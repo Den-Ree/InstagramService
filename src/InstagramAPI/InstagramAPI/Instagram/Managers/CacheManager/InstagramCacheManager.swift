@@ -58,9 +58,7 @@ class InstagramCacheManager: NSObject {
             cache.removeValue(forKey: client.identifier)
             identifiers.append(client.identifier)
         }
-        if identifiers.count > 0 {
-            AppNotifications.center.post(name: Notifications.didCleanClientsCache, userInfo: [Keys.clientIdentifiers : identifiers])
-        }
+        //TODO: Need to remove only Instagram cache
     }
     
     func removeAllObjects() {

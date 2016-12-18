@@ -49,7 +49,7 @@ class InstagramNetworkClient: BaseNetworkClient {
         }
         
         let isRedirect = isRedirectURL(url)
-        AnalyticsManager.logReport(withFormat: "getAccessToken_url %@ - result %ld", values: [url.absoluteString, isRedirect as CVarArg])
+        
         if !isRedirect {
             return nil
         }
@@ -163,7 +163,6 @@ extension InstagramNetworkClient {
 
     
     func isRedirectURL(_ url: URL) -> Bool {
-        AnalyticsManager.logReport(withFormat: "check_redirect_url %@", values: [url.absoluteString])
         //check if we has correct app redirect url
         guard let appRedirectURL = URL(string: appRedirectURL) else {
             return false

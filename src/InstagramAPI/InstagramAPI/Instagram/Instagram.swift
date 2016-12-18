@@ -43,23 +43,11 @@ class InstagramManager: NSObject {
     }()
     
     //TODO: Create constants
-    fileprivate let appClientId: String = "be322b2540c745438432c86c825ed469"
-    fileprivate var appRedirectURL: String {
-        return SettingsManager.shared.config.instagramRedirectURL
-    }
+    fileprivate let appClientId: String = "eb6961971b7149899a3692a4125bb6af"
+    fileprivate var appRedirectURL: String = "https://www.nolisto.com"
 
     fileprivate var isNeedToReceiveNewUser = false
     fileprivate(set) var lastReceivedUser: InstagramUser?
-    
-    //MARK: Protected
-    override init() {
-        super.init()
-        subscribe(on: [AppCoreDataManager.Notifications.didChangeInstagramAccount], selector: #selector(InstagramManager.handle(_:)))
-    }
-    
-    deinit {
-        unsubscribeFromNotifications()
-    }
 }
 
 //MARK: Public
@@ -84,14 +72,12 @@ extension InstagramManager {
                     }
                     catch {
                         let error = error as NSError
-                        AnalyticsManager.logReport(withFormat: "error_when_remove_keyichain_\(error.localizedDescription)")
+                        print("\(error.localizedDescription)")
                     }
                     self?.lastReceivedUser = user
-                    AnalyticsManager.logReport(withFormat: "user_received_from_instagram")
                 }
                 else {
                     self?.lastReceivedUser = nil
-                    AnalyticsManager.logReport(withFormat: "user_didn't_receive_from_instagram")
                 }
                 self?.cleanUpCookies()
                 self?.isNeedToReceiveNewUser = false
@@ -118,33 +104,25 @@ extension InstagramManager {
     }
     
     func logoutAccounts(withIDs accountIDs: [String], completion: ((Bool, Error?)->())?) {
-        AppBackend.manager.removeAccounts(accountIDs, completion: { (success, error) in
-            if success {
-                self.finishLogout(forCurrentUsers: accountIDs, completion: completion)
-            }
-            else {
-                completion?(success, error)
-            }
-        })
+        finishLogout(forCurrentUsers: accountIDs, completion: completion)
     }
     
     func refreshAccount(forInstagramId instagramId: String?) {
-        if let instagramId = instagramId {
-            AnalyticsManager.logReport(withFormat: "refreshInstagramAccount - \(instagramId)")
+        guard let instagramId = instagramId else {
+            print("no instagram id")
+            return
         }
+        
         userService.fetchUser(userId: instagramId) { (user, error) in
             if let user = user {
-                if let selectedAccount = InstagramAccount.selectedInstagramAccount, let userMediaCount = user.counts?.media , selectedAccount.mediaCount != Int64(userMediaCount) {
-                    AppNotifications.center.post(name: Notifications.mediaWasChanged)
-                }
-                AppCoreData.manager.updateInstagramAccount(user, completion: nil)
+                self.lastReceivedUser = user
             }
         }
     }
     
     func checkAccessTokenExpirationInResponse(with meta: InstagramMetaObject?) {
         if let meta = meta, meta.isAccessTokenException {
-            AppNotifications.center.post(name: Notifications.accessTokenExpired)
+            //TODO: Need to think about it
         }
     }
     
@@ -167,53 +145,23 @@ private extension InstagramManager {
             }
             catch {
                 let error = error as NSError
-                AnalyticsManager.logReport(withFormat: "error_when_remove_keyichain_\(error.localizedDescription)")
+                print("\(error.localizedDescription)")
             }
         }
-        
-        AppCoreData.manager.save({ (savingContext) in
-            let predicate = NSPredicate.whereKey(InstagramAccount.Attributes.instagramId, containedIn: currentUserIDs)
-            
-            if let accountsInContext = InstagramAccount.findAll(predicate, context: savingContext) as? [InstagramAccount] {
-                for account in accountsInContext {
-                    account.selected = false
-                    account.loggedIn = false
-                }
-            }
-            }, completion: { (success) in
-                
-                let predicate = InstagramAccount.predicateForUnselectedInstagramAccounts()
-                if let account = InstagramAccount.find(predicate) as? InstagramAccount {
-                    AppCoreData.manager.selectInstagramAccount(account.objectId, completion: { (success) in
-                        completion?(success, nil)
-                    })
-                }
-                else {
-                    AppNotifications.center.post(name: Notifications.noLoggedInAccounts)
-                    completion?(success, nil)
-                }
-        })
+        lastReceivedUser = nil
     }
 }
 
 extension InstagramManager: InstagramNetworkClientManagerProtocol {
     var instagramAccessToken: String? {
         var result: String?
-        if let currentUserId = InstagramAccount.selectedInstagramAccount?.objectId , isNeedToReceiveNewUser == false {
+        if let currentUserId = lastReceivedUser?.objectId , isNeedToReceiveNewUser == false {
             result = keychainStore[kInstagramAccessToken + currentUserId]
         }
         else {
             result = keychainStore[kInstagramAccessToken]
         }
         return result
-    }
-}
-
-extension InstagramManager: NotificationsObserverProtocol {
-    func handle(_ notification: Notification) {
-        if notification.name.rawValue == AppCoreDataManager.Notifications.didChangeInstagramAccount {
-            cleanUpCachedMedia()
-        }
     }
 }
 

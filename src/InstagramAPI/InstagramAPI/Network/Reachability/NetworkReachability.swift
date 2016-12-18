@@ -52,7 +52,7 @@ class NetworkReachability: NSObject {
 private extension NetworkReachability {
     
     func notifyConnectionIsChanged() {
-        AppNotifications.center.post(name: Notifications.reachabilityStatusDidChange)
+        //TODO: 
     }
 }
 

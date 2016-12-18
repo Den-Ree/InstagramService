@@ -12,7 +12,7 @@ import ObjectMapper
 class InstagramTag: InstagramModel {
     
     //MARK: Properties
-    fileprivate(set) var name: String = String.emptyString
+    fileprivate(set) var name: String = ""
     fileprivate(set) var mediaCount: Int = 0
     
     required init?(map: Map) {
