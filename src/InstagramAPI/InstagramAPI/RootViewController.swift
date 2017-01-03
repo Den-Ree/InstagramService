@@ -8,30 +8,30 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RootViewController: UIViewController {
 
     @IBOutlet fileprivate weak var webView: UIWebView!
     fileprivate var isLoggedIn = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Welcome!"
+
         sendLogInRequest()
     }
 }
 
 
 //MARK: External
-extension ViewController: UIWebViewDelegate {
+extension RootViewController: UIWebViewDelegate {
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        
         if let url = request.url , isLoggedIn == false {
             tryLogInAccount(forURL: url)
             return true
-        }
-        else if isLoggedIn {
+        } else if isLoggedIn {
             return false
-        }
-        else {
+        } else {
             return true
         }
     }
@@ -50,7 +50,7 @@ extension ViewController: UIWebViewDelegate {
 }
 
 
-extension ViewController {
+extension RootViewController {
     var authorizationURL: URL? {
         return InstagramManager.shared.authorizationURL()
     }
@@ -62,10 +62,12 @@ extension ViewController {
         InstagramManager.shared.receiveLoggedInUser(url) { (user: InstagramUser?, error) -> () in
             if let instagramAccount = user, let objectId = instagramAccount.objectId , objectId.characters.count > 0 {
                 self.isLoggedIn = true
-                print("name - \(instagramAccount.username!), id - \(instagramAccount.objectId!)")
+                instagramAccount.listPropertiesWithValues()
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "RequestViewController") as! RequestViewController
+                self.navigationController?.pushViewController(controller, animated: true)
                 completion(nil)
-            }
-            else {
+            } else {
                 completion(error)
             }
         }
@@ -75,18 +77,17 @@ extension ViewController {
         if let urlString = url?.absoluteString {
             print("check_url - \(url!.absoluteString) with \(urlString.contains("unknown_user"))")
             return urlString.contains("unknown_user")
-        }
-        else {
+        } else {
             return false
         }
     }
 }
 
-private extension ViewController {
+private extension RootViewController {
     
     func sendLogInRequest() {
         if let authorizationURL = authorizationURL {
-            //                isStartedLogin = true
+            //isStartedLogin = true
             let request = URLRequest(url: authorizationURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)
             webView.loadRequest(request)
         }
@@ -94,14 +95,14 @@ private extension ViewController {
     
     func tryLogInAccount(forURL url: URL) {
         receiveLoggedInInstagramAccount(url, completion: { [weak self] (error) in
-            guard let weakSelf = self else { return }
+            guard let weakSelf = self else {
+                return
+            }
             if let error = error as? NSError {
                 weakSelf.handle(logInError: error)
-            }
-            else if weakSelf.isLoggedIn {
+            } else if weakSelf.isLoggedIn {
                 //TODO: Notify delegate
-            }
-            else if weakSelf.checkIsNeedToResendAuthorizationURL(for: url) {
+            } else if weakSelf.checkIsNeedToResendAuthorizationURL(for: url) {
                 weakSelf.refreshRequest()
             }
         })

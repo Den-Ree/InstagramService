@@ -25,10 +25,10 @@ class BaseNetworkClient: NSObject {
         if let pathURL = encode(path, parameters: parameters) {
             //TODO: need to check encode method
             Alamofire.request(pathURL, method: method).responseObject { (response: Alamofire.DataResponse<T>) -> Void in
+                print("[BaseNetworkClient]: \(method) \(pathURL) succeeded with JSON:\n\(response.result.value)")
                 completion(response.result.value, response.result.error)
             }
-        }
-        else {
+        } else {
             completion(nil, nil)
         }
     }
@@ -45,14 +45,13 @@ class BaseNetworkClient: NSObject {
                 let bodyString = bodyObject.key + "=" + bodyObject.value
                 request.httpBody = bodyString.data(using: String.Encoding.utf8, allowLossyConversion: false)
                 Alamofire.request(request).responseObject(completionHandler: { (response: Alamofire.DataResponse<T>) -> Void in
+                    print("[BaseNetworkClient]: \(method) \(pathURL) succeeded with JSON:\n\(response.result.value)")
                     completion(response.result.value, response.result.error)
                 })
-            }
-            catch {
+            } catch {
                 completion(nil, error)
             }
-        }
-        else {
+        } else {
             completion(nil, nil)
         }
     }
@@ -69,8 +68,7 @@ class BaseNetworkClient: NSObject {
             let initialRequest = URLRequest(url: url)
             let request = try URLEncoding(destination: .methodDependent).encode(initialRequest, with: parameters)
             return request.url
-        }
-        catch {
+        } catch {
             print("\((error as NSError).localizedDescription)")
             return nil
         }

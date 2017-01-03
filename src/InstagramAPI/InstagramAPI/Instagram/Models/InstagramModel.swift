@@ -22,4 +22,17 @@ class InstagramModel: NSObject, Mappable {
     func mapping(map: Map) {
          objectId <- map[kInstagramObjectId]
     }
+    
+    //TODO: naming?
+    func listPropertiesWithValues(reflect: Mirror? = nil) {
+        let mirror = reflect ?? Mirror(reflecting: self)
+        if mirror.superclassMirror != nil {
+            self.listPropertiesWithValues(reflect: mirror.superclassMirror)
+        }
+        for (index, attr) in mirror.children.enumerated() {
+            if let property_name = attr.label as String! {
+                print("|\(mirror.description) \(index): \(property_name): \(attr.value)")
+            }
+        }
+    }
 }
