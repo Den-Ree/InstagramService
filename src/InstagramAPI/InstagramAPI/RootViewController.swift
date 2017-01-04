@@ -62,7 +62,6 @@ extension RootViewController {
         InstagramManager.shared.receiveLoggedInUser(url) { (user: InstagramUser?, error) -> () in
             if let instagramAccount = user, let objectId = instagramAccount.objectId , objectId.characters.count > 0 {
                 self.isLoggedIn = true
-                instagramAccount.listPropertiesWithValues()
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "RequestViewController") as! RequestViewController
                 self.navigationController?.pushViewController(controller, animated: true)

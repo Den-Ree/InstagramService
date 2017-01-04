@@ -18,7 +18,7 @@ class InstagramManager: NSObject {
         return InstagramMediaService(networkClient: self.networkClient)
     }()
     
-    fileprivate(set) lazy var userService: InstagramUserService = {
+    lazy var userService: InstagramUserService = {
         return InstagramUserService(networkClient: self.networkClient)
     }()
  

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8461FB4E1E1D15FE00FCF434 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461FB4D1E1D15FE00FCF434 /* UserViewController.swift */; };
 		92649A181E06CEF3006EC686 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92649A161E06CEF3006EC686 /* Date+Extension.swift */; };
 		92649A191E06CEF3006EC686 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92649A171E06CEF3006EC686 /* DateFormatter+Extension.swift */; };
 		92649A1B1E06CF09006EC686 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92649A1A1E06CF09006EC686 /* String+Extensions.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		08119A51AC04B8E0D9596D2F /* Pods_InstagramAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8461FB4D1E1D15FE00FCF434 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		92649A161E06CEF3006EC686 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		92649A171E06CEF3006EC686 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		92649A1A1E06CF09006EC686 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				9282E7A71DFDF9F700B7ACF3 /* AppDelegate.swift */,
 				9282E7A91DFDF9F700B7ACF3 /* RootViewController.swift */,
 				D7E198321E0FF1E30028DBC0 /* RequestViewController.swift */,
+				8461FB4D1E1D15FE00FCF434 /* UserViewController.swift */,
 				D7E198341E0FF2C60028DBC0 /* RequestCell.swift */,
 				9282E7AB1DFDF9F700B7ACF3 /* Main.storyboard */,
 				9282E7AE1DFDF9F700B7ACF3 /* Assets.xcassets */,
@@ -267,7 +270,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = ConceptOffice;
 				TargetAttributes = {
 					9282E7A31DFDF9F700B7ACF3 = {
@@ -387,6 +390,7 @@
 				9282E7E11DFDFA5B00B7ACF3 /* InstagramResponse.swift in Sources */,
 				D7E198351E0FF2C60028DBC0 /* RequestCell.swift in Sources */,
 				9282E7E61DFDFA5B00B7ACF3 /* InstagramTagService.swift in Sources */,
+				8461FB4E1E1D15FE00FCF434 /* UserViewController.swift in Sources */,
 				9282E7D71DFDFA5B00B7ACF3 /* InstagramCacheManager.swift in Sources */,
 				9282E7E71DFDFA5B00B7ACF3 /* InstagramUserService.swift in Sources */,
 				9282E7E01DFDFA5B00B7ACF3 /* InstagramNetworkClient.swift in Sources */,
@@ -436,6 +440,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -485,6 +490,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -513,6 +519,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B95F3BE642A2E5080D9D4100 /* Pods-InstagramAPI.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = InstagramAPI/InstagramAPI.entitlements;
 				DEVELOPMENT_TEAM = LR4P8MK7R2;
@@ -528,6 +535,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E69210C6149D434F18B372DF /* Pods-InstagramAPI.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = InstagramAPI/InstagramAPI.entitlements;
 				DEVELOPMENT_TEAM = LR4P8MK7R2;

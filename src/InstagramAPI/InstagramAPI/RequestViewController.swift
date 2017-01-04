@@ -56,6 +56,10 @@ extension RequestViewController: UITableViewDataSource {
 
 extension RequestViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if indexPath.section == 0 && indexPath.row == 0 {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }
