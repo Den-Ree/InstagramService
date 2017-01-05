@@ -17,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 //        Timberjack.register()
 //        Timberjack.logStyle = .light
+        if InstagramManager.shared.isLoggedIn {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "RequestViewController") as! RequestViewController
+            window?.rootViewController = UINavigationController(rootViewController: controller)
+        }
         return true
     }
     

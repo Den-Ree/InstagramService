@@ -47,11 +47,27 @@ class InstagramManager: NSObject {
     fileprivate var appRedirectURL: String = "https://www.nolisto.com"
 
     fileprivate var isNeedToReceiveNewUser = false
-    fileprivate(set) var lastReceivedUser: InstagramUser?
+    fileprivate(set) var lastReceivedUser: InstagramUser? {
+        didSet {
+            lastReceivedUserId = lastReceivedUser?.objectId
+        }
+    }
+    fileprivate var lastReceivedUserId: String? {
+        set {
+            store(newValue, key: Keys.lastReceivedUserId)
+        }
+        get {
+            return storedValue(Keys.lastReceivedUserId)
+        }
+    }
 }
 
 //MARK: Public
 extension InstagramManager {
+    
+    var isLoggedIn: Bool {
+       return lastReceivedUserId != nil
+    }
     
     func authorizationURL() -> URL? {
         let parameters: [String : Any] = [kInstagramCliendId: appClientId, kInstagramRedirectUri: appRedirectURL, kInstagramResponseType: kInstagramToken, kInstagramScope: InstagramLoginScope.allScopesValue]
@@ -155,7 +171,7 @@ private extension InstagramManager {
 extension InstagramManager: InstagramNetworkClientManagerProtocol {
     var instagramAccessToken: String? {
         var result: String?
-        if let currentUserId = lastReceivedUser?.objectId , isNeedToReceiveNewUser == false {
+        if let currentUserId = lastReceivedUserId , isNeedToReceiveNewUser == false {
             result = keychainStore[kInstagramAccessToken + currentUserId]
         }
         else {
@@ -165,10 +181,26 @@ extension InstagramManager: InstagramNetworkClientManagerProtocol {
     }
 }
 
+fileprivate extension InstagramManager {
+    func store<ValueType>(_ value: ValueType?, key: String) {
+        UserDefaults.standard.setValue(value, forKeyPath: key)
+        UserDefaults.standard.synchronize()
+    }
+    
+    func storedValue<ValueType>(_ key: String) -> ValueType? {
+        return UserDefaults.standard.value(forKey: key) as? ValueType
+    }
+}
+
+
 extension InstagramManager {
-    struct Notifications {
+    enum Notifications {
         static let noLoggedInAccounts = "InstagramManagerNoLoggedInAccountsNotification"
         static let mediaWasChanged = "InstagramManagerMediaDidChangedNotification"
         static let accessTokenExpired = "InstagramManagerMediaAccessTokenExpired"
+    }
+    
+    enum Keys {
+        static let lastReceivedUserId = "InstagramManagerLastReceivedUserId"
     }
 }
