@@ -14,7 +14,7 @@ private let InstagramManagerKeychainStore = "com.InstagramManager.keychainStore"
 class InstagramManager: NSObject {
     static let shared = InstagramManager()
     
-    fileprivate(set) lazy var mediaService: InstagramMediaService = {
+    lazy var mediaService: InstagramMediaService = {
         return InstagramMediaService(networkClient: self.networkClient)
     }()
     

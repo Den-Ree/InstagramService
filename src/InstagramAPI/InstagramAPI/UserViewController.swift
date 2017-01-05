@@ -12,18 +12,20 @@ import Alamofire
 
 class UserViewController: UIViewController {
 
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var nicknameLabel: UILabel!
-    @IBOutlet weak var postsLabel: UILabel!
-    @IBOutlet weak var followersLabel: UILabel!
-    @IBOutlet weak var followingLabel: UILabel!
-    @IBOutlet weak var bioLabel: UILabel!
-    @IBOutlet weak var websiteLabel: UILabel!
+    var userID: String?
+    
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    @IBOutlet private weak var nicknameLabel: UILabel!
+    @IBOutlet private weak var postsLabel: UILabel!
+    @IBOutlet private weak var followersLabel: UILabel!
+    @IBOutlet private weak var followingLabel: UILabel!
+    @IBOutlet private weak var bioLabel: UILabel!
+    @IBOutlet private weak var websiteLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        InstagramManager.shared.userService.fetchUser(userId: nil) { (user, error) in
+        InstagramManager.shared.userService.fetchUser(userId: userID) { (user, error) in
             if error == nil {
                 if user == user {
                     if let url = user?.profilePictureURL?.absoluteString {

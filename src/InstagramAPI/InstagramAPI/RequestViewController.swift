@@ -56,10 +56,98 @@ extension RequestViewController: UITableViewDataSource {
 
 extension RequestViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 && indexPath.row == 0 {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-            self.navigationController?.pushViewController(controller, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        switch indexPath.section {
+        case 0:
+            //User
+            
+            switch indexPath.row {
+            case 0:
+                //Self
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+                self.navigationController?.pushViewController(controller, animated: true)
+                
+                break
+            case 1:
+                //Recent of self
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "UserMediaViewController") as! UserMediaViewController
+                self.navigationController?.pushViewController(controller, animated: true)
+
+                break
+            case 2:
+                //User id
+                
+                let alertController = UIAlertController(title: "Enter user-id", message: "", preferredStyle: .alert)
+                
+                let goAction = UIAlertAction(title: "Go", style: .default, handler: {alert -> Void in
+                    let firstTextField = alertController.textFields![0] as UITextField
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+//                    controller.userID = firstTextField.text
+                    controller.userID = "2050614543"
+                    self.navigationController?.pushViewController(controller, animated: true)
+                })
+                let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {(action : UIAlertAction!) -> Void in
+                    
+                })
+                alertController.addTextField { (textField : UITextField!) -> Void in
+                    textField.placeholder = "user-id"
+                }
+                alertController.addAction(goAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+                break
+            case 3:
+                //Recent of user-id
+                
+                break
+            case 4:
+                //Liked
+                
+                break
+            case 5:
+                //Search
+                
+                break
+                
+            default:
+                break
+                
+            }
+            break
+            
+        case 1:
+            //Relationship
+            
+            break
+        case 2:
+            //Media
+            
+            break
+        case 3:
+            //Comment
+            
+            break
+        case 4:
+            //Like
+            
+            break
+        case 5:
+            //Tag
+            
+            break
+        case 6:
+            //Location
+            
+            break
+            
+        default:
+            break
+            
         }
     }
 }

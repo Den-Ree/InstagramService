@@ -144,6 +144,29 @@ class InstagramMediaService: InstagramBaseService {
             completion(media, paginationInfo, error)
         }
     }
+    
+    func sendMediaRequest(forUser userId: String?, count: Int, maxId: String?, completion: (([InstagramMedia]?, InstagramPaginationInfo?, Error?) -> Void)?) {
+        guard count > 0 else {
+            completion?(nil,nil,nil)
+            return
+        }
+        
+        //Create parameteres
+        var parameters = [InstagramRequestKey: AnyObject]()
+        
+        parameters[kInstagramCount] = count as AnyObject?
+        if let maxId = maxId {
+            parameters[kInstagramMaxId] = maxId as AnyObject?
+        }
+        
+        networkClient.sendRequest(path: networkClient.instagramUserMediaPath(userId), parameters: parameters) { (response: InstagramArrayResponse<InstagramMedia>?, error) in
+            let media: [InstagramMedia]? = response?.data
+            let pagination: InstagramPaginationInfo? = response?.pagination
+            InstagramManager.shared.checkAccessTokenExpirationInResponse(with: response?.meta)
+            completion?(media, pagination, error)
+        }
+    }
+
 }
 
 //MARK: Private
@@ -252,28 +275,6 @@ private extension InstagramMediaService {
         }
         
         return cachedMedia.last
-    }
-    
-    func sendMediaRequest(forUser userId: String?, count: Int, maxId: String?, completion: (([InstagramMedia]?, InstagramPaginationInfo?, Error?) -> Void)?) {
-        guard count > 0 else {
-            completion?(nil,nil,nil)
-            return
-        }
-        
-        //Create parameteres
-        var parameters = [InstagramRequestKey: AnyObject]()
-        
-        parameters[kInstagramCount] = count as AnyObject?
-        if let maxId = maxId {
-            parameters[kInstagramMaxId] = maxId as AnyObject?
-        }
-        
-        networkClient.sendRequest(path: networkClient.instagramUserMediaPath(userId), parameters: parameters) { (response: InstagramArrayResponse<InstagramMedia>?, error) in
-            let media: [InstagramMedia]? = response?.data
-            let pagination: InstagramPaginationInfo? = response?.pagination
-            InstagramManager.shared.checkAccessTokenExpirationInResponse(with: response?.meta)
-            completion?(media, pagination, error)
-        }
     }
     
     func sendMediaRequest(forTag name: String, count: Int, maxId: String?, completion: (([InstagramMedia]?, InstagramPaginationInfo?, Error?) -> Void)?) {
