@@ -50,7 +50,7 @@ class InstagramCommentService: InstagramBaseService {
 
 private extension InstagramCommentService {
     func sendCommentsRequest(mediaId: String, completion: @escaping InstagramCommentsBlock) {
-        networkClient.sendRequest(path: networkClient.instagramCommentsPath(mediaId), parameters: InstagramRequestParameters(), completion: { (response: InstagramArrayResponse<InstagramComment>?, error) in
+        networkClient.sendRequest(path: networkClient.instagramCommentsPath(mediaId), parameters: InstagramRequestParameters(), bodyObject: nil, completion: { (response: InstagramArrayResponse<InstagramComment>?, error) in
             
             InstagramManager.shared.checkAccessTokenExpirationInResponse(with: response?.meta)
             

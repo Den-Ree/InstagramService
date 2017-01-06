@@ -36,7 +36,7 @@ class InstagramUserService: InstagramBaseService {
 private extension InstagramUserService {
     func sendUserRequest(userId: String?, completion: @escaping InstagramUserBlock) {
         //Create parameteres
-        networkClient.sendRequest(path: networkClient.instagramUserInfoPath(userId), parameters: InstagramRequestParameters()) { (response: InstagramObjectResponse <InstagramUser>?, error) in
+        networkClient.sendRequest(path: networkClient.instagramUserInfoPath(userId), parameters: InstagramRequestParameters(), bodyObject: nil) { (response: InstagramObjectResponse <InstagramUser>?, error) in
             
             InstagramManager.shared.checkAccessTokenExpirationInResponse(with: response?.meta)
             if let data: InstagramUser = response?.data {
@@ -52,7 +52,7 @@ private extension InstagramUserService {
 
     func sendFollowersRequest(_ completion:@escaping InstagramFollowersBlock) {
     
-        networkClient.sendRequest(path: networkClient.instagramFollowersPath(), parameters: InstagramRequestParameters()) { (response: InstagramArrayResponse <InstagramFollower>?, error) in
+        networkClient.sendRequest(path: networkClient.instagramFollowersPath(), parameters: InstagramRequestParameters(), bodyObject: nil) { (response: InstagramArrayResponse <InstagramFollower>?, error) in
             let followers: [InstagramFollower]? = response?.data
             completion(followers, error)
         }
@@ -61,7 +61,7 @@ private extension InstagramUserService {
     func sendUsersRequest(_ searchText: String, completion: @escaping InstagramUsersBlock) {
         var parameters = [InstagramRequestKey: AnyObject]()
         parameters["q"] = searchText as AnyObject?
-        networkClient.sendRequest(path: networkClient.instagramSearchUsersPath(), parameters: parameters) { (response: InstagramArrayResponse<InstagramUser>?, error) in
+        networkClient.sendRequest(path: networkClient.instagramSearchUsersPath(), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramUser>?, error) in
             let users: [InstagramUser]? = response?.data
             completion(users, error)
         }

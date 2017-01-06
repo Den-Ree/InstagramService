@@ -33,12 +33,7 @@ class InstagramNetworkClient: BaseNetworkClient {
         self.manager = manager
     }
     
-    override func sendRequest<T : Mappable>(_ method: HTTPMethod = .get, path: String?, parameters:  InstagramRequestParameters, completion: @escaping (T?, Error?) -> ()) {
-        
-        super.sendRequest(method, path: path, parameters: addAccessToken(parameters), completion: completion)
-    }
-    
-    override func sendRequest<T : Mappable>(_ method: HTTPMethod = .get, path: String?, parameters: [String : AnyObject], bodyObject: NetworkBodyObject, completion: @escaping (T?, Error?) -> ()) {
+    override func sendRequest<T : Mappable>(_ method: HTTPMethod = .get, path: String?, parameters: [String : AnyObject], bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?) -> ()) {
         super.sendRequest(method, path: path, parameters: addAccessToken(parameters), bodyObject: bodyObject, completion: completion)
     }
     

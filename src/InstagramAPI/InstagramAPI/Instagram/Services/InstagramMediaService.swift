@@ -159,7 +159,7 @@ class InstagramMediaService: InstagramBaseService {
             parameters[kInstagramMaxId] = maxId as AnyObject?
         }
         
-        networkClient.sendRequest(path: networkClient.instagramUserMediaPath(userId), parameters: parameters) { (response: InstagramArrayResponse<InstagramMedia>?, error) in
+        networkClient.sendRequest(path: networkClient.instagramUserMediaPath(userId), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramMedia>?, error) in
             let media: [InstagramMedia]? = response?.data
             let pagination: InstagramPaginationInfo? = response?.pagination
             InstagramManager.shared.checkAccessTokenExpirationInResponse(with: response?.meta)
@@ -291,7 +291,7 @@ private extension InstagramMediaService {
             parameters[kInstagramMaxId] = maxId as AnyObject?
         }
         
-        networkClient.sendRequest(path: networkClient.instagramTagMediaPath(name), parameters: parameters) { (response: InstagramArrayResponse<InstagramMedia>?, error) in
+        networkClient.sendRequest(path: networkClient.instagramTagMediaPath(name), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramMedia>?, error) in
             let media: [InstagramMedia]? = response?.data
             let pagination: InstagramPaginationInfo? = response?.pagination
             

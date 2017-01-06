@@ -12,11 +12,18 @@ import AlamofireObjectMapper
 import ObjectMapper
 import Timberjack
 
+let LOG = true
+
 typealias NetworkBodyObject = (key: String, value: String)
 
 class HTTPManager: Alamofire.SessionManager {
     static let shared: HTTPManager = {
-        let configuration = Timberjack.defaultSessionConfiguration()
+        var configuration: URLSessionConfiguration
+        if LOG {
+            configuration = Timberjack.defaultSessionConfiguration()
+        } else {
+            configuration = URLSessionConfiguration.default
+        }
         let manager = HTTPManager(configuration: configuration)
         return manager
     }()
@@ -24,24 +31,7 @@ class HTTPManager: Alamofire.SessionManager {
 
 class BaseNetworkClient: NSObject {
     
-    func sendRequest<T: Mappable>(_ method: HTTPMethod = .get, path: String?, parameters: [String: AnyObject], completion: @escaping (T?, Error?)->()) {
-        
-        if !NetworkReachability.shared.hasConnection {
-            NetworkReachability.shared.checkConnection()
-        }
-        
-        //encode url and send request
-        if let pathURL = encode(path, parameters: parameters) {
-            //TODO: need to check encode method
-            HTTPManager.shared.request(pathURL, method: method).responseObject { (response: Alamofire.DataResponse<T>) -> Void in
-                completion(response.result.value, response.result.error)
-            }
-        } else {
-            completion(nil, nil)
-        }
-    }
-    
-    func sendRequest<T: Mappable>(_ method: HTTPMethod = .get, path: String?, parameters: [String: AnyObject], bodyObject: NetworkBodyObject, completion: @escaping (T?, Error?)->()) {
+    func sendRequest<T: Mappable>(_ method: HTTPMethod = .get, path: String?, parameters: [String: AnyObject], bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?)->()) {
         
         if !NetworkReachability.shared.hasConnection {
             NetworkReachability.shared.checkConnection()
@@ -50,8 +40,10 @@ class BaseNetworkClient: NSObject {
         if let pathURL = encode(path, parameters: parameters) {
             do {
                 var request = try URLRequest(url: pathURL, method: method)
-                let bodyString = bodyObject.key + "=" + bodyObject.value
-                request.httpBody = bodyString.data(using: String.Encoding.utf8, allowLossyConversion: false)
+                if let bodyObject = bodyObject {
+                    let bodyString = bodyObject.key + "=" + bodyObject.value
+                    request.httpBody = bodyString.data(using: String.Encoding.utf8, allowLossyConversion: false)
+                }
                 HTTPManager.shared.request(request).responseObject(completionHandler: { (response: Alamofire.DataResponse<T>) -> Void in
                     completion(response.result.value, response.result.error)
                 })

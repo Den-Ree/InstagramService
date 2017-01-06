@@ -60,7 +60,7 @@ class InstagramTagService: InstagramBaseService {
 private extension InstagramTagService {
     
     func sendTagRequest(_ name: String, completion: @escaping InstagramTagBlock) {
-        networkClient.sendRequest(path: networkClient.instagramTagsPath(name), parameters: InstagramRequestParameters()) { (response: InstagramObjectResponse <InstagramTag>?, error) in
+        networkClient.sendRequest(path: networkClient.instagramTagsPath(name), parameters: InstagramRequestParameters(), bodyObject: nil) { (response: InstagramObjectResponse <InstagramTag>?, error) in
             let tag: InstagramTag? = response?.data
             completion(tag, error)
         }
@@ -69,7 +69,7 @@ private extension InstagramTagService {
     func sendTagsRequest(_ searchText: String, completion: @escaping InstagramTagsBlock) {
         var parameters = [InstagramRequestKey: AnyObject]()
         parameters["q"] = searchText as AnyObject?
-        networkClient.sendRequest(path: networkClient.instagramSearchTagsPath(), parameters: parameters) { (response: InstagramArrayResponse<InstagramTag>?, error) in
+        networkClient.sendRequest(path: networkClient.instagramSearchTagsPath(), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramTag>?, error) in
             let tags: [InstagramTag]? = response?.data
             completion(tags, error)
         }

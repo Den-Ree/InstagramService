@@ -191,7 +191,7 @@ private extension InstagramLikeService {
             parameters[kInstagramMaxId] = maxId as AnyObject?
         }
         
-        networkClient.sendRequest(path: networkClient.instagramLikesPath(mediaId), parameters: parameters) { (response: InstagramArrayResponse<InstagramLike>?, error) in
+        networkClient.sendRequest(path: networkClient.instagramLikesPath(mediaId), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramLike>?, error) in
             let likes: [InstagramLike]? = response?.data
             let pagination: InstagramPaginationInfo? = response?.pagination
             

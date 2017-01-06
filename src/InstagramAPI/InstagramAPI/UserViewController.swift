@@ -30,9 +30,7 @@ class UserViewController: UIViewController {
                 if user == user {
                     if let url = user?.profilePictureURL?.absoluteString {
                         Alamofire.request(url).responseImage { response in
-                            print(response.request)
-                            print(response.response)
-                            debugPrint(response.result)
+                            //debugPrint(response.result)
                             if let image = response.result.value {
                                 self.avatarImageView.image = image
                             }
