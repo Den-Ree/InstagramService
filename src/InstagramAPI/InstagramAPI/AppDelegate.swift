@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Timberjack
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
