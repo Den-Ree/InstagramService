@@ -9,8 +9,8 @@
 import UIKit
 
 class RequestViewController: UIViewController {
-    var sectionsDataSource: [String?] = []
-    var rowsDataSource: [[String?]] = []
+    fileprivate var sectionsDataSource: [String?] = []
+    fileprivate var rowsDataSource: [[String?]] = []
 
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
@@ -86,8 +86,7 @@ extension RequestViewController: UITableViewDelegate {
                     let firstTextField = alertController.textFields![0] as UITextField
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-//                    controller.userID = firstTextField.text
-                    controller.userID = "2050614543"
+                    controller.userID = firstTextField.text
                     self.navigationController?.pushViewController(controller, animated: true)
                 })
                 let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {(action : UIAlertAction!) -> Void in
@@ -103,10 +102,32 @@ extension RequestViewController: UITableViewDelegate {
                 break
             case 3:
                 //Recent of user-id
+                let alertController = UIAlertController(title: "Enter user-id", message: "", preferredStyle: .alert)
+                
+                let goAction = UIAlertAction(title: "Go", style: .default, handler: {alert -> Void in
+                    let firstTextField = alertController.textFields![0] as UITextField
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "UserMediaViewController") as! UserMediaViewController
+                    controller.type = .recent(firstTextField.text)
+                    self.navigationController?.pushViewController(controller, animated: true)
+                })
+                let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {(action : UIAlertAction!) -> Void in
+                    
+                })
+                alertController.addTextField { (textField : UITextField!) -> Void in
+                    textField.placeholder = "user-id"
+                }
+                alertController.addAction(goAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
                 
                 break
             case 4:
                 //Liked
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "UserMediaViewController") as! UserMediaViewController
+                controller.type = .liked
+                self.navigationController?.pushViewController(controller, animated: true)
                 
                 break
             case 5:

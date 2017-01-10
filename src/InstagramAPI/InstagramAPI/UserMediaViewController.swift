@@ -11,20 +11,46 @@ import AlamofireImage
 import Alamofire
 
 class UserMediaViewController: UIViewController {
-    var dataSource:[InstagramMedia?] = []
-    let kMaxPhotosInRaw = 4
-    let kPhotosSpacing: CGFloat = 1.0
+    
+    enum ControllerType {
+        case unknown
+        case recent(String?)
+        case liked
+    }
+    var type: ControllerType = .unknown
+
+    fileprivate var dataSource:[InstagramMedia?] = []
+    fileprivate let kMaxPhotosInRaw = 4
+    fileprivate let kPhotosSpacing: CGFloat = 1.0
     @IBOutlet private weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        InstagramManager.shared.mediaService.sendMediaRequest(forUser: nil, count: 20, maxId: "10") { [weak self](instagramMedia, paginationInfo, error) in
-            if let media = instagramMedia {
-                self?.dataSource = media
-                self?.collectionView.reloadData()
+        switch type {
+        case .recent(let userID):
+            InstagramManager.shared.mediaService.sendMediaRequest(forUser: userID, count: 20, maxId: "10") { [weak self](instagramMedia, paginationInfo, error) in
+                if let media = instagramMedia {
+                    self?.dataSource = media
+                    self?.collectionView.reloadData()
+                }
             }
+            break
+            
+        case .liked:
+            InstagramManager.shared.mediaService.sendMediaLikedRequest(count: 50, maxLikeID: "300") { [weak self](instagramMedia, paginationInfo, error) in
+                if let media = instagramMedia {
+                    self?.dataSource = media
+                    self?.collectionView.reloadData()
+                }
+            }
+            break
+            
+        default:
+            break
+            
         }
+        
     }
 
     override func didReceiveMemoryWarning() {

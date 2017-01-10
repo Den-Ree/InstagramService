@@ -166,7 +166,28 @@ class InstagramMediaService: InstagramBaseService {
             completion?(media, pagination, error)
         }
     }
-
+    
+    func sendMediaLikedRequest(count: Int, maxLikeID: String?, completion: (([InstagramMedia]?, InstagramPaginationInfo?, Error?) -> Void)?) {
+        guard count > 0 else {
+            completion?(nil,nil,nil)
+            return
+        }
+        
+        //Create parameteres
+        var parameters = [InstagramRequestKey: AnyObject]()
+        
+        parameters[kInstagramCount] = count as AnyObject?
+        if let maxLikeID = maxLikeID {
+            parameters[kInstagramMaxLikeId] = maxLikeID as AnyObject?
+        }
+        
+        networkClient.sendRequest(path: networkClient.instagramUserMediaLikedPath(), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramMedia>?, error) in
+            let media: [InstagramMedia]? = response?.data
+            let pagination: InstagramPaginationInfo? = response?.pagination
+            InstagramManager.shared.checkAccessTokenExpirationInResponse(with: response?.meta)
+            completion?(media, pagination, error)
+        }
+    }
 }
 
 //MARK: Private

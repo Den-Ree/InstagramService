@@ -102,6 +102,12 @@ extension InstagramNetworkClient {
         return instagramBaseURLPath + result
     }
     
+    func instagramUserMediaLikedPath() -> InstagramURLPath {
+        
+        let result = "/users/self/media/liked"
+        return instagramBaseURLPath + result
+    }
+    
     func instagramUserInfoPath(_ userId: String?) -> InstagramURLPath {
         
         var result = String.emptyString
