@@ -10,6 +10,7 @@
 		8456FF571E1E57530089102B /* UserMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456FF561E1E57530089102B /* UserMediaViewController.swift */; };
 		8456FF591E1E6E210089102B /* UserMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456FF581E1E6E210089102B /* UserMediaCell.swift */; };
 		8461FB4E1E1D15FE00FCF434 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461FB4D1E1D15FE00FCF434 /* UserViewController.swift */; };
+		921DA8A91E2CAEBC00AC7C7C /* InstagramEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921DA8A81E2CAEBC00AC7C7C /* InstagramEndpoints.swift */; };
 		92649A181E06CEF3006EC686 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92649A161E06CEF3006EC686 /* Date+Extension.swift */; };
 		92649A191E06CEF3006EC686 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92649A171E06CEF3006EC686 /* DateFormatter+Extension.swift */; };
 		92649A1B1E06CF09006EC686 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92649A1A1E06CF09006EC686 /* String+Extensions.swift */; };
@@ -48,6 +49,7 @@
 		8456FF561E1E57530089102B /* UserMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMediaViewController.swift; sourceTree = "<group>"; };
 		8456FF581E1E6E210089102B /* UserMediaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMediaCell.swift; sourceTree = "<group>"; };
 		8461FB4D1E1D15FE00FCF434 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		921DA8A81E2CAEBC00AC7C7C /* InstagramEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramEndpoints.swift; sourceTree = "<group>"; };
 		92649A161E06CEF3006EC686 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		92649A171E06CEF3006EC686 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		92649A1A1E06CF09006EC686 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				9282E7C71DFDFA5B00B7ACF3 /* InstagramConstants.swift */,
 				9282E7C81DFDFA5B00B7ACF3 /* InstagramNetworkClient.swift */,
 				9282E7C91DFDFA5B00B7ACF3 /* InstagramResponse.swift */,
+				921DA8A81E2CAEBC00AC7C7C /* InstagramEndpoints.swift */,
 			);
 			path = NetworkClient;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				D7E198351E0FF2C60028DBC0 /* RequestCell.swift in Sources */,
 				9282E7E61DFDFA5B00B7ACF3 /* InstagramTagService.swift in Sources */,
 				8461FB4E1E1D15FE00FCF434 /* UserViewController.swift in Sources */,
+				921DA8A91E2CAEBC00AC7C7C /* InstagramEndpoints.swift in Sources */,
 				9282E7D71DFDFA5B00B7ACF3 /* InstagramCacheManager.swift in Sources */,
 				9282E7E71DFDFA5B00B7ACF3 /* InstagramUserService.swift in Sources */,
 				9282E7E01DFDFA5B00B7ACF3 /* InstagramNetworkClient.swift in Sources */,

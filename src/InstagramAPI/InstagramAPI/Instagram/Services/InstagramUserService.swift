@@ -36,18 +36,34 @@ class InstagramUserService: InstagramBaseService {
 private extension InstagramUserService {
     func sendUserRequest(userId: String?, completion: @escaping InstagramUserBlock) {
         //Create parameteres
-        networkClient.sendRequest(path: networkClient.instagramUserInfoPath(userId), parameters: InstagramRequestParameters(), bodyObject: nil) { (response: InstagramObjectResponse <InstagramUser>?, error) in
-            
+        let params = UserId(userId)
+        let request = UserRequest.get(.user(params))
+        networkClient.send(request, bodyObject: nil) { (response: InstagramObjectResponse <InstagramUser>?, error) in
             InstagramManager.shared.checkAccessTokenExpirationInResponse(with: response?.meta)
             if let data: InstagramUser = response?.data {
                 let user: InstagramUser? = data
-                    completion(user, error)
+                completion(user, error)
             }
             else {
                 
                 completion(nil, error)
             }
+
         }
+        
+        
+//        networkClient.sendRequest(path: networkClient.instagramUserInfoPath(userId), parameters: InstagramRequestParameters(), bodyObject: nil) { (response: InstagramObjectResponse <InstagramUser>?, error) in
+//            
+//            InstagramManager.shared.checkAccessTokenExpirationInResponse(with: response?.meta)
+//            if let data: InstagramUser = response?.data {
+//                let user: InstagramUser? = data
+//                    completion(user, error)
+//            }
+//            else {
+//                
+//                completion(nil, error)
+//            }
+//        }
     }
 
     func sendFollowersRequest(_ completion:@escaping InstagramFollowersBlock) {

@@ -15,6 +15,15 @@ protocol InstagramNetworkClientManagerProtocol: NSObjectProtocol {
     var instagramAccessToken: String? {get}
 }
 
+protocol InstagramEndpointProtocol {
+    var path: String {get}
+    var parameters: [String: AnyObject] {get}
+}
+
+protocol InstagramRequestProtocol: InstagramEndpointProtocol {
+    var method: HTTPMethod {get}
+}
+
 class InstagramNetworkClient: BaseNetworkClient {
     
     //MARK: Properties
@@ -84,6 +93,13 @@ class InstagramNetworkClient: BaseNetworkClient {
         }
         
         return result
+    }
+}
+
+extension InstagramNetworkClient {
+    func send<T: Mappable>(_ request: InstagramRequestProtocol, bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?) -> ()) {
+    
+        super.sendRequest(request.method, path: instagramBaseURLPath + request.path, parameters: addAccessToken(request.parameters), bodyObject: bodyObject, completion: completion)
     }
 }
 
@@ -177,3 +193,72 @@ extension InstagramNetworkClient {
         return appRedirectURL.scheme == url.scheme && host == urlHost
     }
 }
+
+extension UserId {
+    var string: String {
+        var result = String()
+        
+        switch self {
+        case .id(let userId):
+            result = "\(userId)"
+        case .owner:
+            result = "self"
+        }
+        
+        return result
+    }
+}
+
+extension UserRequest.Get: InstagramEndpointProtocol {
+    
+    var parameters: [String : AnyObject] {
+        switch self {
+        case .search(let name):
+            return ["q": name as AnyObject]
+        default:
+            return [:]
+        }
+    }
+    
+    var path: String {
+        var result = String()
+        
+        switch self {
+        case .user(let userId):
+            result = "/\(userId.string)"
+        case .likedMedia:
+            result = "/self/media/liked"
+        case .recentMedia(let userId):
+            result = "/\(userId.string)/media/recent"
+        case .search(_):
+            result = "/search"
+        }
+        
+        return result
+    }
+}
+
+extension UserRequest: InstagramRequestProtocol {
+    var parameters: [String : AnyObject] {
+        switch self {
+        case .get(let endpoint):
+            return endpoint.parameters
+        }
+    }
+
+    var path: String {
+        switch self {
+        case .get(let endpoint):
+            return "/users" + endpoint.path
+        }
+    }
+    
+    var method: HTTPMethod {
+        switch self {
+        case .get(_):
+            return .get
+        }
+    }
+}
+
+
