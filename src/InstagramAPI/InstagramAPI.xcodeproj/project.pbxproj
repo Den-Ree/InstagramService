@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8455F7731E251D010062AC04 /* UserSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455F7721E251D010062AC04 /* UserSearchViewController.swift */; };
+		8455F7751E2529090062AC04 /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455F7741E2529090062AC04 /* UserSearchCell.swift */; };
 		8456FF571E1E57530089102B /* UserMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456FF561E1E57530089102B /* UserMediaViewController.swift */; };
 		8456FF591E1E6E210089102B /* UserMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456FF581E1E6E210089102B /* UserMediaCell.swift */; };
 		8461FB4E1E1D15FE00FCF434 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461FB4D1E1D15FE00FCF434 /* UserViewController.swift */; };
@@ -45,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		08119A51AC04B8E0D9596D2F /* Pods_InstagramAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8455F7721E251D010062AC04 /* UserSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSearchViewController.swift; sourceTree = "<group>"; };
+		8455F7741E2529090062AC04 /* UserSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
 		8456FF561E1E57530089102B /* UserMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMediaViewController.swift; sourceTree = "<group>"; };
 		8456FF581E1E6E210089102B /* UserMediaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMediaCell.swift; sourceTree = "<group>"; };
 		8461FB4D1E1D15FE00FCF434 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
@@ -143,11 +147,13 @@
 				9282E7D11DFDFA5B00B7ACF3 /* Network */,
 				9282E7A71DFDF9F700B7ACF3 /* AppDelegate.swift */,
 				9282E7A91DFDF9F700B7ACF3 /* RootViewController.swift */,
+				D7E198341E0FF2C60028DBC0 /* RequestCell.swift */,
 				D7E198321E0FF1E30028DBC0 /* RequestViewController.swift */,
 				8461FB4D1E1D15FE00FCF434 /* UserViewController.swift */,
 				8456FF561E1E57530089102B /* UserMediaViewController.swift */,
 				8456FF581E1E6E210089102B /* UserMediaCell.swift */,
-				D7E198341E0FF2C60028DBC0 /* RequestCell.swift */,
+				8455F7721E251D010062AC04 /* UserSearchViewController.swift */,
+				8455F7741E2529090062AC04 /* UserSearchCell.swift */,
 				9282E7AB1DFDF9F700B7ACF3 /* Main.storyboard */,
 				9282E7AE1DFDF9F700B7ACF3 /* Assets.xcassets */,
 				9282E7B01DFDF9F700B7ACF3 /* LaunchScreen.storyboard */,
@@ -379,6 +385,7 @@
 				9282E7DD1DFDFA5B00B7ACF3 /* InstagramTag.swift in Sources */,
 				92649A191E06CEF3006EC686 /* DateFormatter+Extension.swift in Sources */,
 				9282E7E31DFDFA5B00B7ACF3 /* InstagramCommentService.swift in Sources */,
+				8455F7751E2529090062AC04 /* UserSearchCell.swift in Sources */,
 				9282E7D91DFDFA5B00B7ACF3 /* InstagramLike.swift in Sources */,
 				9282E7DE1DFDFA5B00B7ACF3 /* InstagramUser.swift in Sources */,
 				9282E7E51DFDFA5B00B7ACF3 /* InstagramMediaService.swift in Sources */,
@@ -399,6 +406,7 @@
 				D7E198351E0FF2C60028DBC0 /* RequestCell.swift in Sources */,
 				9282E7E61DFDFA5B00B7ACF3 /* InstagramTagService.swift in Sources */,
 				8461FB4E1E1D15FE00FCF434 /* UserViewController.swift in Sources */,
+				8455F7731E251D010062AC04 /* UserSearchViewController.swift in Sources */,
 				9282E7D71DFDFA5B00B7ACF3 /* InstagramCacheManager.swift in Sources */,
 				9282E7E71DFDFA5B00B7ACF3 /* InstagramUserService.swift in Sources */,
 				9282E7E01DFDFA5B00B7ACF3 /* InstagramNetworkClient.swift in Sources */,
