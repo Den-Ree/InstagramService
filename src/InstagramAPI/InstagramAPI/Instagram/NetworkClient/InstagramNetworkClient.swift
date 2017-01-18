@@ -15,13 +15,21 @@ protocol InstagramNetworkClientManagerProtocol: NSObjectProtocol {
     var instagramAccessToken: String? {get}
 }
 
-protocol InstagramEndpointProtocol {
+protocol InstagramRequestProtocol {
     var path: String {get}
     var parameters: [String: AnyObject] {get}
+    var method: HTTPMethod {get}
+    var bodyObject: NetworkBodyObject? {get}
 }
 
-protocol InstagramRequestProtocol: InstagramEndpointProtocol {
-    var method: HTTPMethod {get}
+extension InstagramRequestProtocol {
+    var method: HTTPMethod {
+        return .get
+    }
+    
+    var bodyObject: NetworkBodyObject? {
+        return nil
+    }
 }
 
 class InstagramNetworkClient: BaseNetworkClient {
@@ -42,7 +50,7 @@ class InstagramNetworkClient: BaseNetworkClient {
         self.manager = manager
     }
     
-    override func sendRequest<T : Mappable>(_ method: HTTPMethod = .get, path: String?, parameters: [String : AnyObject], bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?) -> ()) {
+    override func sendRequest<T : InstagramResponse>(_ method: HTTPMethod = .get, path: String?, parameters: [String : AnyObject], bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?) -> ()) {
         super.sendRequest(method, path: path, parameters: addAccessToken(parameters), bodyObject: bodyObject, completion: completion)
     }
     
@@ -97,9 +105,8 @@ class InstagramNetworkClient: BaseNetworkClient {
 }
 
 extension InstagramNetworkClient {
-    func send<T: Mappable>(_ request: InstagramRequestProtocol, bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?) -> ()) {
-    
-        super.sendRequest(request.method, path: instagramBaseURLPath + request.path, parameters: addAccessToken(request.parameters), bodyObject: bodyObject, completion: completion)
+    func send<T: InstagramResponse>(_ request: InstagramRequestProtocol, completion: @escaping (T?, Error?) -> ()) {
+        super.sendRequest(request.method, path: instagramBaseURLPath + request.path, parameters: addAccessToken(request.parameters), bodyObject: request.bodyObject, completion: completion)
     }
 }
 
@@ -194,8 +201,10 @@ extension InstagramNetworkClient {
     }
 }
 
-extension UserId {
-    var string: String {
+//MARK: Users endpoints extensions
+
+extension Instagram.UsersEndpoint.User {
+    var pathComponent: String {
         var result = String()
         
         switch self {
@@ -209,56 +218,199 @@ extension UserId {
     }
 }
 
-extension UserRequest.Get: InstagramEndpointProtocol {
+extension Instagram.UsersEndpoint.Get {
     
-    var parameters: [String : AnyObject] {
+    var path: String {
         switch self {
-        case .search(let name):
-            return ["q": name as AnyObject]
-        default:
+        case .user(let user):
+            return "/users/\(user.pathComponent)"
+        case .likedMedia(_):
+            return "/users/self/media/liked"
+        case .recentMedia(let parameters):
+            return "/users/\(parameters.user.pathComponent)/media/recent"
+        case .search(_):
+            return "/users/search"
+        }
+    }
+    
+    var parameters: [String: AnyObject] {
+       
+        switch self {
+        case .user(let user):
+            return [:]
+        case .likedMedia(let parameters):
+            return [:]
+        case .recentMedia(let parameters):
+            return [:]
+        case .search(let parameters):
             return [:]
         }
     }
-    
+}
+
+//MARK: Relationships endpoints
+
+extension Instagram.RelationshipEnpoint.Get {
     var path: String {
-        var result = String()
-        
-        switch self {
-        case .user(let userId):
-            result = "/\(userId.string)"
-        case .likedMedia:
-            result = "/self/media/liked"
-        case .recentMedia(let userId):
-            result = "/\(userId.string)/media/recent"
-        case .search(_):
-            result = "/search"
-        }
-        
-        return result
+        //TODO: Need to fill
+        return ""
+    }
+    
+    var parameters: [String: AnyObject] {
+        //TODO: Need to fill
+        return [:]
     }
 }
 
-extension UserRequest: InstagramRequestProtocol {
-    var parameters: [String : AnyObject] {
-        switch self {
-        case .get(let endpoint):
-            return endpoint.parameters
-        }
-    }
-
+extension Instagram.RelationshipEnpoint.Post {
     var path: String {
-        switch self {
-        case .get(let endpoint):
-            return "/users" + endpoint.path
-        }
+        //TODO: Need to fill
+        return ""
+    }
+    
+    var parameters: [String: AnyObject] {
+        //TODO: Need to fill
+        return [:]
     }
     
     var method: HTTPMethod {
-        switch self {
-        case .get(_):
-            return .get
-        }
+        return .post
+    }
+}
+
+//MARK: Media endpoints
+extension Instagram.MediaEndpoint.Get {
+    var path: String {
+        //TODO: Need to fill
+        return ""
+    }
+    
+    var parameters: [String: AnyObject] {
+        //TODO: Need to fill
+        return [:]
+    }
+}
+
+//MARK: Comments endpoints
+extension Instagram.CommentsEndpoint.Get {
+    var path: String {
+        //TODO: Need to fill
+        return ""
+    }
+    
+    var parameters: [String: AnyObject] {
+        //TODO: Need to fill
+        return [:]
+    }
+}
+
+extension Instagram.CommentsEndpoint.Post {
+    var path: String {
+        //TODO: Need to fill
+        return ""
+    }
+    
+    var parameters: [String: AnyObject] {
+        //TODO: Need to fill
+        return [:]
+    }
+    
+    var method: HTTPMethod {
+        return .post
+    }
+    
+    var bodyObject: NetworkBodyObject? {
+        //TODO: Need to fill
+        return nil
+    }
+}
+
+extension Instagram.CommentsEndpoint.Delete {
+    var path: String {
+        //TODO: Need to fill
+        return ""
+    }
+    
+    var parameters: [String: AnyObject] {
+        //TODO: Need to fill
+        return [:]
+    }
+    
+    var method: HTTPMethod {
+        return .delete
     }
 }
 
 
+//MARK: Likes endpoints
+extension Instagram.LikesEndpoint.Get {
+    var path: String {
+        //TODO: Need to fill
+        return ""
+    }
+    
+    var parameters: [String: AnyObject] {
+        //TODO: Need to fill
+        return [:]
+    }
+}
+
+extension Instagram.LikesEndpoint.Post {
+    var path: String {
+        //TODO: Need to fill
+        return ""
+    }
+    
+    var parameters: [String: AnyObject] {
+        //TODO: Need to fill
+        return [:]
+    }
+    
+    var method: HTTPMethod {
+        return .post
+    }
+}
+
+extension Instagram.LikesEndpoint.Delete {
+    var path: String {
+        //TODO: Need to fill
+        return ""
+    }
+    
+    var parameters: [String: AnyObject] {
+        //TODO: Need to fill
+        return [:]
+    }
+    
+    var method: HTTPMethod {
+        return .delete
+    }
+}
+
+
+//MARK: Tags endpoints
+extension Instagram.TagsEndpoint.Get {
+    var path: String {
+        //TODO: Need to fill
+        return ""
+    }
+    
+    var parameters: [String: AnyObject] {
+        //TODO: Need to fill
+        return [:]
+    }
+}
+
+
+//MARK: Location endpoints
+extension Instagram.LocationsEndpoint.Get {
+    var path: String {
+        //TODO: Need to fill
+        return ""
+    }
+    
+    var parameters: [String: AnyObject] {
+        //TODO: Need to fill
+        return [:]
+    }
+}

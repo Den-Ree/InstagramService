@@ -25,10 +25,27 @@ class UserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        InstagramManager.shared.userService.fetchUser(userId: userID) { (user, error) in
+        
+        /**Example of method with params
+        let params = Instagram.UsersEndpoint.SearchUserParameter(query: "nathan", count: 2)
+        let searchRequest = Instagram.UsersEndpoint.Get.search(params)
+        
+        InstagramManager.shared.networkClient.send(searchRequest) { (users: InstagramArrayResponse<InstagramUser>?, error) in
+            if let users = users?.data {
+                print("\(users)")
+            }
+        }
+        
+        return
+        */
+        
+        let userParams = Instagram.UsersEndpoint.User(userID)
+        let request = Instagram.UsersEndpoint.Get.user(userParams)
+        
+        InstagramManager.shared.networkClient.send(request, completion: { (user: InstagramObjectResponse<InstagramUser>?, error: Error?) in
             if error == nil {
-                if user == user {
-                    if let url = user?.profilePictureURL?.absoluteString {
+                if user?.data == user?.data {
+                    if let url = user?.data?.profilePictureURL?.absoluteString {
                         Alamofire.request(url).responseImage { response in
                             //debugPrint(response.result)
                             if let image = response.result.value {
@@ -37,30 +54,30 @@ class UserViewController: UIViewController {
                         }
                     }
                     
-                    if let fullName = user?.fullName {
+                    if let fullName = user?.data?.fullName {
                         self.title = fullName
                     }
-                    if let nickname = user?.username {
+                    if let nickname = user?.data?.username {
                         self.nicknameLabel.text = nickname
                     }
-                    if let posts = user?.counts?.media {
+                    if let posts = user?.data?.counts?.media {
                         self.postsLabel.text = "\(posts) posts"
                     }
-                    if let followers = user?.counts?.followedBy {
+                    if let followers = user?.data?.counts?.followedBy {
                         self.followersLabel.text = "\(followers) followers"
                     }
-                    if let following = user?.counts?.follows {
+                    if let following = user?.data?.counts?.follows {
                         self.followingLabel.text = "\(following) following"
                     }
-                    if let bio = user?.bio {
+                    if let bio = user?.data?.bio {
                         self.bioLabel.text = bio
                     }
-                    if let website = user?.website?.absoluteString {
+                    if let website = user?.data?.website?.absoluteString {
                         self.websiteLabel.text = website
                     }
                 }
             }
-        }
+        })
     }
 
     override func didReceiveMemoryWarning() {

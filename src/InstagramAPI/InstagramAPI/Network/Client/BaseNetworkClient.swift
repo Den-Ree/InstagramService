@@ -31,7 +31,7 @@ class HTTPManager: Alamofire.SessionManager {
 
 class BaseNetworkClient: NSObject {
     
-    func sendRequest<T: Mappable>(_ method: HTTPMethod = .get, path: String?, parameters: [String: AnyObject], bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?)->()) {
+    func sendRequest<T: InstagramResponse>(_ method: HTTPMethod = .get, path: String?, parameters: [String: AnyObject], bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?)->()) {
         
         if !NetworkReachability.shared.hasConnection {
             NetworkReachability.shared.checkConnection()
@@ -44,6 +44,7 @@ class BaseNetworkClient: NSObject {
                     let bodyString = bodyObject.key + "=" + bodyObject.value
                     request.httpBody = bodyString.data(using: String.Encoding.utf8, allowLossyConversion: false)
                 }
+                //TODO: Need to handle meta
                 HTTPManager.shared.request(request).responseObject(completionHandler: { (response: Alamofire.DataResponse<T>) -> Void in
                     completion(response.result.value, response.result.error)
                 })
