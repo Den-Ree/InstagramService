@@ -8,6 +8,9 @@
 
 import UIKit
 import KeychainAccess
+import Alamofire
+import AlamofireObjectMapper
+import ObjectMapper
 
 private let InstagramManagerKeychainStore = "com.InstagramManager.keychainStore"
 
@@ -18,10 +21,6 @@ class InstagramManager: NSObject {
         return InstagramMediaService(networkClient: self.networkClient)
     }()
     
-    lazy var userService: InstagramUserService = {
-        return InstagramUserService(networkClient: self.networkClient)
-    }()
- 
     fileprivate(set) lazy var commentService: InstagramCommentService = {
         return InstagramCommentService(networkClient: self.networkClient)
     }()
@@ -34,7 +33,7 @@ class InstagramManager: NSObject {
         return InstagramTagService(networkClient: self.networkClient)
     }()
     
-    fileprivate lazy var networkClient: InstagramNetworkClient = {
+    fileprivate(set) lazy var networkClient: InstagramNetworkClient = {
         return InstagramNetworkClient(appClientId: self.appClientId, appRedirectURL: self.appRedirectURL, manager: self)
     }()
     
@@ -79,8 +78,11 @@ extension InstagramManager {
             isNeedToReceiveNewUser = true
             keychainStore[kInstagramAccessToken] = accessToken
             
-            userService.fetchUser(userId: nil) { [weak self] (user: InstagramUser?, error: Error?) -> () in
-                if let user = user, let objectId = user.objectId , objectId.characters.count > 0 {
+            let params = Instagram.UsersEndpoint.User()
+            let request = Instagram.UsersEndpoint.Get.user(params)
+    
+            networkClient.send(request, completion: { [weak self] (user: InstagramObjectResponse<InstagramUser>?, error: Error?) in
+                if let user = user?.data, let objectId = user.objectId , objectId.characters.count > 0 {
                     let currentAccessToken = self?.keychainStore[kInstagramAccessToken]
                     self?.keychainStore[kInstagramAccessToken + objectId] = currentAccessToken
                     do {
@@ -98,7 +100,8 @@ extension InstagramManager {
                 self?.cleanUpCookies()
                 self?.isNeedToReceiveNewUser = false
                 completion?(self?.lastReceivedUser, error)
-            }
+   
+            })
         }
         else {
             completion?(nil, nil)
@@ -129,11 +132,14 @@ extension InstagramManager {
             return
         }
         
-        userService.fetchUser(userId: instagramId) { (user, error) in
-            if let user = user {
-                self.lastReceivedUser = user
+        let params = Instagram.UsersEndpoint.User(instagramId)
+        let request = Instagram.UsersEndpoint.Get.user(params)
+        
+        networkClient.send(request, completion: { [weak self] (user: InstagramObjectResponse<InstagramUser>?, error: Error?) in
+            if let user = user?.data {
+                self?.lastReceivedUser = user
             }
-        }
+        })
     }
     
     func checkAccessTokenExpirationInResponse(with meta: InstagramMetaObject?) {

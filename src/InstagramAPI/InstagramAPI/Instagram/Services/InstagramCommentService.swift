@@ -49,6 +49,7 @@ class InstagramCommentService: InstagramBaseService {
 }
 
 private extension InstagramCommentService {
+    
     func sendCommentsRequest(mediaId: String, completion: @escaping InstagramCommentsBlock) {
         networkClient.sendRequest(path: networkClient.instagramCommentsPath(mediaId), parameters: InstagramRequestParameters(), bodyObject: nil, completion: { (response: InstagramArrayResponse<InstagramComment>?, error) in
             

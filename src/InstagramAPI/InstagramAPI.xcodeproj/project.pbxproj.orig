@@ -406,8 +406,11 @@
 				D7E198351E0FF2C60028DBC0 /* RequestCell.swift in Sources */,
 				9282E7E61DFDFA5B00B7ACF3 /* InstagramTagService.swift in Sources */,
 				8461FB4E1E1D15FE00FCF434 /* UserViewController.swift in Sources */,
+<<<<<<< HEAD
 				8455F7731E251D010062AC04 /* UserSearchViewController.swift in Sources */,
+=======
 				921DA8A91E2CAEBC00AC7C7C /* InstagramRequests.swift in Sources */,
+>>>>>>> 7851f9b30f3ad0658c239809286df8f64236ee8f
 				9282E7D71DFDFA5B00B7ACF3 /* InstagramCacheManager.swift in Sources */,
 				9282E7E01DFDFA5B00B7ACF3 /* InstagramNetworkClient.swift in Sources */,
 				9282E7DC1DFDFA5B00B7ACF3 /* InstagramModel.swift in Sources */,

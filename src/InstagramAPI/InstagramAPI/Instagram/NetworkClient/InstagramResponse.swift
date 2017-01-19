@@ -11,9 +11,9 @@ import UIKit
 import AlamofireObjectMapper
 import ObjectMapper
 
-protocol InstagramResponse: NSObjectProtocol {}
+protocol InstagramResponse: Mappable {}
 
-class InstagramObjectResponse <T: Mappable> : NSObject, Mappable, InstagramResponse {
+class InstagramObjectResponse <T: Mappable> : NSObject, InstagramResponse {
     var data: T?
     var meta: InstagramMetaObject?
     required init?(map: Map) {}
@@ -24,7 +24,7 @@ class InstagramObjectResponse <T: Mappable> : NSObject, Mappable, InstagramRespo
     }
 }
 
-class InstagramArrayResponse <T: Mappable> : NSObject, Mappable, InstagramResponse {
+class InstagramArrayResponse <T: Mappable> : NSObject, InstagramResponse {
     var data: [T]?
     var meta: InstagramMetaObject?
     var pagination: InstagramPaginationInfo?
