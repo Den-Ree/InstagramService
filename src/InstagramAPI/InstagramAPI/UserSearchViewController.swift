@@ -10,7 +10,14 @@ import UIKit
 
 class UserSearchViewController: UIViewController {
     
-    @IBOutlet fileprivate weak var tableView: UITableView!
+    @IBOutlet fileprivate weak var tableView: UITableView! {
+        didSet {
+            tableView.tableFooterView = UIView.init(frame: .zero)
+            tableView.estimatedRowHeight = 100
+            tableView.rowHeight = UITableViewAutomaticDimension
+        }
+    }
+
     @IBOutlet fileprivate weak var searchBar: UISearchBar!
     fileprivate var dataSource: [InstagramUser?] = []
     fileprivate var searchActive : Bool = false
@@ -30,6 +37,8 @@ extension UserSearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserSearchCell") as! UserSearchCell;
+        let currentUser = dataSource[indexPath.row]
+        cell.usernameLabel.text = currentUser?.username
         return cell;
     }
 }

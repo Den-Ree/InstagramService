@@ -132,7 +132,10 @@ extension RequestViewController: UITableViewDelegate {
                 break
             case 5:
                 //Search
-                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "UserSearchViewController") as! UserSearchViewController
+                self.navigationController?.pushViewController(controller, animated: true)
+
                 break
                 
             default:

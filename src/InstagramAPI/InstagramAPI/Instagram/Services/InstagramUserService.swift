@@ -61,6 +61,7 @@ private extension InstagramUserService {
     func sendUsersRequest(_ searchText: String, completion: @escaping InstagramUsersBlock) {
         var parameters = [InstagramRequestKey: AnyObject]()
         parameters["q"] = searchText as AnyObject?
+        parameters["count"] = "10" as AnyObject?
         networkClient.sendRequest(path: networkClient.instagramSearchUsersPath(), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramUser>?, error) in
             let users: [InstagramUser]? = response?.data
             completion(users, error)
