@@ -61,12 +61,14 @@ extension UserSearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        InstagramManager.shared.userService.fetchUsers(searchText: searchText) { (users, error) in
-            guard let users = users else {
+        let searchParams = Instagram.UsersEndpoint.SearchUserParameter(query: searchText, count: 10)
+        let request = Instagram.UsersEndpoint.Get.search(searchParams)
+        InstagramManager.shared.networkClient.send(request, completion: { (users: InstagramArrayResponse<InstagramUser>?, error: Error?) in
+            guard let users = users?.data else {
                 return
             }
             self.dataSource = users
             self.tableView.reloadData()
-        }
+        })
     }
 }

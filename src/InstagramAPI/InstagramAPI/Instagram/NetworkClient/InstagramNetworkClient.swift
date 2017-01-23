@@ -243,7 +243,10 @@ extension Instagram.UsersEndpoint.Get {
         case .recentMedia(let parameters):
             return [:]
         case .search(let parameters):
-            return [:]
+            return [
+                "q"     : parameters.query as AnyObject,
+                "count" : parameters.count as AnyObject
+            ]
         }
     }
 }

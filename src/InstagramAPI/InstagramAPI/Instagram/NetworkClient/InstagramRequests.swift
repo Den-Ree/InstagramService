@@ -35,6 +35,11 @@ extension Instagram {
         struct SearchUserParameter {
             let query: String
             var count: Int? = nil
+            
+            init(query: String, count: Int) {
+                self.query = query
+                self.count = count
+            }
         }
         
         struct LikedMediaParameter {
