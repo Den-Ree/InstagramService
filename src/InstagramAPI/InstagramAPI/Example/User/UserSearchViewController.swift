@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class UserSearchViewController: UIViewController {
     
@@ -25,7 +26,7 @@ class UserSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.title = "Search"
     }
 
 }
@@ -39,7 +40,20 @@ extension UserSearchViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserSearchCell") as! UserSearchCell;
         let currentUser = dataSource[indexPath.row]
         cell.usernameLabel.text = currentUser?.username
+        cell.fullnameLabel.text = currentUser?.fullName
+        cell.avatarImageView.af_setImage(withURL: (currentUser?.profilePictureURL)!)
+            
         return cell;
+    }
+}
+
+extension UserSearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentUser = dataSource[indexPath.row]
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+        controller.userID = currentUser?.objectId
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
 

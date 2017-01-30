@@ -29,21 +29,35 @@ class UserMediaViewController: UIViewController {
         
         switch type {
         case .recent(let userID):
-            InstagramManager.shared.mediaService.sendMediaRequest(forUser: userID, count: 20, maxId: "10") { [weak self](instagramMedia, paginationInfo, error) in
-                if let media = instagramMedia {
-                    self?.dataSource = media
-                    self?.collectionView.reloadData()
-                }
+            //TODO: fix spaghetti
+            if let userID = userID {
+                let parameters = Instagram.UsersEndpoint.RecentMediaParameter(user: .id(userID), count: 10, minId: "10", maxId: "10")
+                let request = Instagram.UsersEndpoint.Get.recentMedia(parameters)
+                InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
+                    let media: [InstagramMedia]? = response?.data
+                    self.dataSource = media!
+                    self.collectionView.reloadData()
+                })
+            } else {
+                let parameters = Instagram.UsersEndpoint.RecentMediaParameter(user: .owner, count: 10, minId: "10", maxId: "10")
+                let request = Instagram.UsersEndpoint.Get.recentMedia(parameters)
+                InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
+                    let media: [InstagramMedia]? = response?.data
+                    self.dataSource = media!
+                    self.collectionView.reloadData()
+                })
             }
             break
             
         case .liked:
-            InstagramManager.shared.mediaService.sendMediaLikedRequest(count: 50, maxLikeID: "300") { [weak self](instagramMedia, paginationInfo, error) in
-                if let media = instagramMedia {
-                    self?.dataSource = media
-                    self?.collectionView.reloadData()
-                }
-            }
+            let parameters = Instagram.UsersEndpoint.LikedMediaParameter(user: .owner, count: 10, maxLikeId: "10")
+            let request = Instagram.UsersEndpoint.Get.likedMedia(parameters)
+            InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
+                let media: [InstagramMedia]? = response?.data
+                self.dataSource = media!
+                self.collectionView.reloadData()
+            })
+
             break
             
         default:

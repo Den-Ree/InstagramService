@@ -234,14 +234,21 @@ extension Instagram.UsersEndpoint.Get {
     }
     
     var parameters: [String: AnyObject] {
-       
+        
         switch self {
-        case .user(let user):
+        case .user( _):
             return [:]
         case .likedMedia(let parameters):
-            return [:]
+            return [
+                "count"         : parameters.count as AnyObject,
+                "max_like_id"   : parameters.maxLikeId as AnyObject
+            ]
         case .recentMedia(let parameters):
-            return [:]
+            return [
+                "count"     : parameters.count as AnyObject,
+                "max_id"    : parameters.maxId as AnyObject,
+                "min_id"    : parameters.minId as AnyObject
+            ]
         case .search(let parameters):
             return [
                 "q"     : parameters.query as AnyObject,

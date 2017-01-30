@@ -44,8 +44,14 @@ extension Instagram {
         
         struct LikedMediaParameter {
             let user: User
-            var count: Int? = nil
-            var maxId: String? = nil
+            var count: Int?
+            var maxLikeId: String?
+            
+            init(user: User, count: Int, maxLikeId: String) {
+                self.user = user
+                self.count = count
+                self.maxLikeId = maxLikeId
+            }
         }
         
         struct RecentMediaParameter {
@@ -54,7 +60,7 @@ extension Instagram {
             let minId: String?
             let maxId: String?
             
-            init(user: User, count: Int? = nil, minId: String? = nil, maxId: String? = nil) {
+            init(user: User, count: Int, minId: String, maxId: String) {
                 self.user = user
                 self.count = count
                 self.minId = minId

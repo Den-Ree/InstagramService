@@ -24,56 +24,7 @@ class UserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-<<<<<<< HEAD
-        InstagramManager.shared.userService.fetchUser(userId: userID) { (user, error) in
-            guard let user = user, error == nil else {
-                return
-            }
-            
-            if let url = user.profilePictureURL?.absoluteString {
-                Alamofire.request(url).responseImage { response in
-                    //debugPrint(response.result)
-                    if let image = response.result.value {
-                        self.avatarImageView.image = image
-                    }
-                }
-            }
-            
-            self.title = user.fullName
-            self.nicknameLabel.text = user.username
-            
-            if let posts = user.counts?.media {
-                self.postsLabel.text = "\(posts) posts"
-            }
-            if let followers = user.counts?.followedBy {
-                self.followersLabel.text = "\(followers) followers"
-            }
-            if let following = user.counts?.follows {
-                self.followingLabel.text = "\(following) following"
-            }
-            
-            self.bioLabel.text = user.bio
-            
-            if let website = user.website?.absoluteString {
-                self.websiteLabel.text = website
-            }
-        }
-=======
-        
-        /**Example of method with params
-        let params = Instagram.UsersEndpoint.SearchUserParameter(query: "nathan", count: 2)
-        let searchRequest = Instagram.UsersEndpoint.Get.search(params)
-        
-        InstagramManager.shared.networkClient.send(searchRequest) { (users: InstagramArrayResponse<InstagramUser>?, error) in
-            if let users = users?.data {
-                print("\(users)")
-            }
-        }
-        
-        return
-        */
-        
+
         let userParams = Instagram.UsersEndpoint.User(userID)
         let request = Instagram.UsersEndpoint.Get.user(userParams)
         
@@ -113,7 +64,6 @@ class UserViewController: UIViewController {
                 }
             }
         })
->>>>>>> 7851f9b30f3ad0658c239809286df8f64236ee8f
     }
     
     override func didReceiveMemoryWarning() {

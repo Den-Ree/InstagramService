@@ -67,6 +67,7 @@ extension RequestViewController: UITableViewDelegate {
                 //Self
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+                controller.title = rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
                 
                 break
@@ -74,6 +75,8 @@ extension RequestViewController: UITableViewDelegate {
                 //Recent of self
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "UserMediaViewController") as! UserMediaViewController
+                controller.type = .recent(nil)
+                controller.title = rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
 
                 break
@@ -87,6 +90,7 @@ extension RequestViewController: UITableViewDelegate {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
                     controller.userID = firstTextField.text
+                    controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                     self.navigationController?.pushViewController(controller, animated: true)
                 })
                 let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {(action : UIAlertAction!) -> Void in
@@ -109,6 +113,7 @@ extension RequestViewController: UITableViewDelegate {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let controller = storyboard.instantiateViewController(withIdentifier: "UserMediaViewController") as! UserMediaViewController
                     controller.type = .recent(firstTextField.text)
+                    controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                     self.navigationController?.pushViewController(controller, animated: true)
                 })
                 let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {(action : UIAlertAction!) -> Void in
@@ -127,6 +132,7 @@ extension RequestViewController: UITableViewDelegate {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "UserMediaViewController") as! UserMediaViewController
                 controller.type = .liked
+                controller.title = rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
                 
                 break
@@ -134,6 +140,7 @@ extension RequestViewController: UITableViewDelegate {
                 //Search
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "UserSearchViewController") as! UserSearchViewController
+                controller.title = rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
 
                 break

@@ -24,6 +24,7 @@ class HTTPManager: Alamofire.SessionManager {
         } else {
             configuration = URLSessionConfiguration.default
         }
+        configuration.requestCachePolicy = .returnCacheDataElseLoad
         let manager = HTTPManager(configuration: configuration)
         return manager
     }()
