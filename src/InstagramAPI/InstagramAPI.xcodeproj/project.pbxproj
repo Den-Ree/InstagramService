@@ -42,6 +42,8 @@
 		D761006F1E3F9EAC005CB7A3 /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D761006A1E3F9EAC005CB7A3 /* UserSearchCell.swift */; };
 		D76100701E3F9EAC005CB7A3 /* UserSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D761006B1E3F9EAC005CB7A3 /* UserSearchViewController.swift */; };
 		D76100711E3F9EAC005CB7A3 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D761006C1E3F9EAC005CB7A3 /* UserViewController.swift */; };
+		D7ECAC401E4F309200BBAB46 /* RelationshipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ECAC3F1E4F309200BBAB46 /* RelationshipsViewController.swift */; };
+		D7ECAC421E4F328500BBAB46 /* RelationshipsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ECAC411E4F328500BBAB46 /* RelationshipsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +86,8 @@
 		D761006A1E3F9EAC005CB7A3 /* UserSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSearchCell.swift; path = Example/User/UserSearchCell.swift; sourceTree = "<group>"; };
 		D761006B1E3F9EAC005CB7A3 /* UserSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSearchViewController.swift; path = Example/User/UserSearchViewController.swift; sourceTree = "<group>"; };
 		D761006C1E3F9EAC005CB7A3 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserViewController.swift; path = Example/User/UserViewController.swift; sourceTree = "<group>"; };
+		D7ECAC3F1E4F309200BBAB46 /* RelationshipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RelationshipsViewController.swift; path = Example/Relationship/RelationshipsViewController.swift; sourceTree = "<group>"; };
+		D7ECAC411E4F328500BBAB46 /* RelationshipsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RelationshipsCell.swift; path = Example/Relationship/RelationshipsCell.swift; sourceTree = "<group>"; };
 		E69210C6149D434F18B372DF /* Pods-InstagramAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramAPI/Pods-InstagramAPI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -248,6 +252,7 @@
 			children = (
 				D76100621E3F9E84005CB7A3 /* RequestsList */,
 				D76100631E3F9E8C005CB7A3 /* User */,
+				D7ECAC3E1E4F302E00BBAB46 /* Relationship */,
 			);
 			name = Example;
 			sourceTree = "<group>";
@@ -271,6 +276,15 @@
 				D761006A1E3F9EAC005CB7A3 /* UserSearchCell.swift */,
 			);
 			name = User;
+			sourceTree = "<group>";
+		};
+		D7ECAC3E1E4F302E00BBAB46 /* Relationship */ = {
+			isa = PBXGroup;
+			children = (
+				D7ECAC3F1E4F309200BBAB46 /* RelationshipsViewController.swift */,
+				D7ECAC411E4F328500BBAB46 /* RelationshipsCell.swift */,
+			);
+			name = Relationship;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7ECAC401E4F309200BBAB46 /* RelationshipsViewController.swift in Sources */,
 				9282E7DD1DFDFA5B00B7ACF3 /* InstagramTag.swift in Sources */,
 				92649A191E06CEF3006EC686 /* DateFormatter+Extension.swift in Sources */,
 				9282E7E31DFDFA5B00B7ACF3 /* InstagramCommentService.swift in Sources */,
@@ -422,6 +437,7 @@
 				D76100671E3F9E9C005CB7A3 /* RequestViewController.swift in Sources */,
 				9282E7DB1DFDFA5B00B7ACF3 /* InstagramMedia.swift in Sources */,
 				D761006D1E3F9EAC005CB7A3 /* UserMediaCell.swift in Sources */,
+				D7ECAC421E4F328500BBAB46 /* RelationshipsCell.swift in Sources */,
 				D76100701E3F9EAC005CB7A3 /* UserSearchViewController.swift in Sources */,
 				92649A1B1E06CF09006EC686 /* String+Extensions.swift in Sources */,
 				9282E7E41DFDFA5B00B7ACF3 /* InstagramLikeService.swift in Sources */,

@@ -262,8 +262,16 @@ extension Instagram.UsersEndpoint.Get {
 
 extension Instagram.RelationshipEnpoint.Get {
     var path: String {
-        //TODO: Need to fill
-        return ""
+        switch self {
+        case .follows:
+            return "/users/self/follows"
+        case .followedBy:
+            return "/users/self/followed-by"
+        case .requestedBy:
+            return "/users/self/requested-by"
+        case .relationship(let userId):
+            return "/users/\(userId)/follows"
+        }
     }
     
     var parameters: [String: AnyObject] {
