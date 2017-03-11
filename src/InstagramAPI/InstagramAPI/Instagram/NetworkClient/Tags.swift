@@ -49,25 +49,25 @@ extension Instagram.TagsEndpoint.Get {
     }
   }
   
-  var parameters: [String: Any] {
+  var parameters: InstagramRequestParameters {
     switch self {
     case .tag(_):
       return [:]
     case .recentMedia(let parameters):
-      var result = [String : Any]()
+      var result = InstagramRequestParameters()
       if let count = parameters.count {
-        result["count"]  = count
+        result[Instagram.Keys.Media.count]  = count as AnyObject?
       }
       if let minId = parameters.minId {
-        result["min_tag_id"] = minId
+        result[Instagram.Keys.Pagination.minTagId] = minId as AnyObject?
       }
       if let maxId = parameters.maxId {
-        result["max_tag_id"] = maxId
+        result[Instagram.Keys.Pagination.maxTagId] = maxId as AnyObject?
       }
       return result
     case .search(let query):
       return [
-        "q": query
+        "q": query as AnyObject
       ]
     }
   }

@@ -135,13 +135,13 @@
 		8431E7481E71BE170026D752 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
+				8431E74F1E71BE380026D752 /* Users.swift */,
+				8431E74D1E71BE380026D752 /* Relationships.swift */,
+				8431E74C1E71BE380026D752 /* Media.swift */,
 				8431E7491E71BE380026D752 /* Comments.swift */,
 				8431E74A1E71BE380026D752 /* Likes.swift */,
-				8431E74B1E71BE380026D752 /* Locations.swift */,
-				8431E74C1E71BE380026D752 /* Media.swift */,
-				8431E74D1E71BE380026D752 /* Relationships.swift */,
 				8431E74E1E71BE380026D752 /* Tags.swift */,
-				8431E74F1E71BE380026D752 /* Users.swift */,
+				8431E74B1E71BE380026D752 /* Locations.swift */,
 			);
 			name = Endpoints;
 			sourceTree = "<group>";

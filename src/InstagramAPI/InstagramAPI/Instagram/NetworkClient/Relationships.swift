@@ -53,8 +53,7 @@ extension Instagram.RelationshipsEnpoint.Get {
     }
   }
   
-  var parameters : [String : Any]{
-    // TODO Need to fill
+  var parameters : InstagramRequestParameters{
     return [:]
   }
 }
@@ -67,11 +66,11 @@ extension Instagram.RelationshipsEnpoint.Post {
     }
   }
   
-  var parameters: [String: Any] {
+  var parameters: InstagramRequestParameters {
     switch self {
     case .relationship(let parameter):
       return [
-        "action": parameter.action.rawValue
+        "action": parameter.action.rawValue as AnyObject
       ]
     }
   }

@@ -8,6 +8,7 @@
 
 import UIKit
 
+//Do it need to be added to Instagram constrains
 private let kInstagramCachedComments = "kInstagramCachedComments"
 
 typealias InstagramCommentsBlock = ([InstagramComment]?, Error?)->()
@@ -61,7 +62,7 @@ private extension InstagramCommentService {
     }
     
     func sendUserMediaCommentRequest(_ mediaId: String, text: String, completion: @escaping InstagramSuccessBlock) {
-        networkClient.sendRequest(.post, path: networkClient.instagramCommentsPath(mediaId), parameters: InstagramRequestParameters(), bodyObject: NetworkBodyObject(key: kInstagramText, value: text)) { [weak self] (response: InstagramMetaResponse?, error) in
+        networkClient.sendRequest(.post, path: networkClient.instagramCommentsPath(mediaId), parameters: InstagramRequestParameters(), bodyObject: NetworkBodyObject(key: Instagram.Keys.Comment.text, value: text)) { [weak self] (response: InstagramMetaResponse?, error) in
             
             InstagramManager.shared.checkAccessTokenExpirationInResponse(with: response?.meta)
             var success = false

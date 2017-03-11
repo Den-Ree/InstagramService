@@ -17,7 +17,7 @@ protocol InstagramNetworkClientManagerProtocol: NSObjectProtocol {
 
 protocol InstagramRequestProtocol {
     var path: String {get}
-    var parameters: [String: Any] {get}
+    var parameters: InstagramRequestParameters {get}
     var method: HTTPMethod {get}
     var bodyObject: NetworkBodyObject? {get}
 }
@@ -94,10 +94,10 @@ class InstagramNetworkClient: BaseNetworkClient {
         
         var result = parameters
         if let accessToken = accessToken {
-            result[kInstagramAccessToken] = accessToken as AnyObject?
+            result[Instagram.Keys.Auth.accessToken] = accessToken as AnyObject?
         }
         else {
-            result[kInstagramCliendId] = appClientId as AnyObject?
+            result[Instagram.Keys.Auth.clientId] = appClientId as AnyObject?
         }
         
         return result

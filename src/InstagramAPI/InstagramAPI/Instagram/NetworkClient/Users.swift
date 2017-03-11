@@ -105,26 +105,26 @@ extension Instagram.UsersEndpoint.Get {
     }
   }
   
-  var parameters: [String: Any] {
+  var parameters: InstagramRequestParameters {
     
     switch self {
     case .user( _):
       return [:]
     case .likedMedia(let parameters):
       return [
-        "count"         : parameters.count as AnyObject,
-        "max_like_id"   : parameters.maxLikeId as AnyObject
+        Instagram.Keys.Media.count         : parameters.count as AnyObject,
+        Instagram.Keys.Pagination.maxLikeId   : parameters.maxLikeId as AnyObject
       ]
     case .recentMedia(let parameters):
       return [
-        "count"     : parameters.count as AnyObject,
-        "max_id"    : parameters.maxId as AnyObject,
+        Instagram.Keys.Media.count     : parameters.count as AnyObject,
+        Instagram.Keys.Pagination.maxId    : parameters.maxId as AnyObject,
         "min_id"    : parameters.minId as AnyObject
       ]
     case .search(let parameters):
       return [
         "q"     : parameters.query as AnyObject,
-        "count" : parameters.count as AnyObject
+        Instagram.Keys.Media.count : parameters.count as AnyObject
       ]
     }
   }

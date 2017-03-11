@@ -53,8 +53,7 @@ extension Instagram.CommentsEndpoint.Get {
     }
   }
   
-  var parameters: [String : Any] {
-    //TODO Need to fill
+  var parameters: InstagramRequestParameters {
     return [:]
   }
 }
@@ -67,11 +66,11 @@ extension Instagram.CommentsEndpoint.Post {
     }
   }
   
-  var parameters: [String : Any] {
+  var parameters: InstagramRequestParameters {
     switch self {
     case .comment(let parameters):
       return [
-        "text" : parameters.text
+        Instagram.Keys.Comment.text : parameters.text as AnyObject
       ]
     }
   }
@@ -89,7 +88,7 @@ extension Instagram.CommentsEndpoint.Delete {
     }
   }
   
-  var parameters: [String : Any] {
+  var parameters: InstagramRequestParameters {
     //TODO Need to fill
     return [:]
   }

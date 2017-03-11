@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+//Do it need to be added to Instagram constrains
 private let kInstagramCachedMedia = "kInstagramCachedMedia"
 private let instagramDefaultDayMediaCount = 3
 private let instagramMediaMaxCount = 19
@@ -154,9 +154,9 @@ class InstagramMediaService: InstagramBaseService {
         //Create parameteres
         var parameters = [InstagramRequestKey: AnyObject]()
         
-        parameters[kInstagramCount] = count as AnyObject?
+        parameters[Instagram.Keys.Media.count] = count as AnyObject?
         if let maxId = maxId {
-            parameters[kInstagramMaxId] = maxId as AnyObject?
+            parameters[Instagram.Keys.Pagination.maxId] = maxId as AnyObject?
         }
         
         networkClient.sendRequest(path: networkClient.instagramUserMediaPath(userId), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramMedia>?, error) in
@@ -176,9 +176,9 @@ class InstagramMediaService: InstagramBaseService {
         //Create parameteres
         var parameters = [InstagramRequestKey: AnyObject]()
         
-        parameters[kInstagramCount] = count as AnyObject?
+        parameters[Instagram.Keys.Media.count] = count as AnyObject?
         if let maxLikeID = maxLikeID {
-            parameters[kInstagramMaxLikeId] = maxLikeID as AnyObject?
+            parameters[Instagram.Keys.Pagination.maxLikeId] = maxLikeID as AnyObject?
         }
         
         networkClient.sendRequest(path: networkClient.instagramUserMediaLikedPath(), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramMedia>?, error) in
@@ -307,9 +307,9 @@ private extension InstagramMediaService {
         //Create parameteres
         var parameters = [InstagramRequestKey: AnyObject]()
         
-        parameters[kInstagramCount] = count as AnyObject?
+        parameters[Instagram.Keys.Media.count] = count as AnyObject?
         if let maxId = maxId {
-            parameters[kInstagramMaxId] = maxId as AnyObject?
+            parameters[Instagram.Keys.Pagination.maxId] = maxId as AnyObject?
         }
         
         networkClient.sendRequest(path: networkClient.instagramTagMediaPath(name), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramMedia>?, error) in

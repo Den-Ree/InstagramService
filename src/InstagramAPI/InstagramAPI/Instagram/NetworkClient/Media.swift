@@ -59,17 +59,17 @@ extension Instagram.MediaEndpoint.Get {
     }
   }
   
-  var parameters: [String : Any] {
+  var parameters: InstagramRequestParameters {
     switch self {
     case .media(_):
       return [:]
     case .search(let parameters):
       
-      var result = [String : Any]()
-      result["lat"] = parameters.latitude
-      result["lng"] = parameters.longitude
+      var result = InstagramRequestParameters()
+      result["lat"] = parameters.latitude as AnyObject?
+      result["lng"] = parameters.longitude as AnyObject?
       if let distance = parameters.distance {
-        result["distance"] = distance
+        result["distance"] = distance as AnyObject?
       }
       return result
     }

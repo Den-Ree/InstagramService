@@ -19,8 +19,8 @@ class InstagramObjectResponse <T: Mappable> : NSObject, InstagramResponse {
     required init?(map: Map) {}
     
     func mapping(map: Map) {
-        data <- map[kInstagramData]
-        meta <- map[kInstagramMeta]
+        data <- map[Instagram.Keys.Response.data]
+        meta <- map[Instagram.Keys.Response.meta]
     }
 }
 
@@ -32,9 +32,9 @@ class InstagramArrayResponse <T: Mappable> : NSObject, InstagramResponse {
     required init?(map: Map) {}
     
     func mapping(map: Map) {
-        data <- map[kInstagramData]
-        meta <- map[kInstagramMeta]
-        pagination <- map[kInstagramPagination]
+        data <- map[Instagram.Keys.Response.data]
+        meta <- map[Instagram.Keys.Response.meta]
+        pagination <- map[Instagram.Keys.Response.pagination]
     }
 }
 
@@ -44,7 +44,7 @@ class InstagramMetaResponse: NSObject, Mappable, InstagramResponse {
     required init?(map: Map) {}
     
     func mapping(map: Map) {
-        meta <- map[kInstagramMeta]
+        meta <- map[Instagram.Keys.Response.meta]
     }
 }
 
@@ -56,8 +56,8 @@ class InstagramPaginationInfo: NSObject, Mappable, InstagramResponse {
     required init?(map: Map) {}
     
     func mapping(map: Map) {
-        nextURL <- (map[kInstagramNextURL], URLTransform())
-        nextMaxId <- map[kInstagramNextMaxId]
+        nextURL <- (map[Instagram.Keys.Pagination.nextURL], URLTransform())
+        nextMaxId <- map[Instagram.Keys.Pagination.nextMaxId]
     }
 }
 
@@ -85,9 +85,9 @@ class InstagramMetaObject: NSObject, Mappable {
     required init?(map: Map) {}
     
     func mapping(map: Map) {
-        code <- map[kInstagramCode]
-        errorType <- map[kInstagramErrorType]
-        errorMessage <- map[kInstagramErrorMessage]
+        code <- map[Instagram.Keys.Error.code]
+        errorType <- map[Instagram.Keys.Error.type]
+        errorMessage <- map[Instagram.Keys.Error.message]
     }
 }
 

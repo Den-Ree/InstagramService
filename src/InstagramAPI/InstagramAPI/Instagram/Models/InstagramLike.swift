@@ -23,9 +23,9 @@ class InstagramLike: InstagramModel {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
-        username <- map[kInstagramUsername]
-        firstName <- map[kInstagramFirstName]
-        lastName <- map[kInstagramLastName]
-        type <- map[kInstagramType]
+        username <- map[Instagram.Keys.User.username]
+        firstName <- map[Instagram.Keys.User.firstName]
+        lastName <- map[Instagram.Keys.User.lastName]
+        type <- map[Instagram.Keys.Media.type]
     }
 }

@@ -41,7 +41,7 @@ extension Instagram.LikesEndpoint.Get {
     }
   }
   
-  var parameters : [String : Any]{
+  var parameters : InstagramRequestParameters{
     // TODO Need to fill
     return [:]
   }
@@ -56,8 +56,7 @@ extension Instagram.LikesEndpoint.Post {
     }
   }
   
-  var parameters : [String : Any]{
-    // TODO Need to fill
+  var parameters : InstagramRequestParameters{
     return [:]
   }
 
@@ -75,8 +74,7 @@ extension Instagram.LikesEndpoint.Delete {
     }
   }
   
-  var parameters : [String : Any]{
-    // TODO Need to fill
+  var parameters : InstagramRequestParameters{
     return [:]
   }
 
