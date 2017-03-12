@@ -14,11 +14,11 @@ extension Instagram {
     
     //Requests
     enum Get: InstagramRequestProtocol {
-      case likes(mediaId: InstagramObjectId)
+      case likes(mediaId: String)
     }
     
     enum Post: InstagramRequestProtocol {
-      case likes(mediaId: InstagramObjectId)
+      case likes(mediaId: String)
     }
     
     enum Delete: InstagramRequestProtocol {
@@ -27,8 +27,8 @@ extension Instagram {
     
     //Parameters
     struct DeleteLikeParameter {
-      let mediaId: InstagramObjectId
-      let commentId: InstagramObjectId
+      let mediaId: String
+      let commentId: String
     }
   }
 }

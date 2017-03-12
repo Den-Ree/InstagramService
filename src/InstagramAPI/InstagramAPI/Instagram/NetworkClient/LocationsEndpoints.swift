@@ -21,7 +21,7 @@ extension Instagram {
     
     //Params
     struct RecentMediaParameter {
-      let locationId: InstagramObjectId
+      let locationId: String
       var minId: String? = nil
       var maxId: String? = nil
     }
@@ -30,7 +30,7 @@ extension Instagram {
       var longitude: Double? = nil
       var latitude: Double? = nil
       var distance: Double? = nil
-      var facebookPlacesId: InstagramObjectId? //If Used lng/lat is not required
+      var facebookPlacesId: String? //If Used lng/lat is not required
     }
   }
 }

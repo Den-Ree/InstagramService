@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		8431E7471E71BE060026D752 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E7461E71BE060026D752 /* RootViewController.swift */; };
-		8431E7501E71BE380026D752 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E7491E71BE380026D752 /* Comments.swift */; };
-		8431E7511E71BE380026D752 /* Likes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74A1E71BE380026D752 /* Likes.swift */; };
-		8431E7521E71BE380026D752 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74B1E71BE380026D752 /* Locations.swift */; };
-		8431E7531E71BE380026D752 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74C1E71BE380026D752 /* Media.swift */; };
-		8431E7541E71BE380026D752 /* Relationships.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74D1E71BE380026D752 /* Relationships.swift */; };
-		8431E7551E71BE380026D752 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74E1E71BE380026D752 /* Tags.swift */; };
-		8431E7561E71BE380026D752 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74F1E71BE380026D752 /* Users.swift */; };
-		921DA8A91E2CAEBC00AC7C7C /* InstagramRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921DA8A81E2CAEBC00AC7C7C /* InstagramRequests.swift */; };
+		8431E7501E71BE380026D752 /* CommentsEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E7491E71BE380026D752 /* CommentsEndpoints.swift */; };
+		8431E7511E71BE380026D752 /* LikesEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74A1E71BE380026D752 /* LikesEndpoints.swift */; };
+		8431E7521E71BE380026D752 /* LocationsEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74B1E71BE380026D752 /* LocationsEndpoints.swift */; };
+		8431E7531E71BE380026D752 /* MediaEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74C1E71BE380026D752 /* MediaEndpoints.swift */; };
+		8431E7541E71BE380026D752 /* RelationshipsEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74D1E71BE380026D752 /* RelationshipsEndpoints.swift */; };
+		8431E7551E71BE380026D752 /* TagsEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74E1E71BE380026D752 /* TagsEndpoints.swift */; };
+		8431E7561E71BE380026D752 /* UsersEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74F1E71BE380026D752 /* UsersEndpoints.swift */; };
+		921DA8A91E2CAEBC00AC7C7C /* InstagramRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921DA8A81E2CAEBC00AC7C7C /* InstagramRequest.swift */; };
 		92649A181E06CEF3006EC686 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92649A161E06CEF3006EC686 /* Date+Extension.swift */; };
 		92649A191E06CEF3006EC686 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92649A171E06CEF3006EC686 /* DateFormatter+Extension.swift */; };
 		92649A1B1E06CF09006EC686 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92649A1A1E06CF09006EC686 /* String+Extensions.swift */; };
@@ -55,14 +55,14 @@
 /* Begin PBXFileReference section */
 		08119A51AC04B8E0D9596D2F /* Pods_InstagramAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8431E7461E71BE060026D752 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = Example/RootViewController.swift; sourceTree = "<group>"; };
-		8431E7491E71BE380026D752 /* Comments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
-		8431E74A1E71BE380026D752 /* Likes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Likes.swift; sourceTree = "<group>"; };
-		8431E74B1E71BE380026D752 /* Locations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
-		8431E74C1E71BE380026D752 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
-		8431E74D1E71BE380026D752 /* Relationships.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relationships.swift; sourceTree = "<group>"; };
-		8431E74E1E71BE380026D752 /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
-		8431E74F1E71BE380026D752 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
-		921DA8A81E2CAEBC00AC7C7C /* InstagramRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramRequests.swift; sourceTree = "<group>"; };
+		8431E7491E71BE380026D752 /* CommentsEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsEndpoints.swift; sourceTree = "<group>"; };
+		8431E74A1E71BE380026D752 /* LikesEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesEndpoints.swift; sourceTree = "<group>"; };
+		8431E74B1E71BE380026D752 /* LocationsEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsEndpoints.swift; sourceTree = "<group>"; };
+		8431E74C1E71BE380026D752 /* MediaEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEndpoints.swift; sourceTree = "<group>"; };
+		8431E74D1E71BE380026D752 /* RelationshipsEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipsEndpoints.swift; sourceTree = "<group>"; };
+		8431E74E1E71BE380026D752 /* TagsEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsEndpoints.swift; sourceTree = "<group>"; };
+		8431E74F1E71BE380026D752 /* UsersEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersEndpoints.swift; sourceTree = "<group>"; };
+		921DA8A81E2CAEBC00AC7C7C /* InstagramRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramRequest.swift; sourceTree = "<group>"; };
 		92649A161E06CEF3006EC686 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		92649A171E06CEF3006EC686 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		92649A1A1E06CF09006EC686 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -135,13 +135,13 @@
 		8431E7481E71BE170026D752 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
-				8431E74F1E71BE380026D752 /* Users.swift */,
-				8431E74D1E71BE380026D752 /* Relationships.swift */,
-				8431E74C1E71BE380026D752 /* Media.swift */,
-				8431E7491E71BE380026D752 /* Comments.swift */,
-				8431E74A1E71BE380026D752 /* Likes.swift */,
-				8431E74E1E71BE380026D752 /* Tags.swift */,
-				8431E74B1E71BE380026D752 /* Locations.swift */,
+				8431E74F1E71BE380026D752 /* UsersEndpoints.swift */,
+				8431E74D1E71BE380026D752 /* RelationshipsEndpoints.swift */,
+				8431E74C1E71BE380026D752 /* MediaEndpoints.swift */,
+				8431E7491E71BE380026D752 /* CommentsEndpoints.swift */,
+				8431E74A1E71BE380026D752 /* LikesEndpoints.swift */,
+				8431E74E1E71BE380026D752 /* TagsEndpoints.swift */,
+				8431E74B1E71BE380026D752 /* LocationsEndpoints.swift */,
 			);
 			name = Endpoints;
 			sourceTree = "<group>";
@@ -231,7 +231,7 @@
 				9282E7C71DFDFA5B00B7ACF3 /* InstagramConstants.swift */,
 				9282E7C81DFDFA5B00B7ACF3 /* InstagramNetworkClient.swift */,
 				9282E7C91DFDFA5B00B7ACF3 /* InstagramResponse.swift */,
-				921DA8A81E2CAEBC00AC7C7C /* InstagramRequests.swift */,
+				921DA8A81E2CAEBC00AC7C7C /* InstagramRequest.swift */,
 				8431E7481E71BE170026D752 /* Endpoints */,
 			);
 			path = NetworkClient;
@@ -437,8 +437,8 @@
 				9282E7DD1DFDFA5B00B7ACF3 /* InstagramTag.swift in Sources */,
 				92649A191E06CEF3006EC686 /* DateFormatter+Extension.swift in Sources */,
 				9282E7E31DFDFA5B00B7ACF3 /* InstagramCommentService.swift in Sources */,
-				8431E7541E71BE380026D752 /* Relationships.swift in Sources */,
-				8431E7521E71BE380026D752 /* Locations.swift in Sources */,
+				8431E7541E71BE380026D752 /* RelationshipsEndpoints.swift in Sources */,
+				8431E7521E71BE380026D752 /* LocationsEndpoints.swift in Sources */,
 				9282E7D91DFDFA5B00B7ACF3 /* InstagramLike.swift in Sources */,
 				D761006F1E3F9EAC005CB7A3 /* UserSearchCell.swift in Sources */,
 				9282E7DE1DFDFA5B00B7ACF3 /* InstagramUser.swift in Sources */,
@@ -449,25 +449,25 @@
 				9282E7D61DFDFA5B00B7ACF3 /* Instagram.swift in Sources */,
 				D761006E1E3F9EAC005CB7A3 /* UserMediaViewController.swift in Sources */,
 				9282E7A81DFDF9F700B7ACF3 /* AppDelegate.swift in Sources */,
-				8431E7531E71BE380026D752 /* Media.swift in Sources */,
+				8431E7531E71BE380026D752 /* MediaEndpoints.swift in Sources */,
 				9282E7DF1DFDFA5B00B7ACF3 /* InstagramConstants.swift in Sources */,
 				9282E7D81DFDFA5B00B7ACF3 /* InstagramComment.swift in Sources */,
 				D76100711E3F9EAC005CB7A3 /* UserViewController.swift in Sources */,
 				9282E7E91DFDFA5B00B7ACF3 /* NetworkReachability.swift in Sources */,
 				D76100671E3F9E9C005CB7A3 /* RequestViewController.swift in Sources */,
 				9282E7DB1DFDFA5B00B7ACF3 /* InstagramMedia.swift in Sources */,
-				8431E7561E71BE380026D752 /* Users.swift in Sources */,
+				8431E7561E71BE380026D752 /* UsersEndpoints.swift in Sources */,
 				D761006D1E3F9EAC005CB7A3 /* UserMediaCell.swift in Sources */,
-				8431E7511E71BE380026D752 /* Likes.swift in Sources */,
-				8431E7551E71BE380026D752 /* Tags.swift in Sources */,
+				8431E7511E71BE380026D752 /* LikesEndpoints.swift in Sources */,
+				8431E7551E71BE380026D752 /* TagsEndpoints.swift in Sources */,
 				D76100701E3F9EAC005CB7A3 /* UserSearchViewController.swift in Sources */,
 				92649A1B1E06CF09006EC686 /* String+Extensions.swift in Sources */,
 				8431E7471E71BE060026D752 /* RootViewController.swift in Sources */,
 				9282E7E41DFDFA5B00B7ACF3 /* InstagramLikeService.swift in Sources */,
 				9282E7E11DFDFA5B00B7ACF3 /* InstagramResponse.swift in Sources */,
 				9282E7E61DFDFA5B00B7ACF3 /* InstagramTagService.swift in Sources */,
-				8431E7501E71BE380026D752 /* Comments.swift in Sources */,
-				921DA8A91E2CAEBC00AC7C7C /* InstagramRequests.swift in Sources */,
+				8431E7501E71BE380026D752 /* CommentsEndpoints.swift in Sources */,
+				921DA8A91E2CAEBC00AC7C7C /* InstagramRequest.swift in Sources */,
 				9282E7D71DFDFA5B00B7ACF3 /* InstagramCacheManager.swift in Sources */,
 				9282E7E01DFDFA5B00B7ACF3 /* InstagramNetworkClient.swift in Sources */,
 				9282E7DC1DFDFA5B00B7ACF3 /* InstagramModel.swift in Sources */,

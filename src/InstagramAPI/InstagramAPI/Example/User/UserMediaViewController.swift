@@ -31,7 +31,7 @@ class UserMediaViewController: UIViewController {
         case .recent(let userID):
             //TODO: fix spaghetti
             if let userID = userID {
-                let parameters = Instagram.UsersEndpoint.RecentMediaParameter(user: .id(userID), count: 10, minId: "10", maxId: "10")
+                let parameters = Instagram.UsersEndpoint.Parameter.RecentMedia(user: .id(userID), count: 10, minId: "10", maxId: "10")
                 let request = Instagram.UsersEndpoint.Get.recentMedia(parameters)
                 InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
                     let media: [InstagramMedia]? = response?.data
@@ -39,7 +39,7 @@ class UserMediaViewController: UIViewController {
                     self.collectionView.reloadData()
                 })
             } else {
-                let parameters = Instagram.UsersEndpoint.RecentMediaParameter(user: .owner, count: 10, minId: "10", maxId: "10")
+                let parameters = Instagram.UsersEndpoint.Parameter.RecentMedia(user: .owner, count: 10, minId: "10", maxId: "10")
                 let request = Instagram.UsersEndpoint.Get.recentMedia(parameters)
                 InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
                     let media: [InstagramMedia]? = response?.data
@@ -50,7 +50,7 @@ class UserMediaViewController: UIViewController {
             break
             
         case .liked:
-            let parameters = Instagram.UsersEndpoint.LikedMediaParameter(user: .owner, count: 10, maxLikeId: "10")
+            let parameters = Instagram.UsersEndpoint.Parameter.LikedMedia(user: .owner, count: 10, maxLikeId: "10")
             let request = Instagram.UsersEndpoint.Get.likedMedia(parameters)
             InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
                 let media: [InstagramMedia]? = response?.data

@@ -17,7 +17,7 @@ extension Instagram {
       case follows
       case followedBy
       case requestedBy
-      case relationship(userId: InstagramObjectId)
+      case relationship(userId: String)
     }
     
     enum Post: InstagramRequestProtocol {
@@ -26,7 +26,7 @@ extension Instagram {
     
     //Parameters
     struct PostRelationshipParameter {
-      let userId: InstagramObjectId
+      let userId: String
       let action: Action
     }
     

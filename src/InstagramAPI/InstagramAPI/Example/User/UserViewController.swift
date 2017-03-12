@@ -25,10 +25,10 @@ class UserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let userParams = Instagram.UsersEndpoint.User(userID)
+        let userParams = Instagram.UsersEndpoint.Parameter.User(userID)
         let request = Instagram.UsersEndpoint.Get.user(userParams)
         
-        InstagramManager.shared.networkClient.send(request, completion: { (user: InstagramObjectResponse<InstagramUser>?, error: Error?) in
+        InstagramManager.shared.networkClient.send(request, completion: { (user: InstagramObjectResponse<Instagram.User>?, error: Error?) in
             if error == nil {
                 if user?.data == user?.data {
                     if let url = user?.data?.profilePictureURL?.absoluteString {

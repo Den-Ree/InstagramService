@@ -50,7 +50,7 @@ class InstagramNetworkClient: BaseNetworkClient {
         self.manager = manager
     }
     
-    override func sendRequest<T : InstagramResponse>(_ method: HTTPMethod = .get, path: String?, parameters: [String : AnyObject], bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?) -> ()) {
+    override func sendRequest<T : InstagramResponse>(_ method: HTTPMethod = .get, path: String?, parameters: [String : Any], bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?) -> ()) {
         super.sendRequest(method, path: path, parameters: addAccessToken(parameters), bodyObject: bodyObject, completion: completion)
     }
     
