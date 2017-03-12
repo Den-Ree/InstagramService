@@ -12,7 +12,7 @@ import ObjectMapper
 class InstagramComment: InstagramModel {
     fileprivate(set) var createdDate: Date?
     fileprivate(set) var text: String?
-    fileprivate(set) var from: InstagramUser?
+    fileprivate(set) var from: Instagram.User?
     
     required init?(map: Map) {
         super.init(map: map)

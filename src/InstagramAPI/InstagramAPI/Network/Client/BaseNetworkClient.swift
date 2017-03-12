@@ -32,7 +32,7 @@ class HTTPManager: Alamofire.SessionManager {
 
 class BaseNetworkClient: NSObject {
     
-    func sendRequest<T: InstagramResponse>(_ method: HTTPMethod = .get, path: String?, parameters: [String: AnyObject], bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?)->()) {
+    func sendRequest<T: InstagramResponse>(_ method: HTTPMethod = .get, path: String?, parameters: [String: Any], bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?)->()) {
         
         if !NetworkReachability.shared.hasConnection {
             NetworkReachability.shared.checkConnection()

@@ -18,7 +18,7 @@ class InstagramMedia: InstagramModel {
     }
     
     //MARK: Properties
-    fileprivate(set) var user: InstagramUser?
+    fileprivate(set) var user: Instagram.User?
     fileprivate(set) var userHasLiked: Bool?
     fileprivate(set) var createdDate: Date?
     fileprivate(set) var link: URL?

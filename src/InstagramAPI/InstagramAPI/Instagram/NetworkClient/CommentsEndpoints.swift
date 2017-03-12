@@ -14,7 +14,7 @@ extension Instagram {
     
     //Requests
     enum Get: InstagramRequestProtocol {
-      case comment(mediaId: InstagramObjectId)
+      case comment(mediaId: String)
     }
     
     enum Post: InstagramRequestProtocol {
@@ -27,12 +27,12 @@ extension Instagram {
     
     //Parameters
     struct DeleteCommentParameter {
-      let mediaId: InstagramObjectId
-      let commentId: InstagramObjectId
+      let mediaId: String
+      let commentId: String
     }
     
     struct PostCommentParameter {
-      let mediaId: InstagramObjectId
+      let mediaId: String
       let text: String
       //TODO: Need to create typealis and return error if string is not supports
       /**

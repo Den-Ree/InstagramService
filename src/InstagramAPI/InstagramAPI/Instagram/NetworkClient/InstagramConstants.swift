@@ -22,7 +22,7 @@ let instagramAuthorizationURLPath: InstagramURLPath = "https://api.instagram.com
 
 //MARK: Request Keys
 typealias InstagramRequestKey = String
-typealias InstagramRequestParameters = [InstagramRequestKey : AnyObject]
+typealias InstagramRequestParameters = [InstagramRequestKey : Any]
 typealias InstagramResponseKey = String
 
 
@@ -104,6 +104,7 @@ extension Instagram {
       static let url = "url"
       static let height = "height"
       static let width = "width"
+      static let query = "q"
     }
     
     enum Comment {
@@ -217,21 +218,21 @@ public struct InstagramVideo {
 }
 
 open class InstagramUserCountsTransform: TransformType {
-    public typealias Object = InstagramUserCounts
+    public typealias Object = Instagram.UserCounts
     public typealias JSON = [String: Int]
     
     public init() {}
     
-    open func transformFromJSON(_ value: Any?) -> InstagramUserCounts? {
+    open func transformFromJSON(_ value: Any?) -> Instagram.UserCounts? {
         if let dictionary = value as? [String: Int] {
             if let media = dictionary[Instagram.Keys.User.Counts.media], let follows = dictionary[Instagram.Keys.User.Counts.follows], let followedBy = dictionary[Instagram.Keys.User.Counts.followedBy] {
-                return InstagramUserCounts(media: media, follows: follows, followedBy: followedBy)
+                return Instagram.UserCounts(media: media, follows: follows, followedBy: followedBy)
             }
         }
         return nil
     }
     
-    open func transformToJSON(_ value: InstagramUserCounts?) -> [String: Int]? {
+    open func transformToJSON(_ value: Instagram.UserCounts?) -> [String: Int]? {
         if let counts = value {
             return [Instagram.Keys.User.Counts.media: counts.media, Instagram.Keys.User.Counts.follows: counts.follows, Instagram.Keys.User.Counts.followedBy: counts.followedBy]
         }

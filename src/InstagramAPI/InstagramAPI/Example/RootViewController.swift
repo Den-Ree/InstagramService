@@ -59,7 +59,7 @@ extension RootViewController {
         //Receive logged in user from url
         isLoggedIn = false
         
-        InstagramManager.shared.receiveLoggedInUser(url) { (user: InstagramUser?, error) -> () in
+        InstagramManager.shared.receiveLoggedInUser(url) { (user: Instagram.User?, error) -> () in
             if let instagramAccount = user, let objectId = instagramAccount.objectId , objectId.characters.count > 0 {
                 self.isLoggedIn = true
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)

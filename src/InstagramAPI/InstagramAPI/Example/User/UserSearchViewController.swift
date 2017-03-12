@@ -20,7 +20,7 @@ class UserSearchViewController: UIViewController {
     }
 
     @IBOutlet fileprivate weak var searchBar: UISearchBar!
-    fileprivate var dataSource: [InstagramUser?] = []
+    fileprivate var dataSource: [Instagram.User?] = []
     fileprivate var searchActive : Bool = false
 
     override func viewDidLoad() {
@@ -75,9 +75,9 @@ extension UserSearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let searchParams = Instagram.UsersEndpoint.SearchUserParameter(query: searchText, count: 10)
+        let searchParams = Instagram.UsersEndpoint.Parameter.SearchUser(query: searchText, count: 10)
         let request = Instagram.UsersEndpoint.Get.search(searchParams)
-        InstagramManager.shared.networkClient.send(request, completion: { (users: InstagramArrayResponse<InstagramUser>?, error: Error?) in
+        InstagramManager.shared.networkClient.send(request, completion: { (users: InstagramArrayResponse<Instagram.User>?, error: Error?) in
             guard let users = users?.data else {
                 return
             }
