@@ -23,9 +23,9 @@ class InstagramLocation: InstagramModel {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
-        latitude <- map[kInstagramLatitude]
-        longitude <- map[kInstagramLongitude]
-        streetAddress <- map[kInstagramStreetAddress]
-        name <- map[kInstagramName]
+        latitude <- map[Instagram.Keys.Location.latitude]
+        longitude <- map[Instagram.Keys.Location.longitude]
+        streetAddress <- map[Instagram.Keys.Location.streetAddress]
+        name <- map[Instagram.Keys.Location.name]
     }
 }

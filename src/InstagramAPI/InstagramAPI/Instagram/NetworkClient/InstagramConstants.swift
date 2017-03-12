@@ -23,88 +23,123 @@ let instagramAuthorizationURLPath: InstagramURLPath = "https://api.instagram.com
 //MARK: Request Keys
 typealias InstagramRequestKey = String
 typealias InstagramRequestParameters = [InstagramRequestKey : AnyObject]
-
-
-let kInstagramCliendId = "client_id"
-let kInstagramRedirectUri = "redirect_uri"
-let kInstagramResponseType = "response_type"
-let kInstagramToken = "token"
-let kInstagramScope = "scope"
-let kInstagramAccessToken = "access_token"
-
-//MARK: Response Keys
 typealias InstagramResponseKey = String
 
-let kInstagramObjectId = "id"
-let kInstagramCount = "count"
-let kInstagramURL = "url"
-let kInstagramHeight = "height"
-let kInstagramWidth = "width"
 
-let kInstagramData = "data"
-let kInstagramMeta = "meta"
-let kInstagramPagination = "pagination"
-let kInstagramCode = "code"
-let kInstagramErrorType = "error_type"
-let kInstagramErrorMessage = "error_message"
-
-let kInstagramThumbnail = "thumbnail"
-let kInstagramLowResolution = "low_resolution"
-let kInstagramStandardResolution = "standard_resolution"
-let kInstagramLowBandwidth = "low_bandwidth"
-
-let kInstagramImage = "image"
-let kInstagramVideo = "video"
-
-let kInstagramUser = "user"
-let kInstagramUserHasLiked = "user_has_liked"
-let kInstagramCreatedTime = "created_time"
-let kInstagramLink = "link"
-let kInstagramCaption = "caption"
-let kInstagramLikes = "likes"
-let kInstagramComments = "comments"
-let kInstagramFilter = "filter"
-
-let kInstagramTags = "tags"
-let kInstagramImages = "images"
-let kInstagramVideos = "videos"
-let kInstagramLocation = "location"
-let kInstagramType = "type"
-
-let kInstagramFrom = "from"
-let kInstagramText = "text"
-
-let kInstagramUsername = "username"
-let kInstagramFullName = "full_name"
-let kInstagramFirstName = "first_name"
-let kInstagramLastName = "last_name"
-let kInstagramProfilePicture = "profile_picture"
-let kInstagramBio = "bio"
-let kInstagramWebsite = "website"
-
-let kInstagramCounts = "counts"
-let kInstagramMedia = "media"
-let kInstagramFollows = "follows"
-let kInstagramFollowedBy = "followed_by"
-
-let kInstagramMediaCount = "media_count"
-
-let kInstagramName = "name"
-let kInstagramLatitude = "latitude"
-let kInstagramLongitude = "longitude"
-let kInstagramStreetAddress = "street_address"
-
-let kInstagramNextURL = "next_url"
-let kInstagramNextMaxId = "next_max_id"
-let kInstagramNextMaxLikeId = "next_max_like_id"
-let kInstagramNextMaxTagId = "next_max_tag_id"
-let kInstagramNextCursor = "next_cursor"
-
-let kInstagramMaxId = "max_id"
-let kInstagramMaxLikeId = "max_like_id"
-let kInstagramMaxTagId = "max_tag_id"
-let kInstagramCursor = "cursor"
-
+extension Instagram {
+  
+  enum Constants {
+    static let keychainStore = "com.InstagramManager.keychainStore"
+  }
+  
+  enum Keys {
+    
+    enum Auth {
+      static let clientId = "client_id"
+      static let redirectUri = "redirect_uri"
+      static let accessToken = "access_token"
+    }
+    
+    enum Response {
+      static let type = "response_type"
+      static let token = "token"
+      static let scope = "scope"
+      static let data = "data"
+      static let meta = "meta"
+      static let pagination = "pagination"
+    }
+    
+    enum Object {
+      static let id = "id"
+      static let createdTime = "created_time"
+      static let user = "user"
+    }
+    
+    enum Error {
+      static let type = "error_type"
+      static let message = "error_message"
+      static let code = "code"
+    }
+    
+    enum User {
+      static let username = "username"
+      static let fullName = "full_name"
+      static let firstName = "first_name"
+      static let lastName = "last_name"
+      static let profilePicture = "profile_picture"
+      static let bio = "bio"
+      static let website = "website"
+      static let mediaCount = "media_count"
+      static let counts = "counts"
+      
+      enum Counts {
+        static let media = "media"
+        static let follows = "follows"
+        static let followedBy = "followed_by"
+      }
+    }
+    
+    enum Media {
+      static let count = "count"
+      static let link = "link"
+      static let caption = "caption"
+      static let likes = "likes"
+      static let comments = "comments"
+      static let filter = "filter"
+      static let tags = "tags"
+      static let images = "images"
+      static let videos = "videos"
+      static let location = "location"
+      static let type = "type"
+      static let userHasLiked = "user_has_liked"
+    }
+    
+    enum Data {
+      static let image = "image"
+      static let video = "video"
+      static let thumbnail = "thumbnail"
+      static let lowResolution = "low_resolution"
+      static let standardResolution = "standard_resolution"
+      static let lowBandwidth = "low_bandwidth"
+      static let url = "url"
+      static let height = "height"
+      static let width = "width"
+    }
+    
+    enum Comment {
+      static let from = "from"
+      static let text = "text"
+    }
+    
+    enum Tag {
+      static let name = "name"
+      static let mediaCount = "media_count"
+    }
+    
+    enum Location {
+      
+      static let name = "name"
+      static let latitude = "latitude"
+      static let longitude = "longitude"
+      static let streetAddress = "street_address"
+    }
+    
+    enum Pagination {
+      static let nextURL = "next_url"
+      static let nextMaxId = "next_max_id"
+      static let nextMaxLikeId = "next_max_like_id"
+      static let nextMaxTagId = "next_max_tag_id"
+      static let nextCursor = "next_cursor"
+      static let maxId = "max_id"
+      static let maxLikeId = "max_like_id"
+      static let maxTagId = "max_tag_id"
+      static let cursor = "cursor"
+      static let minTagId = "min_tag_id"
+      static let minId = "min_id"
+      
+    }
+  }
+}
 
 enum InstagramLoginScope: Int {
     case basic = 0
@@ -142,7 +177,7 @@ public struct InstagramMediaURL {
     fileprivate(set) var size: CGSize = CGSize.zero
     
     init(mediaURLDictionary: InstagramMediaURLDictionary?) {
-        if let urlString = mediaURLDictionary?[kInstagramURL] as? String, let url = Foundation.URL(string: urlString), let width = mediaURLDictionary?[kInstagramWidth] as? CGFloat, let height = mediaURLDictionary?[kInstagramHeight] as? CGFloat {
+        if let urlString = mediaURLDictionary?[Instagram.Keys.Data.url] as? String, let url = Foundation.URL(string: urlString), let width = mediaURLDictionary?[Instagram.Keys.Data.width] as? CGFloat, let height = mediaURLDictionary?[Instagram.Keys.Data.height] as? CGFloat {
             self.URL = url
             self.size = CGSize(width: width, height: height)
         }
@@ -152,11 +187,11 @@ public struct InstagramMediaURL {
     func convertToDictionary() -> InstagramMediaURLDictionary? {
         var result = InstagramMediaURLDictionary()
         if let urlString = URL?.absoluteString {
-            result[kInstagramURL] = urlString as AnyObject?
+            result[Instagram.Keys.Data.url] = urlString as AnyObject?
         }
         
-        result[kInstagramWidth] = size.width as AnyObject?
-        result[kInstagramHeight] = size.height as AnyObject?
+        result[Instagram.Keys.Data.width] = size.width as AnyObject?
+        result[Instagram.Keys.Data.height] = size.height as AnyObject?
         return result
     }
 }
@@ -189,7 +224,7 @@ open class InstagramUserCountsTransform: TransformType {
     
     open func transformFromJSON(_ value: Any?) -> InstagramUserCounts? {
         if let dictionary = value as? [String: Int] {
-            if let media = dictionary[kInstagramMedia], let follows = dictionary[kInstagramFollows], let followedBy = dictionary[kInstagramFollowedBy] {
+            if let media = dictionary[Instagram.Keys.User.Counts.media], let follows = dictionary[Instagram.Keys.User.Counts.follows], let followedBy = dictionary[Instagram.Keys.User.Counts.followedBy] {
                 return InstagramUserCounts(media: media, follows: follows, followedBy: followedBy)
             }
         }
@@ -198,7 +233,7 @@ open class InstagramUserCountsTransform: TransformType {
     
     open func transformToJSON(_ value: InstagramUserCounts?) -> [String: Int]? {
         if let counts = value {
-            return [kInstagramMedia: counts.media, kInstagramFollows: counts.follows, kInstagramFollowedBy: counts.followedBy]
+            return [Instagram.Keys.User.Counts.media: counts.media, Instagram.Keys.User.Counts.follows: counts.follows, Instagram.Keys.User.Counts.followedBy: counts.followedBy]
         }
         return nil
     }
@@ -215,9 +250,9 @@ open class InstagramImageTransform: TransformType {
             return nil
         }
         
-        let lowResolutionURL = InstagramMediaURL(mediaURLDictionary: images[kInstagramLowResolution] as? InstagramMediaURLDictionary)
-        let standardResolutionURL = InstagramMediaURL(mediaURLDictionary: images[kInstagramStandardResolution] as? InstagramMediaURLDictionary)
-        let thumbnailURL = InstagramMediaURL(mediaURLDictionary: images[kInstagramThumbnail] as? InstagramMediaURLDictionary)
+        let lowResolutionURL = InstagramMediaURL(mediaURLDictionary: images[Instagram.Keys.Data.lowResolution] as? InstagramMediaURLDictionary)
+        let standardResolutionURL = InstagramMediaURL(mediaURLDictionary: images[Instagram.Keys.Data.standardResolution] as? InstagramMediaURLDictionary)
+        let thumbnailURL = InstagramMediaURL(mediaURLDictionary: images[Instagram.Keys.Data.thumbnail] as? InstagramMediaURLDictionary)
         
         return InstagramImage(lowResolutionURL: lowResolutionURL, standardResolutionURL: standardResolutionURL, thumbnailURL: thumbnailURL)
     }
@@ -229,15 +264,15 @@ open class InstagramImageTransform: TransformType {
         
         var imagesDictionary = InstagramImagesDictionary()
         if let lowResolutionURL = image.lowResolutionURL {
-            imagesDictionary[kInstagramLowResolution] = lowResolutionURL.convertToDictionary() as AnyObject?
+            imagesDictionary[Instagram.Keys.Data.lowResolution] = lowResolutionURL.convertToDictionary() as AnyObject?
         }
         
         if let standardResolution = image.standardResolutionURL {
-            imagesDictionary[kInstagramStandardResolution] = standardResolution.convertToDictionary() as AnyObject?
+            imagesDictionary[Instagram.Keys.Data.standardResolution] = standardResolution.convertToDictionary() as AnyObject?
         }
         
         if let thumbnailURL = image.thumbnailURL {
-            imagesDictionary[kInstagramThumbnail] = thumbnailURL.convertToDictionary() as AnyObject?
+            imagesDictionary[Instagram.Keys.Data.thumbnail] = thumbnailURL.convertToDictionary() as AnyObject?
         }
         
         return imagesDictionary
@@ -255,9 +290,9 @@ open class InstagramVideoTransform: TransformType {
             return nil
         }
         
-        let lowResolutionURL = InstagramMediaURL(mediaURLDictionary: videos[kInstagramLowResolution] as? InstagramMediaURLDictionary)
-        let standardResolutionURL = InstagramMediaURL(mediaURLDictionary: videos[kInstagramStandardResolution] as? InstagramMediaURLDictionary)
-        let lowBandwidthURL = InstagramMediaURL(mediaURLDictionary: videos[kInstagramLowBandwidth] as? InstagramMediaURLDictionary)
+        let lowResolutionURL = InstagramMediaURL(mediaURLDictionary: videos[Instagram.Keys.Data.lowResolution] as? InstagramMediaURLDictionary)
+        let standardResolutionURL = InstagramMediaURL(mediaURLDictionary: videos[Instagram.Keys.Data.standardResolution] as? InstagramMediaURLDictionary)
+        let lowBandwidthURL = InstagramMediaURL(mediaURLDictionary: videos[Instagram.Keys.Data.lowBandwidth] as? InstagramMediaURLDictionary)
         
         return InstagramVideo(lowResolutionURL: lowResolutionURL, standardResolutionURL: standardResolutionURL, lowBandwidthURL: lowBandwidthURL)
     }
@@ -269,15 +304,15 @@ open class InstagramVideoTransform: TransformType {
         
         var videosDictionary = InstagramVideosDictionary()
         if let lowResolutionURL = video.lowResolutionURL {
-            videosDictionary[kInstagramLowResolution] = lowResolutionURL.convertToDictionary() as AnyObject?
+            videosDictionary[Instagram.Keys.Data.lowResolution] = lowResolutionURL.convertToDictionary() as AnyObject?
         }
         
         if let standardResolution = video.standardResolutionURL {
-            videosDictionary[kInstagramStandardResolution] = standardResolution.convertToDictionary() as AnyObject?
+            videosDictionary[Instagram.Keys.Data.standardResolution] = standardResolution.convertToDictionary() as AnyObject?
         }
         
         if let lowBandwidthURL = video.lowBandwidthURL {
-            videosDictionary[kInstagramLowBandwidth] = lowBandwidthURL.convertToDictionary() as AnyObject?
+            videosDictionary[Instagram.Keys.Data.lowBandwidth] = lowBandwidthURL.convertToDictionary() as AnyObject?
         }
         
         return videosDictionary

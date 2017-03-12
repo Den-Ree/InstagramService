@@ -43,17 +43,17 @@ class InstagramMedia: InstagramModel {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
-        user <- map[kInstagramUser]
-        userHasLiked <- map[kInstagramUserHasLiked]
-        createdDate <- (map[kInstagramCreatedTime], InstagramDateTransform())
-        link <- (map[kInstagramLink], URLTransform())
-        caption <- map[kInstagramCaption]
-        tagsCount <- map[kInstagramTags + String.dotString + kInstagramCount]
-        likesCount <- map[kInstagramLikes + String.dotString + kInstagramCount]
-        commentsCount <- map[kInstagramComments + String.dotString + kInstagramCount]
-        image <- (map[kInstagramImages], InstagramImageTransform())
-        video <- (map[kInstagramVideos], InstagramVideoTransform())
-        type <- map[kInstagramType]
-        tags <- map[kInstagramTags]
+        user <- map[Instagram.Keys.Object.user]
+        userHasLiked <- map[Instagram.Keys.Media.userHasLiked]
+        createdDate <- (map[Instagram.Keys.Object.createdTime], InstagramDateTransform())
+        link <- (map[Instagram.Keys.Media.link], URLTransform())
+        caption <- map[Instagram.Keys.Media.caption]
+        tagsCount <- map[Instagram.Keys.Media.tags + String.dotString + Instagram.Keys.Media.count]
+        likesCount <- map[Instagram.Keys.Media.likes + String.dotString + Instagram.Keys.Media.count]
+        commentsCount <- map[Instagram.Keys.Media.comments + String.dotString + Instagram.Keys.Media.count]
+        image <- (map[Instagram.Keys.Media.images], InstagramImageTransform())
+        video <- (map[Instagram.Keys.Media.videos], InstagramVideoTransform())
+        type <- map[Instagram.Keys.Media.type]
+        tags <- map[Instagram.Keys.Media.tags]
     }
 }

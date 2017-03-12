@@ -21,15 +21,15 @@ class InstagramTag: InstagramModel {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
-        name <- map[kInstagramName]
-        mediaCount <- map[kInstagramMediaCount]
+        name <- map[Instagram.Keys.Tag.name]
+        mediaCount <- map[Instagram.Keys.Tag.mediaCount]
     }
 }
 
 extension InstagramTag {
     //Force init
     static func create(_ name: String, mediaCount: Int) -> InstagramTag? {
-        let tag = InstagramTag(JSON: [kInstagramName: name, kInstagramMediaCount: mediaCount])
+        let tag = InstagramTag(JSON: [Instagram.Keys.Tag.name: name, Instagram.Keys.Tag.mediaCount: mediaCount])
         return tag
     }
 }

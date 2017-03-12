@@ -69,24 +69,24 @@ extension InstagramManager {
     }
     
     func authorizationURL() -> URL? {
-        let parameters: [String : Any] = [kInstagramCliendId: appClientId, kInstagramRedirectUri: appRedirectURL, kInstagramResponseType: kInstagramToken, kInstagramScope: InstagramLoginScope.allScopesValue]
+        let parameters: [String : Any] = [Instagram.Keys.Auth.clientId: appClientId, Instagram.Keys.Auth.redirectUri: appRedirectURL, Instagram.Keys.Response.type: Instagram.Keys.Response.token, Instagram.Keys.Response.scope: InstagramLoginScope.allScopesValue]
         return networkClient.encode(instagramAuthorizationURLPath, parameters: parameters)
     }
     
     func receiveLoggedInUser(_ url: URL?, completion: ((InstagramUser?, Error?)->())?) {
         if let accessToken = networkClient.getAccessToken(url) , accessToken.characters.count > 0 {
             isNeedToReceiveNewUser = true
-            keychainStore[kInstagramAccessToken] = accessToken
+            keychainStore[Instagram.Keys.Auth.accessToken] = accessToken
             
             let params = Instagram.UsersEndpoint.User()
             let request = Instagram.UsersEndpoint.Get.user(params)
     
             networkClient.send(request, completion: { [weak self] (user: InstagramObjectResponse<InstagramUser>?, error: Error?) in
                 if let user = user?.data, let objectId = user.objectId , objectId.characters.count > 0 {
-                    let currentAccessToken = self?.keychainStore[kInstagramAccessToken]
-                    self?.keychainStore[kInstagramAccessToken + objectId] = currentAccessToken
+                    let currentAccessToken = self?.keychainStore[Instagram.Keys.Auth.accessToken]
+                    self?.keychainStore[Instagram.Keys.Auth.accessToken + objectId] = currentAccessToken
                     do {
-                        try self?.keychainStore.remove(kInstagramAccessToken)
+                        try self?.keychainStore.remove(Instagram.Keys.Auth.accessToken)
                     }
                     catch {
                         let error = error as NSError
@@ -117,7 +117,7 @@ extension InstagramManager {
         
         var result: String?
         if let instagramUserId = instagramUserId {
-            result = keychainStore[kInstagramAccessToken + instagramUserId]
+            result = keychainStore[Instagram.Keys.Auth.accessToken + instagramUserId]
         }
         return result
     }
@@ -149,7 +149,7 @@ extension InstagramManager {
     }
     
     func cleanUpCookies() {
-        keychainStore[kInstagramAccessToken] = nil
+        keychainStore[Instagram.Keys.Auth.accessToken] = nil
         networkClient.cleanUpCookies()
     }
     
@@ -163,7 +163,7 @@ private extension InstagramManager {
     func finishLogout(forCurrentUsers currentUserIDs: [String], completion: ((Bool, Error?)->())?) {
         for currentUserId in currentUserIDs {
             do {
-                try keychainStore.remove(kInstagramAccessToken + currentUserId)
+                try keychainStore.remove(Instagram.Keys.Auth.accessToken + currentUserId)
             }
             catch {
                 let error = error as NSError
@@ -178,10 +178,10 @@ extension InstagramManager: InstagramNetworkClientManagerProtocol {
     var instagramAccessToken: String? {
         var result: String?
         if let currentUserId = lastReceivedUserId , isNeedToReceiveNewUser == false {
-            result = keychainStore[kInstagramAccessToken + currentUserId]
+            result = keychainStore[Instagram.Keys.Auth.accessToken + currentUserId]
         }
         else {
-            result = keychainStore[kInstagramAccessToken]
+            result = keychainStore[Instagram.Keys.Auth.accessToken]
         }
         return result
     }

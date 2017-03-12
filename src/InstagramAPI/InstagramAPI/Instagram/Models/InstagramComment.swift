@@ -20,8 +20,8 @@ class InstagramComment: InstagramModel {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
-        from <- map[kInstagramFrom]
-        text <- map[kInstagramText]
-        createdDate <- (map[kInstagramCreatedTime], InstagramDateTransform())
+        from <- map[Instagram.Keys.Comment.from]
+        text <- map[Instagram.Keys.Comment.text]
+        createdDate <- (map[Instagram.Keys.Object.createdTime], InstagramDateTransform())
     }
 }

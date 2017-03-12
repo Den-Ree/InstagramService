@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+//Do it need to be added to Instagram constrains
 private let kInstagramCachedLikes = "kInstagramCachedLikes"
 private let InstagramLikesStepCount = 3
 private let InstagramMaxCount = 19
@@ -186,9 +186,9 @@ private extension InstagramLikeService {
         //Create parameteres
         var parameters = [InstagramRequestKey: AnyObject]()
         
-        parameters[kInstagramCount] = count as AnyObject?
+        parameters[Instagram.Keys.Media.count] = count as AnyObject?
         if let maxId = maxId {
-            parameters[kInstagramMaxId] = maxId as AnyObject?
+            parameters[Instagram.Keys.Pagination.maxId] = maxId as AnyObject?
         }
         
         networkClient.sendRequest(path: networkClient.instagramLikesPath(mediaId), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramLike>?, error) in

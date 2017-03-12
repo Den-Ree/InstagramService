@@ -33,12 +33,12 @@ class InstagramUser: InstagramModel {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
-        username <- map[kInstagramUsername]
-        fullName <- map[kInstagramFullName]
-        profilePictureURL <- (map[kInstagramProfilePicture], URLTransform())
-        bio <- map[kInstagramBio]
-        website <- (map[kInstagramWebsite], URLTransform())
-        counts <- (map[kInstagramCounts], InstagramUserCountsTransform())
+        username <- map[Instagram.Keys.User.username]
+        fullName <- map[Instagram.Keys.User.fullName]
+        profilePictureURL <- (map[Instagram.Keys.User.profilePicture], URLTransform())
+        bio <- map[Instagram.Keys.User.bio]
+        website <- (map[Instagram.Keys.User.website], URLTransform())
+        counts <- (map[Instagram.Keys.User.counts], InstagramUserCountsTransform())
     }
 }
 
@@ -56,8 +56,8 @@ class InstagramFollower: InstagramModel {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
-        username <- map[kInstagramUsername]
-        fullName <- map[kInstagramFullName]
-        profilePictureURL <- (map[kInstagramProfilePicture], URLTransform())
+        username <- map[Instagram.Keys.User.username]
+        fullName <- map[Instagram.Keys.User.fullName]
+        profilePictureURL <- (map[Instagram.Keys.User.profilePicture], URLTransform())
     }
 }

@@ -20,7 +20,7 @@ class InstagramModel: NSObject, Mappable {
     }
     
     func mapping(map: Map) {
-         objectId <- map[kInstagramObjectId]
+         objectId <- map[Instagram.Keys.Object.id]
     }
     
     //TODO: naming?
