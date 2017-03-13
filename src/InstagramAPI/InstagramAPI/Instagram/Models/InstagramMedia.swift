@@ -10,14 +10,14 @@ import UIKit
 import ObjectMapper
 import CoreLocation
 
-class InstagramMedia: InstagramModel {
+public extension Instagram{
+  
+  //MARK: - Media
+  
+  struct Media : InstagramObject {
     
-    enum MediaType: String {
-        case Image = "image"
-        case Video = "video"
-    }
+    //MARK: - Properties
     
-    //MARK: Properties
     fileprivate(set) var user: Instagram.User?
     fileprivate(set) var userHasLiked: Bool?
     fileprivate(set) var createdDate: Date?
@@ -31,29 +31,36 @@ class InstagramMedia: InstagramModel {
     fileprivate(set) var image: InstagramImage?
     fileprivate(set) var video: InstagramVideo?
     fileprivate(set) var tags: [String]?
+    fileprivate(set) var objectId: String?
     
     var isVideo: Bool {
-        return type == MediaType.Video.rawValue
+      return type == MediaType.Video.rawValue
     }
     
-    //MARK: Protected
-    required init?(map: Map) {
-        super.init(map: map)
-    }
+    //MARK: Mappable
+    public init?(map: Map) {}
     
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-        user <- map[Instagram.Keys.Object.user]
-        userHasLiked <- map[Instagram.Keys.Media.userHasLiked]
-        createdDate <- (map[Instagram.Keys.Object.createdTime], InstagramDateTransform())
-        link <- (map[Instagram.Keys.Media.link], URLTransform())
-        caption <- map[Instagram.Keys.Media.caption]
-        tagsCount <- map[Instagram.Keys.Media.tags + String.dotString + Instagram.Keys.Media.count]
-        likesCount <- map[Instagram.Keys.Media.likes + String.dotString + Instagram.Keys.Media.count]
-        commentsCount <- map[Instagram.Keys.Media.comments + String.dotString + Instagram.Keys.Media.count]
-        image <- (map[Instagram.Keys.Media.images], InstagramImageTransform())
-        video <- (map[Instagram.Keys.Media.videos], InstagramVideoTransform())
-        type <- map[Instagram.Keys.Media.type]
-        tags <- map[Instagram.Keys.Media.tags]
+    mutating public func mapping(map: Map){
+      objectId <- map[Instagram.Keys.Object.id]
+      user <- map[Instagram.Keys.Object.user]
+      userHasLiked <- map[Instagram.Keys.Media.userHasLiked]
+      createdDate <- (map[Instagram.Keys.Object.createdTime], InstagramDateTransform())
+      link <- (map[Instagram.Keys.Media.link], URLTransform())
+      caption <- map[Instagram.Keys.Media.caption]
+      tagsCount <- map[Instagram.Keys.Media.tags + String.dotString + Instagram.Keys.Media.count]
+      likesCount <- map[Instagram.Keys.Media.likes + String.dotString + Instagram.Keys.Media.count]
+      commentsCount <- map[Instagram.Keys.Media.comments + String.dotString + Instagram.Keys.Media.count]
+      image <- (map[Instagram.Keys.Media.images], InstagramImageTransform())
+      video <- (map[Instagram.Keys.Media.videos], InstagramVideoTransform())
+      type <- map[Instagram.Keys.Media.type]
+      tags <- map[Instagram.Keys.Media.tags]
     }
+  }
+  
+  public enum MediaType: String {
+    case Image = "image"
+    case Video = "video"
+  }
+  
 }
+
