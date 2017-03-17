@@ -9,19 +9,28 @@
 import UIKit
 import ObjectMapper
 
-class InstagramComment: InstagramModel {
+public extension Instagram {
+  
+  //MARK: - Comment
+  
+  struct Comment : InstagramObject {
+    
+    //MARK: - Properties
+    
     fileprivate(set) var createdDate: Date?
     fileprivate(set) var text: String?
     fileprivate(set) var from: Instagram.User?
+    fileprivate(set) var objectId: String?
     
-    required init?(map: Map) {
-        super.init(map: map)
-    }
+    public init?(map: Map) {}
     
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-        from <- map[Instagram.Keys.Comment.from]
-        text <- map[Instagram.Keys.Comment.text]
-        createdDate <- (map[Instagram.Keys.Object.createdTime], InstagramDateTransform())
+    //MARK: Mappable
+    mutating public func mapping(map: Map) {
+      objectId <- map[Instagram.Keys.Object.id]
+      from <- map[Instagram.Keys.Comment.from]
+      text <- map[Instagram.Keys.Comment.text]
+      createdDate <- (map[Instagram.Keys.Object.createdTime], InstagramDateTransform())
     }
+  }
 }
+

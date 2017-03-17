@@ -30,7 +30,7 @@ extension Instagram {
      - latitude: Latitude of the center search coordinate. If used, lng is required.
      */
     
-    enum Parameter{
+    enum Parameter {
       
       struct SearchMediaParameter {
         let longitude: Double

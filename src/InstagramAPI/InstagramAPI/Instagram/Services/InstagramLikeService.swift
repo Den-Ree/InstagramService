@@ -7,12 +7,12 @@
 //
 
 import UIKit
-//Do it need to be added to Instagram constrains
+//Do it need to be added to Instagram constants
 private let kInstagramCachedLikes = "kInstagramCachedLikes"
 private let InstagramLikesStepCount = 3
 private let InstagramMaxCount = 19
 
-typealias InstagramLikesBlock = ([InstagramLike]?, Error?)->()
+typealias InstagramLikesBlock = ([Instagram.Like]?, Error?)->()
 
 private class LikesCacheObject: NSObject {
     fileprivate(set) var isAllCached: Bool = false
@@ -23,7 +23,7 @@ private class LikesCacheObject: NSObject {
         self.totalLikesCount = totalLikesCount
     }
     
-    var likes:[InstagramLike]?
+    var likes:[Instagram.Like]?
     var paginationInfo: InstagramPaginationInfo? {
         didSet {
             if let likes = likes , likes.count == totalLikesCount {
@@ -71,7 +71,7 @@ class InstagramLikeService: InstagramBaseService {
             }
             
             //Send request to get new likes
-            sendLikesRequest(mediaId, count: count, maxId: currentCachedObject?.paginationInfo?.nextMaxId, completion: { [weak self] (likes: [InstagramLike]?, pagination: InstagramPaginationInfo?, error) in
+            sendLikesRequest(mediaId, count: count, maxId: currentCachedObject?.paginationInfo?.nextMaxId, completion: { [weak self] (likes: [Instagram.Like]?, pagination: InstagramPaginationInfo?, error) in
                 self?.cacheLikes(mediaId, totalLikesCount: totalLikesCount, newLikes: likes, paginationInfo: pagination)
                 completion(self?.cachedLikes(mediaId, range: range), error)
             })
@@ -80,7 +80,7 @@ class InstagramLikeService: InstagramBaseService {
     
     func fetchAllLikes(_ mediaId: String, totalLikesCount: Int, completion: InstagramLikesBlock?) {
         
-        var result = [InstagramLike]()
+        var result = Array<Instagram.Like>()
         //Start sending requests
         var likesGroup = DispatchGroup()
         //Get user followers
@@ -88,7 +88,7 @@ class InstagramLikeService: InstagramBaseService {
         
         func incrementalFetchAllLikes() {
             //TODO: Need to set step count like totalLikesCount
-            fetchLikes(mediaId, range: InstagramPaginationRange(0...InstagramLikesStepCount), totalLikesCount: totalLikesCount) { (likes: [InstagramLike]?, error) in
+            fetchLikes(mediaId, range: InstagramPaginationRange(0...InstagramLikesStepCount), totalLikesCount: totalLikesCount) { (likes: [Instagram.Like]?, error) in
                 if let likes = likes , likes.count > 0 {
                     result.append(contentsOf: likes)
                     if result.count < totalLikesCount {
@@ -115,7 +115,7 @@ class InstagramLikeService: InstagramBaseService {
 //MARK: Private
 private extension InstagramLikeService {
     
-    func cacheLikes(_ mediaId: String, totalLikesCount: Int, newLikes: [InstagramLike]?, paginationInfo: InstagramPaginationInfo?) {
+    func cacheLikes(_ mediaId: String, totalLikesCount: Int, newLikes: [Instagram.Like]?, paginationInfo: InstagramPaginationInfo?) {
         
         guard let newLikes = newLikes , newLikes.count > 0 else {
             return
@@ -128,7 +128,7 @@ private extension InstagramLikeService {
             cachedObject?.paginationInfo = paginationInfo
         }
         else {
-            var result = [InstagramLike]()
+            var result = Array<Instagram.Like>()
             if let cachedLikes = cachedObject?.likes , cachedLikes.count > 0 {
                 
                 //Add cached media to result array, and update them newMedia contains them
@@ -171,7 +171,7 @@ private extension InstagramLikeService {
     /**
      Return objects in range, if range more then number of items it returns all list
      */
-    func cachedLikes(_ mediaId: String, range: InstagramPaginationRange) -> [InstagramLike]? {
+    func cachedLikes(_ mediaId: String, range: InstagramPaginationRange) -> [Instagram.Like]? {
         
         guard let cachedLikes = cachedLikes[mediaId]?.likes else {
             return nil
@@ -181,7 +181,7 @@ private extension InstagramLikeService {
         return Array(cachedLikes[range.lowerBound..<endIndex+1])
     }
     
-    func sendLikesRequest(_ mediaId: String, count: Int, maxId: String?, completion: @escaping ([InstagramLike]?, InstagramPaginationInfo?, Error?) -> ()) {
+    func sendLikesRequest(_ mediaId: String, count: Int, maxId: String?, completion: @escaping ([Instagram.Like]?, InstagramPaginationInfo?, Error?) -> ()) {
         
         //Create parameteres
         var parameters = [InstagramRequestKey: AnyObject]()
@@ -191,8 +191,8 @@ private extension InstagramLikeService {
             parameters[Instagram.Keys.Pagination.maxId] = maxId as AnyObject?
         }
         
-        networkClient.sendRequest(path: networkClient.instagramLikesPath(mediaId), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramLike>?, error) in
-            let likes: [InstagramLike]? = response?.data
+        networkClient.sendRequest(path: networkClient.instagramLikesPath(mediaId), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<Instagram.Like>?, error) in
+            let likes: [Instagram.Like]? = response?.data
             let pagination: InstagramPaginationInfo? = response?.pagination
             
             completion(likes, pagination, error)

@@ -22,11 +22,11 @@ public extension Instagram{
     fileprivate(set) var userHasLiked: Bool?
     fileprivate(set) var createdDate: Date?
     fileprivate(set) var link: URL?
-    fileprivate(set) var caption: InstagramComment?
+    fileprivate(set) var caption: Instagram.Comment?
     fileprivate(set) var tagsCount: Int = 0
     fileprivate(set) var likesCount: Int = 0
     fileprivate(set) var commentsCount: Int = 0
-    fileprivate(set) var location: InstagramLocation?
+    fileprivate(set) var location: Instagram.Location?
     fileprivate(set) var type: String?
     fileprivate(set) var image: InstagramImage?
     fileprivate(set) var video: InstagramVideo?
@@ -34,7 +34,7 @@ public extension Instagram{
     fileprivate(set) var objectId: String?
     
     var isVideo: Bool {
-      return type == MediaType.Video.rawValue
+      return type == MediaType.video.rawValue
     }
     
     //MARK: Mappable
@@ -58,8 +58,8 @@ public extension Instagram{
   }
   
   public enum MediaType: String {
-    case Image = "image"
-    case Video = "video"
+    case image = "image"
+    case video = "video"
   }
   
 }

@@ -8,20 +8,19 @@
 
 import UIKit
 
-//Do it need to be added to Instagram constrains
+//Do it need to be added to Instagram constants
 private let kInstagramCachedComments = "kInstagramCachedComments"
-
-typealias InstagramCommentsBlock = ([InstagramComment]?, Error?)->()
+typealias InstagramCommentsBlock = ([Instagram.Comment]?, Error?)->()
 
 class InstagramCommentService: InstagramBaseService {
     //MARK: Properties
-    fileprivate var cachedComments: [String: [InstagramComment]] {
+    fileprivate var cachedComments: [String: [Instagram.Comment]] {
         get {
-            if let cachedObjects = cachedObject as? [String: [InstagramComment]] {
+            if let cachedObjects = cachedObject as? [String: [Instagram.Comment]] {
                 return cachedObjects
             }
             else {
-                return [String: [InstagramComment]]()
+                return [String: Array<Instagram.Comment>]()
             }
         }
         set(newValue) {
@@ -37,7 +36,7 @@ class InstagramCommentService: InstagramBaseService {
         }
         else {
             //Send request to get media comments
-            sendCommentsRequest(mediaId: mediaId, completion: { [weak self] (comments :[InstagramComment]?, error: Error?) -> Void in
+            sendCommentsRequest(mediaId: mediaId, completion: { [weak self] (comments :[Instagram.Comment]?, error: Error?) -> Void in
                 self?.cachedComments[mediaId] = comments
                 completion(comments, error)
             })
@@ -52,11 +51,11 @@ class InstagramCommentService: InstagramBaseService {
 private extension InstagramCommentService {
     
     func sendCommentsRequest(mediaId: String, completion: @escaping InstagramCommentsBlock) {
-        networkClient.sendRequest(path: networkClient.instagramCommentsPath(mediaId), parameters: InstagramRequestParameters(), bodyObject: nil, completion: { (response: InstagramArrayResponse<InstagramComment>?, error) in
+        networkClient.sendRequest(path: networkClient.instagramCommentsPath(mediaId), parameters: InstagramRequestParameters(), bodyObject: nil, completion: { (response: InstagramArrayResponse<Instagram.Comment>?, error) in
             
             InstagramManager.shared.checkAccessTokenExpirationInResponse(with: response?.meta)
             
-            let comments: [InstagramComment]? = response?.data
+            let comments: [Instagram.Comment]? = response?.data
             completion(comments, error)
         })
     }
@@ -69,7 +68,7 @@ private extension InstagramCommentService {
             if let result = response?.meta?.isSuccessCode , result {
                 success = result
                 self?.cachedComments[mediaId] = nil
-                self?.fetchComments(mediaId, completion: { (_: [InstagramComment]?, error) in
+                self?.fetchComments(mediaId, completion: { (_: [Instagram.Comment]?, error) in
                     completion(success, error)
                 })
             }

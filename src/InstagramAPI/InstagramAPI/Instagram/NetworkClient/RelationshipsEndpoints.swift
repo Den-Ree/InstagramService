@@ -12,34 +12,43 @@ extension Instagram {
   
   enum RelationshipsEnpoint {
     
-    //Requests
-    enum Get: InstagramRequestProtocol {
-      case follows
-      case followedBy
-      case requestedBy
-      case relationship(userId: String)
+    //MARK: - Requests
+    
+    enum Request {
+      
+      enum Get: InstagramRequestProtocol {
+        case follows
+        case followedBy
+        case requestedBy
+        case relationship(userId: String)
+      }
+      
+      enum Post: InstagramRequestProtocol {
+        case relationship(Parameter.PostRelationshipParameter)
+      }
     }
     
-    enum Post: InstagramRequestProtocol {
-      case relationship(PostRelationshipParameter)
-    }
+    //MARK: - Parameters
     
-    //Parameters
-    struct PostRelationshipParameter {
-      let userId: String
-      let action: Action
-    }
-    
-    enum Action: String {
-      case follow =	"follow"
-      case unfollow = "unfollow"
-      case approve = "approve"
-      case ignore = "ignore"
+    enum Parameter {
+      struct PostRelationshipParameter {
+        let userId: String
+        let action: Action
+      }
+      
+      enum Action: String {
+        case follow =	"follow"
+        case unfollow = "unfollow"
+        case approve = "approve"
+        case ignore = "ignore"
+      }
     }
   }
 }
 
-extension Instagram.RelationshipsEnpoint.Get {
+//MARK: - InstagramRequestProtocol
+
+extension Instagram.RelationshipsEnpoint.Request.Get {
   var path: String {
     switch self {
     case .follows:
@@ -58,7 +67,7 @@ extension Instagram.RelationshipsEnpoint.Get {
   }
 }
 
-extension Instagram.RelationshipsEnpoint.Post {
+extension Instagram.RelationshipsEnpoint.Request.Post {
   var path: String {
     switch self {
     case .relationship(let parameters):

@@ -12,15 +12,18 @@ extension Instagram {
   
   enum LocationsEndpoint {
     
-    //Requests
+    //MARK: - Requests
+    
     enum Get: InstagramRequestProtocol {
       case location(id: String)
-      case recentMedia(RecentMediaParameter)
-      case search(SearchMediaParameter)
+      case recentMedia(Parameter.RecentMediaParameter)
+      case search(Parameter.SearchMediaParameter)
     }
     
-    //Params
-    struct RecentMediaParameter {
+    //MARK: - Parameters
+
+    enum Parameter {
+      struct RecentMediaParameter {
       let locationId: String
       var minId: String? = nil
       var maxId: String? = nil
@@ -31,9 +34,12 @@ extension Instagram {
       var latitude: Double? = nil
       var distance: Double? = nil
       var facebookPlacesId: String? //If Used lng/lat is not required
+      }
     }
   }
 }
+
+//MARK: - InstagramRequestProtocol
 
 extension Instagram.LocationsEndpoint.Get {
   var path: String {

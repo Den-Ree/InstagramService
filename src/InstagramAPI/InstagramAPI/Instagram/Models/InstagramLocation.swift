@@ -9,23 +9,28 @@
 import UIKit
 import ObjectMapper
 
-class InstagramLocation: InstagramModel {
+public extension Instagram {
+  
+  //MARK: - Location
+  
+  struct Location: InstagramObject{
     
     //MARK: Properties
     fileprivate(set) var latitude: Double?
     fileprivate(set) var longitude: Double?
     fileprivate(set) var streetAddress: String?
     fileprivate(set) var name: String?
+    fileprivate(set) var objectId: String?
     
-    required init?(map: Map) {
-        super.init(map: map)
-    }
+    public init?(map: Map) {}
     
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-        latitude <- map[Instagram.Keys.Location.latitude]
-        longitude <- map[Instagram.Keys.Location.longitude]
-        streetAddress <- map[Instagram.Keys.Location.streetAddress]
-        name <- map[Instagram.Keys.Location.name]
+    //MARK: Mappable
+    mutating public func mapping(map: Map) {
+      objectId <- map[Instagram.Keys.Object.id]
+      latitude <- map[Instagram.Keys.Location.latitude]
+      longitude <- map[Instagram.Keys.Location.longitude]
+      streetAddress <- map[Instagram.Keys.Location.streetAddress]
+      name <- map[Instagram.Keys.Location.name]
     }
+  }
 }

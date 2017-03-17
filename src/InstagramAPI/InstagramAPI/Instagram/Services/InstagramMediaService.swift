@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//Do it need to be added to Instagram constrains
+//Do it need to be added to Instagram constants
 private let kInstagramCachedMedia = "kInstagramCachedMedia"
 private let instagramDefaultDayMediaCount = 3
 private let instagramMediaMaxCount = 19
