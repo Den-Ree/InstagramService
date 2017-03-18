@@ -16,23 +16,7 @@ private let InstagramManagerKeychainStore = "com.InstagramManager.keychainStore"
 
 class InstagramManager: NSObject {
     static let shared = InstagramManager()
-    
-    lazy var mediaService: InstagramMediaService = {
-        return InstagramMediaService(networkClient: self.networkClient)
-    }()
-    
-    fileprivate(set) lazy var commentService: InstagramCommentService = {
-        return InstagramCommentService(networkClient: self.networkClient)
-    }()
-    
-    fileprivate(set) lazy var likeService: InstagramLikeService = {
-        return InstagramLikeService(networkClient: self.networkClient)
-    }()
-    
-    fileprivate(set) lazy var tagService: InstagramTagService = {
-        return InstagramTagService(networkClient: self.networkClient)
-    }()
-    
+  
     fileprivate(set) lazy var networkClient: InstagramNetworkClient = {
         return InstagramNetworkClient(appClientId: self.appClientId, appRedirectURL: self.appRedirectURL, manager: self)
     }()
@@ -153,11 +137,7 @@ extension InstagramManager {
         networkClient.cleanUpCookies()
     }
     
-    func cleanUpCachedMedia() {
-        let clients = [mediaService as InstagramCacheClient, commentService as InstagramCacheClient]
-        InstagramCacheManager.shared.removeCachedObject(clients)
-    }
-}
+  }
 
 private extension InstagramManager {
     func finishLogout(forCurrentUsers currentUserIDs: [String], completion: ((Bool, Error?)->())?) {
