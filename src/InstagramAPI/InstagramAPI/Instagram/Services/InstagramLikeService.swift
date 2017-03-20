@@ -80,7 +80,7 @@ class InstagramLikeService: InstagramBaseService {
     
     func fetchAllLikes(_ mediaId: String, totalLikesCount: Int, completion: InstagramLikesBlock?) {
         
-        var result = Array<Instagram.Like>()
+        var result: [Instagram.Like] = []
         //Start sending requests
         var likesGroup = DispatchGroup()
         //Get user followers
@@ -128,7 +128,7 @@ private extension InstagramLikeService {
             cachedObject?.paginationInfo = paginationInfo
         }
         else {
-            var result = Array<Instagram.Like>()
+          var result: [Instagram.Like] = []
             if let cachedLikes = cachedObject?.likes , cachedLikes.count > 0 {
                 
                 //Add cached media to result array, and update them newMedia contains them

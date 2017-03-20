@@ -21,7 +21,7 @@ class InstagramTagService: InstagramBaseService {
         
         //Create requests group
         let tagsGroup = DispatchGroup()
-        var tags = Array<Instagram.Tag>()
+        var tags: [Instagram.Tag] = []
         var tagsError: Error?
         
         tagsGroup.enter()

@@ -20,7 +20,7 @@ class InstagramCommentService: InstagramBaseService {
                 return cachedObjects
             }
             else {
-                return [String: Array<Instagram.Comment>]()
+              return [:]
             }
         }
         set(newValue) {

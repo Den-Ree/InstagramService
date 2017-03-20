@@ -207,7 +207,7 @@ private extension InstagramMediaService {
             cachedObject?.paginationInfo = paginationInfo
         }
         else {
-            var result = Array<Instagram.Media>()
+            var result: [Instagram.Media] = []
             if let cachedMedia = cachedObject?.media , cachedMedia.count > 0 {
                 
                 //Add cached media to result array, and update them newMedia contains them
