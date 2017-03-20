@@ -12,15 +12,18 @@ extension Instagram {
   
   enum LocationsEndpoint {
     
-    //Requests
+    //MARK: - Requests
+    
     enum Get: InstagramRequestProtocol {
       case location(id: String)
-      case recentMedia(RecentMediaParameter)
-      case search(SearchMediaParameter)
+      case recentMedia(Parameter.RecentMediaParameter)
+      case search(Parameter.SearchMediaParameter)
     }
     
-    //Params
-    struct RecentMediaParameter {
+    //MARK: - Parameters
+
+    enum Parameter {
+      struct RecentMediaParameter {
       let locationId: String
       var minId: String? = nil
       var maxId: String? = nil
@@ -31,9 +34,12 @@ extension Instagram {
       var latitude: Double? = nil
       var distance: Double? = nil
       var facebookPlacesId: String? //If Used lng/lat is not required
+      }
     }
   }
 }
+
+//MARK: - InstagramRequestProtocol
 
 extension Instagram.LocationsEndpoint.Get {
   var path: String {
@@ -63,21 +69,21 @@ extension Instagram.LocationsEndpoint.Get {
     case .search(let parameters):
       var result = InstagramRequestParameters()
       if let lng = parameters.longitude, let lat = parameters.latitude{
-        result["lat"] = lat as AnyObject?
-        result["lng"] = lng as AnyObject?
+        result[Instagram.Keys.Location.lat] = lat as AnyObject?
+        result[Instagram.Keys.Location.lng] = lng as AnyObject?
       }
       if let facebookPlacesId = parameters.facebookPlacesId{
-        result["facebook_placed_id"] = facebookPlacesId as AnyObject?
+        result[Instagram.Keys.Pagination.facebookPlacedId] = facebookPlacesId as AnyObject?
       }
       if let distance = parameters.distance {
         let distanceMinValue = 0.0
         let distanceMaxValue = 750.0
         
         if distance >= distanceMinValue && distance <= distanceMaxValue {
-          result["distance"] = distance as AnyObject?
+          result[Instagram.Keys.Location.distance] = distance as AnyObject?
         } else {
           let distanceDefaultValue = 500.0
-          result["distance"] = distanceDefaultValue as AnyObject?
+          result[Instagram.Keys.Location.distance] = distanceDefaultValue as AnyObject?
         }
       }
       return result

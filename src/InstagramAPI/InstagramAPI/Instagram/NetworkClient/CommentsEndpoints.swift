@@ -12,40 +12,53 @@ extension Instagram {
   
   enum CommentsEndpoint {
     
-    //Requests
-    enum Get: InstagramRequestProtocol {
-      case comment(mediaId: String)
+    //MARK: - Requests
+    
+    enum Request {
+      
+      enum Get: InstagramRequestProtocol {
+        case comment(mediaId: String)
+      }
+      
+      enum Post: InstagramRequestProtocol {
+        case comment(Parameter.PostCommentParameter)
+      }
+      
+      enum Delete: InstagramRequestProtocol {
+        case comment(Parameter.DeleteCommentParameter)
+      }
+
     }
     
-    enum Post: InstagramRequestProtocol {
-      case comment(PostCommentParameter)
-    }
     
-    enum Delete: InstagramRequestProtocol {
-      case comment(DeleteCommentParameter)
-    }
+    //MARK: - Parameters
     
-    //Parameters
-    struct DeleteCommentParameter {
-      let mediaId: String
-      let commentId: String
-    }
+    enum Parameter {
     
-    struct PostCommentParameter {
-      let mediaId: String
-      let text: String
-      //TODO: Need to create typealis and return error if string is not supports
-      /**
-       The total length of the comment cannot exceed 300 characters.
-       The comment cannot contain more than 4 hashtags.
-       The comment cannot contain more than 1 URL.
-       The comment cannot consist of all capital letters.
-       */
+      struct DeleteCommentParameter {
+        let mediaId: String
+        let commentId: String
+      }
+      
+      struct PostCommentParameter {
+        let mediaId: String
+        let text: String
+        //TODO: Need to create typealis and return error if string is not supports
+        /**
+         The total length of the comment cannot exceed 300 characters.
+         The comment cannot contain more than 4 hashtags.
+         The comment cannot contain more than 1 URL.
+         The comment cannot consist of all capital letters.
+         */
+      }
+
     }
   }
 }
 
-extension Instagram.CommentsEndpoint.Get {
+//MARK: - InstagramRequestProtocol
+
+extension Instagram.CommentsEndpoint.Request.Get {
   var path: String {
     switch self {
     case .comment(let mediaId):
@@ -58,7 +71,7 @@ extension Instagram.CommentsEndpoint.Get {
   }
 }
 
-extension Instagram.CommentsEndpoint.Post {
+extension Instagram.CommentsEndpoint.Request.Post {
   var path: String {
     switch self {
     case .comment(let parameters):
@@ -80,7 +93,7 @@ extension Instagram.CommentsEndpoint.Post {
   }
 }
 
-extension Instagram.CommentsEndpoint.Delete {
+extension Instagram.CommentsEndpoint.Request.Delete {
   var path: String {
     switch self {
     case .comment(let parameter):

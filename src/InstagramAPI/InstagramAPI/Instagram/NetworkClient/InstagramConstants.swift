@@ -74,6 +74,7 @@ extension Instagram {
       
       enum Counts {
         static let media = "media"
+        static let action = "action"
         static let follows = "follows"
         static let followedBy = "followed_by"
       }
@@ -123,6 +124,9 @@ extension Instagram {
       static let latitude = "latitude"
       static let longitude = "longitude"
       static let streetAddress = "street_address"
+      static let lat = "lat"
+      static let lng = "lng"
+      static let distance = "distance"
     }
     
     enum Pagination {
@@ -137,6 +141,7 @@ extension Instagram {
       static let cursor = "cursor"
       static let minTagId = "min_tag_id"
       static let minId = "min_id"
+      static let facebookPlacedId = "facebook_placed_id"
       
     }
   }

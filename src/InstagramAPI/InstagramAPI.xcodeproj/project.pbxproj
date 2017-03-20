@@ -214,13 +214,13 @@
 		9282E7BE1DFDFA5B00B7ACF3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9282E7C31DFDFA5B00B7ACF3 /* InstagramModel.swift */,
+				9282E7C51DFDFA5B00B7ACF3 /* InstagramUser.swift */,
+				9282E7C21DFDFA5B00B7ACF3 /* InstagramMedia.swift */,
 				9282E7BF1DFDFA5B00B7ACF3 /* InstagramComment.swift */,
 				9282E7C01DFDFA5B00B7ACF3 /* InstagramLike.swift */,
-				9282E7C11DFDFA5B00B7ACF3 /* InstagramLocation.swift */,
-				9282E7C21DFDFA5B00B7ACF3 /* InstagramMedia.swift */,
-				9282E7C31DFDFA5B00B7ACF3 /* InstagramModel.swift */,
 				9282E7C41DFDFA5B00B7ACF3 /* InstagramTag.swift */,
-				9282E7C51DFDFA5B00B7ACF3 /* InstagramUser.swift */,
+				9282E7C11DFDFA5B00B7ACF3 /* InstagramLocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

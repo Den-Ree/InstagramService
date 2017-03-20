@@ -9,23 +9,29 @@
 import UIKit
 import ObjectMapper
 
-class InstagramLike: InstagramModel {
+public extension Instagram {
+  
+  //MARK: - Like
+  
+  struct Like : InstagramObject{
     
     //MARK: Properties
+    
     fileprivate(set) var username: String?
     fileprivate(set) var firstName: String?
     fileprivate(set) var lastName: String?
     fileprivate(set) var type: String?
+    fileprivate(set) var objectId: String?
+   
+    public init?(map: Map){}
     
-    required init?(map: Map) {
-        super.init(map: map)
+    //MARK: Mappable
+    mutating public func mapping(map: Map) {
+      objectId <- map[Instagram.Keys.Object.id]
+      username <- map[Instagram.Keys.User.username]
+      firstName <- map[Instagram.Keys.User.firstName]
+      lastName <- map[Instagram.Keys.User.lastName]
+      type <- map[Instagram.Keys.Media.type]
     }
-    
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-        username <- map[Instagram.Keys.User.username]
-        firstName <- map[Instagram.Keys.User.firstName]
-        lastName <- map[Instagram.Keys.User.lastName]
-        type <- map[Instagram.Keys.Media.type]
-    }
+  }
 }

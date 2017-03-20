@@ -9,27 +9,31 @@
 import UIKit
 import ObjectMapper
 
-class InstagramTag: InstagramModel {
+public extension Instagram{
+  
+  //MARK: - Tag
+
+  struct Tag : InstagramObject {
     
     //MARK: Properties
     fileprivate(set) var name: String = ""
     fileprivate(set) var mediaCount: Int = 0
+    fileprivate(set) var objectId: String?
     
-    required init?(map: Map) {
-        super.init(map: map)
-    }
+    public init?(map: Map) {}
     
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-        name <- map[Instagram.Keys.Tag.name]
-        mediaCount <- map[Instagram.Keys.Tag.mediaCount]
+    //MARK: Mappable
+    mutating public func mapping(map: Map) {
+      objectId <- map[Instagram.Keys.Object.id]
+      name <- map[Instagram.Keys.Tag.name]
+      mediaCount <- map[Instagram.Keys.Tag.mediaCount]
     }
+  }
 }
-
-extension InstagramTag {
+public extension Instagram.Tag {
     //Force init
-    static func create(_ name: String, mediaCount: Int) -> InstagramTag? {
-        let tag = InstagramTag(JSON: [Instagram.Keys.Tag.name: name, Instagram.Keys.Tag.mediaCount: mediaCount])
+    static func create(_ name: String, mediaCount: Int) -> Instagram.Tag? {
+        let tag = Instagram.Tag(JSON: [Instagram.Keys.Tag.name: name, Instagram.Keys.Tag.mediaCount: mediaCount])
         return tag
     }
 }

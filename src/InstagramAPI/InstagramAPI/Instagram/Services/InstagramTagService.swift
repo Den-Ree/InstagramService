@@ -8,8 +8,8 @@
 
 import UIKit
 
-typealias InstagramTagBlock = (InstagramTag?, Error?)->()
-typealias InstagramTagsBlock = ([InstagramTag]?, Error?)->()
+typealias InstagramTagBlock = (Instagram.Tag?, Error?)->()
+typealias InstagramTagsBlock = ([Instagram.Tag]?, Error?)->()
 
 class InstagramTagService: InstagramBaseService {
     
@@ -21,13 +21,13 @@ class InstagramTagService: InstagramBaseService {
         
         //Create requests group
         let tagsGroup = DispatchGroup()
-        var tags = [InstagramTag]()
+        var tags: [Instagram.Tag] = []
         var tagsError: Error?
         
         tagsGroup.enter()
         for tagString in tagNames {
             tagsGroup.enter()
-            sendTagRequest(tagString, completion: { (tag: InstagramTag?, error: Error?) in
+            sendTagRequest(tagString, completion: { (tag: Instagram.Tag?, error: Error?) in
                 if let tag = tag {
                     tags.append(tag)
                 }
@@ -51,7 +51,7 @@ class InstagramTagService: InstagramBaseService {
             return
         }
         
-        sendTagsRequest(searchText) { (tags: [InstagramTag]?, error: Error?) in
+        sendTagsRequest(searchText) { (tags: [Instagram.Tag]?, error: Error?) in
             completion(tags, error)
         }
     }
@@ -60,8 +60,8 @@ class InstagramTagService: InstagramBaseService {
 private extension InstagramTagService {
     
     func sendTagRequest(_ name: String, completion: @escaping InstagramTagBlock) {
-        networkClient.sendRequest(path: networkClient.instagramTagsPath(name), parameters: InstagramRequestParameters(), bodyObject: nil) { (response: InstagramObjectResponse <InstagramTag>?, error) in
-            let tag: InstagramTag? = response?.data
+        networkClient.sendRequest(path: networkClient.instagramTagsPath(name), parameters: InstagramRequestParameters(), bodyObject: nil) { (response: InstagramObjectResponse <Instagram.Tag>?, error) in
+            let tag: Instagram.Tag? = response?.data
             completion(tag, error)
         }
     }
@@ -69,8 +69,8 @@ private extension InstagramTagService {
     func sendTagsRequest(_ searchText: String, completion: @escaping InstagramTagsBlock) {
         var parameters = [InstagramRequestKey: AnyObject]()
         parameters["q"] = searchText as AnyObject?
-        networkClient.sendRequest(path: networkClient.instagramSearchTagsPath(), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<InstagramTag>?, error) in
-            let tags: [InstagramTag]? = response?.data
+        networkClient.sendRequest(path: networkClient.instagramSearchTagsPath(), parameters: parameters, bodyObject: nil) { (response: InstagramArrayResponse<Instagram.Tag>?, error) in
+            let tags: [Instagram.Tag]? = response?.data
             completion(tags, error)
         }
     }

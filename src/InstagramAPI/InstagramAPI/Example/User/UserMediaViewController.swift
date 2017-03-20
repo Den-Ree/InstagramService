@@ -19,7 +19,7 @@ class UserMediaViewController: UIViewController {
     }
     var type: ControllerType = .unknown
 
-    fileprivate var dataSource:[InstagramMedia?] = []
+    fileprivate var dataSource:[Instagram.Media?] = []
     fileprivate let kMaxPhotosInRaw = 4
     fileprivate let kPhotosSpacing: CGFloat = 1.0
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -33,16 +33,16 @@ class UserMediaViewController: UIViewController {
             if let userID = userID {
                 let parameters = Instagram.UsersEndpoint.Parameter.RecentMedia(user: .id(userID), count: 10, minId: "10", maxId: "10")
                 let request = Instagram.UsersEndpoint.Get.recentMedia(parameters)
-                InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
-                    let media: [InstagramMedia]? = response?.data
+                InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<Instagram.Media>?, error: Error?) in
+                    let media: [Instagram.Media]? = response?.data
                     self.dataSource = media!
                     self.collectionView.reloadData()
                 })
             } else {
                 let parameters = Instagram.UsersEndpoint.Parameter.RecentMedia(user: .owner, count: 10, minId: "10", maxId: "10")
                 let request = Instagram.UsersEndpoint.Get.recentMedia(parameters)
-                InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
-                    let media: [InstagramMedia]? = response?.data
+                InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<Instagram.Media>?, error: Error?) in
+                    let media: [Instagram.Media]? = response?.data
                     self.dataSource = media!
                     self.collectionView.reloadData()
                 })
@@ -52,8 +52,8 @@ class UserMediaViewController: UIViewController {
         case .liked:
             let parameters = Instagram.UsersEndpoint.Parameter.LikedMedia(user: .owner, count: 10, maxLikeId: "10")
             let request = Instagram.UsersEndpoint.Get.likedMedia(parameters)
-            InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
-                let media: [InstagramMedia]? = response?.data
+            InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<Instagram.Media>?, error: Error?) in
+                let media: [Instagram.Media]? = response?.data
                 self.dataSource = media!
                 self.collectionView.reloadData()
             })
@@ -82,7 +82,7 @@ extension UserMediaViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserMediaCell", for: indexPath) as! UserMediaCell
-        let media = dataSource[indexPath.row]! as InstagramMedia
+        let media = dataSource[indexPath.row]! as Instagram.Media
         cell.photoImageView.af_setImage(withURL: (media.image?.lowResolutionURL?.URL)!)
         return cell
     }

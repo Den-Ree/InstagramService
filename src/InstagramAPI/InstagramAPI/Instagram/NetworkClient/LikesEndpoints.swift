@@ -12,28 +12,37 @@ extension Instagram {
   
   enum LikesEndpoint {
     
-    //Requests
-    enum Get: InstagramRequestProtocol {
-      case likes(mediaId: String)
-    }
+    //MARK: - Requests
     
-    enum Post: InstagramRequestProtocol {
-      case likes(mediaId: String)
-    }
+    enum Request {
     
-    enum Delete: InstagramRequestProtocol {
-      case likes(DeleteLikeParameter)
-    }
+      enum Get: InstagramRequestProtocol {
+        case likes(mediaId: String)
+      }
     
-    //Parameters
-    struct DeleteLikeParameter {
+      enum Post: InstagramRequestProtocol {
+        case likes(mediaId: String)
+      }
+    
+      enum Delete: InstagramRequestProtocol {
+        case likes(Parameter.DeleteLikeParameter)
+      }
+    }
+        
+    //MARK: - Parameters
+    
+    enum Parameter {
+      struct DeleteLikeParameter {
       let mediaId: String
       let commentId: String
+      }
     }
   }
 }
 
-extension Instagram.LikesEndpoint.Get {
+//MARK: - InstagramRequestProtocol
+
+extension Instagram.LikesEndpoint.Request.Get {
   var path: String {
     switch self {
     case .likes(let mediaId):
@@ -48,7 +57,7 @@ extension Instagram.LikesEndpoint.Get {
 
 }
 
-extension Instagram.LikesEndpoint.Post {
+extension Instagram.LikesEndpoint.Request.Post {
   var path: String {
     switch self {
     case .likes(let mediaId):
@@ -66,7 +75,7 @@ extension Instagram.LikesEndpoint.Post {
   }
 }
 
-extension Instagram.LikesEndpoint.Delete {
+extension Instagram.LikesEndpoint.Request.Delete {
   var path: String {
     switch self {
     case .likes(let mediaId):

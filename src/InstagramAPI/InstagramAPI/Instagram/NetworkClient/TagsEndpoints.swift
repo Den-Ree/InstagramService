@@ -12,30 +12,35 @@ extension Instagram {
   
   enum TagsEndpoint {
     
+    //MARK: - Requests
     
-    //Requests
     enum Get: InstagramRequestProtocol {
       case tag(name: String)
-      case recentMedia(RecentMediaParameter)
+      case recentMedia(Parameter.RecentMediaParameter)
       case search(query: String)
     }
     
+    //MARK: - Parameters
     
-    //Parameters
-    /**
-     @params A valid access token.
-     - maxId: Return media after this max_tag_id.
-     - count: Count of tagged media to return.
-     - minId: Return media before this min_tag_id.
-     */
-    struct RecentMediaParameter {
-      let tagName: String
-      var minId: String? = nil
-      var maxId: String? = nil
-      var count: Int? = nil
+    enum Parameter {
+      //Parameters
+      /**
+       @params A valid access token.
+       - maxId: Return media after this max_tag_id.
+       - count: Count of tagged media to return.
+       - minId: Return media before this min_tag_id.
+       */
+      struct RecentMediaParameter {
+        let tagName: String
+        var minId: String? = nil
+        var maxId: String? = nil
+        var count: Int? = nil
+      }
     }
   }
 }
+
+//MARK: - InstagramRequestProtocol
 
 extension Instagram.TagsEndpoint.Get {
   var path: String {
@@ -67,7 +72,7 @@ extension Instagram.TagsEndpoint.Get {
       return result
     case .search(let query):
       return [
-        "q": query as AnyObject
+        Instagram.Keys.Data.query : query as AnyObject
       ]
     }
   }
