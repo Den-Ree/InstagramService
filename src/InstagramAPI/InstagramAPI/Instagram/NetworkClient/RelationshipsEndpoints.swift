@@ -79,7 +79,7 @@ extension Instagram.RelationshipsEnpoint.Request.Post {
     switch self {
     case .relationship(let parameter):
       return [
-        "action": parameter.action.rawValue as AnyObject
+        Instagram.Keys.User.Counts.action: parameter.action.rawValue as AnyObject
       ]
     }
   }

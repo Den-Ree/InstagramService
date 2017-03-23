@@ -78,10 +78,10 @@ extension Instagram.MediaEndpoint.Get {
       
       var result = InstagramRequestParameters()
       
-      result["lat"] = parameters.latitude as AnyObject?
-      result["lng"] = parameters.longitude as AnyObject?
+      result[Instagram.Keys.Location.lat] = parameters.latitude as AnyObject?
+      result[Instagram.Keys.Location.lng] = parameters.longitude as AnyObject?
       if let distance = parameters.distance {
-        result["distance"] = distance
+        result[Instagram.Keys.Location.distance] = distance
       }
       return result
     }

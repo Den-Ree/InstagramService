@@ -72,7 +72,7 @@ extension Instagram.TagsEndpoint.Get {
       return result
     case .search(let query):
       return [
-        "q": query as AnyObject
+        Instagram.Keys.Data.query : query as AnyObject
       ]
     }
   }
