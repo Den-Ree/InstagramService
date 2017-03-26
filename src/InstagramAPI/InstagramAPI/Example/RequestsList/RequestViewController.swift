@@ -161,7 +161,6 @@ extension RequestViewController: UITableViewDelegate {
             break
         case 3:
             //Comment
-            
             break
         case 4:
             //Like
