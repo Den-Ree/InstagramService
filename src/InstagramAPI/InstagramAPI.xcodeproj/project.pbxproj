@@ -34,8 +34,6 @@
 		9282E7DF1DFDFA5B00B7ACF3 /* InstagramConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9282E7C71DFDFA5B00B7ACF3 /* InstagramConstants.swift */; };
 		9282E7E01DFDFA5B00B7ACF3 /* InstagramNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9282E7C81DFDFA5B00B7ACF3 /* InstagramNetworkClient.swift */; };
 		9282E7E11DFDFA5B00B7ACF3 /* InstagramResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9282E7C91DFDFA5B00B7ACF3 /* InstagramResponse.swift */; };
-		9282E7E81DFDFA5B00B7ACF3 /* BaseNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9282E7D31DFDFA5B00B7ACF3 /* BaseNetworkClient.swift */; };
-		9282E7E91DFDFA5B00B7ACF3 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9282E7D51DFDFA5B00B7ACF3 /* NetworkReachability.swift */; };
 		CC810FC75CEF97D19CEECE3D /* Pods_InstagramAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08119A51AC04B8E0D9596D2F /* Pods_InstagramAPI.framework */; };
 		D76100661E3F9E9C005CB7A3 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76100641E3F9E9C005CB7A3 /* RequestCell.swift */; };
 		D76100671E3F9E9C005CB7A3 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76100651E3F9E9C005CB7A3 /* RequestViewController.swift */; };
@@ -78,8 +76,6 @@
 		9282E7C71DFDFA5B00B7ACF3 /* InstagramConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramConstants.swift; sourceTree = "<group>"; };
 		9282E7C81DFDFA5B00B7ACF3 /* InstagramNetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramNetworkClient.swift; sourceTree = "<group>"; };
 		9282E7C91DFDFA5B00B7ACF3 /* InstagramResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramResponse.swift; sourceTree = "<group>"; };
-		9282E7D31DFDFA5B00B7ACF3 /* BaseNetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNetworkClient.swift; sourceTree = "<group>"; };
-		9282E7D51DFDFA5B00B7ACF3 /* NetworkReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
 		B95F3BE642A2E5080D9D4100 /* Pods-InstagramAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramAPI/Pods-InstagramAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		D76100641E3F9E9C005CB7A3 /* RequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestCell.swift; path = Example/RequestsList/RequestCell.swift; sourceTree = "<group>"; };
 		D76100651E3F9E9C005CB7A3 /* RequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestViewController.swift; path = Example/RequestsList/RequestViewController.swift; sourceTree = "<group>"; };
@@ -168,7 +164,6 @@
 				92649A161E06CEF3006EC686 /* Date+Extension.swift */,
 				92649A171E06CEF3006EC686 /* DateFormatter+Extension.swift */,
 				9282E7B91DFDFA5B00B7ACF3 /* Instagram */,
-				9282E7D11DFDFA5B00B7ACF3 /* Network */,
 				D76100611E3F9E24005CB7A3 /* Example */,
 				9282E7AB1DFDF9F700B7ACF3 /* Main.storyboard */,
 				9282E7AE1DFDF9F700B7ACF3 /* Assets.xcassets */,
@@ -213,31 +208,6 @@
 				8431E7481E71BE170026D752 /* Endpoints */,
 			);
 			path = NetworkClient;
-			sourceTree = "<group>";
-		};
-		9282E7D11DFDFA5B00B7ACF3 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				9282E7D21DFDFA5B00B7ACF3 /* Client */,
-				9282E7D41DFDFA5B00B7ACF3 /* Reachability */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
-		9282E7D21DFDFA5B00B7ACF3 /* Client */ = {
-			isa = PBXGroup;
-			children = (
-				9282E7D31DFDFA5B00B7ACF3 /* BaseNetworkClient.swift */,
-			);
-			path = Client;
-			sourceTree = "<group>";
-		};
-		9282E7D41DFDFA5B00B7ACF3 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				9282E7D51DFDFA5B00B7ACF3 /* NetworkReachability.swift */,
-			);
-			path = Reachability;
 			sourceTree = "<group>";
 		};
 		D76100611E3F9E24005CB7A3 /* Example */ = {
@@ -409,7 +379,6 @@
 				9282E7DE1DFDFA5B00B7ACF3 /* InstagramUser.swift in Sources */,
 				92649A181E06CEF3006EC686 /* Date+Extension.swift in Sources */,
 				D76100661E3F9E9C005CB7A3 /* RequestCell.swift in Sources */,
-				9282E7E81DFDFA5B00B7ACF3 /* BaseNetworkClient.swift in Sources */,
 				9282E7D61DFDFA5B00B7ACF3 /* Instagram.swift in Sources */,
 				D761006E1E3F9EAC005CB7A3 /* UserMediaViewController.swift in Sources */,
 				9282E7A81DFDF9F700B7ACF3 /* AppDelegate.swift in Sources */,
@@ -418,7 +387,6 @@
 				9282E7DF1DFDFA5B00B7ACF3 /* InstagramConstants.swift in Sources */,
 				9282E7D81DFDFA5B00B7ACF3 /* InstagramComment.swift in Sources */,
 				D76100711E3F9EAC005CB7A3 /* UserViewController.swift in Sources */,
-				9282E7E91DFDFA5B00B7ACF3 /* NetworkReachability.swift in Sources */,
 				D76100671E3F9E9C005CB7A3 /* RequestViewController.swift in Sources */,
 				9282E7DB1DFDFA5B00B7ACF3 /* InstagramMedia.swift in Sources */,
 				8431E7561E71BE380026D752 /* UsersEndpoints.swift in Sources */,

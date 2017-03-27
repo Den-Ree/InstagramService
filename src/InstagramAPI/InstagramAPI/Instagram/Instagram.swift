@@ -17,8 +17,8 @@ private let InstagramManagerKeychainStore = "com.InstagramManager.keychainStore"
 class InstagramManager: NSObject {
     static let shared = InstagramManager()
   
-    fileprivate(set) lazy var networkClient: InstagramNetworkClient = {
-        return InstagramNetworkClient(appClientId: self.appClientId, appRedirectURL: self.appRedirectURL, manager: self)
+    fileprivate(set) lazy var networkClient: Instagram.NetworkClient = {
+        return Instagram.NetworkClient(appClientId: self.appClientId, appRedirectURL: self.appRedirectURL, manager: self)
     }()
     
     fileprivate lazy var keychainStore: Keychain = {
@@ -54,7 +54,9 @@ extension InstagramManager {
     
     func authorizationURL() -> URL? {
         let parameters: [String : Any] = [Instagram.Keys.Auth.clientId: appClientId, Instagram.Keys.Auth.redirectUri: appRedirectURL, Instagram.Keys.Response.type: Instagram.Keys.Response.token, Instagram.Keys.Response.scope: InstagramLoginScope.allScopesValue]
-        return networkClient.encode(instagramAuthorizationURLPath, parameters: parameters)
+      // TODO
+      //return networkClient.encode(instagramAuthorizationURLPath, parameters: parameters)
+      return nil
     }
     
     func receiveLoggedInUser(_ url: URL?, completion: ((Instagram.User?, Error?)->())?) {

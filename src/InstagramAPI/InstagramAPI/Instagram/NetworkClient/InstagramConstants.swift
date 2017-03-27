@@ -144,7 +144,21 @@ extension Instagram {
       static let facebookPlacedId = "facebook_placed_id"
       
     }
+    
+    enum HTTPMethod {
+      static let options = "OPTIONS"
+      static let get     = "GET"
+      static let head    = "HEAD"
+      static let post    = "POST"
+      static let put     = "PUT"
+      static let patch   = "PATCH"
+      static let delete  = "DELETE"
+      static let trace   = "TRACE"
+      static let connect = "CONNECT"
+    }
+    
   }
+  
 }
 
 enum InstagramLoginScope: Int {
