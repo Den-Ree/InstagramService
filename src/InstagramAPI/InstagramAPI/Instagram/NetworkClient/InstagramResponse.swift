@@ -7,8 +7,6 @@
 //
 
 import UIKit
-
-import AlamofireObjectMapper
 import ObjectMapper
 
 protocol InstagramResponse: Mappable {}

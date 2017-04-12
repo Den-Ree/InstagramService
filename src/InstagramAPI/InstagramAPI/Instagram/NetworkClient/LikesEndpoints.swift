@@ -6,7 +6,7 @@
 //  Copyright © 2017 Den Ree. All rights reserved.
 //
 
-import Alamofire
+import Foundation
 
 extension Instagram {
   
@@ -71,7 +71,7 @@ extension Instagram.LikesEndpoint.Request.Post {
 
   
   var method: HTTPMethod {
-    return .post
+    return Instagram.Keys.HTTPMethod.post
   }
 }
 
@@ -89,6 +89,6 @@ extension Instagram.LikesEndpoint.Request.Delete {
 
 
   var method: HTTPMethod {
-    return .delete
+    return Instagram.Keys.HTTPMethod.delete
   }
 }

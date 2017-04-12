@@ -54,9 +54,7 @@ extension InstagramManager {
     
     func authorizationURL() -> URL? {
         let parameters: [String : Any] = [Instagram.Keys.Auth.clientId: appClientId, Instagram.Keys.Auth.redirectUri: appRedirectURL, Instagram.Keys.Response.type: Instagram.Keys.Response.token, Instagram.Keys.Response.scope: InstagramLoginScope.allScopesValue]
-      // TODO
-      //return networkClient.encode(instagramAuthorizationURLPath, parameters: parameters)
-      return nil
+      return networkClient.encode(Instagram.Keys.Networking.authorizationPath, parameters: parameters)
     }
     
     func receiveLoggedInUser(_ url: URL?, completion: ((Instagram.User?, Error?)->())?) {
@@ -182,12 +180,6 @@ fileprivate extension InstagramManager {
 
 
 extension InstagramManager {
-    enum Notifications {
-        static let noLoggedInAccounts = "InstagramManagerNoLoggedInAccountsNotification"
-        static let mediaWasChanged = "InstagramManagerMediaDidChangedNotification"
-        static let accessTokenExpired = "InstagramManagerMediaAccessTokenExpired"
-    }
-    
     enum Keys {
         static let lastReceivedUserId = "InstagramManagerLastReceivedUserId"
     }

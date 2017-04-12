@@ -16,7 +16,6 @@ typealias InstagramSuccessBlock = (Bool, Error?)->()
 //MARK: Path
 typealias InstagramURLPath = String
 
-let instagramBaseURLPath: InstagramURLPath = "https://api.instagram.com/v1"
 let instagramAuthorizationURLPath: InstagramURLPath = "https://api.instagram.com/oauth/authorize/"
 
 
@@ -146,20 +145,38 @@ extension Instagram {
     }
     
     enum HTTPMethod {
-      static let options = "OPTIONS"
       static let get     = "GET"
-      static let head    = "HEAD"
       static let post    = "POST"
-      static let put     = "PUT"
-      static let patch   = "PATCH"
       static let delete  = "DELETE"
-      static let trace   = "TRACE"
-      static let connect = "CONNECT"
     }
+    
+    enum Notifications {
+      static let noLoggedInAccounts = "InstagramManagerNoLoggedInAccountsNotification"
+      static let mediaWasChanged = "InstagramManagerMediaDidChangedNotification"
+      static let accessTokenExpired = "InstagramManagerMediaAccessTokenExpired"
+    }
+
     
   }
   
 }
+
+extension Instagram.Keys{
+  
+  enum Networking{
+    static let scheme = "http"
+    static let host = "api.instagram.com"
+    static let path = "/v1"
+    static let authorizationPath = "/oauth/authorize/"
+  }
+  
+  enum AuthValues{
+    static let appClientId: String = "eb6961971b7149899a3692a4125bb6af"
+    static var appRedirectURL: String = "https://www.nolisto.com"
+  }
+}
+
+
 
 enum InstagramLoginScope: Int {
     case basic = 0

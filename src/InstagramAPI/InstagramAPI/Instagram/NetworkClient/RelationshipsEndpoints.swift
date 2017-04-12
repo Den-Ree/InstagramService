@@ -6,7 +6,7 @@
 //  Copyright © 2017 Den Ree. All rights reserved.
 //
 
-import Alamofire
+import Foundation
 
 extension Instagram {
   
@@ -85,6 +85,6 @@ extension Instagram.RelationshipsEnpoint.Request.Post {
   }
   
   var method: HTTPMethod {
-    return .post
+    return Instagram.Keys.HTTPMethod.post
   }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Den Ree. All rights reserved.
 //
 
-import Alamofire
+import Foundation
 
 extension Instagram {
   
