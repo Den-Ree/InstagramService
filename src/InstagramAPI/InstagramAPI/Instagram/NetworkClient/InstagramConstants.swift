@@ -163,18 +163,24 @@ extension Instagram {
 
 extension Instagram.Keys{
   
-  enum Networking{
-    static let scheme = "http"
+  enum Network{
+    static let scheme = "https"
     static let host = "api.instagram.com"
     static let path = "/v1"
     static let authorizationPath = "/oauth/authorize/"
   }
   
-  enum AuthValues{
-    static let appClientId: String = "eb6961971b7149899a3692a4125bb6af"
-    static var appRedirectURL: String = "https://www.nolisto.com"
+  
+}
+extension Instagram{
+  enum Values{
+    enum AuthValues{
+      static let appClientId: String = "eb6961971b7149899a3692a4125bb6af"
+      static var appRedirectURL: String = "https://www.nolisto.com"
+    }
   }
 }
+
 
 
 

@@ -8,11 +8,11 @@
 
 import UIKit
 import KeychainAccess
-import Alamofire
-import AlamofireObjectMapper
+
+
 import ObjectMapper
 
-private let InstagramManagerKeychainStore = "com.InstagramManager.keychainStore"
+private let InstagramManagerKeychainStore = Instagram.Constants.keychainStore
 
 class InstagramManager: NSObject {
     static let shared = InstagramManager()
@@ -26,8 +26,8 @@ class InstagramManager: NSObject {
     }()
     
     //TODO: Create constants
-    fileprivate let appClientId: String = "eb6961971b7149899a3692a4125bb6af"
-    fileprivate var appRedirectURL: String = "https://www.nolisto.com"
+    fileprivate let appClientId: String = Instagram.Values.AuthValues.appClientId
+    fileprivate var appRedirectURL: String = Instagram.Values.AuthValues.appRedirectURL
 
     fileprivate var isNeedToReceiveNewUser = false
     fileprivate(set) var lastReceivedUser: Instagram.User? {
@@ -54,7 +54,7 @@ extension InstagramManager {
     
     func authorizationURL() -> URL? {
         let parameters: [String : Any] = [Instagram.Keys.Auth.clientId: appClientId, Instagram.Keys.Auth.redirectUri: appRedirectURL, Instagram.Keys.Response.type: Instagram.Keys.Response.token, Instagram.Keys.Response.scope: InstagramLoginScope.allScopesValue]
-      return networkClient.encode(Instagram.Keys.Networking.authorizationPath, parameters: parameters)
+      return networkClient.encode(Instagram.Keys.Network.authorizationPath, parameters: parameters)
     }
     
     func receiveLoggedInUser(_ url: URL?, completion: ((Instagram.User?, Error?)->())?) {

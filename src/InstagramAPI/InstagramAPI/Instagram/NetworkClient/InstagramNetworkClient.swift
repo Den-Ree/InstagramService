@@ -9,6 +9,7 @@
 import UIKit
 import ObjectMapper
 
+
 typealias HTTPMethod = String
 typealias NetworkBodyObject = (key : String, value : String)
 
@@ -57,7 +58,7 @@ extension Instagram{
     func sendRequest<T : InstagramResponse>(_ HTTPMethod : HTTPMethod, path: String?, parameters: [String : Any], bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?) -> ()){
       
       
-        // Network avaibility and reachability????
+        // Network reachability????
       var urlRequest = URLRequest(url: self.encode(path, parameters: parameters)!)
       urlRequest.httpMethod = HTTPMethod
       urlRequest.cachePolicy = URLRequest.CachePolicy.returnCacheDataElseLoad
@@ -70,43 +71,49 @@ extension Instagram{
       let task = session.dataTask(with: urlRequest, completionHandler: {
           (data, responce, error) in
         
-        //responce
-        guard error == nil else{
-          print(error?.localizedDescription)
-          return
+        if let error = error{
+          completion(nil, error)
+        } else {
+          do{
+            let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+            // Что надо сделать с датой, чтобы закинуть ее completion
+            print(json)
+          
+          
+          } catch {
+            completion(nil,nil)
+          }
         }
-        
-        
       })
       task.resume()
-      
     }
     
     func encode(_ path : String?, parameters : [String:Any]) -> URL?{
       
       var components = URLComponents()
       
-      components.scheme = Instagram.Keys.Networking.scheme
-      components.host = Instagram.Keys.Networking.host
-      components.path = Instagram.Keys.Networking.path + path!
+      components.scheme = Instagram.Keys.Network.scheme
+      components.host = Instagram.Keys.Network.host
+      components.path = Instagram.Keys.Network.path + path!
       components.queryItems = [URLQueryItem]()
       
-      for (key, value) in  parameters{
+      
+      // Think about order
+      for (key, value) in  parameters.reversed(){
         let queryItem = URLQueryItem(name: key, value: value as? String)
         components.queryItems?.append(queryItem)
       }
       
       if let url = components.url{
+        print(url)
         return url
       } else {
         return nil
       }
     }
-    
     func send<T: InstagramResponse>(_ request: InstagramRequestProtocol, completion: @escaping (T?, Error?) -> ()){
         self.sendRequest(request.method, path: request.path, parameters: request.parameters, bodyObject: request.bodyObject, completion: completion)
-      }
-    
+    }
   }
 }
 
@@ -162,84 +169,6 @@ extension Instagram.NetworkClient{
   }
 
   
-}
-
-
-extension Instagram.NetworkClient{
-  //MARK: URLs
-  func instagramUserMediaPath(_ userId: String?) -> InstagramURLPath {
-    
-    var result = String.emptyString
-    if let userId = userId {
-      result = "/users/\(userId)/media/recent"
-    }
-    else {
-      result = "/users/self/media/recent"
-    }
-    return result
-  }
-  
-  func instagramUserMediaLikedPath() -> InstagramURLPath {
-    
-    let result = "/users/self/media/liked"
-    return result
-  }
-  
-  func instagramUserInfoPath(_ userId: String?) -> InstagramURLPath {
-    
-    var result = String.emptyString
-    if let userId = userId {
-      result = "/users/\(userId)"
-    }
-    else {
-      result = "/users/self"
-    }
-    return result
-  }
-  
-  func instagramSearchUsersPath() -> InstagramURLPath {
-    
-    let result = "/users/search"
-    return result
-  }
-  
-  func instagramLikesPath(_ mediaId: String) -> InstagramURLPath {
-    
-    let result = "/media/\(mediaId)/likes"
-    return result
-  }
-  
-  func instagramCommentsPath(_ mediaId: String) -> InstagramURLPath {
-    
-    let result = "/media/\(mediaId)/comments"
-    return result
-  }
-  
-  func instagramFollowersPath() -> InstagramURLPath {
-    
-    let result = "/users/self/followed-by"
-    return result
-  }
-  
-  func instagramTagsPath(_ name: String) -> InstagramURLPath {
-    
-    let result = "/tags/\(name)"
-    return result
-  }
-  
-  func instagramSearchTagsPath() -> InstagramURLPath {
-    
-    let result = "/tags/search"
-    return result
-  }
-  
-  func instagramTagMediaPath(_ name: String) -> InstagramURLPath {
-    
-    let result = "/tags/\(name)/media/recent"
-    return result
-  }
-  
-  
   func isRedirectURL(_ url: URL) -> Bool {
     //check if we has correct app redirect url
     guard let appRedirectURL = URL(string: appRedirectURL) else {
@@ -254,7 +183,85 @@ extension Instagram.NetworkClient{
     return appRedirectURL.scheme == url.scheme && host == urlHost
   }
 
+  
+}
 
+
+extension Instagram.NetworkClient{
+  enum Path{
+    //MARK: URLs
+    func instagramUserMediaPath(_ userId: String?) -> InstagramURLPath {
+      
+      var result = String.emptyString
+      if let userId = userId {
+        result = "/users/\(userId)/media/recent"
+      }
+      else {
+        result = "/users/self/media/recent"
+      }
+      return result
+    }
+    
+    func instagramUserMediaLikedPath() -> InstagramURLPath {
+      
+      let result = "/users/self/media/liked"
+      return result
+    }
+    
+    func instagramUserInfoPath(_ userId: String?) -> InstagramURLPath {
+      
+      var result = String.emptyString
+      if let userId = userId {
+        result = "/users/\(userId)"
+      }
+      else {
+        result = "/users/self"
+      }
+      return result
+    }
+    
+    func instagramSearchUsersPath() -> InstagramURLPath {
+      
+      let result = "/users/search"
+      return result
+    }
+    
+    func instagramLikesPath(_ mediaId: String) -> InstagramURLPath {
+      
+      let result = "/media/\(mediaId)/likes"
+      return result
+    }
+    
+    func instagramCommentsPath(_ mediaId: String) -> InstagramURLPath {
+      
+      let result = "/media/\(mediaId)/comments"
+      return result
+    }
+    
+    func instagramFollowersPath() -> InstagramURLPath {
+      
+      let result = "/users/self/followed-by"
+      return result
+    }
+    
+    func instagramTagsPath(_ name: String) -> InstagramURLPath {
+      
+      let result = "/tags/\(name)"
+      return result
+    }
+    
+    func instagramSearchTagsPath() -> InstagramURLPath {
+      
+      let result = "/tags/search"
+      return result
+    }
+    
+    func instagramTagMediaPath(_ name: String) -> InstagramURLPath {
+      
+      let result = "/tags/\(name)/media/recent"
+      return result
+    }
+  }
 }
 
 
