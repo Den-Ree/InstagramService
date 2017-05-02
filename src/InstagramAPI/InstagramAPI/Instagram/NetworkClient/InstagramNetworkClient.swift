@@ -58,7 +58,11 @@ extension Instagram{
     func sendRequest<T : InstagramResponse>(_ HTTPMethod : HTTPMethod, path: String?, parameters: [String : Any], bodyObject: NetworkBodyObject?, completion: @escaping (T?, Error?) -> ()){
       
       
-        // Network reachability????
+      if (Network.reachability?.isReachable)! == false{
+        return
+      }
+      
+      
       var urlRequest = URLRequest(url: self.encode(path, parameters: parameters)!)
       urlRequest.httpMethod = HTTPMethod
       urlRequest.cachePolicy = URLRequest.CachePolicy.returnCacheDataElseLoad
@@ -78,7 +82,7 @@ extension Instagram{
             let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
             // Что надо сделать с датой, чтобы закинуть ее completion
             print(json)
-          
+            print(responce)
           
           } catch {
             completion(nil,nil)
