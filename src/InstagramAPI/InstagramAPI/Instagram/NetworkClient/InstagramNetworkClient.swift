@@ -99,7 +99,7 @@ extension Instagram{
       components.queryItems = [URLQueryItem]()
       
       //Check if the components are from authorisationURL
-      if components.path == Instagram.Keys.Network.path + Instagram.Keys.Network.authorizationPath{
+      if components.path == Instagram.Keys.Network.authorizationPath{
         let sortedKeys = Array(parameters.keys).sorted(by: {$0 < $1})
         for key in sortedKeys{
           let queryItem = URLQueryItem(name: key, value: parameters[key] as? String)
@@ -113,7 +113,6 @@ extension Instagram{
         }
       }
       if let url = components.url{
-        
         return url
       } else {
         return nil
