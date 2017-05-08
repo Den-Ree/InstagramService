@@ -79,12 +79,9 @@ extension Instagram{
           completion(nil, error)
         } else {
           do{
-            let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
-            // Что надо сделать с датой, чтобы закинуть ее completion
-            print(json)
-            print(responce)
+            
           
-          } catch {
+            } catch {
             completion(nil,nil)
           }
         }
@@ -98,23 +95,31 @@ extension Instagram{
       
       components.scheme = Instagram.Keys.Network.scheme
       components.host = Instagram.Keys.Network.host
-      components.path = Instagram.Keys.Network.path + path!
+      components.path = path!
       components.queryItems = [URLQueryItem]()
       
+      //Check if the components are from authorisationURL
+      if components.path == Instagram.Keys.Network.path + Instagram.Keys.Network.authorizationPath{
+        let sortedKeys = Array(parameters.keys).sorted(by: {$0 < $1})
+        for key in sortedKeys{
+          let queryItem = URLQueryItem(name: key, value: parameters[key] as? String)
+          components.queryItems?.append(queryItem)
+        }
       
-      // Think about order
-      for (key, value) in  parameters.reversed(){
-        let queryItem = URLQueryItem(name: key, value: value as? String)
-        components.queryItems?.append(queryItem)
+      } else{
+        for (key, value) in parameters{
+          let queryItem = URLQueryItem(name: key, value: value as? String)
+          components.queryItems?.append(queryItem)
+        }
       }
-      
       if let url = components.url{
-        print(url)
+        
         return url
       } else {
         return nil
       }
     }
+    
     func send<T: InstagramResponse>(_ request: InstagramRequestProtocol, completion: @escaping (T?, Error?) -> ()){
         self.sendRequest(request.method, path: request.path, parameters: request.parameters, bodyObject: request.bodyObject, completion: completion)
     }
@@ -191,7 +196,7 @@ extension Instagram.NetworkClient{
 }
 
 
-extension Instagram.NetworkClient{
+extension Instagram{
   enum Path{
     //MARK: URLs
     func instagramUserMediaPath(_ userId: String?) -> InstagramURLPath {
