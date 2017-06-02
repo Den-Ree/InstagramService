@@ -153,7 +153,18 @@ extension RequestViewController: UITableViewDelegate {
             
         case 1:
             //Relationship
-            
+          switch indexPath.row {
+          case 0:
+            //Follows
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "RelationshipViewController") as! RelationshipViewController
+            controller.type = .follows
+            self.navigationController?.pushViewController(controller, animated: true)
+            break
+          
+          default:
+            break
+          }
             break
         case 2:
             //Media
