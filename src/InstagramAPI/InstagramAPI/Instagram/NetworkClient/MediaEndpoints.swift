@@ -18,8 +18,9 @@ extension Instagram {
       case media(Parameter.Media)
       case search(Parameter.SearchMediaParameter)
     }
+
     
-   
+    
     
     //MARK: - Parameters
     

@@ -153,26 +153,179 @@ extension RequestViewController: UITableViewDelegate {
             
         case 1:
             //Relationship
-          switch indexPath.row {
-          case 0:
-            //Follows
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "RelationshipViewController") as! RelationshipViewController
-            controller.type = .follows
-            self.navigationController?.pushViewController(controller, animated: true)
-            break
-          
+            switch indexPath.row {
+            case 0:
+                //Follows
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier:   "RelationshipTableViewController") as! RelationshipTableViewController
+                controller.type = .follows
+                self.navigationController?.pushViewController(controller, animated: true)
+                break
+            case 1:
+              // Followed by
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "RelationshipTableViewController") as! RelationshipTableViewController
+                controller.type = .followedBy
+                self.navigationController?.pushViewController(controller, animated: true)
+                break
+            case 2:
+                //Requested by
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier:   "RelationshipTableViewController") as! RelationshipTableViewController
+                controller.type = .requestedBy
+                self.navigationController?.pushViewController(controller, animated: true)
+                break
+            case 3:
+                // Relationship
+              
+                let alertController = UIAlertController.init(title: "TargetUserId", message: "", preferredStyle: .alert)
+            
+                let goAction = UIAlertAction.init(title: "Go", style: .default, handler: {alert -> Void in
+                  let firstTextField = alertController.textFields?[0]
+                  let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                  let controller = storyboard.instantiateViewController(withIdentifier:"RelationshipViewController") as! RelationshipViewController
+                  controller.targetUserId = firstTextField?.text
+                  self.navigationController?.pushViewController(controller, animated: true)
+                  })
+              
+                let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {(action : UIAlertAction!) -> Void in
+                
+                })
+                alertController.addTextField { (textField : UITextField!) -> Void in
+                  textField.placeholder = "Targetuser-id"
+                }
+                alertController.addAction(goAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+                break
           default:
             break
           }
             break
         case 2:
             //Media
-            
+            switch indexPath.row {
+            case 0:
+                //Media Id
+                let alertController = UIAlertController.init(title: "MediaId", message: "", preferredStyle: .alert)
+                
+                let goAction = UIAlertAction.init(title: "Go", style: .default, handler: { alert -> Void in
+                  let firstTextField = alertController.textFields?[0]
+                  let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                  let controller = storyboard.instantiateViewController(withIdentifier: "MediaViewController") as! MediaViewController
+                  controller.mediaParameter = Instagram.MediaEndpoint.Parameter.Media.id((firstTextField?.text)!)
+                  self.navigationController?.pushViewController(controller, animated: true)
+                })
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+                  (action : UIAlertAction!) -> Void in
+                })
+                
+                alertController.addTextField { (textField : UITextField!) -> Void in
+                  textField.placeholder = "media id"
+                }
+                alertController.addAction(goAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+            case 1:
+              //Media Id with ShortCode
+                let alertController = UIAlertController.init(title: "MediaIdShortCode", message: "", preferredStyle: .alert)
+              
+                let goAction = UIAlertAction.init(title: "Go", style: .default, handler: { alert -> Void in
+                  let firstTextField = alertController.textFields?[0]
+                  let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                  let controller = storyboard.instantiateViewController(withIdentifier: "MediaViewController") as! MediaViewController
+                  controller.mediaParameter = Instagram.MediaEndpoint.Parameter.Media.shortcode((firstTextField?.text)!)
+                  self.navigationController?.pushViewController(controller, animated: true)
+                })
+              
+                let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+                  (action : UIAlertAction!) -> Void in
+                })
+              
+                alertController.addTextField { (textField : UITextField!) -> Void in
+                  textField.placeholder = "media id shortcode"
+                }
+                alertController.addAction(goAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+
+                break
+              
+            case 2:
+              //Media Search
+                let alertController = UIAlertController.init(title: "MediaSearchId", message: "", preferredStyle: .alert)
+              
+                let goAction = UIAlertAction.init(title: "Go", style: .default, handler: { alert -> Void in
+                  let firstTextField = alertController.textFields?[0]
+                  let secondTextField = alertController.textFields?[1]
+                  let thirdTextField = alertController.textFields?[2]
+                  let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                  let controller = storyboard.instantiateViewController(withIdentifier: "MediaSearchViewController") as!  MediaSearchViewController
+                  let parameter = Instagram.MediaEndpoint.Parameter.SearchMediaParameter.init(longitude: Double((firstTextField?.text)!)!, latitude: Double((secondTextField?.text)!)!, distance: Double((thirdTextField?.text)!))
+                  controller.params = parameter
+                  print(parameter)
+                  self.navigationController?.pushViewController(controller, animated: true)
+                })
+              
+                let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+                  (action : UIAlertAction!) -> Void in
+                })
+              
+                alertController.addTextField { (textField : UITextField!) -> Void in
+                  textField.placeholder = "long"
+                }
+                alertController.addTextField { (textField : UITextField!) -> Void in
+                  textField.placeholder = "lat"
+                }
+                alertController.addTextField { (textField : UITextField!) -> Void in
+                  textField.placeholder = "distance"
+                }
+                alertController.addAction(goAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+                break
+            default:
+              break
+            }
             break
         case 3:
             //Comment
+          switch indexPath.row {
+            case 0:
+              // Comments
+              let alertController = UIAlertController.init(title: "MediaId", message: "", preferredStyle: .alert)
             
+              let goAction = UIAlertAction.init(title: "Go", style: .default, handler: { alert -> Void in
+                let firstTextField = alertController.textFields?[0]
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "CommentTableViewController") as! CommentTableViewController
+                controller.mediaId = firstTextField?.text
+                self.navigationController?.pushViewController(controller, animated: true)
+              })
+            
+              let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+              (action : UIAlertAction!) -> Void in
+              })
+            
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "media id"
+              }
+              alertController.addAction(goAction)
+              alertController.addAction(cancelAction)
+              self.present(alertController, animated: true, completion: nil)
+
+              break
+            case 1:
+                // CommentId
+              let storyboard = UIStoryboard(name: "Main", bundle: nil)
+              let controller = storyboard.instantiateViewController(withIdentifier: "CommentIdViewController") as! CommentIdViewController
+              self.navigationController?.pushViewController(controller, animated: true)
+              break
+            default:
+              break
+            }
             break
         case 4:
             //Like

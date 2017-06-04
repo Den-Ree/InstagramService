@@ -31,6 +31,7 @@ extension Instagram {
     //MARK: - Parameters
     
     enum Parameter {
+      
       struct PostRelationshipParameter {
         let userId: String
         let action: Action

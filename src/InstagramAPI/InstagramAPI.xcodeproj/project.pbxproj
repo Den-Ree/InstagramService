@@ -15,9 +15,17 @@
 		8431E7541E71BE380026D752 /* RelationshipsEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74D1E71BE380026D752 /* RelationshipsEndpoints.swift */; };
 		8431E7551E71BE380026D752 /* TagsEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74E1E71BE380026D752 /* TagsEndpoints.swift */; };
 		8431E7561E71BE380026D752 /* UsersEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431E74F1E71BE380026D752 /* UsersEndpoints.swift */; };
-		845106621EE1A15E00F3AF79 /* RelationshipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845106611EE1A15E00F3AF79 /* RelationshipViewController.swift */; };
-		845106641EE1A95100F3AF79 /* RelationshipViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845106631EE1A95100F3AF79 /* RelationshipViewModel.swift */; };
-		845106661EE1C0BA00F3AF79 /* RelationshipCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845106651EE1C0BA00F3AF79 /* RelationshipCellTableViewCell.swift */; };
+		845106621EE1A15E00F3AF79 /* RelationshipTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845106611EE1A15E00F3AF79 /* RelationshipTableViewController.swift */; };
+		845106641EE1A95100F3AF79 /* RelationshipTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845106631EE1A95100F3AF79 /* RelationshipTableViewModel.swift */; };
+		845106661EE1C0BA00F3AF79 /* RelationshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845106651EE1C0BA00F3AF79 /* RelationshipCell.swift */; };
+		845162661EE34D5400D02CEB /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845162651EE34D5400D02CEB /* MediaViewController.swift */; };
+		849D51291EE301F600145EA2 /* RelationshipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D51281EE301F600145EA2 /* RelationshipViewController.swift */; };
+		849D512B1EE30FE300145EA2 /* InstagramRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D512A1EE30FE300145EA2 /* InstagramRelationship.swift */; };
+		84B1AEA61EE3F85E00FB095D /* MediaSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B1AEA51EE3F85E00FB095D /* MediaSearchViewController.swift */; };
+		84B1AEA81EE3F91D00FB095D /* MediaSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B1AEA71EE3F91D00FB095D /* MediaSearchCell.swift */; };
+		84E772661EE41DEA00E6D1E9 /* CommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E772651EE41DEA00E6D1E9 /* CommentTableViewController.swift */; };
+		84E772681EE41E0000E6D1E9 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E772671EE41E0000E6D1E9 /* CommentCell.swift */; };
+		84E7726B1EE436AB00E6D1E9 /* CommentIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E7726A1EE436AB00E6D1E9 /* CommentIdViewController.swift */; };
 		921DA8A91E2CAEBC00AC7C7C /* InstagramRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921DA8A81E2CAEBC00AC7C7C /* InstagramRequest.swift */; };
 		924C13971E83048F00F492AD /* InstagramObject+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C13961E83048F00F492AD /* InstagramObject+Utilities.swift */; };
 		92649A181E06CEF3006EC686 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92649A161E06CEF3006EC686 /* Date+Extension.swift */; };
@@ -60,9 +68,17 @@
 		8431E74D1E71BE380026D752 /* RelationshipsEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipsEndpoints.swift; sourceTree = "<group>"; };
 		8431E74E1E71BE380026D752 /* TagsEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsEndpoints.swift; sourceTree = "<group>"; };
 		8431E74F1E71BE380026D752 /* UsersEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersEndpoints.swift; sourceTree = "<group>"; };
-		845106611EE1A15E00F3AF79 /* RelationshipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipViewController.swift; sourceTree = "<group>"; };
-		845106631EE1A95100F3AF79 /* RelationshipViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipViewModel.swift; sourceTree = "<group>"; };
-		845106651EE1C0BA00F3AF79 /* RelationshipCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipCellTableViewCell.swift; sourceTree = "<group>"; };
+		845106611EE1A15E00F3AF79 /* RelationshipTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipTableViewController.swift; sourceTree = "<group>"; };
+		845106631EE1A95100F3AF79 /* RelationshipTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipTableViewModel.swift; sourceTree = "<group>"; };
+		845106651EE1C0BA00F3AF79 /* RelationshipCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipCell.swift; sourceTree = "<group>"; };
+		845162651EE34D5400D02CEB /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
+		849D51281EE301F600145EA2 /* RelationshipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipViewController.swift; sourceTree = "<group>"; };
+		849D512A1EE30FE300145EA2 /* InstagramRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramRelationship.swift; sourceTree = "<group>"; };
+		84B1AEA51EE3F85E00FB095D /* MediaSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaSearchViewController.swift; sourceTree = "<group>"; };
+		84B1AEA71EE3F91D00FB095D /* MediaSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaSearchCell.swift; sourceTree = "<group>"; };
+		84E772651EE41DEA00E6D1E9 /* CommentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewController.swift; sourceTree = "<group>"; };
+		84E772671EE41E0000E6D1E9 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		84E7726A1EE436AB00E6D1E9 /* CommentIdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentIdViewController.swift; sourceTree = "<group>"; };
 		921DA8A81E2CAEBC00AC7C7C /* InstagramRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramRequest.swift; sourceTree = "<group>"; };
 		924C13961E83048F00F492AD /* InstagramObject+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InstagramObject+Utilities.swift"; sourceTree = "<group>"; };
 		92649A161E06CEF3006EC686 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -142,14 +158,42 @@
 			name = Endpoints;
 			sourceTree = "<group>";
 		};
+		849D51271EE2E09500145EA2 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				845162651EE34D5400D02CEB /* MediaViewController.swift */,
+				84B1AEA51EE3F85E00FB095D /* MediaSearchViewController.swift */,
+				84B1AEA71EE3F91D00FB095D /* MediaSearchCell.swift */,
+			);
+			name = Media;
+			sourceTree = "<group>";
+		};
 		84AE45081EDE07BE00531E65 /* Relationship */ = {
 			isa = PBXGroup;
 			children = (
-				845106611EE1A15E00F3AF79 /* RelationshipViewController.swift */,
-				845106631EE1A95100F3AF79 /* RelationshipViewModel.swift */,
-				845106651EE1C0BA00F3AF79 /* RelationshipCellTableViewCell.swift */,
+				845106611EE1A15E00F3AF79 /* RelationshipTableViewController.swift */,
+				845106631EE1A95100F3AF79 /* RelationshipTableViewModel.swift */,
+				845106651EE1C0BA00F3AF79 /* RelationshipCell.swift */,
+				849D51281EE301F600145EA2 /* RelationshipViewController.swift */,
 			);
 			name = Relationship;
+			sourceTree = "<group>";
+		};
+		84E772641EE41BC500E6D1E9 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				84E772651EE41DEA00E6D1E9 /* CommentTableViewController.swift */,
+				84E772671EE41E0000E6D1E9 /* CommentCell.swift */,
+				84E7726A1EE436AB00E6D1E9 /* CommentIdViewController.swift */,
+			);
+			name = Comment;
+			sourceTree = "<group>";
+		};
+		84E772691EE4348200E6D1E9 /* Like */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Like;
 			sourceTree = "<group>";
 		};
 		924C13951E83046500F492AD /* Extensions */ = {
@@ -229,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				9282E7C51DFDFA5B00B7ACF3 /* InstagramUser.swift */,
+				849D512A1EE30FE300145EA2 /* InstagramRelationship.swift */,
 				9282E7C21DFDFA5B00B7ACF3 /* InstagramMedia.swift */,
 				9282E7BF1DFDFA5B00B7ACF3 /* InstagramComment.swift */,
 				9282E7C01DFDFA5B00B7ACF3 /* InstagramLike.swift */,
@@ -282,6 +327,9 @@
 				D76100621E3F9E84005CB7A3 /* RequestsList */,
 				D76100631E3F9E8C005CB7A3 /* User */,
 				84AE45081EDE07BE00531E65 /* Relationship */,
+				849D51271EE2E09500145EA2 /* Media */,
+				84E772641EE41BC500E6D1E9 /* Comment */,
+				84E772691EE4348200E6D1E9 /* Like */,
 			);
 			name = Example;
 			sourceTree = "<group>";
@@ -439,33 +487,41 @@
 				9282E7DD1DFDFA5B00B7ACF3 /* InstagramTag.swift in Sources */,
 				92649A191E06CEF3006EC686 /* DateFormatter+Extension.swift in Sources */,
 				8431E7541E71BE380026D752 /* RelationshipsEndpoints.swift in Sources */,
+				84E772681EE41E0000E6D1E9 /* CommentCell.swift in Sources */,
 				8431E7521E71BE380026D752 /* LocationsEndpoints.swift in Sources */,
 				9282E7D91DFDFA5B00B7ACF3 /* InstagramLike.swift in Sources */,
 				D761006F1E3F9EAC005CB7A3 /* UserSearchCell.swift in Sources */,
 				9282E7DE1DFDFA5B00B7ACF3 /* InstagramUser.swift in Sources */,
+				84E772661EE41DEA00E6D1E9 /* CommentTableViewController.swift in Sources */,
 				92649A181E06CEF3006EC686 /* Date+Extension.swift in Sources */,
+				84E7726B1EE436AB00E6D1E9 /* CommentIdViewController.swift in Sources */,
 				D76100661E3F9E9C005CB7A3 /* RequestCell.swift in Sources */,
 				9282E7E81DFDFA5B00B7ACF3 /* BaseNetworkClient.swift in Sources */,
 				9282E7D61DFDFA5B00B7ACF3 /* Instagram.swift in Sources */,
+				845162661EE34D5400D02CEB /* MediaViewController.swift in Sources */,
 				D761006E1E3F9EAC005CB7A3 /* UserMediaViewController.swift in Sources */,
 				9282E7A81DFDF9F700B7ACF3 /* AppDelegate.swift in Sources */,
 				8431E7531E71BE380026D752 /* MediaEndpoints.swift in Sources */,
 				924C13971E83048F00F492AD /* InstagramObject+Utilities.swift in Sources */,
-				845106661EE1C0BA00F3AF79 /* RelationshipCellTableViewCell.swift in Sources */,
+				845106661EE1C0BA00F3AF79 /* RelationshipCell.swift in Sources */,
 				9282E7DF1DFDFA5B00B7ACF3 /* InstagramConstants.swift in Sources */,
 				9282E7D81DFDFA5B00B7ACF3 /* InstagramComment.swift in Sources */,
-				845106641EE1A95100F3AF79 /* RelationshipViewModel.swift in Sources */,
+				849D512B1EE30FE300145EA2 /* InstagramRelationship.swift in Sources */,
+				845106641EE1A95100F3AF79 /* RelationshipTableViewModel.swift in Sources */,
 				D76100711E3F9EAC005CB7A3 /* UserViewController.swift in Sources */,
 				9282E7E91DFDFA5B00B7ACF3 /* NetworkReachability.swift in Sources */,
 				D76100671E3F9E9C005CB7A3 /* RequestViewController.swift in Sources */,
+				84B1AEA81EE3F91D00FB095D /* MediaSearchCell.swift in Sources */,
 				9282E7DB1DFDFA5B00B7ACF3 /* InstagramMedia.swift in Sources */,
 				8431E7561E71BE380026D752 /* UsersEndpoints.swift in Sources */,
 				D761006D1E3F9EAC005CB7A3 /* UserMediaCell.swift in Sources */,
 				8431E7511E71BE380026D752 /* LikesEndpoints.swift in Sources */,
+				84B1AEA61EE3F85E00FB095D /* MediaSearchViewController.swift in Sources */,
+				849D51291EE301F600145EA2 /* RelationshipViewController.swift in Sources */,
 				8431E7551E71BE380026D752 /* TagsEndpoints.swift in Sources */,
 				D76100701E3F9EAC005CB7A3 /* UserSearchViewController.swift in Sources */,
 				92649A1B1E06CF09006EC686 /* String+Extensions.swift in Sources */,
-				845106621EE1A15E00F3AF79 /* RelationshipViewController.swift in Sources */,
+				845106621EE1A15E00F3AF79 /* RelationshipTableViewController.swift in Sources */,
 				8431E7471E71BE060026D752 /* RootViewController.swift in Sources */,
 				9282E7E11DFDFA5B00B7ACF3 /* InstagramResponse.swift in Sources */,
 				8431E7501E71BE380026D752 /* CommentsEndpoints.swift in Sources */,

@@ -1,97 +1,129 @@
 //
-//  TableViewController.swift
+//  RelationshipViewController.swift
 //  InstagramAPI
 //
-//  Created by Admin on 02.06.17.
+//  Created by Admin on 03.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
 
 import UIKit
-import Alamofire
 
-enum RelationshipControllerType{
-  case follows
-  case followedBy
-  case requestedBy
-  case unknown
-}
+class RelationshipViewController: UIViewController {
 
-class RelationshipViewController: UITableViewController {
-
+  var targetUserId : String?
   
-  var type : RelationshipControllerType = .unknown
-  var dataSource : [Instagram.User] = []
+  @IBOutlet weak var targetUserIDLabel: UILabel!
+  @IBOutlet weak var avatarImageViev: UIImageView!
+  @IBOutlet weak var userNameLabel: UILabel!
+  @IBOutlet weak var fullNameLabel: UILabel!
+  @IBOutlet weak var outgoingStatusLabel: UILabel!
+  @IBOutlet weak var incomingStatusLabel: UILabel!
+  @IBOutlet weak var follow: UIButton!
+  @IBOutlet weak var ignore: UIButton!
+  @IBOutlet weak var approve: UIButton!
+  @IBOutlet weak var unfollow: UIButton!
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let relationShipViewModel = RelationshipViewModel.init(type: self.type)
-        let request = relationShipViewModel.request()
-        relationShipViewModel.getDataSource(request: request!, completion: {
-          (dataSource : [Instagram.User]?) in
-          if dataSource != nil{
-            self.dataSource = dataSource!
-            
-          }
-        })
-    }
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-      
-        return self.dataSource.count
-    }
-
+  override func viewDidLoad() {
+      super.viewDidLoad()
+      self.targetUserIDLabel.text = targetUserId
+      self.setData()
+      follow.addTarget(self, action: #selector(chooseButton(button:)), for: .touchUpInside)
+      ignore.addTarget(self, action: #selector(chooseButton(button:)), for: .touchUpInside)
+      approve.addTarget(self, action: #selector(chooseButton(button:)), for: .touchUpInside)
+      unfollow.addTarget(self, action: #selector(chooseButton(button:)), for: .touchUpInside)
+  }
   
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RelationshipCell", for: indexPath) as!RelationshipCell
-        let user = dataSource[indexPath.row]
-        cell.fullNameLabel.text = user.fullName
-        cell.userNameLabel.text = user.username
-        cell.avatarImage.af_setImage(withURL: user.profilePictureURL!)
-      
-        return cell
-    }
+  func chooseButton(button: UIButton){
+      follow.titleLabel?.textColor = UIColor.blue
+      follow.isSelected = false
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+      ignore.titleLabel?.textColor = UIColor.blue
+      ignore.isSelected = false
+    
+      approve.titleLabel?.textColor = UIColor.blue
+      approve.isSelected = false
+    
+      unfollow.titleLabel?.textColor = UIColor.blue
+      unfollow.isSelected = false
+    
+      button.isSelected = true
+      button.titleLabel?.textColor = UIColor.black
+  }
+  
+  
+  func setData(){
+      let relationshipRequest = Instagram.RelationshipsEnpoint.Request.Get.relationship(userId: targetUserId!)
+      InstagramManager.shared.networkClient.send(relationshipRequest, completion: {(relationship :  InstagramObjectResponse<Instagram.Relationship>?, error: Error?) in
+        if error == nil{
+            if let outgoingStatus = relationship?.data?.outgoingStatus{
+              self.outgoingStatusLabel.text = outgoingStatus
+            }
+            if let incominStatus = relationship?.data?.incomingStatus{
+              self.incomingStatusLabel.text = incominStatus
+            }
+      }
+    })
+    
+      let userParams = Instagram.UsersEndpoint.Parameter.User.id(targetUserId!)
+      let request = Instagram.UsersEndpoint.Get.user(userParams)
+      self.targetUserIDLabel.text = targetUserId
+      InstagramManager.shared.networkClient.send(request, completion: {(user : InstagramObjectResponse<Instagram.User>?, error : Error?) in
+        if error == nil{
+          if let profileImageURL = user?.data?.profilePictureURL{
+            self.avatarImageViev.af_setImage(withURL: profileImageURL)
+          }
+          if let userName = user?.data?.username{
+            self.userNameLabel.text = userName
+          }
+          if let fullName = user?.data?.fullName{
+            self.fullNameLabel.text = fullName
+          }
+        }
+      })
+  }
+  
+  override func didReceiveMemoryWarning() {
+      super.didReceiveMemoryWarning()
+      // Dispose of any resources that can be recreated.
+  }
+  
+  
+  @IBAction func sendAction(_ sender: Any) {
+    
+      if follow.isSelected || unfollow.isSelected || approve.isSelected || ignore.isSelected{
+      
+        var action : Instagram.RelationshipsEnpoint.Parameter.Action? = nil
+    
+        if follow.isSelected{
+          action = Instagram.RelationshipsEnpoint.Parameter.Action.follow
+        }
+        if unfollow.isSelected{
+          action = Instagram.RelationshipsEnpoint.Parameter.Action.unfollow
+        }
+        if approve.isSelected{
+          action = Instagram.RelationshipsEnpoint.Parameter.Action.approve
+        }
+        if ignore.isSelected{
+          action = Instagram.RelationshipsEnpoint.Parameter.Action.ignore
+        }
+    
+        let userParams = Instagram.RelationshipsEnpoint.Parameter.PostRelationshipParameter.init(userId: targetUserId!, action: action!)
+        let request = Instagram.RelationshipsEnpoint.Request.Post.relationship(userParams)
+        
+        InstagramManager.shared.networkClient.send(request, completion: {
+          (relationship : InstagramObjectResponse<Instagram.Relationship>?, error : Error?) in
+            if error == nil{
+            
+              if relationship?.data == relationship?.data{
+                
+                if let outgoingStatus = relationship?.data?.outgoingStatus{
+                  self.outgoingStatusLabel.text = outgoingStatus
+            }
+          }
+        }
+      })
+        
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+  }
 }
+

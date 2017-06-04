@@ -97,7 +97,7 @@ private extension RootViewController {
             guard let weakSelf = self else {
                 return
             }
-            if let error = error as? NSError {
+            if let error = error{
                 weakSelf.handle(logInError: error)
             } else if weakSelf.isLoggedIn {
                 //TODO: Notify delegate

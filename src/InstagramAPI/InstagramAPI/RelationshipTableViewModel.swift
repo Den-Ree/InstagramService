@@ -8,11 +8,11 @@
 
 import UIKit
 
-class RelationshipViewModel : NSObject {
+class RelationshipTableViewModel : NSObject {
   
-  private var type : RelationshipControllerType = .unknown
+  private var type : RelationshipTableControllerType = .unknown
   
-  init(type : RelationshipControllerType){
+  init(type : RelationshipTableControllerType){
     self.type = type
   }
   
