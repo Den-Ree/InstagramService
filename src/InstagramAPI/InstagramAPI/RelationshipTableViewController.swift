@@ -20,21 +20,26 @@ class RelationshipTableViewController: UITableViewController {
 
   
   var type : RelationshipTableControllerType = .unknown
-  var dataSource : [Instagram.User] = []
+  fileprivate var dataSource : [Instagram.User] = []
   
     override func viewDidLoad() {
         super.viewDidLoad()
         let relationshipTableViewModel = RelationshipTableViewModel.init(type: self.type)
         let request = relationshipTableViewModel.request()
         relationshipTableViewModel.getDataSource(request: request!, completion: {
-          (dataSource : [Instagram.User]?) in
+          (dataSource: [Instagram.User]?) in
           if dataSource != nil{
             self.dataSource = dataSource!
             self.tableView.reloadData()
           }
         })
     }
-    // MARK: - Table view data source
+  
+}
+
+extension RelationshipTableViewController{
+  
+  // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -51,8 +56,7 @@ class RelationshipTableViewController: UITableViewController {
         cell.fullNameLabel.text = user.fullName
         cell.userNameLabel.text = user.username
         cell.avatarImage.af_setImage(withURL: user.profilePictureURL!)
-      
         return cell
     }
-    
 }
+

@@ -1,17 +1,17 @@
 //
-//  MediaSearchCell.swift
+//  TagCell.swift
 //  InstagramAPI
 //
-//  Created by Admin on 04.06.17.
+//  Created by Admin on 05.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
 
 import UIKit
 
-class MediaSearchCell: UICollectionViewCell {
+class TagCell: UICollectionViewCell {
   
   @IBOutlet weak var imageView: UIImageView!
-  
+    
     override func awakeFromNib() {
       super.awakeFromNib()
     

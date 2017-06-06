@@ -25,7 +25,7 @@ extension Instagram {
       }
     
       enum Delete: InstagramRequestProtocol {
-        case likes(Parameter.DeleteLikeParameter)
+        case likes(mediaId: String)
       }
     }
         

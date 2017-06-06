@@ -10,37 +10,37 @@ import UIKit
 
 class RelationshipTableViewModel : NSObject {
   
-  private var type : RelationshipTableControllerType = .unknown
+  private var type: RelationshipTableControllerType = .unknown
   
-  init(type : RelationshipTableControllerType){
+  init(type: RelationshipTableControllerType){
     self.type = type
   }
   
   func request() -> InstagramRequestProtocol?{
-    switch type {
-    case .follows:
-      return Instagram.RelationshipsEnpoint.Request.Get.follows
+      switch type {
+      case .follows:
+        return Instagram.RelationshipsEnpoint.Request.Get.follows
       
-    case .followedBy:
-      return Instagram.RelationshipsEnpoint.Request.Get.followedBy
+      case .followedBy:
+        return Instagram.RelationshipsEnpoint.Request.Get.followedBy
       
-    case .requestedBy:
-      return Instagram.RelationshipsEnpoint.Request.Get.requestedBy
+      case .requestedBy:
+        return Instagram.RelationshipsEnpoint.Request.Get.requestedBy
       
-    case .unknown:
-      return nil
-    }
-  }
-  func getDataSource(request : InstagramRequestProtocol,completion :  @escaping (([Instagram.User]?) -> ())){
-    InstagramManager.shared.networkClient.send(request, completion: {
-      (users : InstagramArrayResponse<Instagram.User>?, error : Error? ) in
-      if error == nil{
-        guard let users = users?.data  else{
-          completion(nil)
-          return
-        }
-        completion(users)
+      case .unknown:
+        return nil
       }
-    })
   }
+  func getDataSource(request: InstagramRequestProtocol,completion:  @escaping (([Instagram.User]?) -> ())){
+      InstagramManager.shared.networkClient.send(request, completion: {
+        (users: InstagramArrayResponse<Instagram.User>?, error: Error? ) in
+        if error == nil{
+          guard let users = users?.data  else{
+            completion(nil)
+            return
+          }
+          completion(users)
+        }
+      })
+    }
 }

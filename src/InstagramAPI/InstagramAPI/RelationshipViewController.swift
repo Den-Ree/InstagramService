@@ -12,16 +12,16 @@ class RelationshipViewController: UIViewController {
 
   var targetUserId : String?
   
-  @IBOutlet weak var targetUserIDLabel: UILabel!
-  @IBOutlet weak var avatarImageViev: UIImageView!
-  @IBOutlet weak var userNameLabel: UILabel!
-  @IBOutlet weak var fullNameLabel: UILabel!
-  @IBOutlet weak var outgoingStatusLabel: UILabel!
-  @IBOutlet weak var incomingStatusLabel: UILabel!
-  @IBOutlet weak var follow: UIButton!
-  @IBOutlet weak var ignore: UIButton!
-  @IBOutlet weak var approve: UIButton!
-  @IBOutlet weak var unfollow: UIButton!
+  @IBOutlet fileprivate weak var targetUserIDLabel: UILabel!
+  @IBOutlet fileprivate weak var avatarImageViev: UIImageView!
+  @IBOutlet fileprivate weak var userNameLabel: UILabel!
+  @IBOutlet fileprivate weak var fullNameLabel: UILabel!
+  @IBOutlet fileprivate weak var outgoingStatusLabel: UILabel!
+  @IBOutlet fileprivate weak var incomingStatusLabel: UILabel!
+  @IBOutlet fileprivate weak var follow: UIButton!
+  @IBOutlet fileprivate weak var ignore: UIButton!
+  @IBOutlet fileprivate weak var approve: UIButton!
+  @IBOutlet fileprivate weak var unfollow: UIButton!
   
   override func viewDidLoad() {
       super.viewDidLoad()
@@ -82,12 +82,6 @@ class RelationshipViewController: UIViewController {
       })
   }
   
-  override func didReceiveMemoryWarning() {
-      super.didReceiveMemoryWarning()
-      // Dispose of any resources that can be recreated.
-  }
-  
-  
   @IBAction func sendAction(_ sender: Any) {
     
       if follow.isSelected || unfollow.isSelected || approve.isSelected || ignore.isSelected{
@@ -106,7 +100,7 @@ class RelationshipViewController: UIViewController {
         if ignore.isSelected{
           action = Instagram.RelationshipsEnpoint.Parameter.Action.ignore
         }
-    
+        
         let userParams = Instagram.RelationshipsEnpoint.Parameter.PostRelationshipParameter.init(userId: targetUserId!, action: action!)
         let request = Instagram.RelationshipsEnpoint.Request.Post.relationship(userParams)
         
@@ -122,7 +116,6 @@ class RelationshipViewController: UIViewController {
           }
         }
       })
-        
     }
   }
 }

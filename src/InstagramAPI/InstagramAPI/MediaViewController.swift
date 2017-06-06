@@ -10,27 +10,27 @@ import UIKit
 
 class MediaViewController: UIViewController {
 
-  var mediaParameter : Instagram.MediaEndpoint.Parameter.Media = .id("")
+  var mediaParameter : Instagram.MediaEndpoint.Parameter.Media = .id(String.emptyString)
   
-  @IBOutlet weak var mediaView: UIImageView!
-  @IBOutlet weak var userLabel: UILabel!
-  @IBOutlet weak var userHasLikedLabel: UILabel!
-  @IBOutlet weak var createdDateLabel: UILabel!
-  @IBOutlet weak var linkLabel: UILabel!
-  @IBOutlet weak var captionLabel: UILabel!
-  @IBOutlet weak var tagsCountLabel: UILabel!
-  @IBOutlet weak var likesCountLabel: UILabel!
-  @IBOutlet weak var commentCountLabel: UILabel!
-  @IBOutlet weak var locationLabel: UILabel!
-  @IBOutlet weak var typeLabel: UILabel!
-  @IBOutlet weak var tagsLabel: UILabel!
+  @IBOutlet fileprivate weak var mediaView: UIImageView!
+  @IBOutlet fileprivate weak var userLabel: UILabel!
+  @IBOutlet fileprivate weak var userHasLikedLabel: UILabel!
+  @IBOutlet fileprivate weak var createdDateLabel: UILabel!
+  @IBOutlet fileprivate weak var linkLabel: UILabel!
+  @IBOutlet fileprivate weak var captionLabel: UILabel!
+  @IBOutlet fileprivate weak var tagsCountLabel: UILabel!
+  @IBOutlet fileprivate weak var likesCountLabel: UILabel!
+  @IBOutlet fileprivate weak var commentCountLabel: UILabel!
+  @IBOutlet fileprivate weak var locationLabel: UILabel!
+  @IBOutlet fileprivate weak var typeLabel: UILabel!
+  @IBOutlet fileprivate weak var tagsLabel: UILabel!
   
     override func viewDidLoad() {
         super.viewDidLoad()
       
         let request = Instagram.MediaEndpoint.Get.media(mediaParameter)
           InstagramManager.shared.networkClient.send(request, completion: {
-            (media : InstagramObjectResponse<Instagram.Media>?, error: Error?) in
+            (media: InstagramObjectResponse<Instagram.Media>?, error: Error?) in
           
             if error == nil{
               
@@ -63,6 +63,9 @@ class MediaViewController: UIViewController {
                   self.locationLabel.text?.append( String(describing: location.latitude) + " " + String(describing: location.longitude))
                 }
                 if let type = data.type{
+                  if type == "image"{
+                    self.mediaView.af_setImage(withURL: (data.image?.lowResolutionURL?.URL)!)
+                  }
                   self.typeLabel.text?.append(type)
                 }
                 if let tags = data.tags{
@@ -74,10 +77,4 @@ class MediaViewController: UIViewController {
             }
           })
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-  
 }

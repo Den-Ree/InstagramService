@@ -1,28 +1,25 @@
 //
-//  CommentCell.swift
+//  TagSearchCellTableViewCell.swift
 //  InstagramAPI
 //
-//  Created by Admin on 04.06.17.
+//  Created by Admin on 05.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
 
 import UIKit
 
-class CommentCell: UITableViewCell {
+class TagSearchCell: UITableViewCell {
 
-  @IBOutlet weak var dateLabel: UILabel!
-  @IBOutlet weak var commentLabel: UILabel!
-  @IBOutlet weak var usernameLabel: UILabel!
-  
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var mediaCountLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+  
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-
+  }
 }

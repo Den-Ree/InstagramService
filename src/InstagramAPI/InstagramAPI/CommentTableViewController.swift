@@ -10,31 +10,25 @@ import UIKit
 
 class CommentTableViewController: UITableViewController {
 
-    var mediaId : String?
+    var mediaId: String?
+    fileprivate var dataSource: [Instagram.Comment] = []
   
-    fileprivate var dataSource : [Instagram.Comment] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-      
         let request = Instagram.CommentsEndpoint.Request.Get.comment(mediaId: mediaId!)
-        InstagramManager.shared.networkClient.send(request, completion: { (comments : InstagramArrayResponse<Instagram.Comment>?, error : Error?) in
+        InstagramManager.shared.networkClient.send(request, completion: { (comments: InstagramArrayResponse<Instagram.Comment>?, error: Error?) in
             if error == nil{
               if let data = comments?.data{
                 self.dataSource = data
                 self.tableView.reloadData()
               }
-          
           }
-        
         })
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
+}
+extension CommentTableViewController{
+  
+  // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -53,5 +47,6 @@ class CommentTableViewController: UITableViewController {
         cell.dateLabel.text = comment.createdDate?.description
         return cell
     }
-
 }
+
+

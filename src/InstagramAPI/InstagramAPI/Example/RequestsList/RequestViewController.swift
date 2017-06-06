@@ -159,6 +159,7 @@ extension RequestViewController: UITableViewDelegate {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier:   "RelationshipTableViewController") as! RelationshipTableViewController
                 controller.type = .follows
+                controller.title = rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
                 break
             case 1:
@@ -166,6 +167,7 @@ extension RequestViewController: UITableViewDelegate {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "RelationshipTableViewController") as! RelationshipTableViewController
                 controller.type = .followedBy
+                controller.title = rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
                 break
             case 2:
@@ -173,6 +175,7 @@ extension RequestViewController: UITableViewDelegate {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier:   "RelationshipTableViewController") as! RelationshipTableViewController
                 controller.type = .requestedBy
+                controller.title = rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
                 break
             case 3:
@@ -185,6 +188,7 @@ extension RequestViewController: UITableViewDelegate {
                   let storyboard = UIStoryboard(name: "Main", bundle: nil)
                   let controller = storyboard.instantiateViewController(withIdentifier:"RelationshipViewController") as! RelationshipViewController
                   controller.targetUserId = firstTextField?.text
+                  controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                   self.navigationController?.pushViewController(controller, animated: true)
                   })
               
@@ -192,7 +196,7 @@ extension RequestViewController: UITableViewDelegate {
                 
                 })
                 alertController.addTextField { (textField : UITextField!) -> Void in
-                  textField.placeholder = "Targetuser-id"
+                  textField.placeholder = "Target_user-id"
                 }
                 alertController.addAction(goAction)
                 alertController.addAction(cancelAction)
@@ -214,6 +218,7 @@ extension RequestViewController: UITableViewDelegate {
                   let storyboard = UIStoryboard(name: "Main", bundle: nil)
                   let controller = storyboard.instantiateViewController(withIdentifier: "MediaViewController") as! MediaViewController
                   controller.mediaParameter = Instagram.MediaEndpoint.Parameter.Media.id((firstTextField?.text)!)
+                  controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                   self.navigationController?.pushViewController(controller, animated: true)
                 })
                 
@@ -222,7 +227,7 @@ extension RequestViewController: UITableViewDelegate {
                 })
                 
                 alertController.addTextField { (textField : UITextField!) -> Void in
-                  textField.placeholder = "media id"
+                  textField.placeholder = "media_id"
                 }
                 alertController.addAction(goAction)
                 alertController.addAction(cancelAction)
@@ -237,6 +242,7 @@ extension RequestViewController: UITableViewDelegate {
                   let storyboard = UIStoryboard(name: "Main", bundle: nil)
                   let controller = storyboard.instantiateViewController(withIdentifier: "MediaViewController") as! MediaViewController
                   controller.mediaParameter = Instagram.MediaEndpoint.Parameter.Media.shortcode((firstTextField?.text)!)
+                  controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                   self.navigationController?.pushViewController(controller, animated: true)
                 })
               
@@ -258,14 +264,14 @@ extension RequestViewController: UITableViewDelegate {
                 let alertController = UIAlertController.init(title: "MediaSearchId", message: "", preferredStyle: .alert)
               
                 let goAction = UIAlertAction.init(title: "Go", style: .default, handler: { alert -> Void in
-                  let firstTextField = alertController.textFields?[0]
-                  let secondTextField = alertController.textFields?[1]
-                  let thirdTextField = alertController.textFields?[2]
+                  let longitudeTextField = alertController.textFields?[0]
+                  let latitudeTextField = alertController.textFields?[1]
+                  let distanceTextField = alertController.textFields?[2]
                   let storyboard = UIStoryboard(name: "Main", bundle: nil)
                   let controller = storyboard.instantiateViewController(withIdentifier: "MediaSearchViewController") as!  MediaSearchViewController
-                  let parameter = Instagram.MediaEndpoint.Parameter.SearchMediaParameter.init(longitude: Double((firstTextField?.text)!)!, latitude: Double((secondTextField?.text)!)!, distance: Double((thirdTextField?.text)!))
+                  let parameter = Instagram.MediaEndpoint.Parameter.SearchMediaParameter.init(longitude: Double((longitudeTextField?.text)!)!, latitude: Double((latitudeTextField?.text)!)!, distance: Double((distanceTextField?.text)!))
                   controller.params = parameter
-                  print(parameter)
+                  controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                   self.navigationController?.pushViewController(controller, animated: true)
                 })
               
@@ -274,10 +280,10 @@ extension RequestViewController: UITableViewDelegate {
                 })
               
                 alertController.addTextField { (textField : UITextField!) -> Void in
-                  textField.placeholder = "long"
+                  textField.placeholder = "longitude"
                 }
                 alertController.addTextField { (textField : UITextField!) -> Void in
-                  textField.placeholder = "lat"
+                  textField.placeholder = "latitude"
                 }
                 alertController.addTextField { (textField : UITextField!) -> Void in
                   textField.placeholder = "distance"
@@ -302,6 +308,7 @@ extension RequestViewController: UITableViewDelegate {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "CommentTableViewController") as! CommentTableViewController
                 controller.mediaId = firstTextField?.text
+                controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
               })
             
@@ -310,7 +317,7 @@ extension RequestViewController: UITableViewDelegate {
               })
             
               alertController.addTextField { (textField : UITextField!) -> Void in
-                textField.placeholder = "media id"
+                textField.placeholder = "media_id"
               }
               alertController.addAction(goAction)
               alertController.addAction(cancelAction)
@@ -322,6 +329,7 @@ extension RequestViewController: UITableViewDelegate {
               let storyboard = UIStoryboard(name: "Main", bundle: nil)
               let controller = storyboard.instantiateViewController(withIdentifier: "CommentIdViewController") as! CommentIdViewController
               self.navigationController?.pushViewController(controller, animated: true)
+              controller.title = rowsDataSource[indexPath.section][indexPath.row]
               break
             default:
               break
@@ -329,15 +337,216 @@ extension RequestViewController: UITableViewDelegate {
             break
         case 4:
             //Like
-            
+          switch indexPath.row{
+            case 0:
+              let alertController = UIAlertController.init(title: "MediaId", message: "", preferredStyle: .alert)
+              
+              let goAction = UIAlertAction.init(title: "Go", style: .default, handler: { alert -> Void in
+                let firstTextField = alertController.textFields?[0]
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "LikeViewController") as! LikeViewController
+                controller.mediaId = firstTextField?.text
+                controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
+                self.navigationController?.pushViewController(controller, animated: true)
+              })
+              
+              let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+                (action : UIAlertAction!) -> Void in
+              })
+              
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "media_id"
+              }
+              alertController.addAction(goAction)
+              alertController.addAction(cancelAction)
+              self.present(alertController, animated: true, completion: nil)
+            default:
+              break
+          }
+          
             break
         case 5:
             //Tag
+          switch indexPath.row {
+            case 0:
+              // Tags Name
+              let alertController = UIAlertController.init(title: "TagName", message: "", preferredStyle: .alert)
+              
+              let goAction = UIAlertAction.init(title: "Go", style: .default, handler: { alert -> Void in
+                let firstTextField = alertController.textFields?[0]
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "TagNameViewController") as! TagNameViewController
+                controller.tagName = firstTextField?.text
+                controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
+                self.navigationController?.pushViewController(controller, animated: true)
+              })
+              
+              let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+                (action : UIAlertAction!) -> Void in
+              })
+              
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "tag_name"
+              }
+              alertController.addAction(goAction)
+              alertController.addAction(cancelAction)
+              self.present(alertController, animated: true, completion: nil)
+              break
+            case 1:
+              // Tags recent
+              let alertController = UIAlertController.init(title: "Tags recent", message: "", preferredStyle: .alert)
+              
+              let goAction = UIAlertAction.init(title: "Go", style: .default, handler: { alert -> Void in
+                let tagNameTextField = alertController.textFields?[0]
+                let maxTagIdTextField = alertController.textFields?[1]
+                let minTagIdTextField = alertController.textFields?[2]
+                let mediaCountTextField = alertController.textFields?[3]
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "TagRecentViewController") as!  TagRecentViewController
+                let tagParameter = Instagram.TagsEndpoint.Parameter.RecentMediaParameter.init(tagName: (tagNameTextField?.text)!, minId: minTagIdTextField?.text, maxId: maxTagIdTextField?.text, count: Int((mediaCountTextField?.text)!))
+                controller.params = tagParameter
+                controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
+                self.navigationController?.pushViewController(controller, animated: true)
+              })
+              
+              let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+                (action : UIAlertAction!) -> Void in
+              })
+              
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "tag_name"
+              }
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "max_tag_id"
+              }
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "min_tag_id"
+              }
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "count"
+              }
+              alertController.addAction(goAction)
+              alertController.addAction(cancelAction)
+              self.present(alertController, animated: true, completion: nil)
+              break
             
+            case 2:
+              //Search
+              let storyboard = UIStoryboard(name: "Main", bundle: nil)
+              let controller = storyboard.instantiateViewController(withIdentifier: "UserSearchViewController") as! UserSearchViewController
+              controller.title = rowsDataSource[indexPath.section][indexPath.row]
+              self.navigationController?.pushViewController(controller, animated: true)
+
+          default:
+              break
+          }
             break
         case 6:
             //Location
+          switch indexPath.row {
+          case 0:
+              //Location id
+              let alertController = UIAlertController.init(title: "TagName", message: "", preferredStyle: .alert)
             
+              let goAction = UIAlertAction.init(title: "Go", style: .default, handler: { alert -> Void in
+                let locationTextField = alertController.textFields?[0]
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "LocationViewController") as! LocationViewController
+                controller.locationId = locationTextField?.text
+                self.navigationController?.pushViewController(controller, animated: true)
+              })
+            
+              let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+                (action : UIAlertAction!) -> Void in
+              })
+            
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                  textField.placeholder = "location_id"
+              }
+              alertController.addAction(goAction)
+              alertController.addAction(cancelAction)
+              self.present(alertController, animated: true, completion: nil)
+              break
+          case 1:
+              // Location recent
+              let alertController = UIAlertController.init(title: "Tags recent", message: "", preferredStyle: .alert)
+            
+              let goAction = UIAlertAction.init(title: "Go", style: .default, handler: { alert -> Void in
+                let locationIdTextField = alertController.textFields?[0]
+                let minIdTextField = alertController.textFields?[1]
+                let maxIdTextField = alertController.textFields?[2]
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "LocationRecentViewController") as!  LocationRecentViewController
+                let locationParameter = Instagram.LocationsEndpoint.Parameter.RecentMediaParameter.init(locationId: (locationIdTextField?.text)!, minId: minIdTextField?.text, maxId: maxIdTextField?.text )
+                controller.locationParameter = locationParameter
+                controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
+                self.navigationController?.pushViewController(controller, animated: true)
+              })
+            
+              let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+                (action : UIAlertAction!) -> Void in
+              })
+            
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "location_id"
+              }
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "min_tag_id"
+              }
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "max_tag_id"
+              }
+              alertController.addAction(goAction)
+              alertController.addAction(cancelAction)
+              self.present(alertController, animated: true, completion: nil)
+              break
+          case 2:
+              // Location search
+              let alertController = UIAlertController.init(title: "Tags recent", message: "", preferredStyle: .alert)
+            
+              let goAction = UIAlertAction.init(title: "Go", style: .default, handler: { alert -> Void in
+                let latitudeTextField = alertController.textFields?[0]
+                let longitudeTextField = alertController.textFields?[1]
+                let distanceTextField = alertController.textFields?[2]
+                let facebookIdTextField = alertController.textFields?[3]
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "LocationSearchViewController") as!  LocationSearchViewController
+                
+                let latitude = NumberFormatter().number(from: (latitudeTextField?.text)!)?.doubleValue
+                let longitude = NumberFormatter().number(from: (longitudeTextField?.text)!)?.doubleValue
+                let distance = NumberFormatter().number(from: (distanceTextField?.text)!)?.doubleValue
+                
+                let parameter = Instagram.LocationsEndpoint.Parameter.SearchMediaParameter.init(longitude: longitude, latitude: latitude, distance: distance, facebookPlacesId: facebookIdTextField?.text)
+                controller.locationSearchParameter = parameter
+                controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
+                self.navigationController?.pushViewController(controller, animated: true)
+              })
+            
+              let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+                (action : UIAlertAction!) -> Void in
+              })
+            
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "latitude"
+              }
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "longitude"
+              }
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "distance max = 750"
+              }
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "facebook_places_id"
+              }
+              alertController.addAction(goAction)
+              alertController.addAction(cancelAction)
+              self.present(alertController, animated: true, completion: nil)
+            
+            
+            break
+          default:
+            break
+          }
             break
             
         default:
