@@ -8,7 +8,7 @@
 
 import Alamofire
 
-extension Instagram {
+/*extension Instagram {
   
   enum LikesEndpoint {
     
@@ -91,4 +91,4 @@ extension Instagram.LikesEndpoint.Request.Delete {
   var method: HTTPMethod {
     return .delete
   }
-}
+}*/

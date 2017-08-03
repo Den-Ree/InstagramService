@@ -8,7 +8,7 @@
 
 import Alamofire
 
-extension Instagram {
+/*extension Instagram {
   
   enum MediaEndpoint {
     
@@ -87,4 +87,4 @@ extension Instagram.MediaEndpoint.Get {
       return result
     }
   }
-}
+}*/

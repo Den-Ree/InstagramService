@@ -7,7 +7,7 @@
 //
 
 import Alamofire
-
+/*
 extension Instagram {
   
   enum CommentsEndpoint {
@@ -110,4 +110,4 @@ extension Instagram.CommentsEndpoint.Request.Delete {
   var method: HTTPMethod {
     return .delete
   }
-}
+}*/

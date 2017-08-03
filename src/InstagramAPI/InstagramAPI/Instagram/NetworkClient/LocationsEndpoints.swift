@@ -8,7 +8,7 @@
 
 import Alamofire
 
-extension Instagram {
+/*extension Instagram {
   
   enum LocationsEndpoint {
     
@@ -90,3 +90,4 @@ extension Instagram.LocationsEndpoint.Get {
     }
   }
 }
+*/

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Den Ree. All rights reserved.
 //
 
-import Alamofire
+/*import Alamofire
 
 extension Instagram {
   
@@ -81,6 +81,7 @@ extension Instagram {
 //MARK: - InstagramRequestProtocol
 
 extension Instagram.UsersEndpoint.Parameter.User {
+  
   var pathComponent: String {
     var result = String()
     
@@ -115,7 +116,7 @@ extension Instagram.UsersEndpoint.Get {
     switch self {
     case .user( _):
       return [:]
-
+      
     case .likedMedia(let parameters):
       var result = InstagramRequestParameters()
       if let count = parameters.count {
@@ -148,4 +149,4 @@ extension Instagram.UsersEndpoint.Get {
       return result
     }
   }
-}
+}*/

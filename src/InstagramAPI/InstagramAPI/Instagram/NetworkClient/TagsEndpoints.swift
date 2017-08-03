@@ -8,7 +8,7 @@
 
 import Alamofire
 
-extension Instagram {
+/*extension Instagram {
   
   enum TagsEndpoint {
     
@@ -76,4 +76,4 @@ extension Instagram.TagsEndpoint.Get {
       ]
     }
   }
-}
+}*/

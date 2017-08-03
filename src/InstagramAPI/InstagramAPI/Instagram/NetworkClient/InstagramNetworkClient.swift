@@ -112,7 +112,7 @@ extension InstagramNetworkClient {
 
 extension InstagramNetworkClient {
 
-    //MARK: URLs
+    //MARK: Path
     func instagramUserMediaPath(_ userId: String?) -> InstagramURLPath {
 
         var result = String.emptyString
@@ -201,5 +201,5 @@ extension InstagramNetworkClient {
     }
 }
 
-//MARK: Users endpoints extensions
+
 

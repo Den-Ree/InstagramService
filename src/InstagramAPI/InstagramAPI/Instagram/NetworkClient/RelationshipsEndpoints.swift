@@ -8,7 +8,7 @@
 
 import Alamofire
 
-extension Instagram {
+/*extension Instagram {
   
   enum RelationshipsEnpoint {
     
@@ -88,4 +88,4 @@ extension Instagram.RelationshipsEnpoint.Request.Post {
   var method: HTTPMethod {
     return .post
   }
-}
+}*/
