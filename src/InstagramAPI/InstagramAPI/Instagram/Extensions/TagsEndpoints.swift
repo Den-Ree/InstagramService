@@ -8,7 +8,8 @@
 
 import Foundation
 
-extension InstagramCore.Endpoints{
+extension InstagramEndpoints{
+  
   enum TagsEndpoint {
     
     //MARK: - Requests

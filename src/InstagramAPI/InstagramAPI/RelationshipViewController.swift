@@ -5,7 +5,7 @@
 //  Created by Admin on 03.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-
+/*
 import UIKit
 
 class RelationshipViewController: UIViewController {
@@ -118,5 +118,5 @@ class RelationshipViewController: UIViewController {
       })
     }
   }
-}
+}*/
 

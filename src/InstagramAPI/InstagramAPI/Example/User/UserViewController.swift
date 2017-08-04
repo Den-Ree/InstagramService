@@ -5,7 +5,7 @@
 //  Created by Yakovlev, Alexander on 1/4/17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-
+/*
 import UIKit
 import AlamofireImage
 import Alamofire
@@ -75,3 +75,4 @@ class UserViewController: UIViewController {
       // Dispose of any resources that can be recreated.
     }
 }
+*/

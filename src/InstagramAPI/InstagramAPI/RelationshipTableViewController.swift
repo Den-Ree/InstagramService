@@ -5,7 +5,7 @@
 //  Created by Admin on 02.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-
+/*
 import UIKit
 import Alamofire
 
@@ -59,4 +59,4 @@ extension RelationshipTableViewController{
         return cell
     }
 }
-
+*/

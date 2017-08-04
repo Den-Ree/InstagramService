@@ -8,17 +8,13 @@
 
 import Foundation
 
-enum InstagramCore{
+public enum InstagramModels{}
   
-  enum Models{}
+public enum InstagramEndpoints{}
   
-  enum Endpoints{}
-  
-}
 
 
-
-extension InstagramCore.Endpoints {
+extension InstagramEndpoints {
   
   public enum UsersEndpoint {
     

@@ -5,7 +5,7 @@
 //  Created by Denis on 12.12.16.
 //  Copyright © 2016 ConceptOffice. All rights reserved.
 //
-
+/*
 import UIKit
 
 class RootViewController: UIViewController {
@@ -115,4 +115,4 @@ private extension RootViewController {
         HTTPCookieStorage.shared.cookieAcceptPolicy = .always
         sendLogInRequest()
     }
-}
+}*/

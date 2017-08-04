@@ -5,7 +5,7 @@
 //  Created by Admin on 03.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-
+/*
 import UIKit
 
 class MediaViewController: UIViewController {
@@ -78,3 +78,4 @@ class MediaViewController: UIViewController {
           })
     }
 }
+*/

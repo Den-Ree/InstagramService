@@ -5,7 +5,7 @@
 //  Created by Yakovlev, Alexander on 1/5/17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-
+/*
 import UIKit
 import AlamofireImage
 import Alamofire
@@ -113,4 +113,4 @@ extension UserMediaViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(0, 0, kPhotosSpacing * 2, 0)
     }
-}
+}*/

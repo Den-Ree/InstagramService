@@ -7,90 +7,106 @@
 //
 
 import Foundation
+import ObjectMapper
 
-extension InstagramCore.Models{
-  enum Models{
+extension InstagramModels{
+  
+  public struct User: InstagramObject{
     
-    struct User{
-    
-      //MARK: - Properties
-      fileprivate(set) var username: String?
-      fileprivate(set) var fullName: String?
-      fileprivate(set) var profilePictureURL: URL?
-      fileprivate(set) var bio: String?
-      fileprivate(set) var website: URL?
-      fileprivate(set) var counts: Instagram.UserCounts?
-      fileprivate(set) var objectId: String?
-    
+      var username: String?
+      var fullName: String?
+      var profilePictureURL: URL?
+      var bio: String?
+      var website: URL?
+      var counts: InstagramModels.UserCounts?
+      var objectId: String?
     }
   
-    struct Relationship{
+  
     
-        //MARK: - Properties
-      fileprivate(set) var outgoingStatus: String?
-      fileprivate(set) var incomingStatus: String?
-      fileprivate(set) var objectId: String?
+   public struct UserCounts: InstagramObject {
+      
+      var media: Int = 0
+      var follows: Int = 0
+      var followedBy: Int = 0
+      var objectId: String?
+      
+    }
+
+  
+  public struct Relationship: InstagramObject{
     
+      var outgoingStatus: String?
+      var incomingStatus: String?
+      var objectId: String?
+      
     }
   
-    struct Media{
+  public struct Media: InstagramObject{
     
-      //MARK: - Properties
+      public enum MediaType: String {
+        case image = "image"
+        case video = "video"
+      }
     
-      fileprivate(set) var user: Instagram.User?
-      fileprivate(set) var userHasLiked: Bool?
-      fileprivate(set) var createdDate: Date?
-      fileprivate(set) var link: URL?
-      fileprivate(set) var caption: Instagram.Comment?
-      fileprivate(set) var tagsCount: Int = 0
-      fileprivate(set) var likesCount: Int = 0
-      fileprivate(set) var commentsCount: Int = 0
-      fileprivate(set) var location: Instagram.Location?
-      fileprivate(set) var type: String?
-      fileprivate(set) var image: InstagramImage?
-      fileprivate(set) var video: InstagramVideo?
-      fileprivate(set) var tags: [String]?
-      fileprivate(set) var objectId: String?
-    }
-  
-    struct Comment{
+      var user: InstagramModels.User?
+      var userHasLiked: Bool?
+      var createdDate: Date?
+      var link: URL?
+      var caption: InstagramModels.Comment?
+      var tagsCount: Int = 0
+      var likesCount: Int = 0
+      var commentsCount: Int = 0
+      var location: InstagramModels.Location?
+      var type: String?
+      var image: InstagramImage?
+      var video: InstagramVideo?
+      var tags: [String]?
+      var objectId: String?
     
-      //MARK: - Properties
-    
-      fileprivate(set) var createdDate: Date?
-      fileprivate(set) var text: String?
-      fileprivate(set) var from: Instagram.User?
-      fileprivate(set) var objectId: String?
+      var isVideo: Bool {
+        return type == MediaType.video.rawValue
+      }
 
     }
   
-    struct Like{
+  public struct Comment: InstagramObject{
     
-      //MARK: Properties
-    
-      fileprivate(set) var username: String?
-      fileprivate(set) var firstName: String?
-      fileprivate(set) var lastName: String?
-      fileprivate(set) var type: String?
-      fileprivate(set) var objectId: String?
+      var createdDate: Date?
+      var text: String?
+      var from: InstagramModels.User
+      var objectId: String?
     }
   
-    struct Tag{
+  public struct Like: InstagramObject{
     
-      //MARK: Properties
-      fileprivate(set) var name: String = ""
-      fileprivate(set) var mediaCount: Int = 0
-      fileprivate(set) var objectId: String?
+      var username: String?
+      var firstName: String?
+      var lastName: String?
+      var type: String?
+      var objectId: String?
     }
   
-    struct Location{
+  public struct Tag: InstagramObject{
     
-      //MARK: Properties
-      fileprivate(set) var latitude: Double?
-      fileprivate(set) var longitude: Double?
-      fileprivate(set) var streetAddress: String?
-      fileprivate(set) var name: String?
-      fileprivate(set) var objectId: String?
+      var name: String = ""
+      var mediaCount: Int = 0
+      var objectId: String?
+    
+      //Force init
+      static func create(_ name: String, mediaCount: Int) -> InstagramModels.Tag? {
+        let tag = InstagramModels.Tag(JSON: [Instagram.Keys.Tag.name: name, Instagram.Keys.Tag.mediaCount: mediaCount])
+        return tag
+      }
+
     }
-  }
+  
+  public struct Location: InstagramObject{
+    
+      var latitude: Double?
+      var longitude: Double?
+      var streetAddress: String?
+      var name: String?
+      var objectId: String?
+    }
 }

@@ -5,7 +5,7 @@
 //  Created by Admin on 06.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-
+/*
 import UIKit
 
 private let reuseIdentifier = "locationRecentCell"
@@ -75,7 +75,7 @@ extension LocationRecentViewController: UICollectionViewDelegateFlowLayout{
         return UIEdgeInsetsMake(0, 0, kPhotosSpacing * 2, 0)
     }
 }
-
+*/
 
 
 

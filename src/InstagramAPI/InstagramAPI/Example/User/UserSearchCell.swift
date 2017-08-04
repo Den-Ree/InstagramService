@@ -5,7 +5,7 @@
 //  Created by Yakovlev, Alexander on 1/10/17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-
+/*
 import UIKit
 
 class UserSearchCell: UITableViewCell {
@@ -26,3 +26,4 @@ class UserSearchCell: UITableViewCell {
     }
 
 }
+*/

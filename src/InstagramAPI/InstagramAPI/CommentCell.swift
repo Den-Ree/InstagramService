@@ -5,7 +5,7 @@
 //  Created by Admin on 04.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-
+/*
 import UIKit
 
 class CommentCell: UITableViewCell {
@@ -26,3 +26,4 @@ class CommentCell: UITableViewCell {
     }
 
 }
+*/

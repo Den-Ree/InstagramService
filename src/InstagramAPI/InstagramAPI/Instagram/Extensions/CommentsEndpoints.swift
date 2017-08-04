@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension InstagramCore.Endpoints{
+extension InstagramEndpoints{
   
   enum CommentsEndpoint {
     

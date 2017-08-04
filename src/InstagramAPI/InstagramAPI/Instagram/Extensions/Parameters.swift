@@ -10,20 +10,13 @@ import Foundation
 
 
 
-
-
 class InstagramRouting: NSObject{
   
-  // How to write endpoints type correctly
- /* var type*/
-  
-    func prepareData(/*type*/){
-    
-    
-    
-    
-    
-    
-    
-  }
+
+
+
+
+
+
+
 }

@@ -5,7 +5,7 @@
 //  Created by Yakovlev, Alexander on 1/10/17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-
+/*
 import UIKit
 import AlamofireImage
 
@@ -86,3 +86,4 @@ extension UserSearchViewController: UISearchBarDelegate {
         })
     }
 }
+*/

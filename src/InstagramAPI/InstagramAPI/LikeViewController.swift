@@ -5,7 +5,7 @@
 //  Created by Admin on 05.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-
+/*
 import UIKit
 
 class LikeViewController: UIViewController {
@@ -50,4 +50,4 @@ class LikeViewController: UIViewController {
             self.userListLabel.text = error?.localizedDescription
         })
   }
-}
+}*/

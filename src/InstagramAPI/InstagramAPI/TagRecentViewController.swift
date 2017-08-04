@@ -5,7 +5,7 @@
 //  Created by Admin on 05.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-
+/*
 import UIKit
 
 private let reuseIdentifier = "tagRecentCell"
@@ -73,5 +73,4 @@ extension TagRecentViewController: UICollectionViewDelegateFlowLayout{
         return UIEdgeInsetsMake(0, 0, kPhotosSpacing * 2, 0)
     }
 }
-
-
+*/

@@ -30,7 +30,7 @@ class InstagramManager: NSObject {
     fileprivate var appRedirectURL: String = "https://www.nolisto.com"
 
     fileprivate var isNeedToReceiveNewUser = false
-    fileprivate(set) var lastReceivedUser: Instagram.User? {
+    fileprivate(set) var lastReceivedUser: InstagramCore.Models.User? {
         didSet {
             lastReceivedUserId = lastReceivedUser?.objectId
         }
@@ -57,15 +57,15 @@ extension InstagramManager {
         return networkClient.encode(instagramAuthorizationURLPath, parameters: parameters)
     }
     
-    func receiveLoggedInUser(_ url: URL?, completion: ((Instagram.User?, Error?)->())?) {
+    func receiveLoggedInUser(_ url: URL?, completion: ((InstagramModels.User?, Error?)->())?) {
         if let accessToken = networkClient.getAccessToken(url) , accessToken.characters.count > 0 {
             isNeedToReceiveNewUser = true
             keychainStore[Instagram.Keys.Auth.accessToken] = accessToken
             
-            let params = Instagram.UsersEndpoint.Parameter.User()
-            let request = Instagram.UsersEndpoint.Get.user(params)
+            let params = InstagramEndpoints.UsersEndpoint.Parameter.User()
+            let request = InstagramEndpoints.UsersEndpoint.Get.user(params)
     
-            networkClient.send(request, completion: { [weak self] (user: InstagramObjectResponse<Instagram.User>?, error: Error?) in
+            networkClient.send(request, completion: { [weak self] (user: InstagramObjectResponse<InstagramModels.User>?, error: Error?) in
                 if let user = user?.data, let objectId = user.objectId , objectId.characters.count > 0 {
                     let currentAccessToken = self?.keychainStore[Instagram.Keys.Auth.accessToken]
                     self?.keychainStore[Instagram.Keys.Auth.accessToken + objectId] = currentAccessToken
@@ -116,10 +116,10 @@ extension InstagramManager {
             return
         }
         
-        let params = Instagram.UsersEndpoint.Parameter.User(instagramId)
-        let request = Instagram.UsersEndpoint.Get.user(params)
+        let params = InstagramEndpoints.UsersEndpoint.Parameter.User(instagramId)
+        let request = InstagramEndpoints.UsersEndpoint.Get.user(params)
         
-        networkClient.send(request, completion: { [weak self] (user: InstagramObjectResponse<Instagram.User>?, error: Error?) in
+        networkClient.send(request, completion: { [weak self] (user: InstagramObjectResponse<InstagramModels.User>?, error: Error?) in
             if let user = user?.data {
                 self?.lastReceivedUser = user
             }
