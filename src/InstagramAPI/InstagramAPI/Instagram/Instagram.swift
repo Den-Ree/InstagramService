@@ -57,7 +57,7 @@ extension InstagramManager {
         return networkClient.encode(instagramAuthorizationURLPath, parameters: parameters)
     }
     
-    func receiveLoggedInUser(_ url: URL?, completion: ((InstagramModels.User?, Error?)->())?) {
+    func receiveLoggedInUser(_ url: URL?, completion: ((InstagramUser?, Error?)->())?) {
         if let accessToken = networkClient.getAccessToken(url) , accessToken.characters.count > 0 {
             isNeedToReceiveNewUser = true
             keychainStore[Instagram.Keys.Auth.accessToken] = accessToken

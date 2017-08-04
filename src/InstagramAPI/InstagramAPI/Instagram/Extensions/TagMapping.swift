@@ -9,9 +9,24 @@
 import Foundation
 import ObjectMapper
 
-extension InstagramCore.Models.Tag: InstagramObject{
+public struct InstagramTag: InstagramObject{
   
-  fileprivate(set) var objectId: String?
+     fileprivate(set) var name: String = ""
+     fileprivate(set) var mediaCount: Int = 0
+     fileprivate(set) var objectId: String?
+  
+  //Force init
+  static func create(_ name: String, mediaCount: Int) -> InstagramTag? {
+     let tag = InstagramTag(JSON: [Instagram.Keys.Tag.name: name, Instagram.Keys.Tag.mediaCount: mediaCount])
+      return tag
+   }
+}
+
+
+
+
+extension InstagramTag{
+  
   
   public init?(map: Map) {}
   

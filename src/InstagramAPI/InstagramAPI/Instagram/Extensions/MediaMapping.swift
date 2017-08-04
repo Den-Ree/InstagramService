@@ -9,9 +9,36 @@
 import Foundation
 import ObjectMapper
 
-extension InstagramCore.Models.Media: InstagramObject{
+public struct InstagramMedia: InstagramObject{
   
-  fileprivate(set) var objectId: String?
+      public enum MediaType: String {
+        case image = "image"
+        case video = "video"
+      }
+  
+     fileprivate(set) var user: InstagramUser?
+     fileprivate(set) var userHasLiked: Bool?
+     fileprivate(set) var createdDate: Date?
+     fileprivate(set) var link: URL?
+     fileprivate(set) var caption: InstagramComment?
+     fileprivate(set) var tagsCount: Int = 0
+     fileprivate(set) var likesCount: Int = 0
+     fileprivate(set) var commentsCount: Int = 0
+     fileprivate(set) var location: InstagramLocation?
+     fileprivate(set) var type: String?
+     fileprivate(set) var image: InstagramImage?
+     fileprivate(set) var video: InstagramVideo?
+     fileprivate(set) var tags: [String]?
+     fileprivate(set) var objectId: String?
+  
+     var isVideo: Bool {
+       return type == MediaType.video.rawValue
+     }
+  
+}
+
+extension InstagramMedia{
+  
   
   public init?(map: Map) {}
   

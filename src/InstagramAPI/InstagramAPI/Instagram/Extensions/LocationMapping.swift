@@ -9,9 +9,20 @@
 import Foundation
 import ObjectMapper
 
-extension InstagramCore.Models.Location: InstagramObject{
+public struct InstagramLocation: InstagramObject{
   
-  var objectId: String?
+    fileprivate(set) var latitude: Double?
+    fileprivate(set) var longitude: Double?
+    fileprivate(set) var streetAddress: String?
+    fileprivate(set) var name: String?
+    fileprivate(set) var objectId: String?
+}
+
+
+
+extension InstagramLocation{
+  
+  
   
   public init?(map: Map) {}
   

@@ -9,9 +9,20 @@
 import Foundation
 import ObjectMapper
 
-extension InstagramCore.Models.Like: InstagramObject{
+public struct InstagramLike: InstagramObject{
   
-  fileprivate(set) var objectId: String?
+     fileprivate(set) var username: String?
+     fileprivate(set) var firstName: String?
+     fileprivate(set) var lastName: String?
+     fileprivate(set) var type: String?
+     fileprivate(set) var objectId: String?
+}
+
+
+
+extension InstagramLike{
+  
+  
   
   public init?(map: Map){}
   

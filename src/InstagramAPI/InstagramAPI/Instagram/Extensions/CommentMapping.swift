@@ -9,10 +9,18 @@
 import Foundation
 import ObjectMapper
 
-extension InstagramCore.Models.Comment: InstagramObject{
-
-  fileprivate(set) var objectId: String?
+public struct InstagramComment: InstagramObject{
   
+     fileprivate(set) var createdDate: Date?
+     fileprivate(set) var text: String?
+     fileprivate(set) var from: InstagramUser
+     fileprivate(set) var objectId: String?
+}
+
+
+
+extension InstagramComment{
+
   public init?(map: Map) {}
   
   mutating public func mapping(map: Map) {

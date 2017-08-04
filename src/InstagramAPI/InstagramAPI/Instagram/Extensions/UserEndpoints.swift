@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-public enum InstagramModels{}
   
 public enum InstagramEndpoints{}
   

@@ -41,7 +41,6 @@
 		845106641EE1A95100F3AF79 /* RelationshipTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845106631EE1A95100F3AF79 /* RelationshipTableViewModel.swift */; };
 		845106661EE1C0BA00F3AF79 /* RelationshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845106651EE1C0BA00F3AF79 /* RelationshipCell.swift */; };
 		845162661EE34D5400D02CEB /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845162651EE34D5400D02CEB /* MediaViewController.swift */; };
-		8476B2761F33B3CD00E3EB50 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476B2751F33B3CD00E3EB50 /* Models.swift */; };
 		8476B2781F33B62700E3EB50 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476B2771F33B62700E3EB50 /* Parameters.swift */; };
 		8476B27B1F33B7F500E3EB50 /* UserEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476B27A1F33B7F500E3EB50 /* UserEndpoints.swift */; };
 		8476B27E1F33B89B00E3EB50 /* RelationshipsEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476B27D1F33B89B00E3EB50 /* RelationshipsEndpoints.swift */; };
@@ -117,7 +116,6 @@
 		845106631EE1A95100F3AF79 /* RelationshipTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipTableViewModel.swift; sourceTree = "<group>"; };
 		845106651EE1C0BA00F3AF79 /* RelationshipCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipCell.swift; sourceTree = "<group>"; };
 		845162651EE34D5400D02CEB /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
-		8476B2751F33B3CD00E3EB50 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		8476B2771F33B62700E3EB50 /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		8476B27A1F33B7F500E3EB50 /* UserEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEndpoints.swift; sourceTree = "<group>"; };
 		8476B27D1F33B89B00E3EB50 /* RelationshipsEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipsEndpoints.swift; sourceTree = "<group>"; };
@@ -204,14 +202,6 @@
 			name = Endpoints;
 			sourceTree = "<group>";
 		};
-		844306DA1F34515B008EE816 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				8476B2751F33B3CD00E3EB50 /* Models.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
 		844306DB1F345189008EE816 /* Mapping */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				8476B2791F33B7D700E3EB50 /* Endpoints */,
-				844306DA1F34515B008EE816 /* Models */,
 			);
 			name = Core;
 			path = Extensions;
@@ -669,7 +658,6 @@
 				8431E7501E71BE380026D752 /* CommentsEndpoints.swift in Sources */,
 				921DA8A91E2CAEBC00AC7C7C /* InstagramRequest.swift in Sources */,
 				844306F41F3455F5008EE816 /* TagMapping.swift in Sources */,
-				8476B2761F33B3CD00E3EB50 /* Models.swift in Sources */,
 				9282E7E01DFDFA5B00B7ACF3 /* InstagramNetworkClient.swift in Sources */,
 				8476B2781F33B62700E3EB50 /* Parameters.swift in Sources */,
 			);

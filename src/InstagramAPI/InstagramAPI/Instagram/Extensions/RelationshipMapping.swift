@@ -9,9 +9,18 @@
 import Foundation
 import ObjectMapper
 
-extension InstagramModels.Relationship{
+
+public struct InstagramRelationship: InstagramObject{
   
-    var objectId: String?
+    fileprivate(set) var outgoingStatus: String?
+    fileprivate(set) var incomingStatus: String?
+    fileprivate(set) var objectId: String?
+  
+}
+
+
+public extension InstagramRelationship{
+  
   
     mutating public func mapping(map: Map) {
       objectId <- map[Instagram.Keys.Object.id]
