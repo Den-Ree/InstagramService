@@ -9,12 +9,12 @@
 import Foundation
 import ObjectMapper
 
-public struct InstagramComment: InstagramObject{
+public struct InstagramComment: InstagramObject {
   
      fileprivate(set) var createdDate: Date?
      fileprivate(set) var text: String?
      fileprivate(set) var from: InstagramUser
-     fileprivate(set) var objectId: String?
+     fileprivate(set) var objectId: String
 }
 
 
