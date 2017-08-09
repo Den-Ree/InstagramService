@@ -5,29 +5,30 @@
 //  Created by Admin on 04.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-/*
+
 import UIKit
 
 private let reuseIdentifier = "MediaSearchCell"
 
 class MediaSearchViewController: UICollectionViewController {
 
-    var params : Instagram.MediaEndpoint.Parameter.SearchMediaParameter?
-    fileprivate var dataSource: [Instagram.Media?] = []
+    var parameter : InstagramMediaRouter.SearchMediaParameter?
+    fileprivate var dataSource: [InstagramMedia?] = []
     fileprivate let kMaxPhotosInRaw = 4
     fileprivate let kPhotosSpacing: CGFloat = 1.0
   
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        let request = Instagram.MediaEndpoint.Get.search(params!)
-        InstagramManager.shared.networkClient.send(request, completion: {
-          (media: InstagramArrayResponse<Instagram.Media>?, error: Error?) in
+        let router = InstagramMediaRouter.search(parameter!)
+      
+        InstagramClient().send(router, completion: { (media: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
           if error == nil{
-            self.dataSource = (media?.data)!
-            self.collectionView?.reloadData()
+              self.dataSource = (media?.data)!
+              self.collectionView?.reloadData()
           }
         })
+    
         
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
@@ -44,7 +45,7 @@ extension MediaSearchViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MediaSearchCell
         let media = dataSource[indexPath.row]
-        cell.imageView.af_setImage(withURL: (media?.image?.lowResolutionURL?.URL)!)
+        cell.imageView.af_setImage(withURL: (media?.image.lowResolution.url)!)
         return cell
     }
 }
@@ -73,4 +74,4 @@ extension MediaSearchViewController : UICollectionViewDelegateFlowLayout{
 }
 
 
-*/
+

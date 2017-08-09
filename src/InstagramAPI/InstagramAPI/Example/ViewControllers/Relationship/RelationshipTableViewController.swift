@@ -5,7 +5,7 @@
 //  Created by Admin on 02.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-/*
+
 import UIKit
 import Alamofire
 
@@ -20,14 +20,14 @@ class RelationshipTableViewController: UITableViewController {
 
   
   var type : RelationshipTableControllerType = .unknown
-  fileprivate var dataSource : [Instagram.User] = []
+  fileprivate var dataSource : [InstagramUser] = []
   
     override func viewDidLoad() {
         super.viewDidLoad()
         let relationshipTableViewModel = RelationshipTableViewModel.init(type: self.type)
         let request = relationshipTableViewModel.request()
         relationshipTableViewModel.getDataSource(request: request!, completion: {
-          (dataSource: [Instagram.User]?) in
+          (dataSource: [InstagramUser]?) in
           if dataSource != nil{
             self.dataSource = dataSource!
             self.tableView.reloadData()
@@ -55,8 +55,8 @@ extension RelationshipTableViewController{
         let user = dataSource[indexPath.row]
         cell.fullNameLabel.text = user.fullName
         cell.userNameLabel.text = user.username
-        cell.avatarImage.af_setImage(withURL: user.profilePictureURL!)
+        cell.avatarImage.af_setImage(withURL: user.profilePictureUrl!)
         return cell
     }
 }
-*/
+

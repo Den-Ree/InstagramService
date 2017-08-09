@@ -19,7 +19,7 @@ class TagSearchViewController: UIViewController {
     }
   
     @IBOutlet fileprivate weak var searchBar: UISearchBar!
-    fileprivate var dataSource: [Instagram.Tag?] = []
+    fileprivate var dataSource: [InstagramTag] = []
     fileprivate var searchActive: Bool = false
   
     override func viewDidLoad() {
@@ -37,8 +37,8 @@ extension TagSearchViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TagSearchCell") as! TagSearchCell
         let tag = dataSource[indexPath.row]
-        cell.nameLabel.text?.append(String.hiddenSymbol + (tag?.name)!)
-        cell.mediaCountLabel.text?.append(String.hiddenSymbol + String(format: "%li", (tag?.mediaCount)!))
+        cell.nameLabel.text?.append(String.hiddenSymbol + tag.name)
+        cell.mediaCountLabel.text?.append(String.hiddenSymbol + String(format: "%li", tag.mediaCount))
         return cell
     }
 }
@@ -49,7 +49,7 @@ extension TagSearchViewController: UITableViewDelegate{
         let tag = dataSource[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "TagNameViewController") as! TagNameViewController
-        controller.tagName = tag?.name
+        controller.tagName = tag.name
         self.navigationController?.pushViewController(controller, animated: true)
     }
 }
@@ -69,15 +69,14 @@ extension TagSearchViewController: UISearchBarDelegate{
         searchActive = false
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let request = Instagram.TagsEndpoint.Get.search(query: searchText)
-        InstagramManager.shared.networkClient.send(request, completion: {
-          (tags : InstagramArrayResponse<Instagram.Tag>?, error: Error?) in
+        let router = InstagramTagRouter.search(query: searchText)
+        InstagramClient().send(router, completion: { (tags: InstagramArrayResponse<InstagramTag>?, error: Error?) in
           if error == nil{
-              if let data = tags?.data{
-               self.dataSource = data
-               self.tableView.reloadData()
-              }
-          }
+                if let data = tags?.data{
+                self.dataSource = data
+                  self.tableView.reloadData()
+                }
+            }
         })
     }
 }

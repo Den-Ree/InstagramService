@@ -5,7 +5,7 @@
 //  Created by Yakovlev, Alexander on 1/10/17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-/*
+
 import UIKit
 import AlamofireImage
 
@@ -20,7 +20,7 @@ class UserSearchViewController: UIViewController {
     }
 
     @IBOutlet fileprivate weak var searchBar: UISearchBar!
-    fileprivate var dataSource: [Instagram.User?] = []
+    fileprivate var dataSource: [InstagramUser?] = []
     fileprivate var searchActive : Bool = false
 
     override func viewDidLoad() {
@@ -41,7 +41,7 @@ extension UserSearchViewController: UITableViewDataSource {
         let currentUser = dataSource[indexPath.row]
         cell.usernameLabel.text = currentUser?.username
         cell.fullnameLabel.text = currentUser?.fullName
-        cell.avatarImageView.af_setImage(withURL: (currentUser?.profilePictureURL)!)
+        cell.avatarImageView.af_setImage(withURL: (currentUser?.profilePictureUrl)!)
             
         return cell;
     }
@@ -52,7 +52,7 @@ extension UserSearchViewController: UITableViewDelegate {
         let currentUser = dataSource[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-        controller.userID = currentUser?.objectId
+        controller.userID = currentUser?.id
         self.navigationController?.pushViewController(controller, animated: true)
     }
 }
@@ -75,10 +75,9 @@ extension UserSearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let searchParams = Instagram.UsersEndpoint.Parameter.SearchUser(query: searchText, count: 10)
-        let request = Instagram.UsersEndpoint.Get.search(searchParams)
-        InstagramManager.shared.networkClient.send(request, completion: { (users: InstagramArrayResponse<Instagram.User>?, error: Error?) in
-            guard let users = users?.data else {
+        let userSearchRouter = InstagramUserRouter.getSearch(.init(query: searchText, count: 10))
+        InstagramClient().send(userSearchRouter, completion: { (users: InstagramArrayResponse<InstagramUser>?,  error: Error?) in
+         guard let users = users?.data else {
                 return
             }
             self.dataSource = users
@@ -86,4 +85,4 @@ extension UserSearchViewController: UISearchBarDelegate {
         })
     }
 }
-*/
+

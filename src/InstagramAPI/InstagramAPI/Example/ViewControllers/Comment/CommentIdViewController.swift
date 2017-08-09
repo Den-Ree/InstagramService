@@ -5,7 +5,7 @@
 //  Created by Admin on 04.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-/*
+
 import UIKit
 
 class CommentIdViewController: UIViewController {
@@ -23,14 +23,16 @@ class CommentIdViewController: UIViewController {
           commentTextView.text = "Please enter your comment"
           return
       }
+      let postCommentRouter = InstagramCommentRouter.postComment(.init(mediaId: mediaIdTextField.text!, text: commentTextView.text))
     
-      let params = Instagram.CommentsEndpoint.Parameter.PostCommentParameter.init(mediaId: mediaIdTextField.text!, text: commentTextView.text)
-      let request = Instagram.CommentsEndpoint.Request.Post.comment(params)
-    
-      InstagramManager.shared.networkClient.send(request, completion: {(responce: InstagramObjectResponse<Instagram.Comment>?, error: Error?) in
-          self.commentTextView.text = error?.localizedDescription
+      InstagramClient().send(postCommentRouter, completion: { (responce: InstagramMetaResponse?, error: Error?) in
+      
+        if responce?.meta.code != 200{
+          print("Error: \(error!.localizedDescription):" + responce!.meta.code.description)
+        }
+        self.commentTextView.text = error?.localizedDescription
       })
-  }
+    }
   
   @IBAction func deleteComment(_ sender: Any) {
       if (commentIdLabel.text?.isEmpty)!{
@@ -41,19 +43,18 @@ class CommentIdViewController: UIViewController {
         mediaIdTextField.text = "Please enter mediaId"
         return
       }
-      let params = Instagram.CommentsEndpoint.Parameter.DeleteCommentParameter.init(mediaId: mediaIdTextField.text!, commentId: commentIdLabel.text!)
-      let request = Instagram.CommentsEndpoint.Request.Delete.comment(params)
     
-      InstagramManager.shared.networkClient.send(request, completion: {
-        (responce: InstagramObjectResponse<Instagram.Comment>?, error: Error?) in
-          self.commentIdLabel.text = error?.localizedDescription
+      let deleteCommentRouter = InstagramCommentRouter.deleteComment(.init(mediaId: mediaIdTextField.text!, commentId: commentIdLabel.text!))
+    
+      InstagramClient().send(deleteCommentRouter, completion: { (responce: InstagramMetaResponse?, error: Error?) in
+      
+        if responce?.meta.code != 200{
+          print("Error: \(error!.localizedDescription):" + responce!.meta.code.description)
+        }
+        self.commentTextView.text = error?.localizedDescription
       })
   }
  
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-  }
 }
-*/
+

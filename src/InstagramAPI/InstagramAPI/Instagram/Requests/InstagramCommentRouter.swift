@@ -8,6 +8,17 @@
 
 import Alamofire
 
+extension String {
+  func isGoodStringForComment() -> Bool {
+    if self.characters.count >= 300
+      || self.components(separatedBy: "#").count > 3
+      || self.components(separatedBy: "http").count > 1 {
+      return false
+    }
+    return true
+  }
+}
+
 enum InstagramCommentRouter: AnyInstagramNetworkRouter {
   // MARK: - Requests
   case getComments(mediaId: String)

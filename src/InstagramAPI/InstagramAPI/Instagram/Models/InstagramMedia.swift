@@ -40,8 +40,8 @@ struct InstagramMedia: AnyInstagramModel {
   var commentsCount: Int = 0
   var location = InstagramLocation()
   var type = MediaType.image
-  var image: String = ""
-  var video: String = ""
+  var image: Image = Image()
+  var video: Video = Video()
   var tags: [String] = []
   // MARK: - Public
   var isVideo: Bool {

@@ -5,7 +5,7 @@
 //  Created by Yakovlev, Alexander on 1/5/17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-/*
+
 import UIKit
 import AlamofireImage
 import Alamofire
@@ -19,7 +19,7 @@ class UserMediaViewController: UIViewController {
     }
     var type: ControllerType = .unknown
 
-    fileprivate var dataSource:[Instagram.Media?] = []
+    fileprivate var dataSource:[InstagramMedia?] = []
     fileprivate let kMaxPhotosInRaw = 4
     fileprivate let kPhotosSpacing: CGFloat = 1.0
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -31,31 +31,28 @@ class UserMediaViewController: UIViewController {
         case .recent(let userID):
             //TODO: fix spaghetti
             if let userID = userID {
-                let parameters = Instagram.UsersEndpoint.Parameter.RecentMedia(user: .id(userID), count: 10, minId: "10", maxId: "10")
-                let request = Instagram.UsersEndpoint.Get.recentMedia(parameters)
-                InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<Instagram.Media>?, error: Error?) in
-                    let media: [Instagram.Media]? = response?.data
+                let userRecentRouter = InstagramUserRouter.getRecentMedia(.init(user: .id(userID), count: 10, minId: "10", maxId: "10"))
+                InstagramClient().send(userRecentRouter, completion: { (media: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
+                    let media: [InstagramMedia]? = media?.data
                     self.dataSource = media!
                     self.collectionView.reloadData()
                 })
             } else {
-                let parameters = Instagram.UsersEndpoint.Parameter.RecentMedia(user: .owner, count: 10, minId: "10", maxId: "10")
-                let request = Instagram.UsersEndpoint.Get.recentMedia(parameters)
-                InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<Instagram.Media>?, error: Error?) in
-                    let media: [Instagram.Media]? = response?.data
-                    self.dataSource = media!
-                    self.collectionView.reloadData()
+                let userRecentRouter = InstagramUserRouter.getRecentMedia(.init(user: .owner, count: 10, minId: "10", maxId: "10"))
+                InstagramClient().send(userRecentRouter, completion: { (media: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
+                  let media: [InstagramMedia]? = media?.data
+                  self.dataSource = media!
+                  self.collectionView.reloadData()
                 })
             }
             break
             
         case .liked:
-            let parameters = Instagram.UsersEndpoint.Parameter.LikedMedia(user: .owner, count: 10, maxLikeId: "10")
-            let request = Instagram.UsersEndpoint.Get.likedMedia(parameters)
-            InstagramManager.shared.networkClient.send(request, completion: { (response: InstagramArrayResponse<Instagram.Media>?, error: Error?) in
-                let media: [Instagram.Media]? = response?.data
-                self.dataSource = media!
-                self.collectionView.reloadData()
+            let userLikedRouter = InstagramUserRouter.getLikedMedia(.init(user: .owner, count: 10, maxLikeId: "10"))
+            InstagramClient().send(userLikedRouter, completion: { (media: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
+                let media: [InstagramMedia]? = media?.data
+              self.dataSource = media!
+              self.collectionView.reloadData()
             })
 
             break
@@ -82,8 +79,8 @@ extension UserMediaViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserMediaCell", for: indexPath) as! UserMediaCell
-        let media = dataSource[indexPath.row]! as Instagram.Media
-        cell.photoImageView.af_setImage(withURL: (media.image?.lowResolutionURL?.URL)!)
+        let media = dataSource[indexPath.row]! as InstagramMedia
+        cell.photoImageView.af_setImage(withURL: (media.image.lowResolution.url!))
         return cell
     }
 }
@@ -113,4 +110,4 @@ extension UserMediaViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(0, 0, kPhotosSpacing * 2, 0)
     }
-}*/
+}

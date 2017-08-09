@@ -5,7 +5,7 @@
 //  Created by Admin on 03.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-/*
+
 import UIKit
 
 class RelationshipViewController: UIViewController {
@@ -52,71 +52,71 @@ class RelationshipViewController: UIViewController {
   
   
   func setData(){
-      let relationshipRequest = Instagram.RelationshipsEnpoint.Request.Get.relationship(userId: targetUserId!)
-      InstagramManager.shared.networkClient.send(relationshipRequest, completion: {(relationship :  InstagramObjectResponse<Instagram.Relationship>?, error: Error?) in
+      let relationshipRouter = InstagramRelationshipRouter.getRelationship(userId: targetUserId!)
+      InstagramClient().send(relationshipRouter, completion: { (relationship: InstagramModelResponse<InstagramRelationship>?, error: Error?) in
+      
         if error == nil{
-            if let outgoingStatus = relationship?.data?.outgoingStatus{
-              self.outgoingStatusLabel.text = outgoingStatus
-            }
-            if let incominStatus = relationship?.data?.incomingStatus{
-              self.incomingStatusLabel.text = incominStatus
-            }
-      }
-    })
+              if let outgoingStatus = relationship?.data.outgoingStatus{
+                self.outgoingStatusLabel.text = outgoingStatus
+              }
+              if let incominStatus = relationship?.data.incomingStatus{
+                self.incomingStatusLabel.text = incominStatus
+              }
+        }
+      })
     
-      let userParams = Instagram.UsersEndpoint.Parameter.User.id(targetUserId!)
-      let request = Instagram.UsersEndpoint.Get.user(userParams)
-      self.targetUserIDLabel.text = targetUserId
-      InstagramManager.shared.networkClient.send(request, completion: {(user : InstagramObjectResponse<Instagram.User>?, error : Error?) in
+      let targetUserRouter = InstagramUserRouter.getUser(.id(targetUserId!))
+      self.targetUserIDLabel.text = self.targetUserId
+    
+      InstagramClient().send(targetUserRouter, completion: { (user: InstagramModelResponse<InstagramUser>?, error: Error?) in
         if error == nil{
-          if let profileImageURL = user?.data?.profilePictureURL{
+          if let profileImageURL = user?.data.profilePictureUrl{
             self.avatarImageViev.af_setImage(withURL: profileImageURL)
           }
-          if let userName = user?.data?.username{
+          if let userName = user?.data.username{
             self.userNameLabel.text = userName
           }
-          if let fullName = user?.data?.fullName{
+          if let fullName = user?.data.fullName{
             self.fullNameLabel.text = fullName
           }
         }
       })
-  }
+    }
   
   @IBAction func sendAction(_ sender: Any) {
     
       if follow.isSelected || unfollow.isSelected || approve.isSelected || ignore.isSelected{
       
-        var action : Instagram.RelationshipsEnpoint.Parameter.Action? = nil
+        var action : InstagramRelationshipRouter.PostRelationshipParameter.Action? = nil
     
         if follow.isSelected{
-          action = Instagram.RelationshipsEnpoint.Parameter.Action.follow
+          action = InstagramRelationshipRouter.PostRelationshipParameter.Action.follow
         }
         if unfollow.isSelected{
-          action = Instagram.RelationshipsEnpoint.Parameter.Action.unfollow
+          action = InstagramRelationshipRouter.PostRelationshipParameter.Action.unfollow
         }
         if approve.isSelected{
-          action = Instagram.RelationshipsEnpoint.Parameter.Action.approve
+          action = InstagramRelationshipRouter.PostRelationshipParameter.Action.approve
         }
         if ignore.isSelected{
-          action = Instagram.RelationshipsEnpoint.Parameter.Action.ignore
+          action = InstagramRelationshipRouter.PostRelationshipParameter.Action.ignore
         }
         
-        let userParams = Instagram.RelationshipsEnpoint.Parameter.PostRelationshipParameter.init(userId: targetUserId!, action: action!)
-        let request = Instagram.RelationshipsEnpoint.Request.Post.relationship(userParams)
         
-        InstagramManager.shared.networkClient.send(request, completion: {
-          (relationship : InstagramObjectResponse<Instagram.Relationship>?, error : Error?) in
-            if error == nil{
+        let postRelationshipRouter = InstagramRelationshipRouter.postRelationship(.init(userId: targetUserId!, action: action!))
+        
+        InstagramClient().send(postRelationshipRouter, completion: { (relationship: InstagramModelResponse<InstagramRelationship>?, error: Error?) in
+          if error == nil{
             
               if relationship?.data == relationship?.data{
                 
-                if let outgoingStatus = relationship?.data?.outgoingStatus{
+                if let outgoingStatus = relationship?.data.outgoingStatus{
                   self.outgoingStatusLabel.text = outgoingStatus
+                }
             }
           }
-        }
-      })
+        })
     }
   }
-}*/
+}
 

@@ -15,16 +15,16 @@ extension Instagram {
   enum Constants {
     static let keychainStore = "com.InstagramClient.keychainStore"
     static let baseUrl = "https://api.instagram.com/"
-    static let appClientId: String = "be322b2540c745438432c86c825ed469"
-    static var appRedirectURL: String {
-      return SettingsManager.shared.config.instagramRedirectURL
-    }
+    static let appClientId: String = "eb6961971b7149899a3692a4125bb6af"
+    static let appClientSecret: String = "78f214b20bcd4ce58d940ef1604e652c"
+    static var appRedirectURL: String = "https://nolisto.com/"
     static var baseUrlComponents: URLComponents {
       var components = URLComponents()
       components.host = "api.instagram.com"
       components.scheme = "https"
       return components
     }
+    static let grantType = "authorization_code"
   }
 
   enum Keys {
@@ -32,6 +32,9 @@ extension Instagram {
       static let clientId = "client_id"
       static let redirectUri = "redirect_uri"
       static let accessToken = "access_token"
+      static let code = "code"
+      static let grantType = "grant_type"
+      static let clientSecret = "client_secret"
     }
 
     enum Response {
@@ -41,6 +44,7 @@ extension Instagram {
       static let data = "data"
       static let meta = "meta"
       static let pagination = "pagination"
+      static let code = "code"
     }
 
     enum Object {
@@ -74,7 +78,12 @@ extension Instagram {
         static let followedBy = "followed_by"
       }
     }
-
+    
+    enum Relationship {
+      static let outgoingStatus = "outgoing_status"
+      static let incomingStatus = "incoming_status"
+    }
+    
     enum Media {
       static let count = "count"
       static let link = "link"

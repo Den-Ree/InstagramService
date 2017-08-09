@@ -22,6 +22,7 @@ extension InstagramMedia {
     likesCount <- map[Instagram.Keys.Media.likes + String.dotString + Instagram.Keys.Media.count]
     commentsCount <- map[Instagram.Keys.Media.comments + String.dotString + Instagram.Keys.Media.count]
     image <- map[Instagram.Keys.Media.images]
+    
     video <- map[Instagram.Keys.Media.videos]
     type <- (map[Instagram.Keys.Media.type], InstagramMediaTypeTransform())
     tags <- map[Instagram.Keys.Media.tags]

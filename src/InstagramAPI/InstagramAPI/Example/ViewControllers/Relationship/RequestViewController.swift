@@ -5,7 +5,7 @@
 //  Created by Sasha Kid on 12/25/16.
 //  Copyright © 2016 ConceptOffice. All rights reserved.
 //
-/*
+
 import UIKit
 
 class RequestViewController: UIViewController {
@@ -57,7 +57,7 @@ extension RequestViewController: UITableViewDataSource {
 extension RequestViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        // TODO: Fix spagetti
         switch indexPath.section {
         case 0:
             //User
@@ -217,7 +217,7 @@ extension RequestViewController: UITableViewDelegate {
                   let firstTextField = alertController.textFields?[0]
                   let storyboard = UIStoryboard(name: "Main", bundle: nil)
                   let controller = storyboard.instantiateViewController(withIdentifier: "MediaViewController") as! MediaViewController
-                  controller.mediaParameter = Instagram.MediaEndpoint.Parameter.Media.id((firstTextField?.text)!)
+                  controller.mediaParameter = InstagramMediaRouter.MediaParameter.id((firstTextField?.text)!)
                   controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                   self.navigationController?.pushViewController(controller, animated: true)
                 })
@@ -241,7 +241,7 @@ extension RequestViewController: UITableViewDelegate {
                   let firstTextField = alertController.textFields?[0]
                   let storyboard = UIStoryboard(name: "Main", bundle: nil)
                   let controller = storyboard.instantiateViewController(withIdentifier: "MediaViewController") as! MediaViewController
-                  controller.mediaParameter = Instagram.MediaEndpoint.Parameter.Media.shortcode((firstTextField?.text)!)
+                  controller.mediaParameter = InstagramMediaRouter.MediaParameter.shortcode((firstTextField?.text)!)
                   controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                   self.navigationController?.pushViewController(controller, animated: true)
                 })
@@ -269,8 +269,8 @@ extension RequestViewController: UITableViewDelegate {
                   let distanceTextField = alertController.textFields?[2]
                   let storyboard = UIStoryboard(name: "Main", bundle: nil)
                   let controller = storyboard.instantiateViewController(withIdentifier: "MediaSearchViewController") as!  MediaSearchViewController
-                  let parameter = Instagram.MediaEndpoint.Parameter.SearchMediaParameter.init(longitude: Double((longitudeTextField?.text)!)!, latitude: Double((latitudeTextField?.text)!)!, distance: Double((distanceTextField?.text)!))
-                  controller.params = parameter
+                  controller.parameter = InstagramMediaRouter.SearchMediaParameter(longitude: Double((longitudeTextField?.text)!)!, latitude: Double((latitudeTextField?.text)!)!, distance: Double((distanceTextField?.text)!))
+                  
                   controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                   self.navigationController?.pushViewController(controller, animated: true)
                 })
@@ -403,8 +403,7 @@ extension RequestViewController: UITableViewDelegate {
                 let mediaCountTextField = alertController.textFields?[3]
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "TagRecentViewController") as!  TagRecentViewController
-                let tagParameter = Instagram.TagsEndpoint.Parameter.RecentMediaParameter.init(tagName: (tagNameTextField?.text)!, minId: minTagIdTextField?.text, maxId: maxTagIdTextField?.text, count: Int((mediaCountTextField?.text)!))
-                controller.params = tagParameter
+                controller.parameter = InstagramTagRouter.RecentMediaParameter(tagName: (tagNameTextField?.text)!, minId:  minTagIdTextField?.text, maxId: maxTagIdTextField?.text, count: Int((mediaCountTextField?.text)!))
                 controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
               })
@@ -477,8 +476,7 @@ extension RequestViewController: UITableViewDelegate {
                 let maxIdTextField = alertController.textFields?[2]
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "LocationRecentViewController") as!  LocationRecentViewController
-                let locationParameter = Instagram.LocationsEndpoint.Parameter.RecentMediaParameter.init(locationId: (locationIdTextField?.text)!, minId: minIdTextField?.text, maxId: maxIdTextField?.text )
-                controller.locationParameter = locationParameter
+                controller.locationParameter = InstagramLocationRouter.RecentMediaParameter(locationId: (locationIdTextField?.text)!, minId: minIdTextField?.text, maxId: maxIdTextField?.text)
                 controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
               })
@@ -516,8 +514,7 @@ extension RequestViewController: UITableViewDelegate {
                 let longitude = NumberFormatter().number(from: (longitudeTextField?.text)!)?.doubleValue
                 let distance = NumberFormatter().number(from: (distanceTextField?.text)!)?.doubleValue
                 
-                let parameter = Instagram.LocationsEndpoint.Parameter.SearchMediaParameter.init(longitude: longitude, latitude: latitude, distance: distance, facebookPlacesId: facebookIdTextField?.text)
-                controller.locationSearchParameter = parameter
+                controller.locationSearchParameter = InstagramLocationRouter.SearchMediaParameter(longitude: longitude, latitude: latitude, distance: distance, facebookPlacesId: facebookIdTextField?.text)
                 controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
               })
@@ -555,4 +552,3 @@ extension RequestViewController: UITableViewDelegate {
         }
     }
 }
-*/

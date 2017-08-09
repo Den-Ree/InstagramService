@@ -5,7 +5,7 @@
 //  Created by Admin on 06.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-/*
+
 import UIKit
 
 class LocationViewController: UIViewController {
@@ -20,23 +20,16 @@ class LocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.idLabel.text?.append(locationId!)
-        let request = Instagram.LocationsEndpoint.Get.location(id: locationId!)
-        InstagramManager.shared.networkClient.send(request, completion: {
-          (location: InstagramObjectResponse<Instagram.Location>?, error: Error?) in
-            if error == nil{
-              if let location = location?.data{
-                if let name = location.name{
-                  self.nameLabel.text?.append(name)
-                }
-                if let lat = location.latitude{
-                  self.latLabel.text?.append(String(format: "%f", lat))
-                }
-                if let lng = location.longitude{
-                  self.lngLabel.text?.append(String(format: "%f", lng))
-                }
-              }
+        let router = InstagramLocationRouter.getLocation(id: locationId!)
+        InstagramClient().send(router, completion: { (location: InstagramModelResponse<InstagramLocation>?, error: Error?) in
+          if error == nil{
+            if let location = location?.data{
+              self.nameLabel.text?.append(location.name)
+              self.latLabel.text?.append(String(format: "%f", location.latitude))
+              self.lngLabel.text?.append(String(format: "%f", location.longitude))
             }
+          }
         })
     }
 }
-*/
+

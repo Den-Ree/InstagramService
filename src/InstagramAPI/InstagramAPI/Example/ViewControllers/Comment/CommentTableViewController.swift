@@ -5,19 +5,21 @@
 //  Created by Admin on 04.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-/*
+
 import UIKit
 
 class CommentTableViewController: UITableViewController {
 
     var mediaId: String?
-    fileprivate var dataSource: [Instagram.Comment] = []
+    fileprivate var dataSource: [InstagramComment] = []
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        let request = Instagram.CommentsEndpoint.Request.Get.comment(mediaId: mediaId!)
-        InstagramManager.shared.networkClient.send(request, completion: { (comments: InstagramArrayResponse<Instagram.Comment>?, error: Error?) in
-            if error == nil{
+      
+        let commentRouter = InstagramCommentRouter.getComments(mediaId: mediaId!)
+      
+        InstagramClient().send(commentRouter, completion: {( comments: InstagramArrayResponse<InstagramComment>?, error: Error?) in
+          if error == nil{
               if let data = comments?.data{
                 self.dataSource = data
                 self.tableView.reloadData()
@@ -43,10 +45,10 @@ extension CommentTableViewController{
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentCell
         let comment = dataSource[indexPath.row]
         cell.commentLabel.text = comment.text
-        cell.usernameLabel.text = comment.from?.username
-        cell.dateLabel.text = comment.createdDate?.description
+        cell.usernameLabel.text = comment.from.username
+        cell.dateLabel.text = comment.createdDate.description
         return cell
     }
 }
-*/
+
 

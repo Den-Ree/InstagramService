@@ -5,12 +5,12 @@
 //  Created by Admin on 03.06.17.
 //  Copyright © 2017 ConceptOffice. All rights reserved.
 //
-/*
+
 import UIKit
 
 class MediaViewController: UIViewController {
 
-  var mediaParameter : Instagram.MediaEndpoint.Parameter.Media = .id(String.emptyString)
+  var mediaParameter : InstagramMediaRouter.MediaParameter = .id(String.emptyString)
   
   @IBOutlet fileprivate weak var mediaView: UIImageView!
   @IBOutlet fileprivate weak var userLabel: UILabel!
@@ -28,54 +28,34 @@ class MediaViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        let request = Instagram.MediaEndpoint.Get.media(mediaParameter)
-          InstagramManager.shared.networkClient.send(request, completion: {
-            (media: InstagramObjectResponse<Instagram.Media>?, error: Error?) in
-          
-            if error == nil{
+        let mediaRouter = InstagramMediaRouter.getMedia(mediaParameter)
+      
+        InstagramClient().send(mediaRouter, completion: { (media: InstagramModelResponse<InstagramMedia>?, error: Error?) in
+          if error == nil{
               
               if let data = media?.data{
-                if let user = data.user{
-                  if let userName = user.username{
-                    self.userLabel.text?.append(userName)
-                  }
-                }
-                if let hasLiked = data.userHasLiked{
-                  self.userHasLikedLabel.text?.append(hasLiked.description)
-                }
-                if let date = data.createdDate{
-                  self.createdDateLabel.text?.append(date.defaultString)
-                }
-                if let link = data.link{
-                  self.linkLabel.text?.append(link.absoluteString)
-                }
-                if let caption = data.caption{
-                  if let text = caption.text{
-                    self.captionLabel.text = text
-                  }
-                }
-              
+                
+                self.userLabel.text?.append(data.user.username)
+                self.userHasLikedLabel.text?.append(data.userHasLiked.description)
+                self.createdDateLabel.text?.append(data.createdDate.description)
+                self.linkLabel.text?.append(data.link)
+                self.captionLabel.text = data.caption.text
                 self.tagsCountLabel.text?.append(String(data.tagsCount))
                 self.commentCountLabel.text?.append(String(data.commentsCount))
                 self.likesCountLabel.text?.append(String(data.likesCount))
-              
-                if let location = data.location{
-                  self.locationLabel.text?.append( String(describing: location.latitude) + " " + String(describing: location.longitude))
+                self.locationLabel.text?.append( String(describing: data.location.latitude) + " " + String(describing: data.location.longitude))
+                if data.type == .image{
+                    self.mediaView.af_setImage(withURL: (data.image.lowResolution.url)!)
+                    self.typeLabel.text?.append("image")
+                }else{
+                    self.typeLabel.text?.append("video")
                 }
-                if let type = data.type{
-                  if type == "image"{
-                    self.mediaView.af_setImage(withURL: (data.image?.lowResolutionURL?.URL)!)
-                  }
-                  self.typeLabel.text?.append(type)
-                }
-                if let tags = data.tags{
-                  for i in 0...tags.count-1{
-                    self.tagsLabel.text?.append(String.hashtagString+tags[i])
-                  }
+                for i in 0...data.tags.count-1{
+                    self.tagsLabel.text?.append(String.hashtagString+data.tags[i])
                 }
               }
             }
-          })
+        })
     }
 }
-*/
+
