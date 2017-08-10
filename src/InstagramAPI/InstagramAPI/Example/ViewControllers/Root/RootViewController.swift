@@ -27,6 +27,7 @@ extension RootViewController: UIWebViewDelegate{
   
   func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
     if isLogged == false{
+      tryLogInAccount(forURL: request.url!)
       return true
     } else if isLogged{
       return false
