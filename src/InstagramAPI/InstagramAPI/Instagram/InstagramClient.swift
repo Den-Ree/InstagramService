@@ -123,23 +123,25 @@ extension InstagramClient{
                         Instagram.Keys.Auth.grantType: Instagram.Constants.grantType,
                         Instagram.Keys.Auth.redirectUri: Instagram.Constants.appRedirectURL,
                         Instagram.Keys.Auth.code: code]
-      let Url = self.encode(Instagram.Constants.baseUrl + "oauth/authorize/", parameters: parameters)
-      let request = URLRequest(url: Url!)
-      
+      let url = self.encode(Instagram.Constants.baseUrl + "oauth/access_token/", parameters: parameters)
+      var request = URLRequest(url: url!)
+      request.httpMethod = HTTPMethod.post.rawValue
       networkManager.request(request).response(completionHandler: {(responce: DefaultDataResponse?) in
         if let responce = responce{
           do{
+            
             let json = try JSONSerialization.jsonObject(with: responce.data!, options: .mutableContainers) as! Dictionary<String,Any>
+            print(json)
             if let accessToken = json[Instagram.Keys.Auth.accessToken] as? String{
               let accessTokenUrl = Instagram.Constants.appRedirectURL.substring(to: Instagram.Constants.appRedirectURL.index(before: Instagram.Constants.appRedirectURL.endIndex)) + "#" + Instagram.Keys.Auth.accessToken + "=" + accessToken
               self.receiveLoggedUser(URL(string: accessTokenUrl)!, completion: nil)
-              
+            
               }
-            } catch{
-            print(error.localizedDescription)
+            }catch{
+              print(error.localizedDescription)
+            }
           }
-        }
-      })
+        })
       break
     }
   }

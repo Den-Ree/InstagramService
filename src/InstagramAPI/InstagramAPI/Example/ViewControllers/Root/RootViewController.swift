@@ -75,6 +75,7 @@ private extension RootViewController{
 
   func sendLogInRequest() {
       let request = URLRequest(url: InstagramClient.InstagramAuthorisationUrl().serverSideFlowUrl!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)
+      print(request.url!)
       webView.loadRequest(request)
   }
   

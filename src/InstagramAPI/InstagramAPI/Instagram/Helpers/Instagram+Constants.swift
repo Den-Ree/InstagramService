@@ -17,7 +17,7 @@ extension Instagram {
     static let baseUrl = "https://api.instagram.com/"
     static let appClientId: String = "eb6961971b7149899a3692a4125bb6af"
     static let appClientSecret: String = "78f214b20bcd4ce58d940ef1604e652c"
-    static var appRedirectURL: String = "https://nolisto.com/"
+    static var appRedirectURL: String = "https://www.nolisto.com"
     static var baseUrlComponents: URLComponents {
       var components = URLComponents()
       components.host = "api.instagram.com"
