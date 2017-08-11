@@ -67,6 +67,7 @@ extension RequestViewController: UITableViewDelegate {
                 //Self
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+                controller.userID = InstagramClient().lastUser?.id
                 controller.title = rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
                 

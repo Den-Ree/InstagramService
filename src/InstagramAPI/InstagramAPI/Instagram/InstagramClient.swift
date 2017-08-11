@@ -23,7 +23,9 @@ final class InstagramClient {
   }()
   fileprivate var networkManager: Alamofire.SessionManager = .default
   // MARK: - Public
-  var isLogged = false
+  var isLogged : Bool{
+    return self.keychainStore["isLogged"] == "true"
+  }
   var lastUser: InstagramUser? = InstagramUser()
   public enum InstagramAuthUrlFragment{
     case empty
@@ -57,9 +59,11 @@ final class InstagramClient {
           return
         }
         let request = try router.asURLRequest(withAccessToken: accessToken)
+        print(request.url?.absoluteString)
         networkManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<T>) in
           // TODO: Need to setup check on access token expire
-          completion(response.result.value!, response.result.error!)
+          print(response.result.value)
+          completion(response.result.value, response.result.error)
         })
       } catch {
         completion(nil, error)
@@ -101,7 +105,7 @@ extension InstagramClient{
     case .empty: return
     case .accessToken(let accessToken):
       self.keychainStore[Instagram.Keys.Auth.accessToken] = accessToken
-        let router = InstagramUserRouter.getUser(InstagramUserRouter.UserParameter.id(Instagram.Constants.appClientId))
+        let router = InstagramUserRouter.getUser(.owner)
         self.send(router, completion: { (responce: InstagramModelResponse<InstagramUser>?, error: Error?) in
           if error == nil && responce?.data != nil && responce?.data.id != nil{
             let currentAccessToken = self.keychainStore[Instagram.Keys.Auth.accessToken]
@@ -113,7 +117,7 @@ extension InstagramClient{
             }
             self.lastUser = responce?.data
             self.cleanCookies()
-            self.isLogged = true
+            self.keychainStore["isLogged"] = "true"
           }
         })
         break
@@ -123,22 +127,25 @@ extension InstagramClient{
                         Instagram.Keys.Auth.grantType: Instagram.Constants.grantType,
                         Instagram.Keys.Auth.redirectUri: Instagram.Constants.appRedirectURL,
                         Instagram.Keys.Auth.code: code]
-      let url = self.encode(Instagram.Constants.baseUrl + "oauth/access_token/", parameters: parameters)
-      var request = URLRequest(url: url!)
+      let url = URL(string: Instagram.Constants.baseUrl + "oauth/access_token/")
+      var request = URLRequest.init(url: url!)
       request.httpMethod = HTTPMethod.post.rawValue
+      let stringParams = parameters.paramsString()
+      let dataParams = stringParams.data(using: String.Encoding.utf8, allowLossyConversion: true)
+      let paramsLength = String(format: "%d", dataParams!.count)
+      request.setValue(paramsLength, forHTTPHeaderField: "Content-Length")
+      request.httpBody = dataParams
+      request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+      
       networkManager.request(request).response(completionHandler: {(responce: DefaultDataResponse?) in
-        if let responce = responce{
-          do{
-            
-            let json = try JSONSerialization.jsonObject(with: responce.data!, options: .mutableContainers) as! Dictionary<String,Any>
-            print(json)
-            if let accessToken = json[Instagram.Keys.Auth.accessToken] as? String{
-              let accessTokenUrl = Instagram.Constants.appRedirectURL.substring(to: Instagram.Constants.appRedirectURL.index(before: Instagram.Constants.appRedirectURL.endIndex)) + "#" + Instagram.Keys.Auth.accessToken + "=" + accessToken
-              self.receiveLoggedUser(URL(string: accessTokenUrl)!, completion: nil)
-            
+          if let responce = responce{
+            do{
+              let json = try JSONSerialization.jsonObject(with: responce.data!, options: .mutableContainers) as! Dictionary<String,Any>
+              if let accessToken = json[Instagram.Keys.Auth.accessToken] as? String{
+                let accessTokenUrl = Instagram.Constants.appRedirectURL + "/" + Instagram.Keys.Auth.accessToken + "=" + accessToken
+                self.receiveLoggedUser(URL(string: accessTokenUrl)!, completion: nil)
               }
             }catch{
-              print(error.localizedDescription)
             }
           }
         })
@@ -148,6 +155,7 @@ extension InstagramClient{
   
   func endLogin(){
     self.lastUser = nil
+    self.keychainStore["isLogged"] = "false"
     self.cleanCookies()
   }
   
@@ -181,6 +189,20 @@ extension InstagramClient{
   
 }
 
+
+extension Dictionary {
+  
+  func paramsString() -> String {
+    var paramsString = [String]()
+    for (key, value) in self {
+      guard let stringValue = value as? String, let stringKey = key as? String else {
+        return ""
+      }
+      paramsString += [stringKey + "=" + "\(stringValue)"]
+    }
+    return (paramsString.isEmpty ? "" : paramsString.joined(separator: "&"))
+  }
+}
 
 
 

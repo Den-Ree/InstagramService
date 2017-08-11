@@ -40,8 +40,12 @@ class UserMediaViewController: UIViewController {
             } else {
                 let userRecentRouter = InstagramUserRouter.getRecentMedia(.init(user: .owner, count: 10, minId: "10", maxId: "10"))
                 InstagramClient().send(userRecentRouter, completion: { (media: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
-                  let media: [InstagramMedia]? = media?.data
-                  self.dataSource = media!
+                  let data: [InstagramMedia]? = media?.data
+                  
+                  if let data = data{
+                    self.dataSource = data
+                  }
+                  
                   self.collectionView.reloadData()
                 })
             }
@@ -50,8 +54,10 @@ class UserMediaViewController: UIViewController {
         case .liked:
             let userLikedRouter = InstagramUserRouter.getLikedMedia(.init(user: .owner, count: 10, maxLikeId: "10"))
             InstagramClient().send(userLikedRouter, completion: { (media: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
-                let media: [InstagramMedia]? = media?.data
-              self.dataSource = media!
+                let data: [InstagramMedia]? = media?.data
+              if let data = data{
+                self.dataSource = data
+              }
               self.collectionView.reloadData()
             })
 

@@ -35,7 +35,7 @@ extension AnyInstagramNetworkRouter {
   func asURLRequest(withAccessToken accessToken: String) throws -> URLRequest {
     /// Setup path
     var urlComponents = Instagram.Constants.baseUrlComponents
-    urlComponents.path = path
+    urlComponents.path = "/v1" + path + "/"
     /// Setup parameters
     var items = [URLQueryItem]()
     items.append(URLQueryItem(name: Instagram.Keys.Auth.accessToken, value: accessToken))
@@ -47,7 +47,7 @@ extension AnyInstagramNetworkRouter {
     }
     // Fill parameters
     var httpBody: Data?
-    if method != .post {
+    if method == .post {
       let paramtersString = items.map({$0.name + "=" + ($0.value ?? "")}).joined(separator: "&")
       httpBody = paramtersString.data(using: .utf8)
     } else {
@@ -55,6 +55,7 @@ extension AnyInstagramNetworkRouter {
     }
     // Create request
     if let url = urlComponents.url {
+      print(url)
       var request = URLRequest(url: url)
       request.httpMethod = method.rawValue
       request.httpBody = httpBody
