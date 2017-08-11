@@ -11,9 +11,9 @@ import AlamofireImage
 import Alamofire
 
 class UserViewController: UIViewController {
-    
-    var userID: String?
-    
+  
+    var userParameter: InstagramUserRouter.UserParameter?
+  
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var nicknameLabel: UILabel!
     @IBOutlet private weak var postsLabel: UILabel!
@@ -24,10 +24,12 @@ class UserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
       
-        let userRouter = InstagramUserRouter.getUser(.id(userID!))
+        let userRouter = InstagramUserRouter.getUser(userParameter!)
       
         InstagramClient().send(userRouter, completion: { (user: InstagramModelResponse<InstagramUser>?, error: Error?) in
+          
           if error == nil{
             if let url = user?.data.profilePictureUrl?.absoluteString {
               Alamofire.request(url).responseImage { response in

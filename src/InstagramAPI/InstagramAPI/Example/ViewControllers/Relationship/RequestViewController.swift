@@ -67,7 +67,7 @@ extension RequestViewController: UITableViewDelegate {
                 //Self
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-                controller.userID = InstagramClient().lastUser?.id
+                controller.userParameter = .owner
                 controller.title = rowsDataSource[indexPath.section][indexPath.row]
                 self.navigationController?.pushViewController(controller, animated: true)
                 
@@ -90,7 +90,7 @@ extension RequestViewController: UITableViewDelegate {
                     let firstTextField = alertController.textFields![0] as UITextField
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-                    controller.userID = firstTextField.text
+                    controller.userParameter = InstagramUserRouter.UserParameter.id(firstTextField.text!)
                     controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
                     self.navigationController?.pushViewController(controller, animated: true)
                 })

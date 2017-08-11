@@ -52,7 +52,7 @@ extension UserSearchViewController: UITableViewDelegate {
         let currentUser = dataSource[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-        controller.userID = currentUser?.id
+        controller.userParameter = InstagramUserRouter.UserParameter.id((currentUser?.id)!)
         self.navigationController?.pushViewController(controller, animated: true)
     }
 }

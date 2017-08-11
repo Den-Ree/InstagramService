@@ -54,12 +54,12 @@ final class InstagramClient {
   func send<T : AnyInstagramResponse>(_ router: AnyInstagramNetworkRouter, completion: @escaping (T?, Error?) -> (Void)) {
       do {
         // Look on lastUser.id
+        
         guard let accessToken = keychainStore[Instagram.Keys.Auth.accessToken + (lastUser?.id)!] else {
-          completion(nil, nil)
+            completion(nil, nil)
           return
         }
         let request = try router.asURLRequest(withAccessToken: accessToken)
-        print(request.url?.absoluteString)
         networkManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<T>) in
           // TODO: Need to setup check on access token expire
           print(response.result.value)
@@ -99,27 +99,31 @@ extension InstagramClient{
     return .empty
   }
   
-  func receiveLoggedUser(_ Url: URL, completion: ((InstagramUser?,Error) -> ())?){
+  func receiveLoggedUser(_ Url: URL, completion: ((InstagramUser?,Error?) -> ())?){
     switch InstagramClient().getAuthUrlFragment(Url) {
       
     case .empty: return
     case .accessToken(let accessToken):
       self.keychainStore[Instagram.Keys.Auth.accessToken] = accessToken
         let router = InstagramUserRouter.getUser(.owner)
-        self.send(router, completion: { (responce: InstagramModelResponse<InstagramUser>?, error: Error?) in
+        self.send(router, completion: { [weak self] (responce: InstagramModelResponse<InstagramUser>?, error: Error?) in
           if error == nil && responce?.data != nil && responce?.data.id != nil{
-            let currentAccessToken = self.keychainStore[Instagram.Keys.Auth.accessToken]
-            self.keychainStore[Instagram.Keys.Auth.accessToken + (responce?.data.id)!] = currentAccessToken
+            let currentAccessToken = self?.keychainStore[Instagram.Keys.Auth.accessToken]
+            self?.keychainStore[Instagram.Keys.Auth.accessToken + (responce?.data.id)!] = currentAccessToken
             do{
-              try self.keychainStore.remove(Instagram.Keys.Auth.accessToken)
+              try self?.keychainStore.remove(Instagram.Keys.Auth.accessToken)
             } catch {
               print(error.localizedDescription)
             }
-            self.lastUser = responce?.data
-            self.cleanCookies()
-            self.keychainStore["isLogged"] = "true"
+            self?.lastUser = responce?.data
+            self?.cleanCookies()
+            self?.keychainStore["isLogged"] = "true"
+            completion?(self?.lastUser, nil)
+          } else{
+            completion?(nil,nil)
           }
         })
+      
         break
     case .code(let code):
       let parameters = [Instagram.Keys.Auth.clientId: Instagram.Constants.appClientId,
@@ -145,7 +149,9 @@ extension InstagramClient{
                 let accessTokenUrl = Instagram.Constants.appRedirectURL + "/" + Instagram.Keys.Auth.accessToken + "=" + accessToken
                 self.receiveLoggedUser(URL(string: accessTokenUrl)!, completion: nil)
               }
+              completion?(self.lastUser,nil)
             }catch{
+              completion?(nil,nil)
             }
           }
         })
