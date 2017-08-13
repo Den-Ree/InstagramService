@@ -48,7 +48,7 @@ extension RootViewController{
     isLogged = false
     
     InstagramClient().receiveLoggedUser(url, completion: { (user: InstagramUser?, error: Error?) -> () in
-      if let user = user{
+      if user != nil{
         self.isLogged = true
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "RequestViewController") as! RequestViewController

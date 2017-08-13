@@ -25,10 +25,10 @@ class CommentIdViewController: UIViewController {
       }
       let postCommentRouter = InstagramCommentRouter.postComment(.init(mediaId: mediaIdTextField.text!, text: commentTextView.text))
     
-      InstagramClient().send(postCommentRouter, completion: { (responce: InstagramMetaResponse?, error: Error?) in
+      InstagramClient().send(postCommentRouter, completion: { (response: InstagramMetaResponse?, error: Error?) in
       
-        if responce?.meta.code != 200{
-          print("Error: \(error!.localizedDescription):" + responce!.meta.code.description)
+        if response?.meta.code != 200{
+          print("Error: \(error!.localizedDescription):" + response!.meta.code.description)
         }
         self.commentTextView.text = error?.localizedDescription
       })
@@ -46,10 +46,10 @@ class CommentIdViewController: UIViewController {
     
       let deleteCommentRouter = InstagramCommentRouter.deleteComment(.init(mediaId: mediaIdTextField.text!, commentId: commentIdLabel.text!))
     
-      InstagramClient().send(deleteCommentRouter, completion: { (responce: InstagramMetaResponse?, error: Error?) in
+      InstagramClient().send(deleteCommentRouter, completion: { (response: InstagramMetaResponse?, error: Error?) in
       
-        if responce?.meta.code != 200{
-          print("Error: \(error!.localizedDescription):" + responce!.meta.code.description)
+        if response?.meta.code != 200{
+          print("Error: \(error!.localizedDescription):" + response!.meta.code.description)
         }
         self.commentTextView.text = error?.localizedDescription
       })

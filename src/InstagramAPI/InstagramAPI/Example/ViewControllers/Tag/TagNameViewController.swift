@@ -17,12 +17,12 @@ class TagNameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let router = InstagramTagRouter.getTag(name: tagName!)
-        InstagramClient().send(router, completion: { (responce: InstagramModelResponse<InstagramTag>?, error: Error?) in
+        InstagramClient().send(router, completion: { (response: InstagramModelResponse<InstagramTag>?, error: Error?) in
           if error == nil{
-              if let name = responce?.data.name{
+              if let name = response?.data.name{
                   self.tagNameLabel.text?.append(" " + name)
               }
-              if let mediaCount = responce?.data.mediaCount{
+              if let mediaCount = response?.data.mediaCount{
                   self.mediaCountLabel.text?.append(" " + String(format: "%i", mediaCount))
               }
             }

@@ -27,6 +27,7 @@ final class InstagramClient {
     return self.keychainStore["isLogged"] == "true"
   }
   var lastUser: InstagramUser? = InstagramUser()
+  
   public enum InstagramAuthUrlFragment{
     case empty
     case code(String)
@@ -62,7 +63,7 @@ final class InstagramClient {
         let request = try router.asURLRequest(withAccessToken: accessToken)
         networkManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<T>) in
           // TODO: Need to setup check on access token expire
-          print(response.result.value)
+          self.checkAccessTokenExpiration(response)
           completion(response.result.value, response.result.error)
         })
       } catch {
@@ -106,21 +107,22 @@ extension InstagramClient{
     case .accessToken(let accessToken):
       self.keychainStore[Instagram.Keys.Auth.accessToken] = accessToken
         let router = InstagramUserRouter.getUser(.owner)
-        self.send(router, completion: { [weak self] (responce: InstagramModelResponse<InstagramUser>?, error: Error?) in
-          if error == nil && responce?.data != nil && responce?.data.id != nil{
+        self.send(router, completion: { [weak self] (response: InstagramModelResponse<InstagramUser>?, error: Error?) in
+          if error == nil && response?.data != nil && response?.data.id != nil{
             let currentAccessToken = self?.keychainStore[Instagram.Keys.Auth.accessToken]
-            self?.keychainStore[Instagram.Keys.Auth.accessToken + (responce?.data.id)!] = currentAccessToken
+            self?.keychainStore[Instagram.Keys.Auth.accessToken + (response?.data.id)!] = currentAccessToken
             do{
               try self?.keychainStore.remove(Instagram.Keys.Auth.accessToken)
             } catch {
               print(error.localizedDescription)
             }
-            self?.lastUser = responce?.data
+            self?.lastUser = response?.data
             self?.cleanCookies()
             self?.keychainStore["isLogged"] = "true"
             completion?(self?.lastUser, nil)
           } else{
             completion?(nil,nil)
+            
           }
         })
       
@@ -141,10 +143,10 @@ extension InstagramClient{
       request.httpBody = dataParams
       request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
       
-      networkManager.request(request).response(completionHandler: {(responce: DefaultDataResponse?) in
-          if let responce = responce{
+      networkManager.request(request).response(completionHandler: {(response: DefaultDataResponse?) in
+          if let response = response{
             do{
-              let json = try JSONSerialization.jsonObject(with: responce.data!, options: .mutableContainers) as! Dictionary<String,Any>
+              let json = try JSONSerialization.jsonObject(with: response.data!, options: .mutableContainers) as! Dictionary<String,Any>
               if let accessToken = json[Instagram.Keys.Auth.accessToken] as? String{
                 let accessTokenUrl = Instagram.Constants.appRedirectURL + "/" + Instagram.Keys.Auth.accessToken + "=" + accessToken
                 self.receiveLoggedUser(URL(string: accessTokenUrl)!, completion: nil)
@@ -157,6 +159,14 @@ extension InstagramClient{
         })
       break
     }
+  }
+  
+  func checkAccessTokenExpiration<T: AnyInstagramResponse>(_ response: DataResponse<T>) {
+      if response.result.value?.meta.errorType.rawValue == "OAuthAccessTokenError"{
+          print(Notifications.accessTokenExpired)
+          self.keychainStore[Instagram.Keys.Auth.accessToken + (self.lastUser?.id)!] = nil
+          self.endLogin()
+      }
   }
   
   func endLogin(){

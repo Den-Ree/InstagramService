@@ -35,14 +35,14 @@ class LikeViewController: UIViewController {
 
   @IBAction func post(_ sender: Any) {
         let router = InstagramLikeRouter.postLike(mediaId: mediaId!)
-        InstagramClient().send(router, completion: { (responce: InstagramModelResponse<InstagramLike>?, error: Error?) in
+        InstagramClient().send(router, completion: { (response: InstagramModelResponse<InstagramLike>?, error: Error?) in
           self.userListLabel.text = error?.localizedDescription
         })
   }
   
   @IBAction func deleteLike(_ sender: Any) {
         let router = InstagramLikeRouter.deleteLike(mediaId: mediaId!)
-        InstagramClient().send(router, completion: { (responce: InstagramModelResponse<InstagramLike>?, error: Error?) in
+        InstagramClient().send(router, completion: { (response: InstagramModelResponse<InstagramLike>?, error: Error?) in
           self.userListLabel.text = error?.localizedDescription
         })
     }

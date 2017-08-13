@@ -568,7 +568,7 @@
         <scene sceneID="EKh-iO-bkj">
             <objects>
                 <collectionViewController storyboardIdentifier="LocationRecentViewController" id="b3E-bS-fAP" customClass="LocationRecentViewController" customModule="InstagramAPI" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="yrI-wr-4Uf">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yrI-wr-4Uf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -675,7 +675,7 @@
         <scene sceneID="LhD-wW-MIB">
             <objects>
                 <collectionViewController storyboardIdentifier="TagRecentViewController" id="fZS-TJ-lKF" customClass="TagRecentViewController" customModule="InstagramAPI" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="1Ow-27-NXu">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="1Ow-27-NXu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -804,7 +804,7 @@
         <scene sceneID="4Zs-f1-KhP">
             <objects>
                 <collectionViewController storyboardIdentifier="MediaSearchViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" clearsSelectionOnViewWillAppear="NO" id="nLT-KL-CqY" customClass="MediaSearchViewController" customModule="InstagramAPI" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="YtT-ff-FXr">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="YtT-ff-FXr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -963,7 +963,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3LU-w6-PmV">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3LU-w6-PmV">
                                 <rect key="frame" x="131" y="584.5" width="112" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="Send">
@@ -1024,6 +1024,7 @@
                         <constraints>
                             <constraint firstItem="xkX-Vb-2Nr" firstAttribute="top" secondItem="UZN-FU-4nb" secondAttribute="bottom" constant="64" id="0Sz-mC-0Zu"/>
                             <constraint firstItem="RmX-b8-ott" firstAttribute="leading" secondItem="2Ki-72-XYg" secondAttribute="trailing" constant="71" id="6CE-hp-qeK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3LU-w6-PmV" secondAttribute="trailing" constant="116" id="7ff-xk-TXy"/>
                             <constraint firstItem="3LU-w6-PmV" firstAttribute="top" secondItem="2Ki-72-XYg" secondAttribute="bottom" constant="91" id="8Rs-IN-XgW"/>
                             <constraint firstItem="xkX-Vb-2Nr" firstAttribute="leading" secondItem="0Xc-il-fNM" secondAttribute="leadingMargin" constant="22" id="8lJ-xb-Ior"/>
                             <constraint firstItem="3Sz-uF-Lmr" firstAttribute="leading" secondItem="UZN-FU-4nb" secondAttribute="trailing" constant="18" id="Acr-rN-dfL"/>
@@ -1033,6 +1034,7 @@
                             <constraint firstItem="RmX-b8-ott" firstAttribute="leading" secondItem="2Ki-72-XYg" secondAttribute="trailing" constant="71" id="Ir3-rV-66j"/>
                             <constraint firstItem="3Sz-uF-Lmr" firstAttribute="trailing" secondItem="0Xc-il-fNM" secondAttribute="trailingMargin" id="Jy2-by-cWb"/>
                             <constraint firstItem="V65-Xp-Lbr" firstAttribute="top" secondItem="jho-9r-dW4" secondAttribute="bottom" constant="19" id="JzQ-67-Zgr"/>
+                            <constraint firstItem="3LU-w6-PmV" firstAttribute="leading" secondItem="0Xc-il-fNM" secondAttribute="leadingMargin" constant="115" id="MWt-kg-rsk"/>
                             <constraint firstItem="2I1-nM-rJq" firstAttribute="leading" secondItem="xkX-Vb-2Nr" secondAttribute="trailing" constant="83" id="Meo-j3-gvH"/>
                             <constraint firstItem="jho-9r-dW4" firstAttribute="top" secondItem="3Sz-uF-Lmr" secondAttribute="bottom" constant="22" id="PhY-1x-Nj3"/>
                             <constraint firstItem="RmX-b8-ott" firstAttribute="top" secondItem="2I1-nM-rJq" secondAttribute="bottom" constant="26" id="QHZ-OM-zLX"/>
@@ -1327,7 +1329,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SUc-Al-5LP" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5wh-Q9-Q29">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5wh-Q9-Q29">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
