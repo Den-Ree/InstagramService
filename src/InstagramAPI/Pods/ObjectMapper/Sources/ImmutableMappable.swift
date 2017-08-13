@@ -84,7 +84,7 @@ public extension Map {
 	/// Returns a `BaseMappable` object or throws an error.
 	public func value<T: BaseMappable>(_ key: String, nested: Bool? = nil, delimiter: String = ".") throws -> T {
 		let currentValue = self.currentValue(for: key, nested: nested, delimiter: delimiter)
-		return try Mapper<T>().mapOrFail(JSONObject: currentValue)
+		return try Mapper<T>().mapOrFail(JSONObject: currentValue!)
 	}
 
 	// MARK: [BaseMappable]
