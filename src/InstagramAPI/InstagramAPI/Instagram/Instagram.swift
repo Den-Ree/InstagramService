@@ -16,15 +16,15 @@ private let InstagramManagerKeychainStore = "com.InstagramManager.keychainStore"
 
 class InstagramManager: NSObject {
     static let shared = InstagramManager()
-  
+
     fileprivate(set) lazy var networkClient: Instagram.NetworkClient = {
         return Instagram.NetworkClient(appClientId: self.appClientId, appRedirectURL: self.appRedirectURL, manager: self)
     }()
-    
+
     fileprivate lazy var keychainStore: Keychain = {
         return Keychain(service: InstagramManagerKeychainStore)
     }()
-    
+
     //TODO: Create constants
     fileprivate let appClientId: String = "eb6961971b7149899a3692a4125bb6af"
     fileprivate var appRedirectURL: String = "https://www.nolisto.com"
@@ -45,109 +45,105 @@ class InstagramManager: NSObject {
     }
 }
 
-//MARK: Public
+// MARK: Public
 extension InstagramManager {
-    
+
     var isLoggedIn: Bool {
        return lastReceivedUserId != nil
     }
-    
+
     func authorizationURL() -> URL? {
         let parameters: [String : Any] = [Instagram.Keys.Auth.clientId: appClientId, Instagram.Keys.Auth.redirectUri: appRedirectURL, Instagram.Keys.Response.type: Instagram.Keys.Response.token, Instagram.Keys.Response.scope: InstagramLoginScope.allScopesValue]
       // TODO
       //return networkClient.encode(instagramAuthorizationURLPath, parameters: parameters)
       return nil
     }
-    
-    func receiveLoggedInUser(_ url: URL?, completion: ((Instagram.User?, Error?)->())?) {
-        if let accessToken = networkClient.getAccessToken(url) , accessToken.characters.count > 0 {
+
+    func receiveLoggedInUser(_ url: URL?, completion: ((Instagram.User?, Error?)->Void)?) {
+        if let accessToken = networkClient.getAccessToken(url), accessToken.characters.count > 0 {
             isNeedToReceiveNewUser = true
             keychainStore[Instagram.Keys.Auth.accessToken] = accessToken
-            
+
             let params = Instagram.UsersEndpoint.Parameter.User()
             let request = Instagram.UsersEndpoint.Get.user(params)
-    
+
             networkClient.send(request, completion: { [weak self] (user: InstagramObjectResponse<Instagram.User>?, error: Error?) in
-                if let user = user?.data, let objectId = user.objectId , objectId.characters.count > 0 {
+                if let user = user?.data, let objectId = user.objectId, objectId.characters.count > 0 {
                     let currentAccessToken = self?.keychainStore[Instagram.Keys.Auth.accessToken]
                     self?.keychainStore[Instagram.Keys.Auth.accessToken + objectId] = currentAccessToken
                     do {
                         try self?.keychainStore.remove(Instagram.Keys.Auth.accessToken)
-                    }
-                    catch {
+                    } catch {
                         let error = error as NSError
                         print("\(error.localizedDescription)")
                     }
                     self?.lastReceivedUser = user
-                }
-                else {
+                } else {
                     self?.lastReceivedUser = nil
                 }
                 self?.cleanUpCookies()
                 self?.isNeedToReceiveNewUser = false
                 completion?(self?.lastReceivedUser, error)
-   
+
             })
-        }
-        else {
+        } else {
             completion?(nil, nil)
         }
     }
-    
+
     func endLogin() {
         lastReceivedUser = nil
         cleanUpCookies()
     }
-    
+
     func accessToken(_ instagramUserId: String?) -> String? {
-        
+
         var result: String?
         if let instagramUserId = instagramUserId {
             result = keychainStore[Instagram.Keys.Auth.accessToken + instagramUserId]
         }
         return result
     }
-    
-    func logoutAccounts(withIDs accountIDs: [String], completion: ((Bool, Error?)->())?) {
+
+    func logoutAccounts(withIDs accountIDs: [String], completion: ((Bool, Error?)->Void)?) {
         finishLogout(forCurrentUsers: accountIDs, completion: completion)
     }
-    
+
     func refreshAccount(forInstagramId instagramId: String?) {
         guard let instagramId = instagramId else {
             print("no instagram id")
             return
         }
-        
+
         let params = Instagram.UsersEndpoint.Parameter.User(instagramId)
         let request = Instagram.UsersEndpoint.Get.user(params)
-        
-        networkClient.send(request, completion: { [weak self] (user: InstagramObjectResponse<Instagram.User>?, error: Error?) in
+
+        networkClient.send(request, completion: { [weak self] (user: InstagramObjectResponse<Instagram.User>?, _: Error?) in
             if let user = user?.data {
                 self?.lastReceivedUser = user
             }
         })
     }
-    
+
     func checkAccessTokenExpirationInResponse(with meta: InstagramMetaObject?) {
         if let meta = meta, meta.isAccessTokenException {
             //TODO: Need to think about it
         }
     }
-    
+
     func cleanUpCookies() {
         keychainStore[Instagram.Keys.Auth.accessToken] = nil
         networkClient.cleanUpCookies()
     }
-    
+
   }
 
 private extension InstagramManager {
-    func finishLogout(forCurrentUsers currentUserIDs: [String], completion: ((Bool, Error?)->())?) {
+    func finishLogout(forCurrentUsers currentUserIDs: [String], completion: ((Bool, Error?)->Void)?) {
         for currentUserId in currentUserIDs {
             do {
                 try keychainStore.remove(Instagram.Keys.Auth.accessToken + currentUserId)
-            }
-            catch {
+            } catch {
                 let error = error as NSError
                 print("\(error.localizedDescription)")
             }
@@ -159,10 +155,9 @@ private extension InstagramManager {
 extension InstagramManager: InstagramNetworkClientManagerProtocol {
     var instagramAccessToken: String? {
         var result: String?
-        if let currentUserId = lastReceivedUserId , isNeedToReceiveNewUser == false {
+        if let currentUserId = lastReceivedUserId, isNeedToReceiveNewUser == false {
             result = keychainStore[Instagram.Keys.Auth.accessToken + currentUserId]
-        }
-        else {
+        } else {
             result = keychainStore[Instagram.Keys.Auth.accessToken]
         }
         return result
@@ -174,12 +169,11 @@ fileprivate extension InstagramManager {
         UserDefaults.standard.setValue(value, forKeyPath: key)
         UserDefaults.standard.synchronize()
     }
-    
+
     func storedValue<ValueType>(_ key: String) -> ValueType? {
         return UserDefaults.standard.value(forKey: key) as? ValueType
     }
 }
-
 
 extension InstagramManager {
     enum Notifications {
@@ -187,7 +181,7 @@ extension InstagramManager {
         static let mediaWasChanged = "InstagramManagerMediaDidChangedNotification"
         static let accessTokenExpired = "InstagramManagerMediaAccessTokenExpired"
     }
-    
+
     enum Keys {
         static let lastReceivedUserId = "InstagramManagerLastReceivedUserId"
     }

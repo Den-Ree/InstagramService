@@ -13,7 +13,7 @@ class RelationshipCell: UITableViewCell {
   @IBOutlet weak var fullNameLabel: UILabel!
   @IBOutlet weak var avatarImage: UIImageView!
   @IBOutlet weak var userNameLabel: UILabel!
-  
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,4 +26,3 @@ class RelationshipCell: UITableViewCell {
     }
 
 }
-

@@ -17,7 +17,7 @@ enum UserEndpoints {
         case likedMedia
         case search(name: String)
     }
-    
+
     enum Post {
         case user
     }

@@ -196,8 +196,7 @@ public class AutoPurgingImageCache: ImageRequestCache {
             if self.currentMemoryUsage > self.memoryCapacity {
                 let bytesToPurge = self.currentMemoryUsage - self.preferredMemoryUsageAfterPurge
 
-
-                var sortedImages = self.cachedImages.map{$1}
+                var sortedImages = self.cachedImages.map {$1}
                 sortedImages.sort {
                     let date1 = $0.lastAccessDate
                     let date2 = $1.lastAccessDate

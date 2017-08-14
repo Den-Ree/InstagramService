@@ -12,15 +12,15 @@ class CommentTableViewController: UITableViewController {
 
     var mediaId: String?
     fileprivate var dataSource: [InstagramComment] = []
-  
+
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+
         let commentRouter = InstagramCommentRouter.getComments(mediaId: mediaId!)
-      
+
         InstagramClient().send(commentRouter, completion: {( comments: InstagramArrayResponse<InstagramComment>?, error: Error?) in
-          if error == nil{
-              if let data = comments?.data{
+          if error == nil {
+              if let data = comments?.data {
                 self.dataSource = data
                 self.tableView.reloadData()
               }
@@ -28,8 +28,8 @@ class CommentTableViewController: UITableViewController {
         })
     }
 }
-extension CommentTableViewController{
-  
+extension CommentTableViewController {
+
   // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -40,7 +40,6 @@ extension CommentTableViewController{
         return dataSource.count
     }
 
-  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentCell
         let comment = dataSource[indexPath.row]
@@ -50,5 +49,3 @@ extension CommentTableViewController{
         return cell
     }
 }
-
-

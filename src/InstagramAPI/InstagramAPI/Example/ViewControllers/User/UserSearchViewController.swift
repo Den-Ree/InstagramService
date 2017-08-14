@@ -10,7 +10,7 @@ import UIKit
 import AlamofireImage
 
 class UserSearchViewController: UIViewController {
-    
+
     @IBOutlet fileprivate weak var tableView: UITableView! {
         didSet {
             tableView.tableFooterView = UIView.init(frame: .zero)
@@ -21,7 +21,7 @@ class UserSearchViewController: UIViewController {
 
     @IBOutlet fileprivate weak var searchBar: UISearchBar!
     fileprivate var dataSource: [InstagramUser?] = []
-    fileprivate var searchActive : Bool = false
+    fileprivate var searchActive: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,15 +35,15 @@ extension UserSearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UserSearchCell") as! UserSearchCell;
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserSearchCell") as! UserSearchCell
         let currentUser = dataSource[indexPath.row]
         cell.usernameLabel.text = currentUser?.username
         cell.fullnameLabel.text = currentUser?.fullName
         cell.avatarImageView.af_setImage(withURL: (currentUser?.profilePictureUrl)!)
-            
-        return cell;
+
+        return cell
     }
 }
 
@@ -59,24 +59,24 @@ extension UserSearchViewController: UITableViewDelegate {
 
 extension UserSearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
+        searchActive = true
     }
-    
+
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false;
+        searchActive = false
     }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
+        searchActive = false
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
+        searchActive = false
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let userSearchRouter = InstagramUserRouter.getSearch(.init(query: searchText, count: 10))
-        InstagramClient().send(userSearchRouter, completion: { (users: InstagramArrayResponse<InstagramUser>?,  error: Error?) in
+        InstagramClient().send(userSearchRouter, completion: { (users: InstagramArrayResponse<InstagramUser>?, _: Error?) in
          guard let users = users?.data else {
                 return
             }
@@ -85,4 +85,3 @@ extension UserSearchViewController: UISearchBarDelegate {
         })
     }
 }
-

@@ -10,8 +10,8 @@ import UIKit
 
 class MediaViewController: UIViewController {
 
-  var mediaParameter : InstagramMediaRouter.MediaParameter = .id(String.emptyString)
-  
+  var mediaParameter: InstagramMediaRouter.MediaParameter = .id(String.emptyString)
+
   @IBOutlet fileprivate weak var mediaView: UIImageView!
   @IBOutlet fileprivate weak var userLabel: UILabel!
   @IBOutlet fileprivate weak var userHasLikedLabel: UILabel!
@@ -24,17 +24,17 @@ class MediaViewController: UIViewController {
   @IBOutlet fileprivate weak var locationLabel: UILabel!
   @IBOutlet fileprivate weak var typeLabel: UILabel!
   @IBOutlet fileprivate weak var tagsLabel: UILabel!
-  
+
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+
         let mediaRouter = InstagramMediaRouter.getMedia(mediaParameter)
-      
+
         InstagramClient().send(mediaRouter, completion: { (media: InstagramModelResponse<InstagramMedia>?, error: Error?) in
-          if error == nil{
-              
-              if let data = media?.data{
-                
+          if error == nil {
+
+              if let data = media?.data {
+
                 self.userLabel.text?.append(data.user.username)
                 self.userHasLikedLabel.text?.append(data.userHasLiked.description)
                 self.createdDateLabel.text?.append(data.createdDate.description)
@@ -44,13 +44,13 @@ class MediaViewController: UIViewController {
                 self.commentCountLabel.text?.append(String(data.commentsCount))
                 self.likesCountLabel.text?.append(String(data.likesCount))
                 self.locationLabel.text?.append( String(describing: data.location.latitude) + " " + String(describing: data.location.longitude))
-                if data.type == .image{
+                if data.type == .image {
                     self.mediaView.af_setImage(withURL: (data.image.lowResolution.url)!)
                     self.typeLabel.text?.append("image")
-                }else{
+                } else {
                     self.typeLabel.text?.append("video")
                 }
-                for i in 0...data.tags.count-1{
+                for i in 0...data.tags.count-1 {
                     self.tagsLabel.text?.append(String.hashtagString+data.tags[i])
                 }
               }
@@ -58,4 +58,3 @@ class MediaViewController: UIViewController {
         })
     }
 }
-

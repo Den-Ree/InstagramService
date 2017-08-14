@@ -8,34 +8,34 @@
 
 import UIKit
 
-class RelationshipTableViewModel : NSObject {
-  
+class RelationshipTableViewModel: NSObject {
+
   private var type: RelationshipTableControllerType = .unknown
-  
-  init(type: RelationshipTableControllerType){
+
+  init(type: RelationshipTableControllerType) {
     self.type = type
   }
-  
-  func request() -> AnyInstagramNetworkRouter?{
+
+  func request() -> AnyInstagramNetworkRouter? {
       switch type {
       case .follows:
         return InstagramRelationshipRouter.getFollows
-      
+
       case .followedBy:
         return InstagramRelationshipRouter.getFollowedBy
-      
+
       case .requestedBy:
         return InstagramRelationshipRouter.getRequestedBy
-      
+
       case .unknown:
         return nil
       }
   }
-  func getDataSource(request: AnyInstagramNetworkRouter,completion:  @escaping (([InstagramUser]?) -> ())){
+  func getDataSource(request: AnyInstagramNetworkRouter, completion:  @escaping (([InstagramUser]?) -> Void)) {
       InstagramClient().send(request, completion: {
         (users: InstagramArrayResponse<InstagramUser>?, error: Error? ) in
-        if error == nil{
-          guard let users = users?.data  else{
+        if error == nil {
+          guard let users = users?.data  else {
             completion(nil)
             return
           }
@@ -44,4 +44,3 @@ class RelationshipTableViewModel : NSObject {
       })
     }
 }
-

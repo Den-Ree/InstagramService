@@ -80,8 +80,7 @@ public class ImageDownloader {
             handlerID: String,
             receiptID: String,
             filter: ImageFilter?,
-            completion: CompletionHandler?)
-        {
+            completion: CompletionHandler?) {
             self.request = request
             self.urlID = ImageDownloader.urlIdentifier(for: request.request!)
             self.handlerID = handlerID
@@ -166,8 +165,7 @@ public class ImageDownloader {
         configuration: URLSessionConfiguration = ImageDownloader.defaultURLSessionConfiguration(),
         downloadPrioritization: DownloadPrioritization = .fifo,
         maximumActiveDownloads: Int = 4,
-        imageCache: ImageRequestCache? = AutoPurgingImageCache())
-    {
+        imageCache: ImageRequestCache? = AutoPurgingImageCache()) {
         self.sessionManager = SessionManager(configuration: configuration)
         self.sessionManager.startRequestsImmediately = false
 
@@ -189,8 +187,7 @@ public class ImageDownloader {
         sessionManager: SessionManager,
         downloadPrioritization: DownloadPrioritization = .fifo,
         maximumActiveDownloads: Int = 4,
-        imageCache: ImageRequestCache? = AutoPurgingImageCache())
-    {
+        imageCache: ImageRequestCache? = AutoPurgingImageCache()) {
         self.sessionManager = sessionManager
         self.sessionManager.startRequestsImmediately = false
 
@@ -209,8 +206,7 @@ public class ImageDownloader {
     public func addAuthentication(
         user: String,
         password: String,
-        persistence: URLCredential.Persistence = .forSession)
-    {
+        persistence: URLCredential.Persistence = .forSession) {
         let credential = URLCredential(user: user, password: password, persistence: persistence)
         addAuthentication(usingCredential: credential)
     }
@@ -259,8 +255,7 @@ public class ImageDownloader {
         progress: ProgressHandler? = nil,
         progressQueue: DispatchQueue = DispatchQueue.main,
         completion: CompletionHandler?)
-        -> RequestReceipt?
-    {
+        -> RequestReceipt? {
         var request: DataRequest!
 
         synchronizationQueue.sync {
@@ -427,8 +422,7 @@ public class ImageDownloader {
         progress: ProgressHandler? = nil,
         progressQueue: DispatchQueue = DispatchQueue.main,
         completion: CompletionHandler? = nil)
-        -> [RequestReceipt]
-    {
+        -> [RequestReceipt] {
         return urlRequests.flatMap {
             download($0, filter: filter, progress: progress, progressQueue: progressQueue, completion: completion)
         }

@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum InstagramMediaRouter: AnyInstagramNetworkRouter{
+enum InstagramMediaRouter: AnyInstagramNetworkRouter {
   // MARK: - Requests
   case getMedia(MediaParameter)
   case search(SearchMediaParameter)

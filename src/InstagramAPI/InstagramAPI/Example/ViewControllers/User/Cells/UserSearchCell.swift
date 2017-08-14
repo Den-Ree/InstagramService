@@ -9,7 +9,7 @@
 import UIKit
 
 class UserSearchCell: UITableViewCell {
-    
+
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var fullnameLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -26,4 +26,3 @@ class UserSearchCell: UITableViewCell {
     }
 
 }
-

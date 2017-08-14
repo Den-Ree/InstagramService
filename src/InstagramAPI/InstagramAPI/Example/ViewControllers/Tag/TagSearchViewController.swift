@@ -10,18 +10,18 @@ import UIKit
 
 class TagSearchViewController: UIViewController {
 
-    @IBOutlet fileprivate weak var tableView: UITableView!{
-        didSet{
+    @IBOutlet fileprivate weak var tableView: UITableView! {
+        didSet {
           tableView.tableFooterView = UIView.init(frame: .zero)
           tableView.estimatedRowHeight = 100
           tableView.rowHeight = UITableViewAutomaticDimension
         }
     }
-  
+
     @IBOutlet fileprivate weak var searchBar: UISearchBar!
     fileprivate var dataSource: [InstagramTag] = []
     fileprivate var searchActive: Bool = false
-  
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,8 +29,8 @@ class TagSearchViewController: UIViewController {
     }
 }
 
-extension TagSearchViewController: UITableViewDataSource{
-  
+extension TagSearchViewController: UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return dataSource.count
     }
@@ -43,8 +43,8 @@ extension TagSearchViewController: UITableViewDataSource{
     }
 }
 
-extension TagSearchViewController: UITableViewDelegate{
-  
+extension TagSearchViewController: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tag = dataSource[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -54,8 +54,8 @@ extension TagSearchViewController: UITableViewDelegate{
     }
 }
 
-extension TagSearchViewController: UISearchBarDelegate{
-  
+extension TagSearchViewController: UISearchBarDelegate {
+
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true
     }
@@ -71,8 +71,8 @@ extension TagSearchViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let router = InstagramTagRouter.search(query: searchText)
         InstagramClient().send(router, completion: { (tags: InstagramArrayResponse<InstagramTag>?, error: Error?) in
-          if error == nil{
-                if let data = tags?.data{
+          if error == nil {
+                if let data = tags?.data {
                 self.dataSource = data
                   self.tableView.reloadData()
                 }

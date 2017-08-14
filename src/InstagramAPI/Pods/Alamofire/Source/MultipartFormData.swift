@@ -257,8 +257,7 @@ open class MultipartFormData {
         var isDirectory: ObjCBool = false
         let path = fileURL.path
 
-        guard FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory) && !isDirectory.boolValue else
-        {
+        guard FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory) && !isDirectory.boolValue else {
             setBodyPartError(withReason: .bodyPartFileIsDirectory(at: fileURL))
             return
         }
@@ -276,8 +275,7 @@ open class MultipartFormData {
             }
 
             bodyContentLength = fileSize.uint64Value
-        }
-        catch {
+        } catch {
             setBodyPartError(withReason: .bodyPartFileSizeQueryFailedWithError(forURL: fileURL, error: error))
             return
         }
@@ -313,8 +311,7 @@ open class MultipartFormData {
         withLength length: UInt64,
         name: String,
         fileName: String,
-        mimeType: String)
-    {
+        mimeType: String) {
         let headers = contentHeaders(withName: name, fileName: fileName, mimeType: mimeType)
         append(stream, withLength: length, headers: headers)
     }

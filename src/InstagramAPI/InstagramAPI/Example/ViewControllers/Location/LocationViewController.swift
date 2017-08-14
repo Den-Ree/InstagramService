@@ -9,21 +9,21 @@
 import UIKit
 
 class LocationViewController: UIViewController {
-  
+
     var locationId: String?
-  
+
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var latLabel: UILabel!
     @IBOutlet weak var lngLabel: UILabel!
-  
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.idLabel.text?.append(locationId!)
         let router = InstagramLocationRouter.getLocation(id: locationId!)
         InstagramClient().send(router, completion: { (location: InstagramModelResponse<InstagramLocation>?, error: Error?) in
-          if error == nil{
-            if let location = location?.data{
+          if error == nil {
+            if let location = location?.data {
               self.nameLabel.text?.append(location.name)
               self.latLabel.text?.append(String(format: "%f", location.latitude))
               self.lngLabel.text?.append(String(format: "%f", location.longitude))
@@ -32,4 +32,3 @@ class LocationViewController: UIViewController {
         })
     }
 }
-

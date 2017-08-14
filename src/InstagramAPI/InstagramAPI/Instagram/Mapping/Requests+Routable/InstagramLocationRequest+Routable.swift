@@ -47,7 +47,7 @@ extension InstagramLocationRouter: AnyNetworkRoutable {
       if let distance = parameters.distance {
         let distanceMinValue = 0.0
         let distanceMaxValue = 750.0
-        
+
         if distance >= distanceMinValue && distance <= distanceMaxValue {
           result[Instagram.Keys.Location.distance] = distance as AnyObject?
         } else {

@@ -17,14 +17,12 @@ extension DateFormatter {
         formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter
     }
-    
     static var appShortTimeFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter
     }
-    
     //only to transform dates
     static var appTransformDateStyleFormatter: DateFormatter {
         let formatter = DateFormatter()

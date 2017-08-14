@@ -19,7 +19,7 @@ struct InstagramUser: AnyInstagramModel {
   var id: String = ""
   var username: String = ""
   var fullName: String = ""
-  var profilePictureUrl: URL? = nil
+  var profilePictureUrl: URL?
   var bio: String = ""
   var website: String = ""
   var counts = Counts()

@@ -13,7 +13,7 @@ class LocationSearchCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var latLabel: UILabel!
     @IBOutlet weak var lngLabel: UILabel!
-  
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
