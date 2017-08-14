@@ -10,8 +10,8 @@ import Foundation
 import ObjectMapper
 
 typealias InstagramPaginationRange = CountableRange<Int>
-typealias InstagramErrorBlock = (Error?)->Void
-typealias InstagramSuccessBlock = (Bool, Error?)->Void
+typealias InstagramErrorBlock = (Error?) -> Void
+typealias InstagramSuccessBlock = (Bool, Error?) -> Void
 
 // MARK: Path
 typealias InstagramURLPath = String

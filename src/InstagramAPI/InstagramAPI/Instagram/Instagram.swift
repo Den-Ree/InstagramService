@@ -59,7 +59,7 @@ extension InstagramManager {
       return nil
     }
 
-    func receiveLoggedInUser(_ url: URL?, completion: ((Instagram.User?, Error?)->Void)?) {
+    func receiveLoggedInUser(_ url: URL?, completion: ((Instagram.User?, Error?) -> Void)?) {
         if let accessToken = networkClient.getAccessToken(url), accessToken.characters.count > 0 {
             isNeedToReceiveNewUser = true
             keychainStore[Instagram.Keys.Auth.accessToken] = accessToken
@@ -105,7 +105,7 @@ extension InstagramManager {
         return result
     }
 
-    func logoutAccounts(withIDs accountIDs: [String], completion: ((Bool, Error?)->Void)?) {
+    func logoutAccounts(withIDs accountIDs: [String], completion: ((Bool, Error?) -> Void)?) {
         finishLogout(forCurrentUsers: accountIDs, completion: completion)
     }
 
@@ -139,7 +139,7 @@ extension InstagramManager {
   }
 
 private extension InstagramManager {
-    func finishLogout(forCurrentUsers currentUserIDs: [String], completion: ((Bool, Error?)->Void)?) {
+    func finishLogout(forCurrentUsers currentUserIDs: [String], completion: ((Bool, Error?) -> Void)?) {
         for currentUserId in currentUserIDs {
             do {
                 try keychainStore.remove(Instagram.Keys.Auth.accessToken + currentUserId)

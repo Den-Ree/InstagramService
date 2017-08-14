@@ -43,7 +43,7 @@ extension RootViewController: UIWebViewDelegate {
 
 extension RootViewController {
 
-  func receiveLoggedInstagramAccount(_ url: URL, completion: @escaping ((Error?)->Void)) {
+  func receiveLoggedInstagramAccount(_ url: URL, completion: @escaping ((Error?) -> Void)) {
     //Receive logged in user from url
     isLogged = false
 
