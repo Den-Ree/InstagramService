@@ -18,7 +18,7 @@ extension InstagramLocationRouter: AnyNetworkRoutable {
     case let .getLocation(id: locationId):
       return "/locations/\(locationId)"
     case let .getRecentMedia(parameters):
-      return "/locations\(parameters.locationId)/media/recent"
+      return "/locations/\(parameters.locationId)/media/recent"
     case .search:
       return "/locations/search"
     }

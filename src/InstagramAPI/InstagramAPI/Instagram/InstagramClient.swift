@@ -136,7 +136,7 @@ extension InstagramClient {
       let url = URL(string: Instagram.Constants.baseUrl + "oauth/access_token/")
       var request = URLRequest.init(url: url!)
       request.httpMethod = HTTPMethod.post.rawValue
-      let stringParams = parameters.paramsString()
+      let stringParams = parameters.parametersString()
       let dataParams = stringParams.data(using: String.Encoding.utf8, allowLossyConversion: true)
       let paramsLength = String(format: "%d", dataParams!.count)
       request.setValue(paramsLength, forHTTPHeaderField: "Content-Length")
@@ -207,7 +207,7 @@ extension InstagramClient {
 
 extension Dictionary {
 
-  func paramsString() -> String {
+  func parametersString() -> String {
     var paramsString = [String]()
     for (key, value) in self {
       guard let stringValue = value as? String, let stringKey = key as? String else {

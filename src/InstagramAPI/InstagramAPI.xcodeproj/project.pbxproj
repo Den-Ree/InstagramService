@@ -89,8 +89,26 @@
 		8432DA111F39DA89003EA868 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8432DA101F39DA89003EA868 /* RootViewController.swift */; };
 		8432DA171F3B684B003EA868 /* InstagramRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8432DA161F3B684B003EA868 /* InstagramRelationship.swift */; };
 		8432DA191F3B68FC003EA868 /* InstagramRelationship+Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8432DA181F3B68FC003EA868 /* InstagramRelationship+Mappable.swift */; };
+		8462A4661F43434E003CCCCE /* UserRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462A4651F43434E003CCCCE /* UserRouterTests.swift */; };
+		8462A4681F43435F003CCCCE /* RelationshipRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462A4671F43435F003CCCCE /* RelationshipRouterTests.swift */; };
+		8462A46A1F434373003CCCCE /* MediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462A4691F434373003CCCCE /* MediaTests.swift */; };
+		8462A46C1F4343E1003CCCCE /* CommentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462A46B1F4343E1003CCCCE /* CommentTests.swift */; };
+		8462A46E1F4343F4003CCCCE /* LikesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462A46D1F4343F4003CCCCE /* LikesTests.swift */; };
+		8462A4701F434404003CCCCE /* TagsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462A46F1F434404003CCCCE /* TagsTests.swift */; };
+		8462A4721F434410003CCCCE /* LocationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462A4711F434410003CCCCE /* LocationsTests.swift */; };
+		8462A4761F4377DF003CCCCE /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462A4751F4377DF003CCCCE /* TestConstants.swift */; };
 		CC810FC75CEF97D19CEECE3D /* Pods_InstagramAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08119A51AC04B8E0D9596D2F /* Pods_InstagramAPI.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8462A4601F43432F003CCCCE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9282E79C1DFDF9F700B7ACF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9282E7A31DFDF9F700B7ACF3;
+			remoteInfo = InstagramAPI;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		08119A51AC04B8E0D9596D2F /* Pods_InstagramAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,12 +195,29 @@
 		8432DA101F39DA89003EA868 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		8432DA161F3B684B003EA868 /* InstagramRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramRelationship.swift; sourceTree = "<group>"; };
 		8432DA181F3B68FC003EA868 /* InstagramRelationship+Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InstagramRelationship+Mappable.swift"; sourceTree = "<group>"; };
+		8462A45B1F43432F003CCCCE /* InstagramAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstagramAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8462A45F1F43432F003CCCCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8462A4651F43434E003CCCCE /* UserRouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRouterTests.swift; sourceTree = "<group>"; };
+		8462A4671F43435F003CCCCE /* RelationshipRouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipRouterTests.swift; sourceTree = "<group>"; };
+		8462A4691F434373003CCCCE /* MediaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTests.swift; sourceTree = "<group>"; };
+		8462A46B1F4343E1003CCCCE /* CommentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTests.swift; sourceTree = "<group>"; };
+		8462A46D1F4343F4003CCCCE /* LikesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesTests.swift; sourceTree = "<group>"; };
+		8462A46F1F434404003CCCCE /* TagsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTests.swift; sourceTree = "<group>"; };
+		8462A4711F434410003CCCCE /* LocationsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsTests.swift; sourceTree = "<group>"; };
+		8462A4751F4377DF003CCCCE /* TestConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
 		9282E7A41DFDF9F700B7ACF3 /* InstagramAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95F3BE642A2E5080D9D4100 /* Pods-InstagramAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramAPI/Pods-InstagramAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		E69210C6149D434F18B372DF /* Pods-InstagramAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramAPI/Pods-InstagramAPI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8462A4581F43432F003CCCCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9282E7A11DFDF9F700B7ACF3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -477,10 +512,35 @@
 			path = Responses;
 			sourceTree = "<group>";
 		};
+		8462A45C1F43432F003CCCCE /* InstagramAPITests */ = {
+			isa = PBXGroup;
+			children = (
+				8462A4751F4377DF003CCCCE /* TestConstants.swift */,
+				8462A4771F4377E8003CCCCE /* RequestTests */,
+				8462A45F1F43432F003CCCCE /* Info.plist */,
+			);
+			path = InstagramAPITests;
+			sourceTree = "<group>";
+		};
+		8462A4771F4377E8003CCCCE /* RequestTests */ = {
+			isa = PBXGroup;
+			children = (
+				8462A4651F43434E003CCCCE /* UserRouterTests.swift */,
+				8462A4671F43435F003CCCCE /* RelationshipRouterTests.swift */,
+				8462A4691F434373003CCCCE /* MediaTests.swift */,
+				8462A46B1F4343E1003CCCCE /* CommentTests.swift */,
+				8462A46D1F4343F4003CCCCE /* LikesTests.swift */,
+				8462A46F1F434404003CCCCE /* TagsTests.swift */,
+				8462A4711F434410003CCCCE /* LocationsTests.swift */,
+			);
+			name = RequestTests;
+			sourceTree = "<group>";
+		};
 		9282E79B1DFDF9F700B7ACF3 = {
 			isa = PBXGroup;
 			children = (
 				77B44EF81F38B971001335C1 /* InstagramAPI */,
+				8462A45C1F43432F003CCCCE /* InstagramAPITests */,
 				9282E7A51DFDF9F700B7ACF3 /* Products */,
 				10561CA1F55169174EF36333 /* Pods */,
 				5B9C65F5CBA6987BA106F3A7 /* Frameworks */,
@@ -491,6 +551,7 @@
 			isa = PBXGroup;
 			children = (
 				9282E7A41DFDF9F700B7ACF3 /* InstagramAPI.app */,
+				8462A45B1F43432F003CCCCE /* InstagramAPITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -498,6 +559,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8462A45A1F43432F003CCCCE /* InstagramAPITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8462A4621F43432F003CCCCE /* Build configuration list for PBXNativeTarget "InstagramAPITests" */;
+			buildPhases = (
+				8462A4571F43432F003CCCCE /* Sources */,
+				8462A4581F43432F003CCCCE /* Frameworks */,
+				8462A4591F43432F003CCCCE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8462A4611F43432F003CCCCE /* PBXTargetDependency */,
+			);
+			name = InstagramAPITests;
+			productName = InstagramAPITests;
+			productReference = 8462A45B1F43432F003CCCCE /* InstagramAPITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		9282E7A31DFDF9F700B7ACF3 /* InstagramAPI */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9282E7B61DFDF9F700B7ACF3 /* Build configuration list for PBXNativeTarget "InstagramAPI" */;
@@ -525,10 +604,15 @@
 		9282E79C1DFDF9F700B7ACF3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0810;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = ConceptOffice;
 				TargetAttributes = {
+					8462A45A1F43432F003CCCCE = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 9282E7A31DFDF9F700B7ACF3;
+					};
 					9282E7A31DFDF9F700B7ACF3 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = LR4P8MK7R2;
@@ -555,11 +639,19 @@
 			projectRoot = "";
 			targets = (
 				9282E7A31DFDF9F700B7ACF3 /* InstagramAPI */,
+				8462A45A1F43432F003CCCCE /* InstagramAPITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8462A4591F43432F003CCCCE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9282E7A21DFDF9F700B7ACF3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -591,7 +683,7 @@
 		};
 		84397A7E1F41ADF00081BBBE /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -636,6 +728,21 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8462A4571F43432F003CCCCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8462A4681F43435F003CCCCE /* RelationshipRouterTests.swift in Sources */,
+				8462A46A1F434373003CCCCE /* MediaTests.swift in Sources */,
+				8462A4721F434410003CCCCE /* LocationsTests.swift in Sources */,
+				8462A4761F4377DF003CCCCE /* TestConstants.swift in Sources */,
+				8462A4701F434404003CCCCE /* TagsTests.swift in Sources */,
+				8462A46E1F4343F4003CCCCE /* LikesTests.swift in Sources */,
+				8462A4661F43434E003CCCCE /* UserRouterTests.swift in Sources */,
+				8462A46C1F4343E1003CCCCE /* CommentTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9282E7A01DFDF9F700B7ACF3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -723,6 +830,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8462A4611F43432F003CCCCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9282E7A31DFDF9F700B7ACF3 /* InstagramAPI */;
+			targetProxy = 8462A4601F43432F003CCCCE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		77B44EFB1F38B971001335C1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -743,6 +858,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8462A4631F43432F003CCCCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				INFOPLIST_FILE = InstagramAPITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.InstagramAPITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InstagramAPI.app/InstagramAPI";
+			};
+			name = Debug;
+		};
+		8462A4641F43432F003CCCCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				INFOPLIST_FILE = InstagramAPITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.InstagramAPITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InstagramAPI.app/InstagramAPI";
+			};
+			name = Release;
+		};
 		9282E7B41DFDF9F700B7ACF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -843,6 +988,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = InstagramAPI/InstagramAPI.entitlements;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = LR4P8MK7R2;
 				INFOPLIST_FILE = InstagramAPI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -859,6 +1005,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = InstagramAPI/InstagramAPI.entitlements;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = LR4P8MK7R2;
 				INFOPLIST_FILE = InstagramAPI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -871,6 +1018,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8462A4621F43432F003CCCCE /* Build configuration list for PBXNativeTarget "InstagramAPITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8462A4631F43432F003CCCCE /* Debug */,
+				8462A4641F43432F003CCCCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9282E79F1DFDF9F700B7ACF3 /* Build configuration list for PBXProject "InstagramAPI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
