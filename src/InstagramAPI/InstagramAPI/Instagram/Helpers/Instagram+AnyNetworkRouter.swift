@@ -65,3 +65,18 @@ extension AnyInstagramNetworkRouter {
     }
   }
 }
+
+extension AnyInstagramNetworkRouter {
+
+  func describe() {
+    print("\n")
+    print("Instagram Network Router Description...")
+    print("Path: \(self.path)")
+    if self.parameters.isEmpty {
+      print("Parameters: nil")
+    } else {
+      print("Parameters: \(self.parameters)")
+    }
+    print("HTTPMethod: \(self.method)")
+  }
+}
