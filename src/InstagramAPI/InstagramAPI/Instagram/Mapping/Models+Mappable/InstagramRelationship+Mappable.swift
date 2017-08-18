@@ -8,8 +8,8 @@
 
 import ObjectMapper
 
-extension InstagramRelationship{
-  
+extension InstagramRelationship {
+
   public init?(map: Map) {}
   mutating public func mapping(map: Map) {
     id <- map[Instagram.Keys.Object.id]

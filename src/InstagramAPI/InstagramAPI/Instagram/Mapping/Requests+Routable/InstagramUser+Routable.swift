@@ -16,12 +16,12 @@ extension InstagramUserRouter: AnyNetworkRoutable {
   var path: String {
     switch self {
     case let .getUser(user):
-      return "/users/\(user.pathComponent)"
+      return "/users/\(user.pathComponent)/"
     case .getLikedMedia:
       // Liked media only from self
       return "/users/self/media/liked"
     case let .getRecentMedia(parameters):
-      return "/users/\(parameters.user.pathComponent)/media/recent"
+      return "/users/\(parameters.user.pathComponent)/media/recent/"
     case .getSearch:
       return "/users/search"
     }

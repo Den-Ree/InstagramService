@@ -11,9 +11,9 @@ import AlamofireImage
 import Alamofire
 
 class UserViewController: UIViewController {
-  
+
     var userParameter: InstagramUserRouter.UserParameter?
-  
+
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var nicknameLabel: UILabel!
     @IBOutlet private weak var postsLabel: UILabel!
@@ -21,16 +21,15 @@ class UserViewController: UIViewController {
     @IBOutlet private weak var followingLabel: UILabel!
     @IBOutlet private weak var bioLabel: UILabel!
     @IBOutlet private weak var websiteLabel: UILabel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-      
+
         let userRouter = InstagramUserRouter.getUser(userParameter!)
-      
+
         InstagramClient().send(userRouter, completion: { (user: InstagramModelResponse<InstagramUser>?, error: Error?) in
-          
-          if error == nil{
+
+          if error == nil {
             if let url = user?.data.profilePictureUrl?.absoluteString {
               Alamofire.request(url).responseImage { response in
                 //debugPrint(response.result)
@@ -57,20 +56,16 @@ class UserViewController: UIViewController {
             if let bio = user?.data.bio {
               self.bioLabel.text = bio
             }
-            if let website = user?.data.website{
+            if let website = user?.data.website {
               self.websiteLabel.text = website
             }
           }
         })
   }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-  
-      
-      
-      
+
       // Dispose of any resources that can be recreated.
     }
 }
-

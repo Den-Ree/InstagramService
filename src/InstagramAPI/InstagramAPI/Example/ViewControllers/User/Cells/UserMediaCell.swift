@@ -11,18 +11,18 @@ import UIKit
 class UserMediaCell: UICollectionViewCell {
 
     @IBOutlet weak var photoImageView: UIImageView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
     }
-    
+
     func apply() {
-        
+
     }
 }

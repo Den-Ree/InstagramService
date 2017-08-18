@@ -20,7 +20,7 @@ extension InstagramMediaRouter: AnyNetworkRoutable {
     case let .getMedia(media):
       return "/media/\(media.pathComponent)"
     case .search:
-      return "media/search"
+      return "/media/search"
     }
   }
   var parameters: InstagramRequestParameters {

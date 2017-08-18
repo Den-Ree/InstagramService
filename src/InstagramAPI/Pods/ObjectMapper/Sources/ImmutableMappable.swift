@@ -31,25 +31,25 @@ public protocol ImmutableMappable: BaseMappable {
 }
 
 public extension ImmutableMappable {
-	
+
 	/// Implement this method to support object -> JSON transform.
 	public func mapping(map: Map) {}
-	
+
 	/// Initializes object from a JSON String
 	public init(JSONString: String, context: MapContext? = nil) throws {
 		self = try Mapper(context: context).map(JSONString: JSONString)
 	}
-	
+
 	/// Initializes object from a JSON Dictionary
 	public init(JSON: [String: Any], context: MapContext? = nil) throws {
 		self = try Mapper(context: context).map(JSON: JSON)
 	}
-	
+
 	/// Initializes object from a JSONObject
 	public init(JSONObject: Any, context: MapContext? = nil) throws {
 		self = try Mapper(context: context).map(JSONObject: JSONObject)
 	}
-	
+
 }
 
 public extension Map {
@@ -58,7 +58,7 @@ public extension Map {
 		let isNested = nested ?? key.contains(delimiter)
 		return self[key, nested: isNested, delimiter: delimiter].currentValue
 	}
-	
+
 	// MARK: Basic
 
 	/// Returns a value or throws an error.
@@ -95,7 +95,7 @@ public extension Map {
 		guard let jsonArray = currentValue as? [Any] else {
 			throw MapError(key: key, currentValue: currentValue, reason: "Cannot cast to '[Any]'", file: file, function: function, line: line)
 		}
-		return try jsonArray.enumerated().map { i, JSONObject -> T in
+		return try jsonArray.enumerated().map { _, JSONObject -> T in
 			return try Mapper<T>().mapOrFail(JSONObject: JSONObject)
 		}
 	}
@@ -162,24 +162,24 @@ public extension Mapper where N: ImmutableMappable {
 	}
 
 	// MARK: Array mapping functions
-	
+
 	public func mapArray(JSONArray: [[String: Any]]) throws -> [N] {
 		return try JSONArray.flatMap(mapOrFail)
 	}
-	
+
 	public func mapArray(JSONString: String) throws -> [N] {
 		guard let JSONObject = Mapper.parseJSONString(JSONString: JSONString) else {
 			throw MapError(key: nil, currentValue: JSONString, reason: "Cannot convert string into Any'")
 		}
-		
+
 		return try mapArray(JSONObject: JSONObject)
 	}
-	
+
 	public func mapArray(JSONObject: Any) throws -> [N] {
 		guard let JSONArray = JSONObject as? [[String: Any]] else {
 			throw MapError(key: nil, currentValue: JSONObject, reason: "Cannot cast to '[[String: Any]]'")
 		}
-		
+
 		return try mapArray(JSONArray: JSONArray)
 	}
 
@@ -235,14 +235,14 @@ internal extension Mapper where N: BaseMappable {
 
 	internal func mapOrFail(JSON: [String: Any]) throws -> N {
 		let map = Map(mappingType: .fromJSON, JSON: JSON, context: context)
-		
+
 		// Check if object is ImmutableMappable, if so use ImmutableMappable protocol for mapping
 		if let klass = N.self as? ImmutableMappable.Type,
 			var object = try klass.init(map: map) as? N {
 			object.mapping(map: map)
 			return object
 		}
-		
+
 		// If not, map the object the standard way
 		guard let value = self.map(JSON: JSON) else {
 			throw MapError(key: nil, currentValue: JSON, reason: "Cannot map to '\(N.self)'")

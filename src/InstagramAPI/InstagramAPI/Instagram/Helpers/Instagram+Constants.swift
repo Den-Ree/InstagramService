@@ -78,12 +78,12 @@ extension Instagram {
         static let followedBy = "followed_by"
       }
     }
-    
+
     enum Relationship {
       static let outgoingStatus = "outgoing_status"
       static let incomingStatus = "incoming_status"
     }
-    
+
     enum Media {
       static let count = "count"
       static let link = "link"

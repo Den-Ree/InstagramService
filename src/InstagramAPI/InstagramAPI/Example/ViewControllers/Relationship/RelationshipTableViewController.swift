@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-enum RelationshipTableControllerType{
+enum RelationshipTableControllerType {
   case follows
   case followedBy
   case requestedBy
@@ -18,27 +18,26 @@ enum RelationshipTableControllerType{
 
 class RelationshipTableViewController: UITableViewController {
 
-  
-  var type : RelationshipTableControllerType = .unknown
-  fileprivate var dataSource : [InstagramUser] = []
-  
+  var type: RelationshipTableControllerType = .unknown
+  fileprivate var dataSource: [InstagramUser] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let relationshipTableViewModel = RelationshipTableViewModel.init(type: self.type)
         let request = relationshipTableViewModel.request()
         relationshipTableViewModel.getDataSource(request: request!, completion: {
           (dataSource: [InstagramUser]?) in
-          if dataSource != nil{
+          if dataSource != nil {
             self.dataSource = dataSource!
             self.tableView.reloadData()
           }
         })
     }
-  
+
 }
 
-extension RelationshipTableViewController{
-  
+extension RelationshipTableViewController {
+
   // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -49,7 +48,6 @@ extension RelationshipTableViewController{
         return self.dataSource.count
     }
 
-  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RelationshipCell", for: indexPath) as!RelationshipCell
         let user = dataSource[indexPath.row]
@@ -59,4 +57,3 @@ extension RelationshipTableViewController{
         return cell
     }
 }
-

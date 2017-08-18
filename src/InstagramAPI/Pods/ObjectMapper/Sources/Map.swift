@@ -26,18 +26,17 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-
 import Foundation
 
 /// MapContext is available for developers who wish to pass information around during the mapping process.
 public protocol MapContext {
-	
+
 }
 
 /// A class used for holding mapping data
 public final class Map {
 	public let mappingType: MappingType
-	
+
 	public internal(set) var JSON: [String: Any] = [:]
 	public internal(set) var isKeyPresent = false
 	public internal(set) var currentValue: Any?
@@ -45,16 +44,16 @@ public final class Map {
 	var keyIsNested = false
 	public internal(set) var nestedKeyDelimiter: String = "."
 	public var context: MapContext?
-	
+
 	let toObject: Bool // indicates whether the mapping is being applied to an existing object
-	
+
 	public init(mappingType: MappingType, JSON: [String: Any], toObject: Bool = false, context: MapContext? = nil) {
 		self.mappingType = mappingType
 		self.JSON = JSON
 		self.toObject = toObject
 		self.context = context
 	}
-	
+
 	/// Sets the current mapper value and key.
 	/// The Key paramater can be a period separated string (ex. "distance.value") to access sub objects.
 	public subscript(key: String) -> Map {
@@ -101,15 +100,15 @@ public final class Map {
 			// break down the components of the key that are separated by .
 			(isKeyPresent, currentValue) = valueFor(ArraySlice(key.components(separatedBy: delimiter)), dictionary: JSON)
 		}
-		
+
 		// update isKeyPresent if ignoreNil is true
         if ignoreNil && currentValue == nil {
             isKeyPresent = false
         }
-		
+
 		return self
 	}
-	
+
 	public func value<T>() -> T? {
 		return currentValue as? T
 	}
@@ -122,51 +121,51 @@ private func valueFor(_ keyPathComponents: ArraySlice<String>, dictionary: [Stri
 	if keyPathComponents.isEmpty {
 		return (false, nil)
 	}
-	
+
 	if let keyPath = keyPathComponents.first {
 		let object = dictionary[keyPath]
 		if object is NSNull {
 			return (true, nil)
-		} else if let dict = object as? [String: Any] , keyPathComponents.count > 1 {
+		} else if let dict = object as? [String: Any], keyPathComponents.count > 1 {
 			let tail = keyPathComponents.dropFirst()
 			return valueFor(tail, dictionary: dict)
-		} else if let array = object as? [Any] , keyPathComponents.count > 1 {
+		} else if let array = object as? [Any], keyPathComponents.count > 1 {
 			let tail = keyPathComponents.dropFirst()
 			return valueFor(tail, array: array)
 		} else {
 			return (object != nil, object)
 		}
 	}
-	
+
 	return (false, nil)
 }
 
 /// Fetch value from JSON Array, loop through keyPathComponents them until we reach the desired object
 private func valueFor(_ keyPathComponents: ArraySlice<String>, array: [Any]) -> (Bool, Any?) {
 	// Implement it as a tail recursive function.
-	
+
 	if keyPathComponents.isEmpty {
 		return (false, nil)
 	}
-	
+
 	//Try to convert keypath to Int as index
 	if let keyPath = keyPathComponents.first,
-		let index = Int(keyPath) , index >= 0 && index < array.count {
-			
+		let index = Int(keyPath), index >= 0 && index < array.count {
+
 			let object = array[index]
-			
+
 			if object is NSNull {
 				return (true, nil)
-			} else if let array = object as? [Any] , keyPathComponents.count > 1 {
+			} else if let array = object as? [Any], keyPathComponents.count > 1 {
 				let tail = keyPathComponents.dropFirst()
 				return valueFor(tail, array: array)
-			} else if let dict = object as? [String: Any] , keyPathComponents.count > 1 {
+			} else if let dict = object as? [String: Any], keyPathComponents.count > 1 {
 				let tail = keyPathComponents.dropFirst()
 				return valueFor(tail, dictionary: dict)
 			} else {
 				return (true, object)
 			}
 	}
-	
+
 	return (false, nil)
 }

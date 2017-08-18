@@ -8,11 +8,10 @@
 
 import Foundation
 
-struct InstagramRelationship: AnyInstagramModel{
+struct InstagramRelationship: AnyInstagramModel {
   // MARK: - Properties
   var id: String = ""
   var outgoingStatus: String = ""
   var incomingStatus: String = ""
-  
-  
+
 }

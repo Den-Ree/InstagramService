@@ -19,6 +19,7 @@ struct InstagramUser: AnyInstagramModel {
   var id: String = ""
   var username: String = ""
   var fullName: String = ""
+  // swiftlint:disable redundant_optional_initialization
   var profilePictureUrl: URL? = nil
   var bio: String = ""
   var website: String = ""

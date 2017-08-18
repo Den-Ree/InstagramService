@@ -12,13 +12,13 @@ class LocationSearchViewController: UITableViewController {
 
     var locationSearchParameter: InstagramLocationRouter.SearchMediaParameter?
     fileprivate var dataSource: [InstagramLocation] = []
-  
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let router = InstagramLocationRouter.search(locationSearchParameter!)
-      
+
         InstagramClient().send(router, completion: { (locations: InstagramArrayResponse<InstagramLocation>?, error: Error?) in
-         if error == nil{
+         if error == nil {
               self.dataSource = (locations?.data)!
               self.tableView.reloadData()
             }
@@ -26,8 +26,8 @@ class LocationSearchViewController: UITableViewController {
     }
 
 }
-  extension LocationSearchViewController{
-    
+  extension LocationSearchViewController {
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -38,11 +38,10 @@ class LocationSearchViewController: UITableViewController {
         return (dataSource.count)
     }
 
-  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "locationSearchCell", for: indexPath) as! LocationSearchCell
         let location = dataSource[indexPath.row]
-      
+
         cell.nameLabel.text?.append(location.name)
         cell.idLabel.text?.append(location.id)
         cell.latLabel.text?.append(String(format: "%f", location.latitude))

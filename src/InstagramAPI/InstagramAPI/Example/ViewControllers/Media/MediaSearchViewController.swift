@@ -12,30 +12,29 @@ private let reuseIdentifier = "MediaSearchCell"
 
 class MediaSearchViewController: UICollectionViewController {
 
-    var parameter : InstagramMediaRouter.SearchMediaParameter?
+    var parameter: InstagramMediaRouter.SearchMediaParameter?
     fileprivate var dataSource: [InstagramMedia?] = []
     fileprivate let kMaxPhotosInRaw = 4
     fileprivate let kPhotosSpacing: CGFloat = 1.0
-  
+
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+
         let router = InstagramMediaRouter.search(parameter!)
-      
+
         InstagramClient().send(router, completion: { (media: InstagramArrayResponse<InstagramMedia>?, error: Error?) in
-          if error == nil{
+          if error == nil {
               self.dataSource = (media?.data)!
               self.collectionView?.reloadData()
           }
         })
-    
-        
+
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
 }
 
 extension MediaSearchViewController {
-  
+
   // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -50,28 +49,25 @@ extension MediaSearchViewController {
     }
 }
 
-extension MediaSearchViewController : UICollectionViewDelegateFlowLayout{
-  
+extension MediaSearchViewController : UICollectionViewDelegateFlowLayout {
+
   // Mark: UICollectionViewDelegateFlowLayout
-  
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenWidth = UIScreen.main.bounds.width
         let photoWidth = floor(screenWidth / CGFloat(kMaxPhotosInRaw) - kPhotosSpacing / CGFloat(kMaxPhotosInRaw) * kPhotosSpacing)
         return CGSize(width: photoWidth, height: photoWidth)
     }
-  
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
       return kPhotosSpacing
     }
-  
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
       return kPhotosSpacing
     }
-  
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
       return UIEdgeInsetsMake(0, 0, kPhotosSpacing * 2, 0)
     }
 }
-
-
-
