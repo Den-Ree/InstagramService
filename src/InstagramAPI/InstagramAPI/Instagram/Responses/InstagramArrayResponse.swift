@@ -8,8 +8,8 @@
 
 import UIKit
 
-struct InstagramArrayResponse <T: AnyInstagramModel>: AnyInstagramResponse {
-  var data: [T] = []
-  var meta = InstagramMeta()
-  var pagination = InstagramPaginationInfo()
+public struct InstagramArrayResponse <T: AnyInstagramModel>: AnyInstagramResponse {
+  public var data: [T] = []
+  public var meta = InstagramMeta()
+  public var pagination = InstagramPaginationInfo()
 }

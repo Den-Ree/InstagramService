@@ -8,8 +8,8 @@
 
 import Alamofire
 
-extension String {
-  func isGoodStringForComment() -> Bool {
+public extension String {
+  public func isGoodStringForComment() -> Bool {
     if self.characters.count >= 300
       || self.components(separatedBy: "#").count > 3
       || self.components(separatedBy: "http").count > 1 {
@@ -19,20 +19,20 @@ extension String {
   }
 }
 
-enum InstagramCommentRouter: AnyInstagramNetworkRouter {
+public enum InstagramCommentRouter: AnyInstagramNetworkRouter {
   // MARK: - Requests
   case getComments(mediaId: String)
   case postComment(PostCommentParameter)
   case deleteComment(DeleteCommentParameter)
   // MARK: - Parameters
-  struct DeleteCommentParameter {
-    let mediaId: String
-    let commentId: String
+  public struct DeleteCommentParameter {
+    public let mediaId: String
+    public let commentId: String
   }
-  struct PostCommentParameter {
-    let mediaId: String
-    let text: String
-    init(mediaId: String, text: String) {
+  public struct PostCommentParameter {
+    public let mediaId: String
+    public let text: String
+    public init(mediaId: String, text: String) {
       if !text.isGoodStringForComment() {
         assertionFailure("Text for comment isn't correct")
       }

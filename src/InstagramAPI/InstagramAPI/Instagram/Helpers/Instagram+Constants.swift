@@ -9,156 +9,157 @@
 import Foundation
 import ObjectMapper
 
-typealias InstagramRequestParameters = [String : Any]
+public typealias InstagramRequestParameters = [String : Any]
 
-extension Instagram {
-  enum Constants {
-    static let keychainStore = "com.InstagramClient.keychainStore"
-    static let baseUrl = "https://api.instagram.com/"
-    static let appClientId: String = "eb6961971b7149899a3692a4125bb6af"
-    static let appClientSecret: String = "78f214b20bcd4ce58d940ef1604e652c"
-    static var appRedirectURL: String = "https://www.nolisto.com"
-    static var baseUrlComponents: URLComponents {
+public enum Instagram {}
+
+public extension Instagram {
+  public enum Constants {
+    public static let keychainStore = "com.InstagramClient.keychainStore"
+    public static let baseUrl = "https://api.instagram.com/"
+    public static let appClientId: String = "eb6961971b7149899a3692a4125bb6af"
+    public static let appClientSecret: String = "78f214b20bcd4ce58d940ef1604e652c"
+    public static var appRedirectURL: String = "https://www.nolisto.com"
+    public static var baseUrlComponents: URLComponents {
       var components = URLComponents()
       components.host = "api.instagram.com"
       components.scheme = "https"
       return components
     }
-    static let grantType = "authorization_code"
+    public static let grantType = "authorization_code"
   }
 
-  enum Keys {
-    enum Auth {
-      static let clientId = "client_id"
-      static let redirectUri = "redirect_uri"
-      static let accessToken = "access_token"
-      static let code = "code"
-      static let grantType = "grant_type"
-      static let clientSecret = "client_secret"
+  public enum Keys {
+    public enum Auth {
+      public static let clientId = "client_id"
+      public static let redirectUri = "redirect_uri"
+      public static let accessToken = "access_token"
+      public static let code = "code"
+      public static let grantType = "grant_type"
+      public static let clientSecret = "client_secret"
     }
 
-    enum Response {
-      static let type = "response_type"
-      static let token = "token"
-      static let scope = "scope"
-      static let data = "data"
-      static let meta = "meta"
-      static let pagination = "pagination"
-      static let code = "code"
+    public enum Response {
+      public static let type = "response_type"
+      public static let token = "token"
+      public static let scope = "scope"
+      public static let data = "data"
+      public static let meta = "meta"
+      public static let pagination = "pagination"
+      public static let code = "code"
     }
 
-    enum Object {
-      static let id = "id"
-      static let createdTime = "created_time"
-      static let user = "user"
+    public enum Object {
+      public static let id = "id"
+      public static let createdTime = "created_time"
+      public static let user = "user"
     }
 
-    enum Error {
-      static let type = "error_type"
-      static let message = "error_message"
-      static let code = "code"
+    public enum Error {
+      public static let type = "error_type"
+      public static let message = "error_message"
+      public static let code = "code"
     }
 
-    enum User {
-      static let id = "id"
-      static let username = "username"
-      static let fullName = "full_name"
-      static let firstName = "first_name"
-      static let lastName = "last_name"
-      static let profilePicture = "profile_picture"
-      static let bio = "bio"
-      static let website = "website"
-      static let mediaCount = "media_count"
-      static let counts = "counts"
+    public enum User {
+      public static let id = "id"
+      public static let username = "username"
+      public static let fullName = "full_name"
+      public static let firstName = "first_name"
+      public static let lastName = "last_name"
+      public static let profilePicture = "profile_picture"
+      public static let bio = "bio"
+      public static let website = "website"
+      public static let mediaCount = "media_count"
+      public static let counts = "counts"
 
-      enum Counts {
-        static let media = "media"
-        static let action = "action"
-        static let follows = "follows"
-        static let followedBy = "followed_by"
+      public enum Counts {
+        public static let media = "media"
+        public static let action = "action"
+        public static let follows = "follows"
+        public static let followedBy = "followed_by"
       }
     }
 
-    enum Relationship {
-      static let outgoingStatus = "outgoing_status"
-      static let incomingStatus = "incoming_status"
+    public enum Relationship {
+      public static let outgoingStatus = "outgoing_status"
+      public static let incomingStatus = "incoming_status"
     }
 
-    enum Media {
-      static let count = "count"
-      static let link = "link"
-      static let caption = "caption"
-      static let likes = "likes"
-      static let comments = "comments"
-      static let filter = "filter"
-      static let tags = "tags"
-      static let images = "images"
-      static let videos = "videos"
-      static let location = "location"
-      static let type = "type"
-      static let userHasLiked = "user_has_liked"
+    public enum Media {
+      public static let count = "count"
+      public static let link = "link"
+      public static let caption = "caption"
+      public static let likes = "likes"
+      public static let comments = "comments"
+      public static let filter = "filter"
+      public static let tags = "tags"
+      public static let images = "images"
+      public static let videos = "videos"
+      public static let location = "location"
+      public static let type = "type"
+      public static let userHasLiked = "user_has_liked"
     }
 
-    enum Data {
-      static let image = "image"
-      static let video = "video"
-      static let thumbnail = "thumbnail"
-      static let lowResolution = "low_resolution"
-      static let standardResolution = "standard_resolution"
-      static let lowBandwidth = "low_bandwidth"
-      static let url = "url"
-      static let height = "height"
-      static let width = "width"
-      static let query = "q"
+    public enum Data {
+      public static let image = "image"
+      public static let video = "video"
+      public static let thumbnail = "thumbnail"
+      public static let lowResolution = "low_resolution"
+      public static let standardResolution = "standard_resolution"
+      public static let lowBandwidth = "low_bandwidth"
+      public static let url = "url"
+      public static let height = "height"
+      public static let width = "width"
+      public static let query = "q"
     }
 
-    enum Comment {
-      static let from = "from"
-      static let text = "text"
+    public enum Comment {
+      public static let from = "from"
+      public static let text = "text"
     }
 
-    enum Tag {
-      static let name = "name"
-      static let mediaCount = "media_count"
+    public enum Tag {
+      public static let name = "name"
+      public static let mediaCount = "media_count"
     }
 
-    enum Location {
-
-      static let name = "name"
-      static let latitude = "latitude"
-      static let longitude = "longitude"
-      static let streetAddress = "street_address"
-      static let lat = "lat"
-      static let lng = "lng"
-      static let distance = "distance"
+    public enum Location {
+      public static let name = "name"
+      public static let latitude = "latitude"
+      public static let longitude = "longitude"
+      public static let streetAddress = "street_address"
+      public static let lat = "lat"
+      public static let lng = "lng"
+      public static let distance = "distance"
     }
 
-    enum Pagination {
-      static let nextURL = "next_url"
-      static let nextMaxId = "next_max_id"
-      static let nextMaxLikeId = "next_max_like_id"
-      static let nextMaxTagId = "next_max_tag_id"
-      static let nextCursor = "next_cursor"
-      static let maxId = "max_id"
-      static let maxLikeId = "max_like_id"
-      static let maxTagId = "max_tag_id"
-      static let cursor = "cursor"
-      static let minTagId = "min_tag_id"
-      static let minId = "min_id"
-      static let facebookPlacedId = "facebook_placed_id"
+    public enum Pagination {
+      public static let nextURL = "next_url"
+      public static let nextMaxId = "next_max_id"
+      public static let nextMaxLikeId = "next_max_like_id"
+      public static let nextMaxTagId = "next_max_tag_id"
+      public static let nextCursor = "next_cursor"
+      public static let maxId = "max_id"
+      public static let maxLikeId = "max_like_id"
+      public static let maxTagId = "max_tag_id"
+      public static let cursor = "cursor"
+      public static let minTagId = "min_tag_id"
+      public static let minId = "min_id"
+      public static let facebookPlacedId = "facebook_placed_id"
 
     }
 
-    enum HTTPMethod {
-      static let options = "OPTIONS"
-      static let get     = "GET"
-      static let head    = "HEAD"
-      static let post    = "POST"
-      static let put     = "PUT"
-      static let patch   = "PATCH"
-      static let delete  = "DELETE"
-      static let trace   = "TRACE"
-      static let connect = "CONNECT"
+    public enum HTTPMethod {
+      public static let options = "OPTIONS"
+      public static let get     = "GET"
+      public static let head    = "HEAD"
+      public static let post    = "POST"
+      public static let put     = "PUT"
+      public static let patch   = "PATCH"
+      public static let delete  = "DELETE"
+      public static let trace   = "TRACE"
+      public static let connect = "CONNECT"
     }
   }
 
@@ -173,13 +174,13 @@ extension Instagram {
       return ["basic", "public_content", "follower_list", "comments", "relationships", "likes"]
     }
     static var allScopesValue: String {
-      var result = String.emptyString
+      var result = ""
       let scopesValues = Instagram.LoginScope.scopesValues
       for scope in scopesValues {
         if scope == scopesValues.last {
           result += scope
         } else {
-          result += (scope + String.spaceString)
+          result += (scope + " ")
         }
       }
       return result

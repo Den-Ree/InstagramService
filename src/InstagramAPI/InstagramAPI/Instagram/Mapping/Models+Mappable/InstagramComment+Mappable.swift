@@ -8,10 +8,10 @@
 
 import ObjectMapper
 
-extension InstagramComment {
+public extension InstagramComment {
   // MARK: - Mappable
-  init?(map: Map) {}
-  mutating func mapping(map: Map) {
+  public init?(map: Map) {}
+  mutating public func mapping(map: Map) {
     id <- map[Instagram.Keys.Object.id]
     from <- map[Instagram.Keys.Comment.from]
     text <- map[Instagram.Keys.Comment.text]

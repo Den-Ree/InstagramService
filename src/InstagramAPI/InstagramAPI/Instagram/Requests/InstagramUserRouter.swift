@@ -8,51 +8,51 @@
 
 import Alamofire
 
-enum InstagramUserRouter: AnyInstagramNetworkRouter {
+public enum InstagramUserRouter: AnyInstagramNetworkRouter {
   // MARK: - Requests
   case getUser(UserParameter)
   case getRecentMedia(RecentMediaParameter)
   case getLikedMedia(LikedMediaParameter)
   case getSearch(SearchUserParameter)
   // MARK: - Parameters
-  struct SearchUserParameter {
-    let query: String
-    var count: Int?
+  public struct SearchUserParameter {
+    public let query: String
+    public var count: Int?
     // MARK: - Init
-    init(query: String, count: Int) {
+    public init(query: String, count: Int) {
       self.query = query
       self.count = count
     }
   }
-  struct LikedMediaParameter {
-    let user: UserParameter
-    var count: Int?
-    var maxLikeId: String?
+  public struct LikedMediaParameter {
+    public let user: UserParameter
+    public var count: Int?
+    public var maxLikeId: String?
     // MARK: - Init
-    init(user: UserParameter, count: Int, maxLikeId: String) {
+    public init(user: UserParameter, count: Int, maxLikeId: String) {
       self.user = user
       self.count = count
       self.maxLikeId = maxLikeId
     }
   }
-  struct RecentMediaParameter {
-    let user: UserParameter
-    let count: Int?
-    let minId: String?
-    let maxId: String?
+  public struct RecentMediaParameter {
+    public let user: UserParameter
+    public let count: Int?
+    public let minId: String?
+    public let maxId: String?
     // MARK: - Init
-    init(user: UserParameter, count: Int, minId: String, maxId: String) {
+    public init(user: UserParameter, count: Int, minId: String, maxId: String) {
       self.user = user
       self.count = count
       self.minId = minId
       self.maxId = maxId
     }
   }
-  enum UserParameter {
+  public enum UserParameter {
     case id(String)
-    case owner
+     case owner
     // MARK: - Init
-    init(_ userId: String? = nil) {
+    public init(_ userId: String? = nil) {
       if let userId = userId {
         self = .id(userId)
       } else {

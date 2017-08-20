@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct InstagramModelResponse <T: AnyInstagramModel>: AnyInstagramResponse {
-  var data: T = T(JSON: [:])!
-  var meta = InstagramMeta()
+public struct InstagramModelResponse <T: AnyInstagramModel>: AnyInstagramResponse {
+  public var data: T = T(JSON: [:])!
+  public var meta = InstagramMeta()
 }

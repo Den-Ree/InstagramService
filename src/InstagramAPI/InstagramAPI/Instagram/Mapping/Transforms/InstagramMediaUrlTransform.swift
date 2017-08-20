@@ -8,10 +8,10 @@
 
 import ObjectMapper
 
-struct InstagramMediaUrlTransform: TransformType {
+public struct InstagramMediaUrlTransform: TransformType {
   // MARK: - TransformType
-  typealias Object = InstagramMedia.Url
-  typealias JSON = [String: Any]
+  public typealias Object = InstagramMedia.Url
+  public typealias JSON = [String: Any]
   public func transformFromJSON(_ value: Any?) -> Object? {
     guard
       let value = value as? JSON,

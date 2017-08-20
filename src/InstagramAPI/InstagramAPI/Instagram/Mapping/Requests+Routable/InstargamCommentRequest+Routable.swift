@@ -10,7 +10,7 @@ import Alamofire
 
 extension InstagramCommentRouter: AnyNetworkRoutable {
   // MARK: - Private
-  var method: HTTPMethod {
+  public var method: HTTPMethod {
     switch self {
     case .getComments:
       return .get
@@ -20,7 +20,7 @@ extension InstagramCommentRouter: AnyNetworkRoutable {
       return .delete
     }
   }
-  var path: String {
+  public var path: String {
     switch self {
     case let .getComments(mediaId):
       return "/media/\(mediaId)/comments"
@@ -30,7 +30,7 @@ extension InstagramCommentRouter: AnyNetworkRoutable {
       return "/media/\(parameter.mediaId)/comments/\(parameter.commentId)"
     }
   }
-  var parameters: InstagramRequestParameters {
+  public var parameters: InstagramRequestParameters {
     switch self {
     case let .postComment(parameters):
       return [

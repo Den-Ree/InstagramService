@@ -8,10 +8,10 @@
 
 import ObjectMapper
 
-extension InstagramArrayResponse {
+public extension InstagramArrayResponse {
   // MARK: - Mappable
-  init?(map: Map) {}
-  mutating func mapping(map: Map) {
+  public init?(map: Map) {}
+  public mutating func mapping(map: Map) {
     data <- map[Instagram.Keys.Response.data]
     meta <- map[Instagram.Keys.Response.meta]
     pagination <- map[Instagram.Keys.Response.pagination]
@@ -22,10 +22,10 @@ extension InstagramArrayResponse {
 
 extension InstagramPaginationInfo: Mappable {
   // MARK: - Mappable
-  init?(map: Map) {
+  public init?(map: Map) {
     self.init()
   }
-  mutating func mapping(map: Map) {
+  mutating public func mapping(map: Map) {
     nextURL <- (map[Instagram.Keys.Pagination.nextURL], URLTransform())
     nextMaxId <- map[Instagram.Keys.Pagination.nextMaxId]
   }

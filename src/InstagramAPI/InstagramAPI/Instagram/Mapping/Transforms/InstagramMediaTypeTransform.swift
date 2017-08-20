@@ -8,10 +8,10 @@
 
 import ObjectMapper
 
-struct InstagramMediaTypeTransform: TransformType {
+public struct InstagramMediaTypeTransform: TransformType {
   // MARK: - TransformType
-  typealias Object = InstagramMedia.MediaType
-  typealias JSON = String
+  public typealias Object = InstagramMedia.MediaType
+  public typealias JSON = String
   public func transformFromJSON(_ value: Any?) -> InstagramMedia.MediaType? {
     guard let value = value as? JSON else {
       return .image

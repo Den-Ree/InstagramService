@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum InstagramRelationshipRouter: AnyInstagramNetworkRouter {
+public enum InstagramRelationshipRouter: AnyInstagramNetworkRouter {
   // MARK: - Requests
   case getFollows
   case getFollowedBy
@@ -16,11 +16,11 @@ enum InstagramRelationshipRouter: AnyInstagramNetworkRouter {
   case getRelationship(userId: String)
   case postRelationship(PostRelationshipParameter)
   // MARK: - Parameters
-  struct PostRelationshipParameter {
-    let userId: String
-    let action: Action
+  public struct PostRelationshipParameter {
+    public let userId: String
+    public let action: Action
     // MARK: Nested
-    enum Action: String {
+    public enum Action: String {
       case follow
       case unfollow
       case approve

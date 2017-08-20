@@ -8,10 +8,10 @@
 
 import ObjectMapper
 
-extension InstagramLocation {
+public extension InstagramLocation {
   // MARK: - Mappable
-  init?(map: Map) {}
-  mutating func mapping(map: Map) {
+  public init?(map: Map) {}
+  mutating public func mapping(map: Map) {
     latitude <- map[Instagram.Keys.Location.latitude]
     longitude <- map[Instagram.Keys.Location.longitude]
     streetAddress <- map[Instagram.Keys.Location.streetAddress]

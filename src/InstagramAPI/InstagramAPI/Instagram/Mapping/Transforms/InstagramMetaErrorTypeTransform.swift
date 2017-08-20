@@ -8,10 +8,10 @@
 
 import ObjectMapper
 
-struct InstagramMetaErrorTypeTransform: TransformType {
+public struct InstagramMetaErrorTypeTransform: TransformType {
   // MARK: - TransformType
-  typealias Object = InstagramMeta.ErrorType
-  typealias JSON = String
+  public typealias Object = InstagramMeta.ErrorType
+  public typealias JSON = String
   public func transformFromJSON(_ value: Any?) -> InstagramMeta.ErrorType? {
     guard let value = value as? JSON else {
       return .empty

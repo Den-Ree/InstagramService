@@ -10,7 +10,7 @@ import Alamofire
 
 extension InstagramLikeRouter: AnyNetworkRoutable {
   // MARK: - Private
-  var method: HTTPMethod {
+  public var method: HTTPMethod {
     switch self {
     case .getLikes:
       return .get
@@ -20,7 +20,7 @@ extension InstagramLikeRouter: AnyNetworkRoutable {
       return .delete
     }
   }
-  var path: String {
+  public var path: String {
     switch self {
     case let .getLikes(mediaId),
          let .postLike(mediaId),
@@ -28,7 +28,7 @@ extension InstagramLikeRouter: AnyNetworkRoutable {
       return "/media/\(mediaId)/likes"
     }
   }
-  var parameters: InstagramRequestParameters {
+  public var parameters: InstagramRequestParameters {
     return [:]
   }
 }

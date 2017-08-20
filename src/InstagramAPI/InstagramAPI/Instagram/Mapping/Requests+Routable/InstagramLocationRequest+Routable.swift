@@ -10,10 +10,10 @@ import Alamofire
 
 extension InstagramLocationRouter: AnyNetworkRoutable {
   // MARK: - AnyNetworkRoutable
-  var method: HTTPMethod {
+  public var method: HTTPMethod {
     return .get
   }
-  var path: String {
+  public var path: String {
     switch  self {
     case let .getLocation(id: locationId):
       return "/locations/\(locationId)"
@@ -23,7 +23,7 @@ extension InstagramLocationRouter: AnyNetworkRoutable {
       return "/locations/search"
     }
   }
-  var parameters: InstagramRequestParameters {
+  public var parameters: InstagramRequestParameters {
     switch self {
     case .getLocation: return [:]
     case let .getRecentMedia(parameters):

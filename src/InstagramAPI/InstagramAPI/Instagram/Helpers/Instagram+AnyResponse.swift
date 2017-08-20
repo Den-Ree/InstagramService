@@ -8,6 +8,6 @@
 
 import ObjectMapper
 
-protocol AnyInstagramResponse: Mappable {
+public protocol AnyInstagramResponse: Mappable {
   var meta: InstagramMeta { get }
 }

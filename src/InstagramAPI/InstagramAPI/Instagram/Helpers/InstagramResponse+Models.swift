@@ -10,29 +10,29 @@ import UIKit
 
 // MARK: - InstagramPaginationInfo
 
-struct InstagramPaginationInfo {
+public struct InstagramPaginationInfo {
   // MARK: - Properties
-  var nextURL: URL?
-  var nextMaxId: String = ""
-  init() {
+  public var nextURL: URL?
+  public var nextMaxId: String = ""
+  public init() {
     nextURL = nil
   }
 }
 
 // MARK: - InstagramMeta
 
-struct InstagramMeta {
+public struct InstagramMeta {
   // MARK: Nested 
-  enum ErrorType: String {
+  public enum ErrorType: String {
     case empty = ""
     case accessTokenException = "OAuthAccessTokenException"
   }
   // MARK: - Properties
-  var code: Int = 0
-  var errorType: ErrorType = .empty
-  var errorMessage: String = ""
+  public var code: Int = 0
+  public var errorType: ErrorType = .empty
+  public var errorMessage: String = ""
   // MARK: - Public
-  var isSucceeded: Bool {
+  public var isSucceeded: Bool {
     return code == 200
   }
 }

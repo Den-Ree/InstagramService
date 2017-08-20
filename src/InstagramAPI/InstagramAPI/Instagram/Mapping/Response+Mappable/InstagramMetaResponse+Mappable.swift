@@ -8,18 +8,18 @@
 
 import ObjectMapper
 
-extension InstagramMetaResponse {
+public extension InstagramMetaResponse {
   // MARK: - Mappable
-  init?(map: Map) {}
-  mutating func mapping(map: Map) {
+  public init?(map: Map) {}
+  mutating public func mapping(map: Map) {
     meta <- map[Instagram.Keys.Response.meta]
   }
 }
 
 extension InstagramMeta: Mappable {
   // MARK: - Mappable
-  init?(map: Map) {}
-  mutating func mapping(map: Map) {
+  public init?(map: Map) {}
+  mutating public func mapping(map: Map) {
     code <- map[Instagram.Keys.Error.code]
     errorType <- (map[Instagram.Keys.Error.type], InstagramMetaErrorTypeTransform())
     errorMessage <- map[Instagram.Keys.Error.message]

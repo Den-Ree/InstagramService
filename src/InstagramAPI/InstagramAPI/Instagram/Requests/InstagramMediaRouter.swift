@@ -8,17 +8,17 @@
 
 import Alamofire
 
-enum InstagramMediaRouter: AnyInstagramNetworkRouter {
+public enum InstagramMediaRouter: AnyInstagramNetworkRouter {
   // MARK: - Requests
   case getMedia(MediaParameter)
   case search(SearchMediaParameter)
   // MARK: - Parameters
-  struct SearchMediaParameter {
-    let longitude: Double
-    let latitude: Double
-    var distance: Double?
+  public struct SearchMediaParameter {
+    public let longitude: Double
+    public let latitude: Double
+    public var distance: Double?
   }
-  enum MediaParameter {
+  public enum MediaParameter {
     case id(String)
     case shortcode(String)
   }

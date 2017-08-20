@@ -6,9 +6,7 @@
 //  Copyright © 2017 Den Ree. All rights reserved.
 //
 
-import Alamofire
-
-enum InstagramLikeRouter: AnyInstagramNetworkRouter {
+public enum InstagramLikeRouter: AnyInstagramNetworkRouter {
   // MARK: - Requests
   case getLikes(mediaId: String)
   case postLike(mediaId: String)

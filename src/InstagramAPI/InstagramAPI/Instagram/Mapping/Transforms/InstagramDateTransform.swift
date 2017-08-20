@@ -8,10 +8,10 @@
 
 import ObjectMapper
 
-struct InstagramDateTransform: TransformType {
+public struct InstagramDateTransform: TransformType {
   // MARK: - TransformType
-  typealias Object = Date
-  typealias JSON = String
+  public typealias Object = Date
+  public typealias JSON = String
   public func transformFromJSON(_ value: Any?) -> Date? {
     if let value = value as? JSON, let timeInterval = Double(value) {
       return Date(timeIntervalSince1970: timeInterval)

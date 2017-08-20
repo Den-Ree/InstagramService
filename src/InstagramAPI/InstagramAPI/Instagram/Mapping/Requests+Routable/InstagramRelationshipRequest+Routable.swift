@@ -12,7 +12,7 @@ import Alamofire
 
 extension InstagramRelationshipRouter: AnyNetworkRoutable {
   // MARK: - AnyNetworkRoutable
-  var method: HTTPMethod {
+  public var method: HTTPMethod {
     switch self {
     case .getFollowedBy,
          .getFollows,
@@ -23,7 +23,7 @@ extension InstagramRelationshipRouter: AnyNetworkRoutable {
       return .post
     }
   }
-  var path: String {
+  public var path: String {
     switch self {
     case .getFollows:
       return "/users/self/follows"
@@ -37,7 +37,7 @@ extension InstagramRelationshipRouter: AnyNetworkRoutable {
       return "/users/\(parameters.userId)/relationship"
     }
   }
-  var parameters: InstagramRequestParameters {
+  public var parameters: InstagramRequestParameters {
     switch self {
     case .getFollowedBy,
          .getFollows,

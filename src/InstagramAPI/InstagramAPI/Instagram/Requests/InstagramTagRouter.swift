@@ -8,7 +8,7 @@
 
 import Alamofire
 
-enum InstagramTagRouter: AnyInstagramNetworkRouter {
+public  enum InstagramTagRouter: AnyInstagramNetworkRouter {
   // MARK: - Requests
   case getTag(name: String)
   case getRecentMedia(RecentMediaParameter)
@@ -21,10 +21,10 @@ enum InstagramTagRouter: AnyInstagramNetworkRouter {
    - count: Count of tagged media to return.
    - minId: Return media before this min_tag_id.
    */
-  struct RecentMediaParameter {
-    let tagName: String
-    var minId: String?
-    var maxId: String?
-    var count: Int?
+  public struct RecentMediaParameter {
+    public let tagName: String
+    public var minId: String?
+    public var maxId: String?
+    public var count: Int?
   }
 }

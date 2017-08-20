@@ -10,8 +10,8 @@ import ObjectMapper
 
 extension InstagramTag {
   // MARK: - Mappable
-  init?(map: Map) {}
-  mutating func mapping(map: Map) {
+  public init?(map: Map) {}
+  mutating public func mapping(map: Map) {
     name <- map[Instagram.Keys.Tag.name]
     mediaCount <- map[Instagram.Keys.Tag.mediaCount]
   }

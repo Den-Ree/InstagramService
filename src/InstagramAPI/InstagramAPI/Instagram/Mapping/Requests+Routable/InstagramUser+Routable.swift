@@ -10,10 +10,10 @@ import Alamofire
 
 extension InstagramUserRouter: AnyNetworkRoutable {
   // MARK: - AnyNetworkRoutable
-  var method: HTTPMethod {
+  public var method: HTTPMethod {
     return .get
   }
-  var path: String {
+  public var path: String {
     switch self {
     case let .getUser(user):
       return "/users/\(user.pathComponent)/"
@@ -26,7 +26,7 @@ extension InstagramUserRouter: AnyNetworkRoutable {
       return "/users/search"
     }
   }
-  var parameters: InstagramRequestParameters {
+  public var parameters: InstagramRequestParameters {
     var result: InstagramRequestParameters = InstagramRequestParameters()
     switch self {
     case .getUser:
@@ -60,8 +60,8 @@ extension InstagramUserRouter: AnyNetworkRoutable {
 
 // MARK: - Helpers
 
-extension InstagramUserRouter.UserParameter {
-  var pathComponent: String {
+public extension InstagramUserRouter.UserParameter {
+  public var pathComponent: String {
     switch self {
     case .id(let userId):
       return "\(userId)"

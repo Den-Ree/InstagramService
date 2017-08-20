@@ -8,43 +8,43 @@
 
 import ObjectMapper
 
-struct InstagramMedia: AnyInstagramModel {
+public struct InstagramMedia: AnyInstagramModel {
   // MARK: - Nested
-  enum MediaType: String {
+  public enum MediaType: String {
     case image
     case video
   }
-  struct Image {
-    var lowResolution = InstagramMedia.Url()
-    var standardResolution = InstagramMedia.Url()
-    var thumbnail = InstagramMedia.Url()
+  public struct Image {
+    public var lowResolution = InstagramMedia.Url()
+    public var standardResolution = InstagramMedia.Url()
+    public var thumbnail = InstagramMedia.Url()
   }
-  struct Video {
-    var lowResolution = InstagramMedia.Url()
-    var standardResolution = InstagramMedia.Url()
-    var lowBandwidth = InstagramMedia.Url()
+  public struct Video {
+    public var lowResolution = InstagramMedia.Url()
+    public var standardResolution = InstagramMedia.Url()
+    public var lowBandwidth = InstagramMedia.Url()
   }
-  struct Url {
-    var url: URL?
-    var size: CGSize = .zero
+  public struct Url {
+    public var url: URL?
+    public var size: CGSize = .zero
   }
   // MARK: - Properties
-  var id: String = ""
-  var user = InstagramUser()
-  var userHasLiked: Bool = false
-  var createdDate: Date = Date()
-  var link: String = ""
-  var caption = InstagramComment()
-  var tagsCount: Int = 0
-  var likesCount: Int = 0
-  var commentsCount: Int = 0
-  var location = InstagramLocation()
-  var type = MediaType.image
-  var image: Image = Image()
-  var video: Video = Video()
-  var tags: [String] = []
+  public var id: String = ""
+  public var user = InstagramUser()
+  public var userHasLiked: Bool = false
+  public var createdDate: Date = Date()
+  public var link: String = ""
+  public var caption = InstagramComment()
+  public var tagsCount: Int = 0
+  public var likesCount: Int = 0
+  public var commentsCount: Int = 0
+  public var location = InstagramLocation()
+  public var type = MediaType.image
+  public var image: Image = Image()
+  public var video: Video = Video()
+  public var tags: [String] = []
   // MARK: - Public
-  var isVideo: Bool {
+  public var isVideo: Bool {
     return type == .video
   }
 }

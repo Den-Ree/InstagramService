@@ -10,10 +10,10 @@ import Alamofire
 
 extension InstagramTagRouter: AnyNetworkRoutable {
   // MARK: - AnyNetworkRoutable
-  var method: HTTPMethod {
+  public var method: HTTPMethod {
     return .get
   }
-  var path: String {
+  public var path: String {
     switch self {
     case let .getTag(name):
       return "/tags/\(name)"
@@ -23,7 +23,7 @@ extension InstagramTagRouter: AnyNetworkRoutable {
       return "/tags/search"
     }
   }
-  var parameters: InstagramRequestParameters {
+  public var parameters: InstagramRequestParameters {
     switch self {
     case .getTag: return [:]
     case let .getRecentMedia(parameters):

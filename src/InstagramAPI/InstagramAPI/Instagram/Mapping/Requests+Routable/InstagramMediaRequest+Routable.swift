@@ -12,10 +12,10 @@ import Alamofire
 
 extension InstagramMediaRouter: AnyNetworkRoutable {
   // MARK: - AnyNetworkRoutable
-  var method: HTTPMethod {
+  public var method: HTTPMethod {
     return .get
   }
-  var path: String {
+  public var path: String {
     switch self {
     case let .getMedia(media):
       return "/media/\(media.pathComponent)"
@@ -23,7 +23,7 @@ extension InstagramMediaRouter: AnyNetworkRoutable {
       return "/media/search"
     }
   }
-  var parameters: InstagramRequestParameters {
+  public var parameters: InstagramRequestParameters {
     switch self {
     case .getMedia:
       return [:]
@@ -41,8 +41,8 @@ extension InstagramMediaRouter: AnyNetworkRoutable {
 
 // MARK: - Helpers
 
-extension InstagramMediaRouter.MediaParameter {
-  var pathComponent: String {
+public extension InstagramMediaRouter.MediaParameter {
+  public var pathComponent: String {
     switch self {
     case .id(let id):
       return "\(id)"

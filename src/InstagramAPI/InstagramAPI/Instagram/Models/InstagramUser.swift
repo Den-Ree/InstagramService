@@ -8,20 +8,19 @@
 
 import ObjectMapper
 
-struct InstagramUser: AnyInstagramModel {
+public struct InstagramUser: AnyInstagramModel {
   // MARK: - Nested
-  struct Counts {
-    var media: Int = 0
-    var follows: Int = 0
-    var followedBy: Int = 0
+  public struct Counts {
+    public var media: Int = 0
+    public var follows: Int = 0
+    public var followedBy: Int = 0
   }
   // MARK: - Properties
-  var id: String = ""
-  var username: String = ""
-  var fullName: String = ""
-  // swiftlint:disable redundant_optional_initialization
-  var profilePictureUrl: URL? = nil
-  var bio: String = ""
-  var website: String = ""
-  var counts = Counts()
+  public var id: String = ""
+  public var username: String = ""
+  public var fullName: String = ""
+  public var profilePictureUrl: URL? = nil
+  public var bio: String = ""
+  public var website: String = ""
+  public var counts = Counts()
 }

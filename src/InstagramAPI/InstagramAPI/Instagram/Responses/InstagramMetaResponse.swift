@@ -8,6 +8,6 @@
 
 import UIKit
 
-struct InstagramMetaResponse: AnyInstagramResponse {
-  var meta = InstagramMeta()
+public struct InstagramMetaResponse: AnyInstagramResponse {
+  public var meta = InstagramMeta()
 }

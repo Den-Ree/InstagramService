@@ -8,11 +8,11 @@
 
 import ObjectMapper
 
-struct InstagramLocation: AnyInstagramModel {
+public struct InstagramLocation: AnyInstagramModel {
   // MARK: - Properties
-  var latitude: Double = 0
-  var longitude: Double = 0
-  var streetAddress: String = ""
-  var name: String = ""
-  var id: String = ""
+  public var latitude: Double = 0
+  public var longitude: Double = 0
+  public var streetAddress: String = ""
+  public var name: String = ""
+  public var id: String = ""
 }
