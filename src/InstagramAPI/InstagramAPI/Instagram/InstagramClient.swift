@@ -26,7 +26,11 @@ public final class InstagramClient {
   }
   public var loggedUserId: String {
     get {
-      return self.keychainStore["lastUserId"]!
+      if self.isLogged == false{
+        return ""
+      }else{
+        return self.keychainStore["lastUserId"]!
+      }
     }
     set (newValue) {
       self.keychainStore["lastUserId"] = newValue
@@ -56,11 +60,13 @@ public final class InstagramClient {
     return InstagramClient().encode(Instagram.Constants.baseUrl + "oauth/authorize/", parameters: parameters)
     }
   }
-
+  
+  public init(){}
+  
   public func send<T: AnyInstagramResponse>(_ router: AnyInstagramNetworkRouter, completion: @escaping (T?, Error?) -> Void) {
       do {
         guard let accessToken = keychainStore[Instagram.Keys.Auth.accessToken + loggedUserId] else {
-            completion(nil, nil)
+          completion(nil, nil)
           return
         }
         let request = try router.asURLRequest(withAccessToken: accessToken)
@@ -165,7 +171,7 @@ public extension InstagramClient {
     }
   }
 
-  public func checkAccessTokenExpiration<T: AnyInstagramResponse>(_ response: DataResponse<T>) {
+  fileprivate func checkAccessTokenExpiration<T: AnyInstagramResponse>(_ response: DataResponse<T>) {
       if response.result.value?.meta.errorType.rawValue == "OAuthAccessTokenError"{
           print(Notifications.accessTokenExpired)
           self.keychainStore[Instagram.Keys.Auth.accessToken + loggedUserId] = nil
@@ -180,8 +186,8 @@ public extension InstagramClient {
   }
   
   public func setClientParameters(_ accessToken: String, clientId: String){
-    
     self.keychainStore[Instagram.Keys.Auth.accessToken + clientId] = accessToken
+    self.keychainStore["isLogged"] = "true"
     self.loggedUserId = clientId
   }
 
@@ -189,7 +195,7 @@ public extension InstagramClient {
 
 public extension InstagramClient {
 
-  public func encode(_ path: String?, parameters: [String: Any]) -> URL? {
+  fileprivate func encode(_ path: String?, parameters: [String: Any]) -> URL? {
     guard let path = path, let encodedPath = path.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed), let url = URL(string: encodedPath) else {
       return nil
     }
