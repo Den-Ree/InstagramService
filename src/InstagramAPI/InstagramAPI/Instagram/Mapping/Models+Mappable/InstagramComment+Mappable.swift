@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-public extension InstagramComment {
+extension InstagramComment {
   // MARK: - Mappable
   public init?(map: Map) {}
   mutating public func mapping(map: Map) {

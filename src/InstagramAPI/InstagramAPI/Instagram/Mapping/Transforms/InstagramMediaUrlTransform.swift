@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-public struct InstagramMediaUrlTransform: TransformType {
+struct InstagramMediaUrlTransform: TransformType {
   // MARK: - TransformType
   public typealias Object = InstagramMedia.Url
   public typealias JSON = [String: Any]

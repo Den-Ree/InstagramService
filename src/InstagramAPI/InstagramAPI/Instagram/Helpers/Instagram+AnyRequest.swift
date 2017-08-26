@@ -8,4 +8,4 @@
 
 import Foundation
 
-public protocol AnyInstagramRequest: AnyNetworkRoutable {}
+protocol AnyInstagramRequest: AnyNetworkRoutable {}

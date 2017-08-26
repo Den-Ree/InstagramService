@@ -66,7 +66,7 @@ public extension AnyInstagramNetworkRouter {
   }
 }
 
-public extension AnyInstagramNetworkRouter {
+extension AnyInstagramNetworkRouter {
 
   public func describe() {
     print("\n")

@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-public struct InstagramDateTransform: TransformType {
+struct InstagramDateTransform: TransformType {
   // MARK: - TransformType
   public typealias Object = Date
   public typealias JSON = String

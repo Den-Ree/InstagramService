@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-public struct InstagramMetaErrorTypeTransform: TransformType {
+struct InstagramMetaErrorTypeTransform: TransformType {
   // MARK: - TransformType
   public typealias Object = InstagramMeta.ErrorType
   public typealias JSON = String

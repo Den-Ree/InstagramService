@@ -11,22 +11,22 @@ import ObjectMapper
 
 public typealias InstagramRequestParameters = [String : Any]
 
-public enum Instagram {}
+enum Instagram {}
 
-public extension Instagram {
-  public enum Constants {
-    public static let keychainStore = "com.InstagramClient.keychainStore"
-    public static let baseUrl = "https://api.instagram.com/"
-    public static let appClientId: String = "eb6961971b7149899a3692a4125bb6af"
-    public static let appClientSecret: String = "78f214b20bcd4ce58d940ef1604e652c"
-    public static var appRedirectURL: String = "https://www.nolisto.com"
-    public static var baseUrlComponents: URLComponents {
+extension Instagram {
+  
+  enum Constants {
+    static let baseUrl = "https://api.instagram.com/"
+    static var appClientId: String = "SET YOUR CLIENT ID"
+    static var appClientSecret: String = "SET YOUR CLIENT SECRET"
+    static var appRedirectURL: String = "SET YOUR REDIRECT-URL"
+    static var baseUrlComponents: URLComponents {
       var components = URLComponents()
       components.host = "api.instagram.com"
       components.scheme = "https"
       return components
     }
-    public static let grantType = "authorization_code"
+    static let grantType = "authorization_code"
   }
 
   public enum Keys {

@@ -10,8 +10,8 @@ import ObjectMapper
 
 public extension InstagramUser {
   // MARK: - Mappable
-  public init?(map: Map) {}
-  mutating public func mapping(map: Map) {
+  init?(map: Map) {}
+  mutating func mapping(map: Map) {
     id <- map[Instagram.Keys.Object.id]
     username <- map[Instagram.Keys.User.username]
     fullName <- map[Instagram.Keys.User.fullName]
@@ -24,10 +24,10 @@ public extension InstagramUser {
 
 // MARK: - Counts
 
-public extension InstagramUser.Counts {
+extension InstagramUser.Counts {
   // MARK: - Mappable
-  public init?(map: Map) {}
-  mutating public func mapping(map: Map) {
+  init?(map: Map) {}
+  mutating func mapping(map: Map) {
     media <- map[Instagram.Keys.User.Counts.media]
     follows <- map[Instagram.Keys.User.Counts.follows]
     followedBy <- map[Instagram.Keys.User.Counts.followedBy]

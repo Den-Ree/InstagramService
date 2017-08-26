@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-public extension InstagramRelationship {
+extension InstagramRelationship {
 
   public init?(map: Map) {}
   mutating public func mapping(map: Map) {

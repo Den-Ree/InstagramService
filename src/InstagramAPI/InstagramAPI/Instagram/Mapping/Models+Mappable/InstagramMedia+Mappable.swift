@@ -10,8 +10,8 @@ import ObjectMapper
 
 public extension InstagramMedia {
   // MARK: - Mappable
-  public init?(map: Map) {}
-  mutating public func mapping(map: Map) {
+  init?(map: Map) {}
+  mutating func mapping(map: Map) {
     id <- map[Instagram.Keys.Object.id]
     user <- map[Instagram.Keys.Object.user]
     userHasLiked <- map[Instagram.Keys.Media.userHasLiked]

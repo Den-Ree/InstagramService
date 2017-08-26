@@ -11,10 +11,6 @@ import XCTest
 
 class LocationsTests: XCTestCase {
 
-  let getLocation = "https://api.instagram.com/v1/locations/{location-id}?access_token=ACCESS-TOKEN"
-  let getLocationRecent = "https://api.instagram.com/v1/locations/{location-id}/media/recent?access_token=ACCESS-TOKEN&max_id=0&min_id=0"
-  let searchLocation = "https://api.instagram.com/v1/locations/search?access_token=ACCESS-TOKEN&lng=1&lat=1&distance=1"
-
   func testGet() {
     let getLocationRouter = InstagramLocationRouter.getLocation(id: "{location-id}")
     guard let UrlRequest = try? getLocationRouter.asURLRequest(withAccessToken: "ACCESS-TOKEN") else {

@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-public extension InstagramArrayResponse {
+extension InstagramArrayResponse {
   // MARK: - Mappable
   public init?(map: Map) {}
   public mutating func mapping(map: Map) {

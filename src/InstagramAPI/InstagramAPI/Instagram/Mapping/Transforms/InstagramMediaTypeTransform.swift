@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-public struct InstagramMediaTypeTransform: TransformType {
+struct InstagramMediaTypeTransform: TransformType {
   // MARK: - TransformType
   public typealias Object = InstagramMedia.MediaType
   public typealias JSON = String
