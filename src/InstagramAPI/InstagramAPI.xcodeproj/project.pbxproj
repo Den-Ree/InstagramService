@@ -252,8 +252,8 @@
 		844B936B1F51AAE100C31E44 /* Client */ = {
 			isa = PBXGroup;
 			children = (
-				844B936C1F51AAE100C31E44 /* InstagramClient + Extensions.swift */,
 				844B936D1F51AAE100C31E44 /* InstagramClient.swift */,
+				844B936C1F51AAE100C31E44 /* InstagramClient + Extensions.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";

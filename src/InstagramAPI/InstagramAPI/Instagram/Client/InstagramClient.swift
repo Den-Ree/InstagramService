@@ -46,7 +46,7 @@ public final class InstagramClient {
   }
 
   public struct InstagramAuthorisationUrl {
-    public var clientSideFlowUrl: URL? {
+    public var clientSideFlow: URL? {
     let parameters: [String : Any] = [Instagram.Keys.Auth.clientId: Instagram.Constants.appClientId,
                                       Instagram.Keys.Auth.redirectUri: Instagram.Constants.appRedirectURL,
                                       Instagram.Keys.Response.type: Instagram.Keys.Response.token,
@@ -54,7 +54,7 @@ public final class InstagramClient {
     return InstagramClient().encode(Instagram.Constants.baseUrl + "oauth/authorize/", parameters: parameters)
     }
 
-    public var serverSideFlowUrl: URL? {
+    public var serverSideFlow: URL? {
     let parameters: [String : Any] = [Instagram.Keys.Auth.clientId: Instagram.Constants.appClientId,
                                       Instagram.Keys.Auth.redirectUri: Instagram.Constants.appRedirectURL,
                                       Instagram.Keys.Response.type: Instagram.Keys.Response.code,
@@ -65,7 +65,7 @@ public final class InstagramClient {
   
   public init() {}
   
-  public init(clientId: String, clientSecret: String, clientRedirectUri: String){
+  public init(_ clientId: String, clientSecret: String, clientRedirectUri: String){
     Instagram.Constants.appClientId = clientId
     Instagram.Constants.appClientSecret = clientSecret
     Instagram.Constants.appRedirectURL = clientRedirectUri

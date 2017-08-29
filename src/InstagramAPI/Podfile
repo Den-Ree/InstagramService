@@ -5,7 +5,6 @@ target 'InstagramAPI' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   pod 'ObjectMapper'
-  pod 'InstagramService', :path => '/Users/admin/CocoaPods/InstagramService/InstagramService.podspec'
   pod 'Alamofire'
   pod 'AlamofireObjectMapper'
   pod 'AlamofireImage', '~> 3.1'
