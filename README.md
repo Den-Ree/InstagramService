@@ -30,7 +30,7 @@ InstagramAPI provides you a network client based on Alamofire, which helps you t
 There are two ways of initialization of a client
 
 * When you don't have an access token
-* When you already got it
+* When you have already got it
 
 ### Step 1 without authentication
 
@@ -54,7 +54,7 @@ You must choose the type of authentication. There are two options:
     // Client side
     let url = InstagramClient.InstagramAuthorisationUrl().clientSideFlow
 
-Now you have to create a webView, where you can authentificate your user and load your Url. 
+Now you have to create a webView, where you can authentificate your user, so you need to load your authentication Url into it. 
 When you get some Url in responce, you have to load it to client. Client will write to the output field user information if it was success
 
     InstagramClient().receiveLoggedUser(responceUrl, completion: { (loggedUserId: String?, error: Error?) -> Void in
@@ -87,7 +87,7 @@ Also InstagramAPI gives you an opportunity to have three types of responces:
 Example:
 
     let parameter = InstagramUserRouter.UserParameter.id("Your user id")
-    let router = InstagramUserRouter.getUser(userParameter!)
+    let router = InstagramUserRouter.getUser(parameter)
     
     InstagramClient().send(userRouter, completion: { (user: InstagramModelResponse<InstagramUser>?, error: Error?) in 
     
