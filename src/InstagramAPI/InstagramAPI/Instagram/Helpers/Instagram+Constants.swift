@@ -17,9 +17,9 @@ extension Instagram {
   
   enum Constants {
     static let baseUrl = "https://api.instagram.com/"
-    static var appClientId: String = "SET YOUR CLIENT ID"
-    static var appClientSecret: String = "SET YOUR CLIENT SECRET"
-    static var appRedirectURL: String = "SET YOUR REDIRECT-URL"
+    static var appClientId: String = ""
+    static var appClientSecret: String = ""
+    static var appRedirectURL: String = ""
     static var baseUrlComponents: URLComponents {
       var components = URLComponents()
       components.host = "api.instagram.com"

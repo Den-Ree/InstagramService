@@ -104,7 +104,7 @@ public extension InstagramClient {
   }
 }
 
-//  MARL: Authorization
+//  MARK: Authorization
 public extension InstagramClient {
 
   fileprivate func getAuthUrlFragment(_ Url: URL) -> InstagramAuthUrlFragment {

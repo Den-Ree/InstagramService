@@ -1,28 +1,17 @@
 //
-//  AnyInstagramResponse+Models.swift
-//  ConceptOffice
+//  InstagramMeta.swift
+//  Pods
 //
-//  Created by Den Ree on 05/08/2017.
-//  Copyright © 2017 Den Ree. All rights reserved.
+//  Created by Admin on 04.09.17.
+//
 //
 
-import UIKit
-
-// MARK: - InstagramPaginationInfo
-
-public struct InstagramPaginationInfo {
-  // MARK: - Properties
-  public var nextURL: URL?
-  public var nextMaxId: String = ""
-  public init() {
-    nextURL = nil
-  }
-}
+import Foundation
 
 // MARK: - InstagramMeta
 
 public struct InstagramMeta {
-  // MARK: Nested 
+  // MARK: Nested
   public enum ErrorType: String {
     case empty = ""
     case accessTokenException = "OAuthAccessTokenException"
