@@ -16,6 +16,7 @@ class LikesTests: XCTestCase {
       guard let UrlRequest = try? getLikesRouter.asURLRequest(withAccessToken: "ACCESS-TOKEN") else {
         return
       }
+      //swiftlint:disable:next line_length
       XCTAssert(UrlRequest.url?.absoluteString == TestConstants.URL.Like.get.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
   }
 
@@ -24,10 +25,11 @@ class LikesTests: XCTestCase {
       guard let UrlRequest = try? postLikeRouter.asURLRequest(withAccessToken: "ACCESS-TOKEN") else {
         return
       }
-    guard let json = try? JSONSerialization.jsonObject(with: UrlRequest.httpBody!, options: .allowFragments) as! [String:Any] else {
+      //swiftlint:disable:next line_length force_cast
+      guard let json = try? JSONSerialization.jsonObject(with: UrlRequest.httpBody!, options: .allowFragments) as! [String:Any] else {
         return
       }
-
+      //swiftlint:disable:next line_length
       XCTAssert(UrlRequest.url?.absoluteString == TestConstants.URL.Like.post.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
       XCTAssert(json.parametersString() == TestConstants.HTTPBody.like)
       XCTAssert(UrlRequest.httpMethod == TestConstants.HTTPMethod.post)
@@ -38,6 +40,7 @@ class LikesTests: XCTestCase {
       guard let UrlRequest = try? deleteCommentRouter.asURLRequest(withAccessToken: "ACCESS-TOKEN") else {
         return
       }
+      //swiftlint:disable:next line_length
       XCTAssert(UrlRequest.url?.absoluteString == TestConstants.URL.Like.delete.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
       XCTAssert(UrlRequest.httpMethod == TestConstants.HTTPMethod.delete)
   }

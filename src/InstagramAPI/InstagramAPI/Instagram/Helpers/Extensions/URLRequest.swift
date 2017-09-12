@@ -18,6 +18,7 @@ extension URLRequest {
       print("URL: nil")
     }
     if self.httpBody != nil {
+      // swiftlint:disable:next force_cast line_length
       guard let json = try? JSONSerialization.jsonObject(with: self.httpBody!, options: .allowFragments) as! [String:Any] else {
         return
       }

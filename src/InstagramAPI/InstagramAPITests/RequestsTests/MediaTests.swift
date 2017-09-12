@@ -17,6 +17,7 @@ class MediaTests: XCTestCase {
       guard let UrlRequest = try? getMediaRouter.asURLRequest(withAccessToken: "ACCESS-TOKEN") else {
         return
       }
+      //swiftlint:disable:next line_length
       XCTAssert(UrlRequest.url?.absoluteString == TestConstants.URL.Media.get.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
   }
 
@@ -26,6 +27,7 @@ class MediaTests: XCTestCase {
       guard let UrlRequest = try? getMediaRouter.asURLRequest(withAccessToken: "ACCESS-TOKEN") else {
         return
       }
+      //swiftlint:disable:next line_length
       XCTAssert(UrlRequest.url?.absoluteString == TestConstants.URL.Media.getWithShortCode.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
   }
 
@@ -35,6 +37,7 @@ class MediaTests: XCTestCase {
       guard let UrlRequest = try? searchMediaRouter.asURLRequest(withAccessToken: "ACCESS-TOKEN") else {
         return
       }
+      //swiftlint:disable:next line_length
       XCTAssert(UrlRequest.url?.absoluteString == TestConstants.URL.Media.search.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
   }
 

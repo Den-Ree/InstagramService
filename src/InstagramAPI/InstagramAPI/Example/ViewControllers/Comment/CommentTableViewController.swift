@@ -17,7 +17,7 @@ class CommentTableViewController: UITableViewController {
         super.viewDidLoad()
 
         let commentRouter = InstagramCommentRouter.getComments(mediaId: mediaId!)
-
+        //swiftlint:disable:next line_length
         InstagramClient().send(commentRouter, completion: {( comments: InstagramArrayResponse<InstagramComment>?, error: Error?) in
           if error == nil {
               if let data = comments?.data {
@@ -41,6 +41,7 @@ extension CommentTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //swiftlint:disable:next force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentCell
         let comment = dataSource[indexPath.row]
         cell.commentLabel.text = comment.text

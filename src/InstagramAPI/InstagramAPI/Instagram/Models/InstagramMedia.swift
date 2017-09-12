@@ -29,6 +29,7 @@ public struct InstagramMedia: AnyInstagramModel {
     public var size: CGSize = .zero
   }
   // MARK: - Properties
+  //swiftlint:disable:next identifier_name
   public var id: String = ""
   public var user = InstagramUser()
   public var userHasLiked: Bool = false

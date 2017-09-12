@@ -49,6 +49,7 @@ public enum InstagramUserRouter: AnyInstagramNetworkRouter {
     }
   }
   public enum UserParameter {
+    //swiftlint:disable:next identifier_name
     case id(String)
      case owner
     // MARK: - Init

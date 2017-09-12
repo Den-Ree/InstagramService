@@ -26,7 +26,7 @@ class UserViewController: UIViewController {
         super.viewDidLoad()
 
         let userRouter = InstagramUserRouter.getUser(userParameter!)
-
+        //swiftlint:disable:next line_length
         InstagramClient().send(userRouter, completion: { (user: InstagramModelResponse<InstagramUser>?, error: Error?) in
 
           if error == nil {

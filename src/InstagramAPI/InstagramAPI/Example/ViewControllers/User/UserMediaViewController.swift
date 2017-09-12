@@ -31,14 +31,18 @@ class UserMediaViewController: UIViewController {
         case .recent(let userID):
             //TODO: fix spaghetti
             if let userID = userID {
-                let userRecentRouter = InstagramUserRouter.getRecentMedia(.init(user: .id(userID), count: 10, minId: "10", maxId: "10"))
-                InstagramClient().send(userRecentRouter, completion: { (media: InstagramArrayResponse<InstagramMedia>?, _: Error?) in
-                    let media: [InstagramMedia]? = media?.data
-                    self.dataSource = media!
-                    self.collectionView.reloadData()
+                  //swiftlint:disable:next line_length
+                  let userRecentRouter = InstagramUserRouter.getRecentMedia(.init(user: .id(userID), count: 10, minId: "10", maxId: "10"))
+                  //swiftlint:disable:next line_length
+                  InstagramClient().send(userRecentRouter, completion: { (media: InstagramArrayResponse<InstagramMedia>?, _: Error?) in
+                  let media: [InstagramMedia]? = media?.data
+                  self.dataSource = media!
+                  self.collectionView.reloadData()
                 })
             } else {
+                //swiftlint:disable:next line_length
                 let userRecentRouter = InstagramUserRouter.getRecentMedia(.init(user: .owner, count: 10, minId: "10", maxId: "10"))
+                //swiftlint:disable:next line_length
                 InstagramClient().send(userRecentRouter, completion: { (media: InstagramArrayResponse<InstagramMedia>?, _: Error?) in
                   let data: [InstagramMedia]? = media?.data
 
@@ -53,6 +57,7 @@ class UserMediaViewController: UIViewController {
 
         case .liked:
             let userLikedRouter = InstagramUserRouter.getLikedMedia(.init(user: .owner, count: 10, maxLikeId: "10"))
+            //swiftlint:disable:next line_length
             InstagramClient().send(userLikedRouter, completion: { (media: InstagramArrayResponse<InstagramMedia>?, _: Error?) in
                 let data: [InstagramMedia]? = media?.data
               if let data = data {
@@ -82,8 +87,9 @@ extension UserMediaViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }
-
+    //swiftlint:disable:next line_length
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //swiftlint:disable:next line_length force_cast
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserMediaCell", for: indexPath) as! UserMediaCell
         let media = dataSource[indexPath.row]! as InstagramMedia
         cell.photoImageView.af_setImage(withURL: (media.image.lowResolution.url!))
@@ -98,17 +104,18 @@ extension UserMediaViewController: UICollectionViewDelegate {
 }
 
 extension UserMediaViewController: UICollectionViewDelegateFlowLayout {
-
+    //swiftlint:disable:next line_length
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenWidth = UIScreen.main.bounds.width
+        //swiftlint:disable:next line_length
         let photoWidth = floor(screenWidth / CGFloat(kMaxPhotosInRaw) - kPhotosSpacing / CGFloat(kMaxPhotosInRaw) * kPhotosSpacing)
         return CGSize(width: photoWidth, height: photoWidth)
     }
-
+    //swiftlint:disable:next line_length
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return kPhotosSpacing
     }
-
+    //swiftlint:disable:next line_length
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return kPhotosSpacing
     }

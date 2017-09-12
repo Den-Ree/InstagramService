@@ -37,6 +37,7 @@ extension UserSearchViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //swiftlint:disable:next force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserSearchCell") as! UserSearchCell
         let currentUser = dataSource[indexPath.row]
         cell.usernameLabel.text = currentUser?.username
@@ -51,6 +52,7 @@ extension UserSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currentUser = dataSource[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //swiftlint:disable:next force_cast line_length
         let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
         controller.userParameter = InstagramUserRouter.UserParameter.id((currentUser?.id)!)
         self.navigationController?.pushViewController(controller, animated: true)
@@ -76,6 +78,7 @@ extension UserSearchViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let userSearchRouter = InstagramUserRouter.getSearch(.init(query: searchText, count: 10))
+        //swiftlint:disable:next line_length
         InstagramClient().send(userSearchRouter, completion: { (users: InstagramArrayResponse<InstagramUser>?, _: Error?) in
          guard let users = users?.data else {
                 return

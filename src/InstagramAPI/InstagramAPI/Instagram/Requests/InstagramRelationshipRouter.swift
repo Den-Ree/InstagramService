@@ -20,6 +20,7 @@ public enum InstagramRelationshipRouter: AnyInstagramNetworkRouter {
     public let userId: String
     public let action: Action
     // MARK: Nested
+    //swiftlint:disable:next nesting
     public enum Action: String {
       case follow
       case unfollow

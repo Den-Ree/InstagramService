@@ -16,7 +16,7 @@ class LocationSearchViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let router = InstagramLocationRouter.search(locationSearchParameter!)
-
+        //swiftlint:disable:next line_length
         InstagramClient().send(router, completion: { (locations: InstagramArrayResponse<InstagramLocation>?, error: Error?) in
          if error == nil {
               self.dataSource = (locations?.data)!
@@ -39,6 +39,7 @@ class LocationSearchViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //swiftlint:disable:next force_cast line_length
         let cell = tableView.dequeueReusableCell(withIdentifier: "locationSearchCell", for: indexPath) as! LocationSearchCell
         let location = dataSource[indexPath.row]
 

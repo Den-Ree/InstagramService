@@ -403,3 +403,4 @@ extension Calendar {
         return hasPMSymbol || hasAMSymbol
     }
 }
+//swiftlint:disable:previous file_length

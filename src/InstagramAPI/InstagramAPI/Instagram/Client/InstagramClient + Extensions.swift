@@ -10,8 +10,9 @@ import Foundation
 import Alamofire
 
 extension InstagramClient {
-  
+
   func encode(_ path: String?, parameters: [String: Any]) -> URL? {
+    //swiftlint:disable:next line_length
     guard let path = path, let encodedPath = path.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed), let url = URL(string: encodedPath) else {
       return nil
     }
@@ -24,5 +25,5 @@ extension InstagramClient {
       return nil
     }
   }
-  
+
 }

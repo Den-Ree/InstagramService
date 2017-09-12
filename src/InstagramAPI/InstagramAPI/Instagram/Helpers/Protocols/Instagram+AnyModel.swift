@@ -11,6 +11,7 @@ import ObjectMapper
 
 // MARK: - Instagram Object
 public protocol AnyInstagramModel: Mappable, Equatable {
+  //swiftlint:disable:next identifier_name
   var id: String { get }
 }
 

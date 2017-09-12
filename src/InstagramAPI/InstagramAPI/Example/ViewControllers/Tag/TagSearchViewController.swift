@@ -35,6 +35,7 @@ extension TagSearchViewController: UITableViewDataSource {
       return dataSource.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //swiftlint:disable:next force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: "TagSearchCell") as! TagSearchCell
         let tag = dataSource[indexPath.row]
         cell.nameLabel.text?.append(String.hiddenSymbol + tag.name)
@@ -48,6 +49,7 @@ extension TagSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tag = dataSource[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //swiftlint:disable:next force_cast line_length
         let controller = storyboard.instantiateViewController(withIdentifier: "TagNameViewController") as! TagNameViewController
         controller.tagName = tag.name
         self.navigationController?.pushViewController(controller, animated: true)

@@ -21,6 +21,7 @@ class LocationViewController: UIViewController {
         super.viewDidLoad()
         self.idLabel.text?.append(locationId!)
         let router = InstagramLocationRouter.getLocation(id: locationId!)
+        //swiftlint:disable:next line_length
         InstagramClient().send(router, completion: { (location: InstagramModelResponse<InstagramLocation>?, error: Error?) in
           if error == nil {
             if let location = location?.data {

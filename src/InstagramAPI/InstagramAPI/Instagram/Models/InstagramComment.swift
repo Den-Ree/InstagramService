@@ -10,6 +10,7 @@ import ObjectMapper
 
 public struct InstagramComment: AnyInstagramModel {
   // MARK: - Properties
+  //swiftlint:disable:next identifier_name
   public var id: String = ""
   public var createdDate = Date()
   public var text: String = ""

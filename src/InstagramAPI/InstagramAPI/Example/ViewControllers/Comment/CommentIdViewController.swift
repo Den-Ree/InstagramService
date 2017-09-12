@@ -23,6 +23,7 @@ class CommentIdViewController: UIViewController {
           commentTextView.text = "Please enter your comment"
           return
       }
+      //swiftlint:disable:next line_length
       let postCommentRouter = InstagramCommentRouter.postComment(.init(mediaId: mediaIdTextField.text!, text: commentTextView.text))
 
       InstagramClient().send(postCommentRouter, completion: { (response: InstagramMetaResponse?, error: Error?) in
@@ -43,7 +44,7 @@ class CommentIdViewController: UIViewController {
         mediaIdTextField.text = "Please enter mediaId"
         return
       }
-
+      //swiftlint:disable:next line_length
       let deleteCommentRouter = InstagramCommentRouter.deleteComment(.init(mediaId: mediaIdTextField.text!, commentId: commentIdLabel.text!))
 
       InstagramClient().send(deleteCommentRouter, completion: { (response: InstagramMetaResponse?, error: Error?) in

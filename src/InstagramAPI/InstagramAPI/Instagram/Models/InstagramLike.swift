@@ -10,6 +10,7 @@ import ObjectMapper
 
 public struct InstagramLike: AnyInstagramModel {
   // MARK: - Properties
+  //swiftlint:disable:next identifier_name
   public var id: String = ""
   public var username: String = ""
   public var firstName: String = ""

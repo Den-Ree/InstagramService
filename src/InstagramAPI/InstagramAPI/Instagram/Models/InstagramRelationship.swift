@@ -10,6 +10,7 @@ import Foundation
 
 public struct InstagramRelationship: AnyInstagramModel {
   // MARK: - Properties
+  //swiftlint:disable:next identifier_name
   public var id: String = ""
   public var outgoingStatus: String = ""
   public var incomingStatus: String = ""

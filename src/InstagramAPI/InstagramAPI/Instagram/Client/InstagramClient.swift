@@ -26,9 +26,9 @@ public final class InstagramClient {
   }
   public var loggedUserId: String {
     get {
-      if self.isLogged == false{
+      if self.isLogged == false {
         return ""
-      }else{
+      } else {
         return self.keychainStore["lastUserId"]!
       }
     }
@@ -36,8 +36,6 @@ public final class InstagramClient {
       self.keychainStore["lastUserId"] = newValue
     }
   }
-  
-  
 
   public enum InstagramAuthUrlFragment {
     case empty
@@ -62,21 +60,21 @@ public final class InstagramClient {
     return InstagramClient().encode(Instagram.Constants.baseUrl + "oauth/authorize/", parameters: parameters)
     }
   }
-  
+
   public init() {}
-  
-  public init(_ clientId: String, clientSecret: String, clientRedirectUri: String){
+
+  public init(_ clientId: String, clientSecret: String, clientRedirectUri: String) {
     Instagram.Constants.appClientId = clientId
     Instagram.Constants.appClientSecret = clientSecret
     Instagram.Constants.appRedirectURL = clientRedirectUri
   }
-  
-  public init(_ accessToken: String, clientId: String){
+
+  public init(_ accessToken: String, clientId: String) {
     self.keychainStore[Instagram.Keys.Auth.accessToken + clientId] = accessToken
     self.keychainStore["isLogged"] = "true"
     self.loggedUserId = clientId
   }
-  
+  //swiftlint:disable:next line_length
   public func send<T: AnyInstagramResponse>(_ router: AnyInstagramNetworkRouter, completion: @escaping (T?, Error?) -> Void) {
       do {
         guard let accessToken = keychainStore[Instagram.Keys.Auth.accessToken + loggedUserId] else {
@@ -104,28 +102,28 @@ public extension InstagramClient {
   }
 }
 
-//  MARK: Authorization
+// MARK: Authorization
 public extension InstagramClient {
 
-  fileprivate func getAuthUrlFragment(_ Url: URL) -> InstagramAuthUrlFragment {
+  fileprivate func getAuthUrlFragment(_ url: URL) -> InstagramAuthUrlFragment {
     let appRedirectUrl: URL = URL(string: Instagram.Constants.appRedirectURL)!
     // Check if our Url isRedirect
-    if appRedirectUrl.scheme == Url.scheme && appRedirectUrl.host == Url.host {
+    if appRedirectUrl.scheme == url.scheme && appRedirectUrl.host == url.host {
       // Then check both flows
-      var components = Url.absoluteString.components(separatedBy: Instagram.Keys.Auth.accessToken + "=")
+      var components = url.absoluteString.components(separatedBy: Instagram.Keys.Auth.accessToken + "=")
       if components.count == 2 {
         return .accessToken(components.last!)
       }
-      components = Url.absoluteString.components(separatedBy: Instagram.Keys.Auth.code + "=")
+      components = url.absoluteString.components(separatedBy: Instagram.Keys.Auth.code + "=")
       if components.count == 2 {
         return .code(components.last!)
       }
     }
     return .empty
   }
-
-  public func receiveLoggedUser(_ Url: URL, completion: ((String?, Error?) -> Void)?) {
-    switch InstagramClient().getAuthUrlFragment(Url) {
+  //swiftlint:disable:next line_length function_body_length
+  public func receiveLoggedUser(_ url: URL, completion: ((String?, Error?) -> Void)?) {
+    switch InstagramClient().getAuthUrlFragment(url) {
 
     case .empty: return
     case .accessToken(let accessToken):
@@ -170,8 +168,10 @@ public extension InstagramClient {
       networkManager.request(request).response(completionHandler: {(response: DefaultDataResponse?) in
           if let response = response {
             do {
+              //swiftlint:disable:next line_length force_cast syntactic_sugar
               let json = try JSONSerialization.jsonObject(with: response.data!, options: .mutableContainers) as! Dictionary<String, Any>
               if let accessToken = json[Instagram.Keys.Auth.accessToken] as? String {
+                //swiftlint:disable:next line_length
                 let accessTokenUrl = Instagram.Constants.appRedirectURL + "/" + Instagram.Keys.Auth.accessToken + "=" + accessToken
                 self.receiveLoggedUser(URL(string: accessTokenUrl)!, completion: nil)
               }
@@ -198,11 +198,12 @@ public extension InstagramClient {
     self.keychainStore["isLogged"] = "false"
     self.cleanCookies()
   }
-  
+
   func cleanCookies() {
     keychainStore[Instagram.Keys.Auth.accessToken] = nil
     let storage = HTTPCookieStorage.shared
     if let cookies = storage.cookies {
+      //swiftlint:disable:next unused_enumerated
       for (_, cookie) in cookies.enumerated() {
         storage.deleteCookie(cookie)
       }

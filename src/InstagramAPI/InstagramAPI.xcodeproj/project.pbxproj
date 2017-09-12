@@ -637,6 +637,7 @@
 			buildConfigurationList = 9282E7B61DFDF9F700B7ACF3 /* Build configuration list for PBXNativeTarget "InstagramAPI" */;
 			buildPhases = (
 				A68ADCA98328F09DD9B39495 /* [CP] Check Pods Manifest.lock */,
+				84C2DF221F6826A4002C3468 /* Swiftlint */,
 				9282E7A01DFDF9F700B7ACF3 /* Sources */,
 				9282E7A11DFDF9F700B7ACF3 /* Frameworks */,
 				9282E7A21DFDF9F700B7ACF3 /* Resources */,
@@ -735,6 +736,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InstagramAPI/Pods-InstagramAPI-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		84C2DF221F6826A4002C3468 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		A68ADCA98328F09DD9B39495 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

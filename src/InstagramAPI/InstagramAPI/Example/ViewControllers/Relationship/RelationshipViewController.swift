@@ -52,6 +52,7 @@ class RelationshipViewController: UIViewController {
 
   func setData() {
       let relationshipRouter = InstagramRelationshipRouter.getRelationship(userId: targetUserId!)
+      //swiftlint:disable:next line_length
       InstagramClient().send(relationshipRouter, completion: { (relationship: InstagramModelResponse<InstagramRelationship>?, error: Error?) in
 
         if error == nil {
@@ -66,7 +67,7 @@ class RelationshipViewController: UIViewController {
 
       let targetUserRouter = InstagramUserRouter.getUser(.id(targetUserId!))
       self.targetUserIDLabel.text = self.targetUserId
-
+      //swiftlint:disable:next line_length
       InstagramClient().send(targetUserRouter, completion: { (user: InstagramModelResponse<InstagramUser>?, error: Error?) in
         if error == nil {
           if let profileImageURL = user?.data.profilePictureUrl {
@@ -100,9 +101,9 @@ class RelationshipViewController: UIViewController {
         if ignore.isSelected {
           action = InstagramRelationshipRouter.PostRelationshipParameter.Action.ignore
         }
-
+        //swiftlint:disable:next line_length
         let postRelationshipRouter = InstagramRelationshipRouter.postRelationship(.init(userId: targetUserId!, action: action!))
-
+        //swiftlint:disable:next line_length
         InstagramClient().send(postRelationshipRouter, completion: { (relationship: InstagramModelResponse<InstagramRelationship>?, error: Error?) in
           if error == nil {
 

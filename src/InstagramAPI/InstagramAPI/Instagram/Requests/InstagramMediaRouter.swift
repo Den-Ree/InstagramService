@@ -19,6 +19,7 @@ public enum InstagramMediaRouter: AnyInstagramNetworkRouter {
     public var distance: Double?
   }
   public enum MediaParameter {
+    //swiftlint:disable:next identifier_name
     case id(String)
     case shortcode(String)
   }

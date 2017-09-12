@@ -9,7 +9,7 @@
 import Foundation
 
 extension Dictionary {
-  
+
   func parametersString() -> String {
     var paramsString = [String]()
     for (key, value) in self {

@@ -29,7 +29,7 @@ class MediaViewController: UIViewController {
         super.viewDidLoad()
 
         let mediaRouter = InstagramMediaRouter.getMedia(mediaParameter)
-
+        //swiftlint:disable:next line_length
         InstagramClient().send(mediaRouter, completion: { (media: InstagramModelResponse<InstagramMedia>?, error: Error?) in
           if error == nil {
 
@@ -43,6 +43,7 @@ class MediaViewController: UIViewController {
                 self.tagsCountLabel.text?.append(String(data.tagsCount))
                 self.commentCountLabel.text?.append(String(data.commentsCount))
                 self.likesCountLabel.text?.append(String(data.likesCount))
+                //swiftlint:disable:next line_length
                 self.locationLabel.text?.append( String(describing: data.location.latitude) + " " + String(describing: data.location.longitude))
                 if data.type == .image {
                     self.mediaView.af_setImage(withURL: (data.image.lowResolution.url)!)

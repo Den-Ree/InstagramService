@@ -25,8 +25,7 @@ class RelationshipTableViewController: UITableViewController {
         super.viewDidLoad()
         let relationshipTableViewModel = RelationshipTableViewModel.init(type: self.type)
         let request = relationshipTableViewModel.request()
-        relationshipTableViewModel.getDataSource(request: request!, completion: {
-          (dataSource: [InstagramUser]?) in
+        relationshipTableViewModel.getDataSource(request: request!, completion: {(dataSource: [InstagramUser]?) in
           if dataSource != nil {
             self.dataSource = dataSource!
             self.tableView.reloadData()
@@ -49,7 +48,8 @@ extension RelationshipTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RelationshipCell", for: indexPath) as!RelationshipCell
+        //swiftlint:disable:next line_length force_cast
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RelationshipCell", for: indexPath) as! RelationshipCell
         let user = dataSource[indexPath.row]
         cell.fullNameLabel.text = user.fullName
         cell.userNameLabel.text = user.username
