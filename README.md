@@ -41,9 +41,15 @@ If you have an access token, you can use client without authentication
     
 ### Step 1 with authentication
 
-When you don't have an accessToken, you have to go through an OAuth 2.0 provided with Instagram
+When you don't have an accessToken, you have to go through an OAuth 2.0 provided by Instagram
 
-You must choose the type of authentication. There are two options:
+Now you need to init your client
+
+    import InstagramService
+    let client = InstagramClient(clientId: "Your clientId", clientSecret: "Your clientSecret", clientRedirectUri: "Your clientRedirect_URL")
+
+
+After initialization of a client, you must choose the type of authentication. There are two options:
 
 * Via server side (When authenticationauthentication via server you will get a special code in responce, and after you have to send special link. Don't worry client support both options)
 * Via client side (Here in responce you get an access token)
