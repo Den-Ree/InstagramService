@@ -20,6 +20,31 @@ public final class InstagramClient {
     return Keychain(service: instagramManagerKeychainStore)
   }()
   fileprivate var networkManager: Alamofire.SessionManager = .default
+  fileprivate var clientId: String {
+    get {
+        return self.keychainStore["clientId"]!
+    }
+    set (newValue) {
+        self.keychainStore["clientId"] = newValue
+    }
+  }
+  fileprivate var clientSecret: String {
+    get {
+      return self.keychainStore["clientSecret"]!
+    }
+    set (newValue) {
+      self.keychainStore["clientSecret"] = newValue
+    }
+  }
+  fileprivate var redirectUrl: String {
+    get {
+      return self.keychainStore["redirectUrl"]!
+    }
+    set (newValue) {
+      self.keychainStore["redirectUri"] = newValue
+    }
+  }
+
   // MARK: - Public
   public var isLogged: Bool {
     return self.keychainStore["isLogged"] == "true"
@@ -29,15 +54,15 @@ public final class InstagramClient {
       if self.isLogged == false {
         return ""
       } else {
-        return self.keychainStore["lastUserId"]!
+        return self.keychainStore["lastLoggedUserId"]!
       }
     }
     set (newValue) {
-      self.keychainStore["lastUserId"] = newValue
+      self.keychainStore["lastLoggedUserId"] = newValue
     }
   }
 
-  public enum InstagramAuthUrlFragment {
+  enum InstagramAuthUrlFragment {
     case empty
     case code(String)
     case accessToken(String)
@@ -45,16 +70,16 @@ public final class InstagramClient {
 
   public struct InstagramAuthorisationUrl {
     public var clientSideFlow: URL? {
-    let parameters: [String : Any] = [Instagram.Keys.Auth.clientId: Instagram.Constants.appClientId,
-                                      Instagram.Keys.Auth.redirectUri: Instagram.Constants.appRedirectURL,
+    let parameters: [String : Any] = [Instagram.Keys.Auth.clientId: InstagramClient().clientId,
+                                      Instagram.Keys.Auth.redirectUri: InstagramClient().redirectUrl,
                                       Instagram.Keys.Response.type: Instagram.Keys.Response.token,
                                       Instagram.Keys.Response.scope: Instagram.LoginScope.allScopesValue]
     return InstagramClient().encode(Instagram.Constants.baseUrl + "oauth/authorize/", parameters: parameters)
     }
 
     public var serverSideFlow: URL? {
-    let parameters: [String : Any] = [Instagram.Keys.Auth.clientId: Instagram.Constants.appClientId,
-                                      Instagram.Keys.Auth.redirectUri: Instagram.Constants.appRedirectURL,
+    let parameters: [String : Any] = [Instagram.Keys.Auth.clientId: InstagramClient().clientId,
+                                      Instagram.Keys.Auth.redirectUri: InstagramClient().redirectUrl,
                                       Instagram.Keys.Response.type: Instagram.Keys.Response.code,
                                       Instagram.Keys.Response.scope: Instagram.LoginScope.allScopesValue]
     return InstagramClient().encode(Instagram.Constants.baseUrl + "oauth/authorize/", parameters: parameters)
@@ -63,10 +88,10 @@ public final class InstagramClient {
 
   public init() {}
 
-  public init(_ clientId: String, clientSecret: String, clientRedirectUri: String) {
-    Instagram.Constants.appClientId = clientId
-    Instagram.Constants.appClientSecret = clientSecret
-    Instagram.Constants.appRedirectURL = clientRedirectUri
+  public init(clientId: String, clientSecret: String, clientRedirectUri: String) {
+    self.clientId = clientId
+    self.clientSecret = clientSecret
+    self.redirectUrl = clientRedirectUri
   }
 
   public init(_ accessToken: String, clientId: String) {
@@ -106,7 +131,7 @@ public extension InstagramClient {
 public extension InstagramClient {
 
   fileprivate func getAuthUrlFragment(_ url: URL) -> InstagramAuthUrlFragment {
-    let appRedirectUrl: URL = URL(string: Instagram.Constants.appRedirectURL)!
+    let appRedirectUrl: URL = URL(string: InstagramClient().redirectUrl)!
     // Check if our Url isRedirect
     if appRedirectUrl.scheme == url.scheme && appRedirectUrl.host == url.host {
       // Then check both flows
@@ -124,8 +149,8 @@ public extension InstagramClient {
   //swiftlint:disable:next line_length function_body_length
   public func receiveLoggedUser(_ url: URL, completion: ((String?, Error?) -> Void)?) {
     switch InstagramClient().getAuthUrlFragment(url) {
-
     case .empty: return
+
     case .accessToken(let accessToken):
         self.keychainStore[Instagram.Keys.Auth.accessToken] = accessToken
         let router = InstagramUserRouter.getUser(.owner)
@@ -150,10 +175,10 @@ public extension InstagramClient {
 
         break
     case .code(let code):
-      let parameters = [Instagram.Keys.Auth.clientId: Instagram.Constants.appClientId,
-                        Instagram.Keys.Auth.clientSecret: Instagram.Constants.appClientSecret,
+      let parameters = [Instagram.Keys.Auth.clientId: InstagramClient().clientId,
+                        Instagram.Keys.Auth.clientSecret: InstagramClient().clientSecret,
                         Instagram.Keys.Auth.grantType: Instagram.Constants.grantType,
-                        Instagram.Keys.Auth.redirectUri: Instagram.Constants.appRedirectURL,
+                        Instagram.Keys.Auth.redirectUri: InstagramClient().redirectUrl,
                         Instagram.Keys.Auth.code: code]
       let url = URL(string: Instagram.Constants.baseUrl + "oauth/access_token/")
       var request = URLRequest.init(url: url!)
@@ -164,7 +189,6 @@ public extension InstagramClient {
       request.setValue(paramsLength, forHTTPHeaderField: "Content-Length")
       request.httpBody = dataParams
       request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-
       networkManager.request(request).response(completionHandler: {(response: DefaultDataResponse?) in
           if let response = response {
             do {
@@ -172,7 +196,7 @@ public extension InstagramClient {
               let json = try JSONSerialization.jsonObject(with: response.data!, options: .mutableContainers) as! Dictionary<String, Any>
               if let accessToken = json[Instagram.Keys.Auth.accessToken] as? String {
                 //swiftlint:disable:next line_length
-                let accessTokenUrl = Instagram.Constants.appRedirectURL + "/" + Instagram.Keys.Auth.accessToken + "=" + accessToken
+                let accessTokenUrl = InstagramClient().redirectUrl + "/" + Instagram.Keys.Auth.accessToken + "=" + accessToken
                 self.receiveLoggedUser(URL(string: accessTokenUrl)!, completion: nil)
               }
               completion?(self.loggedUserId, nil)
@@ -196,6 +220,9 @@ public extension InstagramClient {
   public func endLogin() {
     self.loggedUserId = ""
     self.keychainStore["isLogged"] = "false"
+    self.clientId = ""
+    self.clientSecret = ""
+    self.redirectUrl = ""
     self.cleanCookies()
   }
 

@@ -48,14 +48,17 @@ class RelationshipRouterTests: XCTestCase {
   }
 
   func testPost() {
+      //swiftlint:disable:next line_length
       let postRelationshipParameter = InstagramRelationshipRouter.PostRelationshipParameter.init(userId: "{user-id}", action: .follow)
       let postRelationshipRouter = InstagramRelationshipRouter.postRelationship(postRelationshipParameter)
       guard let UrlRequest = try? postRelationshipRouter.asURLRequest(withAccessToken: "ACCESS-TOKEN") else {
         return
       }
+      //swiftlint:disable:next line_length, force_cast
       guard let json = try? JSONSerialization.jsonObject(with: UrlRequest.httpBody!, options: .allowFragments) as! [String: Any] else {
         return
       }
+      //swiftlint:disable:next line_length
       XCTAssert(UrlRequest.url?.absoluteString == TestConstants.URL.Relationship.post.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
       XCTAssert(UrlRequest.httpMethod == TestConstants.HTTPMethod.post)
       XCTAssert(json.parametersString() == TestConstants.HTTPBody.relationship)
