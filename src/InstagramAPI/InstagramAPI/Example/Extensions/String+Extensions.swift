@@ -66,11 +66,11 @@ extension String {
         let result = NSMutableAttributedString(string: self)
         let underlineRange = (self as NSString).range(of: substring)
         //swiftlint:disable:next legacy_constructor line_length
-        result.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleNone.rawValue, range: NSMakeRange(0, characters.count))
+        result.addAttribute(NSAttributedStringKey.underlineStyle, value: NSUnderlineStyle.styleNone.rawValue, range: NSMakeRange(0, characters.count))
         //swiftlint:disable:next line_length
-        result.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: underlineRange)
+        result.addAttribute(NSAttributedStringKey.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: underlineRange)
         //swiftlint:disable:next legacy_constructor line_length
-        result.addAttributes([NSFontAttributeName: font, NSForegroundColorAttributeName: color], range: NSMakeRange(0, characters.count))
+        result.addAttributes([NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: color], range: NSMakeRange(0, characters.count))
 
         return result
     }

@@ -33,7 +33,7 @@ class RelationshipViewController: UIViewController {
       unfollow.addTarget(self, action: #selector(chooseButton(button:)), for: .touchUpInside)
   }
 
-  func chooseButton(button: UIButton) {
+  @objc func chooseButton(button: UIButton) {
       follow.titleLabel?.textColor = UIColor.blue
       follow.isSelected = false
 

@@ -8,29 +8,30 @@
 
 #if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
-#else
+#elseif os(macOS)
 import Cocoa
 #endif
 
+#if os(iOS) || os(tvOS) || os(watchOS) || os(macOS)
 open class HexColorTransform: TransformType {
-
+	
 	#if os(iOS) || os(tvOS) || os(watchOS)
 	public typealias Object = UIColor
 	#else
 	public typealias Object = NSColor
 	#endif
-
+	
 	public typealias JSON = String
-
+	
 	var prefix: Bool = false
-
+	
 	var alpha: Bool = false
-
+	
 	public init(prefixToJSON: Bool = false, alphaToJSON: Bool = false) {
 		alpha = alphaToJSON
 		prefix = prefixToJSON
 	}
-
+	
 	open func transformFromJSON(_ value: Any?) -> Object? {
 		if let rgba = value as? String {
 			if rgba.hasPrefix("#") {
@@ -43,38 +44,48 @@ open class HexColorTransform: TransformType {
 		}
 		return nil
 	}
-
+	
 	open func transformToJSON(_ value: Object?) -> JSON? {
 		if let value = value {
 			return hexString(color: value)
 		}
 		return nil
 	}
-
+	
 	fileprivate func hexString(color: Object) -> String {
 		let comps = color.cgColor.components!
-		let r = Int(comps[0] * 255)
-		let g = Int(comps[1] * 255)
-		let b = Int(comps[2] * 255)
-		let a = Int(comps[3] * 255)
+		let compsCount = color.cgColor.numberOfComponents
+		let r: Int
+		let g: Int
+		var b: Int
+		let a = Int(comps[compsCount - 1] * 255)
+		if compsCount == 4 { // RGBA
+			r = Int(comps[0] * 255)
+			g = Int(comps[1] * 255)
+			b = Int(comps[2] * 255)
+		} else { // Grayscale
+			r = Int(comps[0] * 255)
+			g = Int(comps[0] * 255)
+			b = Int(comps[0] * 255)
+		}
 		var hexString: String = ""
 		if prefix {
 			hexString = "#"
 		}
 		hexString += String(format: "%02X%02X%02X", r, g, b)
-
+		
 		if alpha {
 			hexString += String(format: "%02X", a)
 		}
 		return hexString
 	}
-
+	
 	fileprivate func getColor(hex: String) -> Object? {
 		var red: CGFloat   = 0.0
 		var green: CGFloat = 0.0
 		var blue: CGFloat  = 0.0
 		var alpha: CGFloat = 1.0
-
+		
 		let scanner = Scanner(string: hex)
 		var hexValue: CUnsignedLongLong = 0
 		if scanner.scanHexInt64(&hexValue) {
@@ -112,3 +123,4 @@ open class HexColorTransform: TransformType {
 		#endif
 	}
 }
+#endif
