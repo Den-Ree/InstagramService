@@ -15,9 +15,8 @@ class RootViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
     self.title = "Welcome!"
-
+    let client = InstagramClient.init(clientId: "", clientSecret: "", clientRedirectUri: "")
     sendLogInRequest()
   }
 }

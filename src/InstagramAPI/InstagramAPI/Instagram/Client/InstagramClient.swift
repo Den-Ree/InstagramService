@@ -22,7 +22,10 @@ public final class InstagramClient {
   fileprivate var networkManager: Alamofire.SessionManager = .default
   fileprivate var clientId: String {
     get {
-        return self.keychainStore["clientId"]!
+      if let clientId = self.keychainStore["clientId"]{
+        return clientId
+      }
+      return " "
     }
     set (newValue) {
         self.keychainStore["clientId"] = newValue
@@ -30,7 +33,10 @@ public final class InstagramClient {
   }
   fileprivate var clientSecret: String {
     get {
-      return self.keychainStore["clientSecret"]!
+      if let clientSecret = self.keychainStore["clientSecret"]{
+        return clientSecret
+      }
+      return " "
     }
     set (newValue) {
       self.keychainStore["clientSecret"] = newValue
@@ -38,7 +44,10 @@ public final class InstagramClient {
   }
   fileprivate var redirectUrl: String {
     get {
-      return self.keychainStore["redirectUrl"]!
+      if let redirectUrl = self.keychainStore["redirectUrl"]{
+        return redirectUrl
+      }
+      return " "
     }
     set (newValue) {
       self.keychainStore["redirectUri"] = newValue
@@ -131,10 +140,8 @@ public extension InstagramClient {
 public extension InstagramClient {
 
   fileprivate func getAuthUrlFragment(_ url: URL) -> InstagramAuthUrlFragment {
-    let appRedirectUrl: URL = URL(string: InstagramClient().redirectUrl)!
-    // Check if our Url isRedirect
-    if appRedirectUrl.scheme == url.scheme && appRedirectUrl.host == url.host {
-      // Then check both flows
+    if let appRedirectUrl: URL = URL(string: InstagramClient().redirectUrl), appRedirectUrl.scheme == url.scheme && appRedirectUrl.host == url.host {
+
       var components = url.absoluteString.components(separatedBy: Instagram.Keys.Auth.accessToken + "=")
       if components.count == 2 {
         return .accessToken(components.last!)
@@ -193,7 +200,9 @@ public extension InstagramClient {
           if let response = response {
             do {
               //swiftlint:disable:next line_length force_cast syntactic_sugar
-              let json = try JSONSerialization.jsonObject(with: response.data!, options: .mutableContainers) as! Dictionary<String, Any>
+              guard let json = try JSONSerialization.jsonObject(with: response.data!, options: .mutableContainers) as? Dictionary<String, Any> else{
+                return
+              }
               if let accessToken = json[Instagram.Keys.Auth.accessToken] as? String {
                 //swiftlint:disable:next line_length
                 let accessTokenUrl = InstagramClient().redirectUrl + "/" + Instagram.Keys.Auth.accessToken + "=" + accessToken

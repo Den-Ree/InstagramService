@@ -70,21 +70,21 @@ extension RequestViewController: UITableViewDelegate {
                 //Self
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 //swiftlint:disable:next force_cast line_length
-                let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-                controller.userParameter = .owner
-                controller.title = rowsDataSource[indexPath.section][indexPath.row]
-                self.navigationController?.pushViewController(controller, animated: true)
-
+                if let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as? UserViewController {
+                  controller.userParameter = .owner
+                  controller.title = rowsDataSource[indexPath.section][indexPath.row]
+                  self.navigationController?.pushViewController(controller, animated: true)
+                }
                 break
             case 1:
                 //Recent of self
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 //swiftlint:disable:next force_cast line_length
-                let controller = storyboard.instantiateViewController(withIdentifier: "UserMediaViewController") as! UserMediaViewController
-                controller.type = .recent(nil)
-                controller.title = rowsDataSource[indexPath.section][indexPath.row]
-                self.navigationController?.pushViewController(controller, animated: true)
-
+                if let controller = storyboard.instantiateViewController(withIdentifier: "UserMediaViewController") as? UserMediaViewController {
+                  controller.type = .recent(nil)
+                  controller.title = rowsDataSource[indexPath.section][indexPath.row]
+                  self.navigationController?.pushViewController(controller, animated: true)
+                }
                 break
             case 2:
                 //User id
@@ -95,10 +95,11 @@ extension RequestViewController: UITableViewDelegate {
                     let firstTextField = alertController.textFields![0] as UITextField
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     //swiftlint:disable:next force_cast line_length
-                    let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-                    controller.userParameter = InstagramUserRouter.UserParameter.id(firstTextField.text!)
-                    controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
-                    self.navigationController?.pushViewController(controller, animated: true)
+                    if let controller = storyboard.instantiateViewController(withIdentifier: "UserViewController") as? UserViewController {
+                      controller.userParameter = InstagramUserRouter.UserParameter.id(firstTextField.text!)
+                      controller.title = self.rowsDataSource[indexPath.section][indexPath.row]
+                      self.navigationController?.pushViewController(controller, animated: true)
+                    }
                 })
                 //swiftlint:disable:next line_length
                 let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {(_ : UIAlertAction!) -> Void in
@@ -164,7 +165,7 @@ extension RequestViewController: UITableViewDelegate {
             break
 
         case 1:
-            //Relationship
+            // Relationship
             switch indexPath.row {
             case 0:
                 //Follows
